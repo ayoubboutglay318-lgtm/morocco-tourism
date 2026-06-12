@@ -12,14 +12,16 @@ gsap.registerPlugin(ScrollTrigger)
 const cdnImg = path => `https://images.unsplash.com/${path}?w=700&q=85&fit=crop&auto=format`
 
 const cityImages = {
-  Marrakech:        cdnImg('photo-1597212618440-806262de4f6b'),
-  Fes:              cdnImg('photo-1559925523-10de9e23cf90'),
-  Chefchaouen:      cdnImg('photo-1538600838042-6a0c694ffab5'),
-  Essaouira:        cdnImg('photo-1624802746702-60ca95bdb605'),
-  Merzouga:         cdnImg('photo-1559586616-361e18714958'),
-  'Atlas Mountains':cdnImg('photo-1593535988128-7214bc2cbedc'),
-  Casablanca:       cdnImg('photo-1548018560-4cb48a8837c1'),
-  Tangier:          cdnImg('photo-1533501747004-381b96042e88'),
+  Marrakech:        'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=700&q=85&fit=crop&auto=format',
+  Fes:              'https://images.unsplash.com/photo-1559925523-10de9e23cf90?w=700&q=85&fit=crop&auto=format',
+  Chefchaouen:      'https://images.unsplash.com/photo-1538600838042-6a0c694ffab5?w=700&q=85&fit=crop&auto=format',
+  Essaouira:        'https://images.unsplash.com/photo-1624802746702-60ca95bdb605?w=700&q=85&fit=crop&auto=format',
+  Merzouga:         'https://images.unsplash.com/photo-1559586616-361e18714958?w=700&q=85&fit=crop&auto=format',
+  'Atlas Mountains':'https://images.unsplash.com/photo-1593535988128-7214bc2cbedc?w=700&q=85&fit=crop&auto=format',
+  Casablanca:       'https://images.unsplash.com/photo-1548018560-4cb48a8837c1?w=700&q=85&fit=crop&auto=format',
+  Tangier:          'https://images.unsplash.com/photo-1533501747004-381b96042e88?w=700&q=85&fit=crop&auto=format',
+  Rabat:            'https://images.unsplash.com/photo-1494894371120-3423c5b3f26d?w=700&q=85&fit=crop&auto=format',
+  Agadir:           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=85&fit=crop&auto=format',
 }
 
 const tangierHighlights = [
