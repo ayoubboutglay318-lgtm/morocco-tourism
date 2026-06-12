@@ -15,6 +15,7 @@ import Emergency from './pages/Emergency'
 import Weather from './pages/Weather'
 import TripPlanner from './pages/TripPlanner'
 import MapPage from './pages/MapPage'
+import Reviews from './pages/Reviews'
 import './App.css'
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/trip-planner" element={<TripPlanner />} />
         <Route path="/map" element={<MapPage />} />
+        <Route path="/reviews" element={<Reviews />} />
       </Routes>
     </AppProvider>
   )

@@ -38,7 +38,7 @@ export default function Navbar() {
           </button>
           {moreOpen && (
             <div style={{ position:'absolute', top:'100%', left:0, background:'#1a0a00', border:'1px solid rgba(201,151,58,0.2)', borderRadius:12, padding:'0.5rem', minWidth:180, zIndex:200, marginTop:8, boxShadow:'0 8px 32px rgba(0,0,0,0.4)' }}>
-              {[['trip-planner',`✨ ${t('tripPlanner')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
+              {[['reviews','⭐ Guest Reviews'],['trip-planner',`✨ ${t('tripPlanner')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
                 <Link key={path} to={`/${path}`} onClick={() => { setMoreOpen(false); setMenuOpen(false) }} style={{ display:'block', padding:'0.5rem 1rem', color:'rgba(255,255,255,0.75)', textDecoration:'none', fontSize:'0.85rem', borderRadius:8, transition:'background 0.2s' }} onMouseEnter={e=>e.target.style.background='rgba(201,151,58,0.1)'} onMouseLeave={e=>e.target.style.background='transparent'}>{label}</Link>
               ))}
             </div>

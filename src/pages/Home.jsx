@@ -89,11 +89,25 @@ export default function Home() {
   const heroSearchRef = useRef()
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/hotels').then(r => setHotels(r.data))
-    axios.get('http://localhost:5000/api/cities').then(r => setCities(r.data))
-    axios.get('http://localhost:5000/api/testimonials').then(r => setTestimonials(r.data))
-    axios.get('http://localhost:5000/api/gallery').then(r => setGallery(r.data))
-    axios.get('http://localhost:5000/api/stats').then(r => setStats(r.data))
+    axios.get('http://localhost:5000/api/hotels')
+      .then(r => setHotels(r.data))
+      .catch(err => console.error('Failed to load hotels:', err))
+
+    axios.get('http://localhost:5000/api/cities')
+      .then(r => setCities(r.data))
+      .catch(err => console.error('Failed to load cities:', err))
+
+    axios.get('http://localhost:5000/api/testimonials')
+      .then(r => setTestimonials(r.data))
+      .catch(err => console.error('Failed to load testimonials:', err))
+
+    axios.get('http://localhost:5000/api/gallery')
+      .then(r => setGallery(r.data))
+      .catch(err => console.error('Failed to load gallery:', err))
+
+    axios.get('http://localhost:5000/api/stats')
+      .then(r => setStats(r.data))
+      .catch(err => console.error('Failed to load stats:', err))
   }, [])
 
   // Hero entrance animation
