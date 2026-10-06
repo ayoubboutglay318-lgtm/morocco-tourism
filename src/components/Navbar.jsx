@@ -8,7 +8,7 @@ const LANGS = [{ code:'en', label:'EN 🇬🇧' }, { code:'fr', label:'FR 🇫�
 export default function Navbar() {
   const { pathname } = useLocation()
   const { dark, setDark, lang, setLang, currency, setCurrency, t, user, favorites } = useApp()
-  // eslint-disable-next-line no-unused-vars
+
   const [menuOpen, setMenuOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
   const isActive = (path) => pathname === path || (path !== '/' && pathname.startsWith(path))
@@ -83,8 +83,24 @@ export default function Navbar() {
         </button>
 
         {/* Book Now CTA */}
-        <Link to="/hotels" className="nav-cta" style={{ padding:'0.45rem 1.1rem', fontSize:'0.82rem', borderRadius:50, background:'var(--gold)', color:'var(--dark)', fontWeight:700, textDecoration:'none' }}>{t('bookNow')}</Link>
+        <Link to="/hotels" className="nav-cta hide-mobile" style={{ padding:'0.45rem 1.1rem', fontSize:'0.82rem', borderRadius:50, background:'var(--gold)', color:'var(--dark)', fontWeight:700, textDecoration:'none' }}>{t('bookNow')}</Link>
+
+        {/* Hamburger */}
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background:'none', border:'none', color:'var(--white)', fontSize:'1.6rem', cursor:'pointer' }}>
+          {menuOpen ? '✕' : '☰'}
+        </button>
       </div>
+
+      {menuOpen && (
+        <div className="mobile-menu">
+          <Link to="/" onClick={() => setMenuOpen(false)}>{t('home')}</Link>
+          <Link to="/destinations" onClick={() => setMenuOpen(false)}>{t('destinations')}</Link>
+          <Link to="/hotels" onClick={() => setMenuOpen(false)}>{t('hotels')}</Link>
+          <Link to="/food" onClick={() => setMenuOpen(false)}>{t('food')}</Link>
+          <Link to="/gallery" onClick={() => setMenuOpen(false)}>{t('gallery')}</Link>
+          <Link to="/map" onClick={() => setMenuOpen(false)}>{t('map')}</Link>
+        </div>
+      )}
     </nav>
   )
 }

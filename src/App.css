@@ -132,6 +132,8 @@ h1, h2, h3, .display { font-family: 'Playfair Display', serif; }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
 
+.hamburger { display: none; }
+
 /* ── HERO ── */
 .hero {
   position: relative;
@@ -1872,4 +1874,61 @@ footer {
   .auth-container { margin: -3rem auto 3rem; }
   .auth-card { padding: 1.8rem; }
   .profile-actions { grid-template-columns: 1fr; }
+}
+
+/* ── MOBILE RESPONSIVE STYLES ── */
+@media (max-width: 900px) {
+  .hamburger { display: block; }
+  .navbar { padding: 0 1rem; }
+  .navbar-links { display: none; }
+  .hide-mobile { display: none !important; }
+  
+  .hero-content h1 { font-size: 2.8rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-search-bar { flex-direction: column; border-radius: 20px; padding: 1rem; }
+  .hero-search-bar input { margin-bottom: 0.5rem; text-align: center; }
+  .hero-actions { flex-direction: column; }
+  
+  .section, .section-sm { padding: 3rem 1.5rem; }
+  
+  .stats-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stats-band { padding: 3rem 1.5rem; }
+  
+  .hotels-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item.wide, .gallery-item.large { grid-column: span 1; grid-row: span 1; }
+  
+  .hotel-detail-header { flex-direction: column; }
+  .newsletter-form { flex-direction: column; }
+  
+  /* Mobile menu active state */
+  .mobile-menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(15, 8, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,151,58,0.2);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    z-index: 999;
+  }
+  .mobile-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-inner { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .cities-grid { grid-template-columns: 1fr; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .hotel-detail-hero { height: 280px; }
+  .filters { flex-direction: column; }
 }
