@@ -911,8 +911,8 @@ app.get('/api/weather',              (req,res) => {
 });
 app.get('/api/featured-attractions', (req,res) => res.json(featuredAttractions));
 
-// Root health check endpoint for cloud hosting
-app.get('/', (req, res) => {
+// API health check endpoint
+app.get('/api', (req, res) => {
   res.json({ message: '🇲🇦 Morocco Tourism API is running', status: 'OK' });
 });
 
