@@ -72,7 +72,7 @@ function StatItem({ value, suffix, label }) {
 }
 
 export default function Home() {
-  const { t } = useApp()
+  useApp()
   const [hotels, setHotels] = useState([])
   const [cities, setCities] = useState([])
   const [testimonials, setTestimonials] = useState([])
@@ -339,7 +339,7 @@ export default function Home() {
 
           {/* Highlights grid */}
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px,1fr))', gap:'1.2rem' }}>
-            {tangierHighlights.map((h, i) => (
+            {tangierHighlights.map((h) => (
               <div key={h.title} className="reveal"
                 style={{ background:'rgba(255,255,255,0.05)', border:'1px solid rgba(125,184,255,0.12)', borderRadius:16, padding:'1.4rem', transition:'all 0.25s', cursor:'default' }}
                 onMouseEnter={e=>{ e.currentTarget.style.background='rgba(125,184,255,0.1)'; e.currentTarget.style.borderColor='rgba(125,184,255,0.3)' }}

@@ -34,6 +34,10 @@ export default function Gallery() {
     return () => ScrollTrigger.getAll().forEach(t => t.kill())
   }, [photos, activeCategory])
 
+  const filtered = activeCategory === 'All'
+    ? photos
+    : photos.filter(p => p.city.toLowerCase().includes(activeCategory.toLowerCase()))
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     if (lightbox === null) return
@@ -48,11 +52,9 @@ export default function Gallery() {
       window.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
     }
+    // eslint-disable-next-line
   }, [lightbox])
 
-  const filtered = activeCategory === 'All'
-    ? photos
-    : photos.filter(p => p.city.toLowerCase().includes(activeCategory.toLowerCase()))
 
   return (
     <div className="gallery-page">

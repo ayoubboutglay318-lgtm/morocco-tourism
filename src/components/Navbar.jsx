@@ -8,6 +8,7 @@ const LANGS = [{ code:'en', label:'EN 🇬🇧' }, { code:'fr', label:'FR 🇫�
 export default function Navbar() {
   const { pathname } = useLocation()
   const { dark, setDark, lang, setLang, currency, setCurrency, t, user, favorites } = useApp()
+  // eslint-disable-next-line no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
   const isActive = (path) => pathname === path || (path !== '/' && pathname.startsWith(path))

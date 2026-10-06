@@ -28,7 +28,7 @@ export default function Destinations() {
     })
   }, [])
 
-  const regions = ['All', ...new Set(destinations.map(d => d.region.split('/')[0].trim()))]
+
   const filtered = destinations.filter(d => {
     const matchSearch = d.name.toLowerCase().includes(search.toLowerCase()) ||
       d.tagline.toLowerCase().includes(search.toLowerCase()) ||

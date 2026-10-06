@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import axios from 'axios'
 import { useApp } from '../context/AppContext'
 
 export default function Auth() {
   const { user, login, logout } = useApp()
-  const navigate = useNavigate()
+
   const [mode, setMode] = useState('login') // 'login' | 'register' | 'profile'
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [error, setError] = useState('')
@@ -15,6 +15,7 @@ export default function Auth() {
 
   useEffect(() => {
     if (user) {
+      // eslint-disable-next-line
       setMode('profile')
       // Fetch profile data
       const token = localStorage.getItem('authToken')

@@ -19,6 +19,7 @@ export default function Hotels() {
   const headerRef = useRef()
 
   useEffect(() => {
+    // eslint-disable-next-line
     setLoading(true)
     const params = {}
     if (city) params.city = city

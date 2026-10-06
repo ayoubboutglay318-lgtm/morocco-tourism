@@ -13,10 +13,10 @@ const cityData = {
   Rabat:            { days:1, highlights:['Kasbah des Oudayas','Hassan Tower & Mohammed V Mausoleum','Chellah Roman ruins','National Museum of Archaeology','Oudayas beach'], hotels:['La Tour Hassan Palace','Sofitel Rabat Jardin des Roses','Riad Dar Soufa'], food:['Rfissa at a traditional restaurant','Pastilla au pigeon','Rabati briouats'] },
 }
 
-const budgetMultiplier = { budget:0.5, midrange:1, luxury:2.2 }
+
 const budgetLabels = { budget:'Budget (under $80/night)', midrange:'Mid-Range ($80–$200/night)', luxury:'Luxury ($200+/night)' }
 
-function generateItinerary(cities, days, budget, interests) {
+function generateItinerary(cities, days, budget) {
   const itinerary = []
   let day = 1
   const cityList = cities.length ? cities : ['Tangier','Fes','Marrakech']
@@ -59,7 +59,7 @@ export default function TripPlanner() {
   const handleGenerate = (e) => {
     e.preventDefault()
     const cities = form.cities.length ? form.cities : ALL_CITIES.slice(0,3)
-    const result = generateItinerary(cities, Number(form.days), form.budget, form.interests)
+    const result = generateItinerary(cities, Number(form.days), form.budget)
     setItinerary(result)
     setGenerated(true)
     setTimeout(() => document.getElementById('itinerary-result')?.scrollIntoView({ behavior:'smooth' }), 100)

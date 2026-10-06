@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 
 export default function HotelCard({ hotel }) {
-  const { convertPrice, toggleFavorite, favorites } = useApp()
+  const { toggleFavorite, favorites } = useApp()
   const isFav = favorites.includes(hotel.id)
   const cardRef = useRef()
   const glowRef = useRef()

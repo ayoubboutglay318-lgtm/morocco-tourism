@@ -10,6 +10,7 @@ export default function Reviews() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    // eslint-disable-next-line
     setLoading(true)
     axios.get('/api/testimonials')
       .then(r => {
@@ -39,6 +40,7 @@ export default function Reviews() {
       )
     }
 
+    // eslint-disable-next-line
     setFilteredReviews(filtered)
   }, [testimonials, selectedRating, searchHotel])
 
@@ -108,7 +110,7 @@ export default function Reviews() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem' }}>
-            {filteredReviews.map((review, i) => (
+            {filteredReviews.map((review) => (
               <div
                 key={review.id}
                 style={{

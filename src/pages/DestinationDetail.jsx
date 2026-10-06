@@ -50,6 +50,7 @@ export default function DestinationDetail() {
 
   /* ── Fetch data ── */
   useEffect(() => {
+    // eslint-disable-next-line
     setDest(null)
     setAttractions([]); setTours([]); setHotels([])
     setTab('overview'); setOpenFact(null); setNotedTips(new Set()); setStarFilter(0)

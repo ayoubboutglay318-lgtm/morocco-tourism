@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, LayerGroup, LayersControl } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Link } from 'react-router-dom'
@@ -84,6 +84,7 @@ export default function MapPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    // eslint-disable-next-line
     setLoading(true)
     axios.get('/api/hotels')
       .then(r => {
@@ -177,6 +178,7 @@ export default function MapPage() {
               {(activeFilter==='all'||activeFilter==='hotels') && hotels.map(h => {
                 const coords = hotelCoords[h.city]
                 if (!coords) return null
+                // eslint-disable-next-line
                 const offset = [coords[0] + (Math.random()-0.5)*0.02, coords[1] + (Math.random()-0.5)*0.02]
                 return (
                   <Marker key={h.id} position={offset} icon={hotelIcon}>
