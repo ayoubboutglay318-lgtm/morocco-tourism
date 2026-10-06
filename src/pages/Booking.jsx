@@ -11,7 +11,7 @@ export default function Booking() {
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/hotels/${id}`).then(r => setHotel(r.data))
+    axios.get(`/api/hotels/${id}`).then(r => setHotel(r.data))
   }, [id])
 
   const nights = form.checkIn && form.checkOut
@@ -27,7 +27,7 @@ export default function Booking() {
     if (nights <= 0) { setError('Check-out must be after check-in.'); return }
     setSubmitting(true)
     try {
-      const res = await axios.post('http://localhost:5000/api/bookings', { hotelId: id, ...form })
+      const res = await axios.post('/api/bookings', { hotelId: id, ...form })
       navigate('/booking-success', { state: { booking: res.data } })
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong.')

@@ -85,7 +85,7 @@ export default function MapPage() {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('http://localhost:5000/api/hotels')
+    axios.get('/api/hotels')
       .then(r => {
         setHotels(r.data.filter(h => h.rating >= minRating))
         setError(null)

@@ -9,6 +9,9 @@ export function AppProvider({ children }) {
   const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'en')
   const [currency, setCurrency] = useState('USD')
   const [favorites, setFavorites] = useState(() => JSON.parse(localStorage.getItem('favorites') || '[]'))
+  const [user, setUser] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('authUser')) } catch { return null }
+  })
 
   useEffect(() => {
     document.body.setAttribute('data-theme', dark ? 'dark' : 'light')
@@ -20,6 +23,17 @@ export function AppProvider({ children }) {
 
   const toggleFavorite = (id) => setFavorites(prev => prev.includes(id) ? prev.filter(f=>f!==id) : [...prev, id])
 
+  const login = (userData) => {
+    setUser(userData)
+    localStorage.setItem('authUser', JSON.stringify(userData))
+  }
+
+  const logout = () => {
+    setUser(null)
+    localStorage.removeItem('authUser')
+    localStorage.removeItem('authToken')
+  }
+
   const convertPrice = (mad) => {
     const rate = RATES[currency] || 1
     const converted = (mad * rate).toFixed(0)
@@ -29,15 +43,15 @@ export function AppProvider({ children }) {
 
   const t = (key) => {
     const translations = {
-      en: { home:'Home', destinations:'Destinations', hotels:'Hotels', food:'Food', culture:'Culture', transport:'Transport', weather:'Weather', map:'Map', tripPlanner:'Trip Planner', emergency:'Emergency', bookNow:'Book Now', viewAll:'View All', search:'Search', from:'From', night:'night', reviews:'reviews' },
-      fr: { home:'Accueil', destinations:'Destinations', hotels:'Hôtels', food:'Cuisine', culture:'Culture', transport:'Transport', weather:'Météo', map:'Carte', tripPlanner:'Planificateur', emergency:'Urgences', bookNow:'Réserver', viewAll:'Voir tout', search:'Rechercher', from:'À partir de', night:'nuit', reviews:'avis' },
-      ar: { home:'الرئيسية', destinations:'الوجهات', hotels:'الفنادق', food:'المطبخ', culture:'الثقافة', transport:'النقل', weather:'الطقس', map:'الخريطة', tripPlanner:'مخطط الرحلة', emergency:'الطوارئ', bookNow:'احجز الآن', viewAll:'عرض الكل', search:'بحث', from:'ابتداءً من', night:'ليلة', reviews:'تقييم' },
+      en: { home:'Home', destinations:'Destinations', hotels:'Hotels', food:'Food', culture:'Culture', transport:'Transport', weather:'Weather', map:'Map', tripPlanner:'Trip Planner', emergency:'Emergency', bookNow:'Book Now', viewAll:'View All', search:'Search', from:'From', night:'night', reviews:'reviews', gallery:'Gallery', blog:'Blog', favorites:'Favorites', profile:'Profile', login:'Sign In' },
+      fr: { home:'Accueil', destinations:'Destinations', hotels:'Hôtels', food:'Cuisine', culture:'Culture', transport:'Transport', weather:'Météo', map:'Carte', tripPlanner:'Planificateur', emergency:'Urgences', bookNow:'Réserver', viewAll:'Voir tout', search:'Rechercher', from:'À partir de', night:'nuit', reviews:'avis', gallery:'Galerie', blog:'Blog', favorites:'Favoris', profile:'Profil', login:'Connexion' },
+      ar: { home:'الرئيسية', destinations:'الوجهات', hotels:'الفنادق', food:'المطبخ', culture:'الثقافة', transport:'النقل', weather:'الطقس', map:'الخريطة', tripPlanner:'مخطط الرحلة', emergency:'الطوارئ', bookNow:'احجز الآن', viewAll:'عرض الكل', search:'بحث', from:'ابتداءً من', night:'ليلة', reviews:'تقييم', gallery:'معرض', blog:'مدونة', favorites:'المفضلة', profile:'الملف الشخصي', login:'تسجيل الدخول' },
     }
     return translations[lang]?.[key] || translations.en[key] || key
   }
 
   return (
-    <AppContext.Provider value={{ dark, setDark, lang, setLang, currency, setCurrency, favorites, toggleFavorite, convertPrice, t, RATES }}>
+    <AppContext.Provider value={{ dark, setDark, lang, setLang, currency, setCurrency, favorites, toggleFavorite, convertPrice, t, RATES, user, login, logout }}>
       {children}
     </AppContext.Provider>
   )

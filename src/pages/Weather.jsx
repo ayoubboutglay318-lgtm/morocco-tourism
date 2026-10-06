@@ -20,7 +20,7 @@ export default function Weather() {
   const [selected, setSelected] = useState('Marrakech')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/weather').then(r => setWeatherData(r.data))
+    axios.get('/api/weather').then(r => setWeatherData(r.data))
   }, [])
 
   if (!weatherData) return <div className="loading">Loading weather data...</div>

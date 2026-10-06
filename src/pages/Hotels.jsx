@@ -25,7 +25,7 @@ export default function Hotels() {
     if (minPrice) params.minPrice = minPrice
     if (maxPrice) params.maxPrice = maxPrice
     if (stars) params.stars = stars
-    axios.get('http://localhost:5000/api/hotels', { params })
+    axios.get('/api/hotels', { params })
       .then(r => {
         let data = r.data
         if (sortBy === 'price-asc')  data = [...data].sort((a, b) => a.price - b.price)

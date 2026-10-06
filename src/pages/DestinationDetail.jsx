@@ -1,129 +1,304 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
-const typeColors = {
-  Heritage: '#c0392b',
-  Nature: '#27ae60',
-  Culture: '#8e44ad',
-  Experience: '#e67e22',
+/* ─── Type badge colours ─── */
+const TYPE_COLORS = {
+  Heritage:   '#b5451b',
+  Nature:     '#1e8a4c',
+  Culture:    '#6d3fa0',
+  Experience: '#d4720a',
 }
 
+/* ─── Transport chips inferred from keywords ─── */
+function getTransportChips(text = '') {
+  const chips = []
+  if (/airport|flight|fly/i.test(text))  chips.push({ icon: '✈️', label: 'By Air' })
+  if (/train|rail|boraq|oncf/i.test(text)) chips.push({ icon: '🚄', label: 'By Train' })
+  if (/ferry|boat|ship/i.test(text))      chips.push({ icon: '⛴️', label: 'By Ferry' })
+  if (/bus|coach|cmt|supr/i.test(text))   chips.push({ icon: '🚌', label: 'By Bus' })
+  if (chips.length === 0)                 chips.push({ icon: '🚗', label: 'By Road' })
+  return chips
+}
+
+/* ─── IntersectionObserver scroll-reveal hook ─── */
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.dd-reveal, .dd-reveal-left, .dd-reveal-right, .dd-reveal-scale')
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('dd-visible'); observer.unobserve(e.target) } }),
+      { threshold: 0.12 }
+    )
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  })
+}
+
+/* ─── Main component ─── */
 export default function DestinationDetail() {
   const { slug } = useParams()
-  const [dest, setDest] = useState(null)
+  const [dest, setDest]             = useState(null)
   const [attractions, setAttractions] = useState([])
-  const [tours, setTours] = useState([])
-  const [hotels, setHotels] = useState([])
-  const [tab, setTab] = useState('overview')
+  const [tours, setTours]           = useState([])
+  const [hotels, setHotels]         = useState([])
+  const [tab, setTab]               = useState('overview')
+  const [openFact, setOpenFact]     = useState(null)
+  const [notedTips, setNotedTips]   = useState(new Set())
+  const [starFilter, setStarFilter] = useState(0)
+  const [lightbox, setLightbox]     = useState(null)
+  const heroImgRef = useRef(null)
 
+  /* ── Fetch data ── */
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/destinations/${slug}`).then(r => {
+    setDest(null)
+    setAttractions([]); setTours([]); setHotels([])
+    setTab('overview'); setOpenFact(null); setNotedTips(new Set()); setStarFilter(0)
+    axios.get(`/api/destinations/${slug}`).then(r => {
       setDest(r.data)
       const city = r.data.name
-      axios.get(`http://localhost:5000/api/attractions?city=${city}`).then(r2 => setAttractions(r2.data))
-      axios.get(`http://localhost:5000/api/tours?city=${city}`).then(r3 => setTours(r3.data))
-      axios.get(`http://localhost:5000/api/hotels?city=${city}`).then(r4 => setHotels(r4.data))
-    })
+      axios.get(`/api/attractions?city=${city}`).then(r2 => setAttractions(r2.data))
+      axios.get(`/api/tours?city=${city}`).then(r3 => setTours(r3.data))
+      axios.get(`/api/hotels?city=${city}`).then(r4 => setHotels(r4.data))
+    }).catch(console.error)
   }, [slug])
 
-  if (!dest) return <div className="loading">Loading destination...</div>
+  /* ── Parallax hero ── */
+  useEffect(() => {
+    const onScroll = () => {
+      if (heroImgRef.current) {
+        heroImgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
-  const tabs = ['overview', 'attractions', 'tours', 'hotels', 'tips']
+  /* ── Scroll-reveal ── */
+  useReveal()
 
+  /* ── Lightbox keyboard close ── */
+  useEffect(() => {
+    const handler = e => { if (e.key === 'Escape') setLightbox(null) }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [])
+
+  const toggleTip = useCallback(i => {
+    setNotedTips(prev => {
+      const next = new Set(prev)
+      next.has(i) ? next.delete(i) : next.add(i)
+      return next
+    })
+  }, [])
+
+  if (!dest) return (
+    <div className="loading" style={{ paddingTop: '10rem' }}>
+      <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🌍</div>
+      Loading destination…
+    </div>
+  )
+
+  const TABS = [
+    { id: 'overview',    icon: '🗺️',  label: 'Overview' },
+    { id: 'attractions', icon: '🏛️',  label: 'Attractions', count: attractions.length },
+    { id: 'tours',       icon: '🎒',  label: 'Tours',       count: tours.length },
+    { id: 'hotels',      icon: '🏨',  label: 'Hotels',      count: hotels.length },
+    { id: 'tips',        icon: '💡',  label: 'Tips',        count: dest.tips?.length },
+  ]
+
+  const WA_URL = `https://wa.me/212689122018?text=${encodeURIComponent(`Hello! I'm interested in a tour to ${dest.name}. Can you help me plan my trip?`)}`
+  const filteredHotels = starFilter === 0 ? hotels : hotels.filter(h => h.stars === starFilter)
+
+  /* ── Gallery images (hero + image, max 5 slots remaining) ── */
+  const galleryImgs = [dest.heroImage, dest.image, ...attractions.slice(0, 4).map(a => a.image)].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).slice(0, 5)
+
+  /* ── Render ── */
   return (
-    <div>
-      {/* Hero */}
-      <div style={{ position: 'relative', height: '65vh', minHeight: 400, overflow: 'hidden' }}>
-        <img src={dest.heroImage || dest.image} alt={dest.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
-          padding: '3rem 2rem', textAlign: 'center', color: '#fff',
-        }}>
-          <div style={{ fontSize: '0.9rem', color: '#f4a830', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 2, marginBottom: '0.5rem' }}>{dest.region}</div>
-          <h1 style={{ fontSize: '3.5rem', fontWeight: 900, lineHeight: 1, marginBottom: '0.5rem' }}>{dest.name}</h1>
-          <p style={{ fontSize: '1.3rem', color: '#e0d4c0', fontStyle: 'italic' }}>{dest.tagline}</p>
+    <div style={{ background: 'var(--cream)' }}>
+
+      {/* ══ HERO ══ */}
+      <div className="dd-hero">
+        <img
+          ref={heroImgRef}
+          className="dd-hero-img"
+          src={dest.heroImage || dest.image}
+          alt={dest.name}
+        />
+        <div className="dd-hero-overlay" />
+
+        {/* Breadcrumb */}
+        <nav className="dd-hero-breadcrumb">
+          <Link to="/">Home</Link>
+          <span>/</span>
+          <Link to="/destinations">Destinations</Link>
+          <span>/</span>
+          <span style={{ color: 'rgba(255,255,255,0.9)' }}>{dest.name}</span>
+        </nav>
+
+        {/* Content */}
+        <div className="dd-hero-content">
+          <div className="dd-hero-region">{dest.region}</div>
+          <h1 className="dd-hero-title">{dest.name}</h1>
+          <p className="dd-hero-tagline">{dest.tagline}</p>
+          {dest.highlights && (
+            <div className="dd-hero-highlights">
+              {dest.highlights.map(h => (
+                <span key={h} className="dd-hero-pill">{h}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Scroll cue */}
+        <div className="dd-hero-scroll">
+          <div className="dd-hero-scroll-line" />
+          Scroll
         </div>
       </div>
 
-      {/* Quick Stats */}
-      <div style={{ background: '#1a0a00', color: '#fff', padding: '1.2rem 2rem' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', gap: '2.5rem', flexWrap: 'wrap', justifyContent: 'center', fontSize: '0.9rem' }}>
-          <span>🌡 <strong>{dest.temperature}</strong></span>
-          <span>📅 Best time: <strong>{dest.bestTime}</strong></span>
-          <span>🗣 <strong>{dest.language}</strong></span>
-          <span>💰 <strong>{dest.currency}</strong></span>
-          <span>🏨 <strong>{hotels.length} hotels available</strong></span>
-          <span>🎯 <strong>{attractions.length} attractions</strong></span>
+      {/* ══ STATS BAR ══ */}
+      <div className="dd-stats-bar">
+        <div className="dd-stats-inner">
+          {[
+            { icon: '⭐', value: dest.rating, label: 'Rating' },
+            { icon: '🗣️', value: dest.reviewCount?.toLocaleString(), label: 'Reviews' },
+            { icon: '🏨', value: hotels.length, label: 'Hotels' },
+            { icon: '🏛️', value: attractions.length, label: 'Attractions' },
+            { icon: '🎒', value: tours.length, label: 'Tours' },
+          ].map(s => (
+            <div key={s.label} className="dd-stat">
+              <span className="dd-stat-icon">{s.icon}</span>
+              <div className="dd-stat-text">
+                <div className="dd-stat-value">{s.value ?? '—'}</div>
+                <div className="dd-stat-label">{s.label}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Tabs */}
-      <div style={{ background: '#fff', borderBottom: '2px solid #f0ebe3', position: 'sticky', top: 64, zIndex: 50 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', gap: 0, overflowX: 'auto' }}>
-          {tabs.map(t => (
-            <button key={t} onClick={() => setTab(t)} style={{
-              padding: '1rem 1.8rem', border: 'none', background: 'none', cursor: 'pointer',
-              fontWeight: tab === t ? 700 : 400,
-              color: tab === t ? '#f4a830' : '#555',
-              borderBottom: tab === t ? '3px solid #f4a830' : '3px solid transparent',
-              textTransform: 'capitalize', fontSize: '0.95rem', whiteSpace: 'nowrap',
-            }}>
-              {t === 'overview' ? 'Overview' : t === 'attractions' ? `Attractions (${attractions.length})` : t === 'tours' ? `Tours (${tours.length})` : t === 'hotels' ? `Hotels (${hotels.length})` : 'Tips'}
+      {/* ══ TABS ══ */}
+      <div className="dd-tabs-bar">
+        <div className="dd-tabs-inner">
+          {TABS.map(t => (
+            <button
+              key={t.id}
+              className={`dd-tab${tab === t.id ? ' active' : ''}`}
+              onClick={() => setTab(t.id)}
+            >
+              <span className="dd-tab-icon">{t.icon}</span>
+              {t.label}
+              {t.count != null && (
+                <span className="dd-tab-count">{t.count}</span>
+              )}
             </button>
           ))}
         </div>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '2.5rem 2rem' }}>
+      {/* ══ TAB CONTENT ══ */}
+      <div className="dd-content">
 
-        {/* OVERVIEW */}
+        {/* ── OVERVIEW ── */}
         {tab === 'overview' && (
-          <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '3rem', alignItems: 'start' }}>
+          <div className="dd-tab-panel">
+            <div className="dd-overview-grid">
+
+              {/* Left: description + facts + getting there */}
               <div>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '1rem' }}>About {dest.name}</h2>
-                {dest.description.split('\n\n').map((para, i) => (
-                  <p key={i} style={{ color: '#555', lineHeight: 1.9, fontSize: '1.05rem', marginBottom: '1rem' }}>{para}</p>
-                ))}
-
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2rem 0 1rem' }}>Getting There</h3>
-                <p style={{ color: '#555', lineHeight: 1.8 }}>{dest.gettingThere}</p>
-
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2rem 0 1rem' }}>Key Facts</h3>
-                <ul style={{ paddingLeft: '1.2rem' }}>
-                  {dest.facts.map((f, i) => (
-                    <li key={i} style={{ color: '#555', marginBottom: '0.6rem', lineHeight: 1.6 }}>{f}</li>
+                <div className="dd-section-eyebrow">About {dest.name}</div>
+                <h2 className="dd-section-title">Discover {dest.name}</h2>
+                <div style={{ marginTop: '1.5rem' }}>
+                  {dest.description.split('\n\n').map((para, i) => (
+                    <p key={i} className="dd-desc-para">{para}</p>
                   ))}
-                </ul>
+                </div>
+
+                {/* Getting There */}
+                <div className="dd-getting-there dd-reveal">
+                  <h3 className="dd-getting-there-title">✈️ Getting There</h3>
+                  <p className="dd-getting-there-text">{dest.gettingThere}</p>
+                  <div className="dd-transport-chips">
+                    {getTransportChips(dest.gettingThere).map(c => (
+                      <span key={c.label} className="dd-transport-chip">{c.icon} {c.label}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Facts Accordion */}
+                <div className="dd-reveal">
+                  <h3 className="dd-facts-title">📌 Key Facts</h3>
+                  {dest.facts.map((f, i) => (
+                    <div
+                      key={i}
+                      className={`dd-fact-item${openFact === i ? ' open' : ''}`}
+                    >
+                      <button
+                        className="dd-fact-btn"
+                        onClick={() => setOpenFact(openFact === i ? null : i)}
+                      >
+                        <span className="dd-fact-num">{i + 1}</span>
+                        <span style={{ flex: 1 }}>{f.length > 80 ? f.slice(0, 80) + '…' : f}</span>
+                        <span className="dd-fact-chevron">▼</span>
+                      </button>
+                      <div className="dd-fact-body">{f}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
+              {/* Right: sidebar */}
               <div>
-                <div style={{ background: '#fef3e2', borderRadius: 16, padding: '1.5rem', marginBottom: '1.5rem' }}>
-                  <h3 style={{ fontWeight: 700, marginBottom: '1rem', color: '#1a0a00' }}>Quick Info</h3>
+                {/* Quick Info */}
+                <div className="dd-sidebar-card dd-reveal-scale">
+                  <h3>Quick Info</h3>
                   {[
-                    ['Region', dest.region],
-                    ['Best Time', dest.bestTime],
-                    ['Language', dest.language],
-                    ['Currency', dest.currency],
-                    ['Climate', dest.temperature],
-                  ].map(([k, v]) => (
-                    <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px solid #f0e8d0', fontSize: '0.9rem' }}>
-                      <span style={{ color: '#888', fontWeight: 600 }}>{k}</span>
-                      <span style={{ color: '#333', textAlign: 'right', maxWidth: 180 }}>{v}</span>
+                    ['📍 Region',      dest.region],
+                    ['📅 Best Time',   dest.bestTime],
+                    ['🗣️ Language',    dest.language],
+                    ['💰 Currency',    dest.currency],
+                    ['🌡️ Climate',     dest.temperature],
+                    ['💲 Price Level', dest.priceLevel],
+                  ].map(([k, v]) => v && (
+                    <div key={k} className="dd-info-row">
+                      <span className="dd-info-key">{k}</span>
+                      <span className="dd-info-val">{v}</span>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ background: '#fff', borderRadius: 16, padding: '1.5rem', boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}>
-                  <h3 style={{ fontWeight: 700, marginBottom: '1rem' }}>Explore {dest.name}</h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                    {[['attractions', `${attractions.length} Attractions`], ['tours', `${tours.length} Tours`], ['hotels', `${hotels.length} Hotels`]].map(([t, label]) => (
-                      <button key={t} onClick={() => setTab(t)} className="btn-secondary" style={{ textAlign: 'left', width: '100%' }}>{label} →</button>
-                    ))}
-                    <Link to={`/hotels?city=${dest.name}`} className="btn-primary" style={{ textAlign: 'center' }}>Book a Hotel</Link>
+                {/* Rating Card */}
+                <div className="dd-sidebar-card dd-reveal-scale" style={{ transitionDelay: '0.1s' }}>
+                  <h3>Traveller Rating</h3>
+                  <div className="dd-rating-display">
+                    <span className="dd-rating-num">{dest.rating}</span>
+                    <div>
+                      <div className="dd-rating-stars">{'★'.repeat(Math.round(dest.rating))}</div>
+                      <div className="dd-rating-count">{dest.reviewCount?.toLocaleString()} reviews</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Card */}
+                <div className="dd-sidebar-card dd-reveal-scale" style={{ transitionDelay: '0.2s' }}>
+                  <h3>Plan Your Visit</h3>
+                  <div className="dd-cta-btns">
+                    <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('attractions')}>
+                      🏛️ {attractions.length} Attractions →
+                    </button>
+                    <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('tours')}>
+                      🎒 {tours.length} Tours →
+                    </button>
+                    <Link to={`/hotels?city=${dest.name}`} className="btn-primary">
+                      🏨 Browse Hotels
+                    </Link>
+                    <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+                       style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#25d366', color: '#fff', padding: '0.7rem 1.5rem', borderRadius: '50px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', transition: 'background 0.2s' }}
+                       onMouseEnter={e => e.currentTarget.style.background = '#1eb957'}
+                       onMouseLeave={e => e.currentTarget.style.background = '#25d366'}
+                    >
+                      💬 Ask via WhatsApp
+                    </a>
                   </div>
                 </div>
               </div>
@@ -131,132 +306,259 @@ export default function DestinationDetail() {
           </div>
         )}
 
-        {/* ATTRACTIONS */}
+        {/* ── ATTRACTIONS ── */}
         {tab === 'attractions' && (
-          <div>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Things to Do in {dest.name}</h2>
-            <p style={{ color: '#888', marginBottom: '2rem' }}>{attractions.length} must-see attractions and experiences</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.8rem' }}>
-              {attractions.map(a => (
-                <div key={a.id} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
-                  <div style={{ position: 'relative', height: 200 }}>
-                    <img src={a.image} alt={a.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <span style={{
-                      position: 'absolute', top: 12, left: 12,
-                      background: typeColors[a.type] || '#555',
-                      color: '#fff', padding: '0.25rem 0.8rem', borderRadius: 20,
-                      fontSize: '0.75rem', fontWeight: 700,
-                    }}>{a.type}</span>
+          <div className="dd-tab-panel">
+            <div className="dd-section-eyebrow">{dest.name}</div>
+            <h2 className="dd-section-title">Things to Do</h2>
+            <p className="dd-section-sub">{attractions.length} must-see attractions and experiences</p>
+
+            <div className="dd-attractions-grid">
+              {attractions.map((a, i) => (
+                <div
+                  key={a.id}
+                  className="dd-attraction-card dd-reveal"
+                  style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
+                >
+                  <div className="dd-attraction-img-wrap">
+                    <img src={a.image} alt={a.name} loading="lazy" />
+                    <span
+                      className="dd-attraction-type"
+                      style={{ background: TYPE_COLORS[a.type] || '#555' }}
+                    >{a.type}</span>
                   </div>
-                  <div style={{ padding: '1.2rem' }}>
-                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{a.name}</h3>
-                    <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '0.8rem' }}>{a.description}</p>
-                    <div style={{ display: 'flex', gap: '1rem', fontSize: '0.82rem', color: '#888' }}>
-                      <span>⏱ {a.duration}</span>
-                      <span>💰 {a.price}</span>
+                  <div className="dd-attraction-body">
+                    <h3 className="dd-attraction-name">{a.name}</h3>
+                    <p className="dd-attraction-desc">{a.description}</p>
+                    <div className="dd-attraction-meta">
+                      <span className="dd-meta-chip">⏱ {a.duration}</span>
+                      <span className="dd-meta-chip">💰 {a.price}</span>
+                      <Link to="/map" className="dd-meta-chip" style={{ textDecoration: 'none', color: 'var(--gold-dark)', background: 'rgba(201,151,58,0.1)', borderColor: 'transparent' }}>
+                        🗺️ Map
+                      </Link>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {attractions.length === 0 && (
+              <p style={{ color: 'var(--text3)', textAlign: 'center', padding: '3rem' }}>
+                No attractions listed for {dest.name} yet.
+              </p>
+            )}
           </div>
         )}
 
-        {/* TOURS */}
+        {/* ── TOURS ── */}
         {tab === 'tours' && (
-          <div>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Tours & Experiences in {dest.name}</h2>
-            <p style={{ color: '#888', marginBottom: '2rem' }}>Guided tours and packages — all with local experts</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
-              {tours.map(t => (
-                <div key={t.id} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
-                  <img src={t.image} alt={t.title} style={{ width: '100%', height: 200, objectFit: 'cover' }} />
-                  <div style={{ padding: '1.3rem' }}>
-                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{t.title}</h3>
-                    <div style={{ display: 'flex', gap: '1rem', fontSize: '0.82rem', color: '#888', marginBottom: '0.8rem' }}>
-                      <span>⏱ {t.duration}</span>
-                      <span>👥 {t.groupSize}</span>
-                      <span>{'★'.repeat(Math.round(t.rating))} {t.rating}</span>
+          <div className="dd-tab-panel">
+            <div className="dd-section-eyebrow">{dest.name}</div>
+            <h2 className="dd-section-title">Tours & Experiences</h2>
+            <p className="dd-section-sub">Guided tours with local experts — small groups only</p>
+
+            <div className="dd-tours-grid">
+              {tours.map((t, i) => (
+                <div
+                  key={t.id}
+                  className="dd-tour-card dd-reveal"
+                  style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
+                >
+                  <div className="dd-tour-img-wrap">
+                    <img src={t.image} alt={t.title} loading="lazy" />
+                    <span className="dd-tour-rating-badge">★ {t.rating}</span>
+                  </div>
+                  <div className="dd-tour-body">
+                    <h3 className="dd-tour-title">{t.title}</h3>
+                    <div className="dd-tour-meta">
+                      <span className="dd-tour-meta-pill">⏱ {t.duration}</span>
+                      <span className="dd-tour-meta-pill">👥 {t.groupSize}</span>
                     </div>
-                    <p style={{ color: '#666', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem' }}>{t.description}</p>
-                    <div style={{ marginBottom: '1rem' }}>
-                      <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#555', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Highlights</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <p className="dd-tour-desc">{t.description}</p>
+                    <div className="dd-tour-highlights">
+                      <div className="dd-tour-highlights-label">Highlights</div>
+                      <div className="dd-tour-highlights-list">
                         {t.highlights.map(h => (
-                          <span key={h} style={{ background: '#fef3e2', color: '#c47a1e', padding: '0.2rem 0.7rem', borderRadius: 12, fontSize: '0.8rem' }}>{h}</span>
+                          <span key={h} className="dd-tour-highlight">{h}</span>
                         ))}
                       </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #f0ebe3', paddingTop: '1rem' }}>
-                      <div>
-                        <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1a0a00' }}>{t.price} MAD</span>
-                        <span style={{ fontSize: '0.85rem', color: '#888' }}> / person</span>
+                    <div className="dd-tour-footer">
+                      <div className="dd-tour-price">
+                        {t.price} MAD
+                        <span> / person</span>
                       </div>
-                      <Link to={`/hotels?city=${dest.name}`} className="btn-primary" style={{ fontSize: '0.85rem', padding: '0.5rem 1.2rem' }}>Book Tour</Link>
+                      <a
+                        href={`https://wa.me/212689122018?text=${encodeURIComponent(`Hello! I'd like to book the "${t.title}" tour in ${dest.name}. Price: ${t.price} MAD/person.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="dd-tour-book-btn"
+                      >
+                        💬 Book
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {tours.length === 0 && (
+              <p style={{ color: 'var(--text3)', textAlign: 'center', padding: '3rem' }}>
+                No tours listed for {dest.name} yet.
+              </p>
+            )}
           </div>
         )}
 
-        {/* HOTELS */}
+        {/* ── HOTELS ── */}
         {tab === 'hotels' && (
-          <div>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Where to Stay in {dest.name}</h2>
-            <p style={{ color: '#888', marginBottom: '2rem' }}>{hotels.length} handpicked accommodations</p>
+          <div className="dd-tab-panel">
+            <div className="dd-section-eyebrow">{dest.name}</div>
+            <h2 className="dd-section-title">Where to Stay</h2>
+            <p className="dd-section-sub">{hotels.length} handpicked accommodations</p>
+
+            {/* Star filter */}
+            <div className="dd-star-filters">
+              {[0, 5, 4, 3].map(s => (
+                <button
+                  key={s}
+                  className={`dd-star-btn${starFilter === s ? ' active' : ''}`}
+                  onClick={() => setStarFilter(s)}
+                >
+                  {s === 0 ? 'All' : `${'★'.repeat(s)} ${s}-star`}
+                </button>
+              ))}
+            </div>
+
             <div className="hotels-grid">
-              {hotels.map(h => (
-                <Link key={h.id} to={`/hotels/${h.id}`} className="hotel-card">
-                  <img src={h.image} alt={h.name} className="hotel-card-img" />
+              {filteredHotels.map((h, i) => (
+                <Link
+                  key={h.id}
+                  to={`/hotels/${h.id}`}
+                  className="hotel-card dd-reveal"
+                  style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
+                >
+                  <div className="hotel-card-img-wrap">
+                    <img src={h.image} alt={h.name} className="hotel-card-img" loading="lazy" />
+                    <span className="hotel-card-badge">{h.badge}</span>
+                  </div>
                   <div className="hotel-card-body">
                     <div className="hotel-card-city">{h.city}</div>
                     <div className="hotel-card-name">{h.name}</div>
-                    <div className="hotel-card-rating">{'★'.repeat(Math.round(h.rating))} <span style={{ color: '#555' }}>{h.rating}</span></div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+                    <div className="hotel-card-rating">
+                      <span className="stars">{'★'.repeat(Math.round(h.rating))}</span>
+                      <span className="rating-num">{h.rating} · {h.reviews.toLocaleString()} reviews</span>
+                    </div>
+                    <div className="hotel-card-amenities">
                       {h.amenities.slice(0, 4).map(a => (
-                        <span key={a} style={{ background: '#fef3e2', color: '#c47a1e', padding: '0.2rem 0.6rem', borderRadius: 10, fontSize: '0.75rem' }}>{a}</span>
+                        <span key={a} className="amenity-pill">{a}</span>
                       ))}
                     </div>
                     <div className="hotel-card-footer">
-                      <div className="hotel-card-price">${h.price} <span>/ night</span></div>
-                      <span className="btn-primary" style={{ padding: '0.4rem 1rem', fontSize: '0.85rem' }}>Book</span>
+                      <div className="hotel-card-price">
+                        ${h.price}<span> / night</span>
+                      </div>
+                      <span className="btn-primary" style={{ padding: '0.45rem 1.1rem', fontSize: '0.85rem' }}>
+                        Book
+                      </span>
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
+
+            {filteredHotels.length === 0 && (
+              <p style={{ color: 'var(--text3)', textAlign: 'center', padding: '3rem' }}>
+                No {starFilter > 0 ? `${starFilter}-star ` : ''}hotels found.
+              </p>
+            )}
           </div>
         )}
 
-        {/* TIPS */}
+        {/* ── TIPS ── */}
         {tab === 'tips' && (
-          <div style={{ maxWidth: 750 }}>
-            <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>Travel Tips for {dest.name}</h2>
-            <p style={{ color: '#888', marginBottom: '2rem' }}>Insider advice to make the most of your visit</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {dest.tips.map((tip, i) => (
-                <div key={i} style={{
-                  background: '#fff', borderRadius: 14, padding: '1.2rem 1.5rem',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                  display: 'flex', gap: '1rem', alignItems: 'flex-start',
-                }}>
-                  <span style={{ background: '#fef3e2', color: '#f4a830', fontWeight: 800, fontSize: '1rem', borderRadius: '50%', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{i + 1}</span>
-                  <p style={{ color: '#444', lineHeight: 1.7, fontSize: '1rem', margin: 0 }}>{tip}</p>
+          <div className="dd-tab-panel">
+            <div className="dd-section-eyebrow">{dest.name}</div>
+            <h2 className="dd-section-title">Insider Tips</h2>
+            <p className="dd-section-sub">
+              Click a tip to mark it as noted — {notedTips.size} of {dest.tips?.length} noted
+            </p>
+
+            <div className="dd-tips-list">
+              {dest.tips?.map((tip, i) => (
+                <div
+                  key={i}
+                  className={`dd-tip-card dd-reveal${notedTips.has(i) ? ' noted' : ''}`}
+                  style={{ transitionDelay: `${i * 0.04}s` }}
+                  onClick={() => toggleTip(i)}
+                >
+                  <div className="dd-tip-check">
+                    {notedTips.has(i) ? '✓' : ''}
+                  </div>
+                  <div className="dd-tip-num">{i + 1}</div>
+                  <p className="dd-tip-text">{tip}</p>
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: '2.5rem', background: '#fef3e2', borderRadius: 16, padding: '1.5rem' }}>
-              <h3 style={{ fontWeight: 700, marginBottom: '1rem' }}>Ready to visit {dest.name}?</h3>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <Link to={`/hotels?city=${dest.name}`} className="btn-primary">Browse Hotels</Link>
-                <button onClick={() => setTab('tours')} className="btn-secondary">View Tours</button>
+
+            {/* CTA block */}
+            <div className="dd-tips-cta dd-reveal">
+              <div>
+                <h3>Ready to visit {dest.name}?</h3>
+                <p>Let our local experts craft your perfect itinerary</p>
+              </div>
+              <div className="dd-tips-cta-btns">
+                <Link to={`/hotels?city=${dest.name}`} className="btn-primary">
+                  🏨 Browse Hotels
+                </Link>
+                <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#25d366', color: '#fff', padding: '0.75rem 1.6rem', borderRadius: '50px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}
+                >
+                  💬 Plan via WhatsApp
+                </a>
               </div>
             </div>
           </div>
         )}
+
       </div>
+
+      {/* ══ PHOTO GALLERY (always visible) ══ */}
+      {galleryImgs.length > 0 && (
+        <section className="dd-gallery-section">
+          <div className="dd-gallery-inner">
+            <div className="dd-gallery-header dd-reveal">
+              <div className="dd-section-eyebrow" style={{ justifyContent: 'center' }}>Visual Journey</div>
+              <h2 className="dd-section-title" style={{ textAlign: 'center' }}>{dest.name} in Photos</h2>
+            </div>
+            <div className="dd-gallery-grid">
+              {galleryImgs.map((src, i) => (
+                <div
+                  key={i}
+                  className="dd-gallery-item dd-reveal-scale"
+                  style={{ transitionDelay: `${i * 0.07}s` }}
+                  onClick={() => setLightbox(src)}
+                >
+                  <img src={src} alt={`${dest.name} photo ${i + 1}`} loading="lazy" />
+                  <div className="dd-gallery-cap">{dest.name} — Photo {i + 1}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ══ LIGHTBOX ══ */}
+      {lightbox && (
+        <div className="dd-lightbox" onClick={() => setLightbox(null)}>
+          <button
+            className="dd-lightbox-close"
+            onClick={() => setLightbox(null)}
+            aria-label="Close lightbox"
+          >×</button>
+          <img src={lightbox} alt="Gallery" onClick={e => e.stopPropagation()} />
+        </div>
+      )}
     </div>
   )
 }

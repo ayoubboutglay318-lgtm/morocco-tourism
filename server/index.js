@@ -45,6 +45,15 @@ const I = {
   cap:  p('photo-1633264542743-c1acdb5eff0e'),
   herc: p('photo-1589278173760-b2f426dc0903'),
   paul: p('photo-1692084745522-90c9a162329e'),
+  // Food — real Moroccan dish photos
+  food_tagine:   p('photo-1540189549336-e6e99eb4adb3'),
+  food_couscous: p('photo-1590846406792-0aefa5358172'),
+  food_pastilla: p('photo-1574894709920-11b28e7367e3'),
+  food_harira:   p('photo-1547592180-85f173990554'),
+  food_tea:      p('photo-1564890369478-c89ca3d9cde8'),
+  food_mechoui:  p('photo-1529042410759-befb1204b468'),
+  food_msemen:   p('photo-1603133872878-684f208fb84b'),
+  food_rfissa:   p('photo-1617196034183-421b4040ed20'),
 };
 
 const hotels = [
@@ -278,6 +287,27 @@ const attractions = [
   { id:14, city:"Fes", name:"Chouara Tanneries",                     type:"Heritage", duration:"2 hrs",    price:"Free",    image:I.fes2,  description:"The world's oldest working tannery in continuous operation since the 11th century. Viewed from the leather merchant terraces above, the stone honeycomb vats dyed in saffron, poppy, mint and indigo create an image unlike anything else on earth. Visit Tuesday–Sunday morning." },
 ];
 
+const tours = [
+  { id:1, city:"Tangier", title:"Literary Tangier Walking Tour", duration:"3 hours", groupSize:"Max 8", rating:4.9, price:350, image:I.tng2, description:"Walk in the footsteps of Burroughs, Bowles and Kerouac. Visit Room 9 of the El Muniria, Café Hafa on the Marshan cliff, the American Legation and the Petit Socco.", highlights:["Café Hafa","American Legation Museum","El Muniria Hotel","Petit Socco cafés"] },
+  { id:2, city:"Tangier", title:"Cap Spartel & Hercules Caves", duration:"Half day", groupSize:"Max 12", rating:4.8, price:280, image:I.cap, description:"Where two seas collide. Visit the striped Cap Spartel lighthouse where the Atlantic meets the Mediterranean, then descend into the ancient Hercules Caves carved by Neolithic millstone-cutters.", highlights:["Cap Spartel lighthouse","Two-sea confluence","Hercules Caves","Rmilat forest walk"] },
+  { id:3, city:"Marrakech", title:"Medina Souk Deep Dive", duration:"4 hours", groupSize:"Max 10", rating:5.0, price:420, image:I.mrk3, description:"Navigate the 18 souk quarters with a master guide. Tanneries, dyers, brass-beaters, spice merchants and carpet weavers — the full living medieval marketplace experience.", highlights:["Dyers souk","Spice market","Brass workshops","Carpet souk"] },
+  { id:4, city:"Marrakech", title:"Djemaa el-Fna by Night", duration:"3 hours", groupSize:"Max 15", rating:4.9, price:300, image:I.mrk5, description:"The world's greatest open-air theatre after dark. Storytellers, Gnawa musicians, acrobats, snake charmers and the smoke and noise of a hundred food grills. Includes dinner at a stall.", highlights:["Gnawa musicians","Storytellers","Snake charmers","Local street dinner"] },
+  { id:5, city:"Fes", title:"Full-Day Fes Medina Tour", duration:"8 hours", groupSize:"Max 8", rating:4.9, price:550, image:I.fes1, description:"The most comprehensive Fes medina experience available. Chouara Tannery, Bou Inania Madrasa, Al-Qarawiyyin, the souks, a Fassi lunch and the covered food market. Transformative.", highlights:["Chouara Tannery","Bou Inania Madrasa","Al-Qarawiyyin","Fassi lunch"] },
+  { id:6, city:"Fes", title:"Fassi Cooking Class", duration:"5 hours", groupSize:"Max 8", rating:5.0, price:480, image:I.fes2, description:"Learn Fassi pastilla, couscous and bastilla from a Fassi family in their home. The most refined cuisine in Morocco, taught by the hands that have been making it for generations.", highlights:["Pastilla preparation","Couscous technique","Preserved lemon","Local family home"] },
+  { id:7, city:"Chefchaouen", title:"Blue City Photography Walk", duration:"3 hours", groupSize:"Max 8", rating:4.9, price:250, image:I.chef1, description:"An early-morning guided walk through Chefchaouen's most photogenic blue alleys before tour groups arrive. The best angles, best light and hidden corners known only to locals.", highlights:["Hidden blue alleys","Spanish Mosque view","Morning golden light","Riff Mountains backdrop"] },
+  { id:8, city:"Chefchaouen", title:"Akchour Waterfalls Trek", duration:"Full day", groupSize:"Max 12", rating:4.8, price:400, image:I.chef2, description:"A spectacular full-day hike through the Talassemtane National Park to the Akchour waterfalls — the most beautiful natural site in northern Morocco. Swimming included.", highlights:["Akchour waterfalls","Talassemtane park","Natural swimming pools","Cedar forest"] },
+  { id:9, city:"Merzouga", title:"Sahara Sunset Camel Trek", duration:"2 hours + overnight", groupSize:"Max 16", rating:5.0, price:890, image:I.sah1, description:"The classic Sahara experience — a camel trek at sunset into the heart of Erg Chebbi, an overnight in a luxury Berber tent, and a dawn walk on the silent dunes. Life-changing.", highlights:["Sunset camel trek","Luxury desert camp","Sahara stargazing","Dune sunrise"] },
+  { id:10, city:"Merzouga", title:"4x4 Desert Explorer", duration:"Full day", groupSize:"Max 6", rating:4.8, price:1200, image:I.sah2, description:"A full-day 4WD expedition across the Sahara — fossil sites of Erfoud, the Gnaoua village of Khemliya, nomad families, salt flats and the hidden southern face of Erg Chebbi.", highlights:["Fossil workshops Erfoud","Khemliya Gnaoua village","Nomad family visit","Erg Chebbi south face"] },
+  { id:11, city:"Essaouira", title:"Gnaoua Music & Ramparts", duration:"3 hours", groupSize:"Max 12", rating:4.8, price:320, image:I.ess1, description:"The spirit of Essaouira — the Atlantic ramparts at sunset, a live Gnaoua music session with a master musician, and the story of this UNESCO port city's extraordinary multicultural history.", highlights:["Atlantic ramparts sunset","Live Gnaoua music","Portuguese fortifications","UNESCO heritage story"] },
+  { id:12, city:"Essaouira", title:"Argan Oil Farm & Cooperatives", duration:"Half day", groupSize:"Max 10", rating:4.7, price:380, image:I.ess2, description:"Visit the argan forest UNESCO Biosphere Reserve and a women's argan oil cooperative — see the traditional hand-pressing process and taste the finest culinary argan oil directly from the source.", highlights:["Argan forest UNESCO reserve","Women's cooperative visit","Hand-pressing process","Argan oil tasting"] },
+  { id:13, city:"Atlas Mountains", title:"Mount Toubkal Ascent (2 days)", duration:"2 days", groupSize:"Max 8", rating:5.0, price:1800, image:I.atl1, description:"The greatest mountain trek in North Africa. Two days from the Berber village of Imlil to the summit of Mount Toubkal (4,167m) — highest peak in Africa north of the Sahara. No technical experience needed.", highlights:["Toubkal summit 4167m","Imlil Berber village","Mountain refuge overnight","360° Atlas panorama"] },
+  { id:14, city:"Atlas Mountains", title:"Aït Ben Haddou & Dades Valley", duration:"Full day", groupSize:"Max 12", rating:4.9, price:850, image:I.atl3, description:"The most spectacular road trip in Morocco — the Tizi n'Tichka pass, the UNESCO ksar of Aït Ben Haddou (Gladiator, Game of Thrones), the Dades Valley rose gardens and clay kasbahs.", highlights:["Tizi n'Tichka pass 2260m","Aït Ben Haddou UNESCO","Dades Valley kasbahs","Valley of Roses"] },
+  { id:15, city:"Agadir", title:"Taghazout Surf Experience", duration:"Half day", groupSize:"Max 8", rating:4.8, price:450, image:I.ess1, description:"Africa's best surf spot — professional instruction at Taghazout beach (20km north of Agadir) with certified surf coaches. Suitable for complete beginners to advanced surfers.", highlights:["Taghazout beach","Professional surf coaching","Board and wetsuit included","Atlantic waves"] },
+  { id:16, city:"Agadir", title:"Souss-Massa Birdwatching", duration:"Full day", groupSize:"Max 6", rating:4.7, price:600, image:I.ess2, description:"The critically endangered Northern Bald Ibis — the rarest bird in Africa — nests only in Souss-Massa National Park. A guided ornithology expedition with a park ranger and specialist guide.", highlights:["Northern Bald Ibis","Souss-Massa park","Flamingos and herons","Atlantic estuary ecosystem"] },
+  { id:17, city:"Casablanca", title:"Hassan II Mosque Private Tour", duration:"2 hours", groupSize:"Max 10", rating:5.0, price:380, image:I.cas1, description:"A private guided tour of the world's third largest mosque — the extraordinary architecture, the retractable roof, the glass floor over the Atlantic, and the full story of its construction (17 years, 10,000 craftsmen).", highlights:["Interior guided tour","Glass floor over Atlantic","210m minaret facts","Retractable roof mechanism"] },
+  { id:18, city:"Casablanca", title:"Art Deco Architecture Walk", duration:"3 hours", groupSize:"Max 12", rating:4.6, price:280, image:I.cas1, description:"The finest collection of 1930s Art Deco architecture in Africa — the Ville Nouvelle of Casablanca rivals Miami Beach and Naples in its concentration of extraordinary buildings. A unique architectural safari.", highlights:["Maarif Art Deco quarter","Place Mohammed V","Cinema Rex (1929)","Colonial administration buildings"] },
+];
+
 const destinations = [
   {
     id:1, slug:"tangier", name:"Tangier", region:"Tanger-Tétouan-Al Hoceïma", tagline:"Where Two Continents Meet",
@@ -289,17 +319,112 @@ const destinations = [
     facts:["14km from Spain — the Spanish coast is visible from the kasbah","One of the oldest continuously inhabited cities in the world (3,000+ years)","The American Legation is the only US National Historic Landmark outside America","Morocco was the first nation to recognise American independence (1777)","William Burroughs wrote Naked Lunch in Room 9 of the El Muniria hotel (1957)","Paul Bowles lived in Tangier from 1947 until his death in 1999","Henri Matisse visited in 1912 and produced 24 masterworks here","Tanger-Med is the largest container port in Africa","Al Boraq high-speed train: Tangier to Casablanca in 2h10","Cap Spartel is where the Atlantic Ocean and Mediterranean Sea collide"],
     gettingThere:"Tangier Ibn Battouta Airport (TNG) has direct flights from Paris, Madrid, Brussels, Amsterdam, London. Tanger-Med ferry port (40km east) connects to Tarifa (35 min), Algeciras (90 min) and Barcelona. Al Boraq high-speed train to Casablanca (2h10) and Rabat (1h30).",
     tips:["Walk up to the kasbah at sunset — the Strait view is unforgettable","Cap Spartel at 8am before tour groups — sea collision most visible in morning light","Mint tea at Café Hafa on the Marshan cliff — where Burroughs and Kerouac sat","The medina is compact — easy to navigate alone unlike Marrakech or Fes","Fresh seafood on Avenue d'Espagne near the port — fish caught that morning","American Legation Museum: Tue–Sat, free entry","Grand Socco Thursday & Sunday markets: arrive by 7am","Petit taxi to Cap Spartel: agree 200–250 MAD return before getting in","Hercules Caves 3km past Cap Spartel — combine both in one half-day","Book Fairmont Tazi Palace or Villa Josephine well in advance"],
+    highlights:["Strait of Gibraltar views","Literary history","Cap Spartel","Kasbah Museum"],
+    rating:4.8, reviewCount:3420, priceLevel:"$$",
   },
   {
     id:2, slug:"marrakech", name:"Marrakech", region:"Marrakech-Safi", tagline:"The Red City",
-    description:"Marrakech — the Red City — is Morocco's beating heart. Founded in 1062, its medina is a UNESCO World Heritage Site of souks, palaces, mosques and riads barely changed in a thousand years.\n\nThe legendary Djemaa el-Fna square transforms from a market by day to the world's greatest open-air theatre by night. The souks sell everything from hand-hammered lanterns to freshly ground ras el hanout.",
+    description:"Marrakech — the Red City — is Morocco's beating heart. Founded in 1062, its medina is a UNESCO World Heritage Site of souks, palaces, mosques and riads barely changed in a thousand years.\n\nThe legendary Djemaa el-Fna square transforms from a market by day to the world's greatest open-air theatre by night — storytellers, Gnawa musicians, acrobats, snake charmers and the smoke of a hundred grills.\n\nBeyond the medina, the Jardin Majorelle (restored by Yves Saint Laurent), the Saadian Tombs, the Ben Youssef Madrasa and the Palais de la Bahia are unmissable. And just 60km away, the snowy peaks of Mount Toubkal (4,167m) — the highest mountain in North Africa — await hikers.",
     image:I.mrk1, heroImage:I.mrk2,
     bestTime:"March–May, September–November",
     language:"Darija (Moroccan Arabic), French, Tamazight", currency:"Moroccan Dirham (MAD)",
     temperature:"Hot and dry — 38°C summer, 18°C winter",
-    facts:["Founded in 1062 by Youssef ibn Tachfin","UNESCO World Heritage medina since 1985","La Mamounia hotel has operated since 1929 — Churchill's favourite","Gateway to Mount Toubkal (4,167m) — North Africa's highest peak","Djemaa el-Fna: UNESCO Intangible Cultural Heritage"],
-    gettingThere:"Marrakech Menara Airport (RAK) has direct flights from most European cities. Train to Casablanca (3h) and Rabat (4h). CTM buses from Fes, Casablanca and Agadir.",
-    tips:["Visit Djemaa el-Fna between 9pm–11pm for the full experience","Start souk exploration at 9am before tour groups arrive","Book riads at least 3 weeks ahead in spring/autumn","Hire a calèche (horse-drawn carriage) for a sunset ramparts circuit"],
+    facts:["Founded in 1062 by Youssef ibn Tachfin","UNESCO World Heritage medina since 1985","La Mamounia hotel has operated since 1929 — Churchill's favourite","Gateway to Mount Toubkal (4,167m) — North Africa's highest peak","Djemaa el-Fna: UNESCO Intangible Cultural Heritage","The Ben Youssef Madrasa (1570) is the largest theological college in North Africa","Over 3 million tourists visit Marrakech each year","The souks cover 18 distinct trade quarters — a living medieval marketplace","Rose water from the Dades Valley is distilled in the city's ancient workshops","Marrakech hosted the COP22 climate conference in 2016"],
+    gettingThere:"Marrakech Menara Airport (RAK) has direct flights from most European cities (London, Paris, Amsterdam, Madrid). Train to Casablanca (3h) and Rabat (4h). CTM buses from Fes, Casablanca and Agadir. Supratours coaches from Agadir and Essaouira.",
+    tips:["Visit Djemaa el-Fna between 9pm–11pm for the full experience","Start souk exploration at 9am before tour groups arrive","Book riads at least 3 weeks ahead in spring/autumn","Hire a calèche (horse-drawn carriage) for a sunset ramparts circuit","Majorelle Garden: arrive at 8am opening to avoid crowds","Bargain respectfully in the souks — 40–50% of initial price is fair","Try the mechoui (slow-roasted lamb) at the plaza near Djemaa el-Fna at noon","Hammam Dar el-Bacha offers an authentic local hammam experience for 30 MAD","Book a cooking class — learning tagine at a riad is a highlight of any visit","The Saadian Tombs are free and less crowded than other sites"],
+    highlights:["Djemaa el-Fna","Medina souks","Jardin Majorelle","Atlas day trips"],
+    rating:4.9, reviewCount:18740, priceLevel:"$$",
+  },
+  {
+    id:3, slug:"fes", name:"Fes", region:"Fès-Meknès", tagline:"The Ancient Soul of Morocco",
+    description:"Fes — the oldest of Morocco's Imperial Cities — is the country's spiritual and intellectual heart. Founded in 789 AD, Fes el-Bali (the old city) is the largest living medieval city in the world and a UNESCO World Heritage Site of extraordinary density and beauty.\n\nThe medina's 9,400 alleys make it the largest car-free urban area on earth. Getting lost is not just inevitable — it is the experience. A maze of ancient mosques, Quranic schools, tanneries, craft workshops and fondouks (merchants' inns) where time has barely moved since the 13th century.\n\nThe Chouara Tannery — the world's oldest working tannery (11th century) — is one of the most visually spectacular sights in all of Africa. The Al-Qarawiyyin University, founded in 859 AD, is the oldest continuously operating university on earth.",
+    image:I.fes1, heroImage:I.fes2,
+    bestTime:"March–May, September–November",
+    language:"Darija (Moroccan Arabic), French, Classical Arabic",
+    currency:"Moroccan Dirham (MAD)", temperature:"Continental — 35°C summer, 5°C winter",
+    facts:["Founded in 789 AD by Idris I — Morocco's oldest imperial city","Fes el-Bali is the largest living medieval city in the world (UNESCO)","Al-Qarawiyyin University (859 AD) is the world's oldest continuously operating university","The Chouara Tannery has been in operation since the 11th century","The medina has over 9,400 alleys and is entirely car-free","The Bou Inania Madrasa (1350) is the finest example of Marinid architecture in Morocco","Fassi cuisine is considered the most refined in Morocco","The Fes Festival of World Sacred Music draws 600,000 visitors each May–June","Over 100 fondouks (ancient caravanserais) survive in the medina","The city was the world's largest city in the 13th century"],
+    gettingThere:"Fes-Saïss Airport (FEZ) has direct flights from Paris, Brussels, Amsterdam, Madrid. ONCF train from Casablanca (4h30), Tangier (4h) and Rabat (3h). CTM buses from all major cities. Taxi from airport: 100–150 MAD.",
+    tips:["Hire a local guide for the medina — the 9,400 alleys are genuinely impossible to navigate alone the first time","Visit Chouara Tannery in the morning for the best colours and light","The Bou Inania Madrasa (1350) is free and the most beautiful building in Fes","Fassi couscous on Friday — find a neighbourhood restaurant that serves the real family version","Buy saffron, ras el hanout and preserved lemons from the spice souk near Bab Rcif","Al-Qarawiyyin Library is not open to visitors — appreciate it from the courtyard","Book dinner at Riad Fes or Dar Roumana for genuine Fassi fine dining","The Blue Gate (Bab Bou Jeloud) at sunset is Fes's most photographed sight","Lunch at a rooftop restaurant above the medina for the full cityscape panorama","Day trip to Meknès (45 min) and Volubilis Roman ruins"],
+    highlights:["Chouara Tanneries","Bou Inania Madrasa","Medieval medina","Fassi cuisine"],
+    rating:4.8, reviewCount:9210, priceLevel:"$",
+  },
+  {
+    id:4, slug:"chefchaouen", name:"Chefchaouen", region:"Tanger-Tétouan-Al Hoceïma", tagline:"The Blue Pearl of Morocco",
+    description:"Chefchaouen — the Blue City, the Blue Pearl — is one of the most photographed places on earth. Founded in 1471 as a refuge for Muslims and Jews expelled from Andalusia, every alley, staircase, flowerpot and wall in the old medina is painted in infinite shades of cobalt, indigo, cerulean and powder blue.\n\nNestled in the Rif Mountains at 600m altitude, Chefchaouen offers a natural freshness and tranquility that makes it unlike any other Moroccan city. The source of the Ras el-Maa river tumbles through the town centre. Goats wander through the medina. The pace of life is gentle and the welcome is warm.\n\nAbove the medina, a 45-minute hike brings you to the Spanish Mosque with its panoramic view of the blue rooftops against the green Rif Mountains — the most iconic view in Morocco.",
+    image:I.chef1, heroImage:I.chef2,
+    bestTime:"April–June, September–October",
+    language:"Tarifit Berber (Riffian), Moroccan Arabic, Spanish",
+    currency:"Moroccan Dirham (MAD)", temperature:"Mountain Mediterranean — 25°C summer, 4°C winter",
+    facts:["Founded in 1471 by Moroccan and Andalusian refugees expelled from Spain","The blue colour originates from a Jewish tradition — blue wards off evil spirits","Altitude 600m — up to 10°C cooler than coastal cities in summer","The Rif Mountains surrounding Chefchaouen receive snow in winter","Home to the Akchour waterfalls — a full-day hiking destination","The medina was closed to non-Muslims until 1920","Chefchaouen is known for its goat cheese — unusually rare in Morocco","The local carpet style is distinctive — bold red and white Riffian geometric patterns","Just 3 hours from Tangier and 4 hours from Fes by bus","Often combined with a visit to Tétouan, the 'White Dove' city 60km south"],
+    gettingThere:"No direct flights. CTM and Supratours buses from Tangier (3h), Fes (4h), Casablanca (5h30). Grand taxi from Tetouan (1h30) or Tangier (2h30). The town is walkable — no car needed.",
+    tips:["The blue walls glow most beautifully in golden morning light — explore 7–9am before tour groups arrive","Hike to the Spanish Mosque (45 min) — the panoramic view is the iconic shot of Morocco","Swim at Akchour Waterfalls — a magnificent full-day trek (20km return)","The local kefta and goat cheese tagine is among the best in Morocco","Buy hand-woven Riffian rugs — the geometric patterns are unique to this region","The Plaza Uta el-Hammam is the heart of the medina — perfect for watching the world pass","Stay at least 2 nights — the city has a way of extending every stay","The hammam on the main square is open to all and costs 15 MAD","Overnight buses from Fes make an easy connection","Try the local bissara (broad bean soup) for breakfast — 5 MAD a bowl"],
+    highlights:["Blue painted medina","Spanish Mosque viewpoint","Akchour Waterfalls","Rif Mountains hiking"],
+    rating:4.9, reviewCount:7830, priceLevel:"$",
+  },
+  {
+    id:5, slug:"merzouga", name:"Merzouga & Sahara", region:"Drâa-Tafilalet", tagline:"Desert of a Thousand Stars",
+    description:"Merzouga is the gateway to Erg Chebbi — the most spectacular dune field in Morocco and one of the most beautiful landscapes on earth. The orange and gold dunes rise up to 150 metres from the flat hammada desert floor, creating a sea of perfectly sculpted sand.\n\nThe Sahara Desert experience — a camel trek at sunset, a night in a luxury desert camp under 3,000 stars, watching the sun rise over the dunes — is for many travellers the single most profound experience of their lives.\n\nBeyond Erg Chebbi, the region reveals the ancient ksar of Khemliya where the Gnaoua music tradition was born, the fossils of Erfoud (Morocco is one of the world's richest fossil sites), and the palm oasis of Tafilalet — the largest in North Africa.",
+    image:I.sah1, heroImage:I.sah2,
+    bestTime:"October–April",
+    language:"Tamazight (Berber), Hassaniya Arabic, Moroccan Arabic",
+    currency:"Moroccan Dirham (MAD)", temperature:"Desert — 43°C summer, 4°C winter (freezing nights)",
+    facts:["Erg Chebbi dunes rise up to 150 metres — Morocco's highest dunes","The Sahara is the world's largest hot desert (9.2 million km²)","Morocco's fossils include 450-million-year-old trilobites, one of the world's richest sites","The village of Khemliya is the birthplace of the ancient Gnaoua music tradition","The Tafilalet palm oasis is the largest in North Africa","Dromedary camels can go 7 days without water","The Milky Way is visible every night from October to April in the Sahara","Erfoud is the world capital of ammonite fossil exports","Road from Marrakech to Merzouga crosses the High Atlas via the Tizi n'Tichka pass (2,260m)","Night temperatures in January can drop to -5°C in the desert"],
+    gettingThere:"No direct flights. Most visitors fly to Marrakech (RAK) and drive 9–10 hours via the Dades Valley and Draa Valley route. CTM buses from Marrakech (10h). Shared grands taxis from Erfoud (45 min). Many visitors do a 3-day circuit from Marrakech through the Atlas and the Sahara.",
+    tips:["Book a luxury desert camp in advance — the best fill up 3 months ahead","Sunset camel trek: depart 1 hour before sunset, arrive at camp in darkness","The coldest months (Dec–Jan) have the clearest skies — best stargazing","Ride a camel one-way, quad bike the other — the best of both worlds","Visit Khemliya village for an authentic Gnaoua music evening with local musicians","Buy ammonite fossils directly from the cutters in Erfoud — avoid tourist shops","4WD is not needed for Erg Chebbi — all roads are paved to Merzouga village","Bring layers even in spring — desert nights are cold even in April","Dawn (5:30am) on the dunes is even more beautiful than sunset","The 3-day Marrakech–Atlas–Sahara road trip is the greatest drive in Morocco"],
+    highlights:["Erg Chebbi dunes","Camel sunset trek","Luxury desert camp","Sahara stargazing"],
+    rating:4.9, reviewCount:11250, priceLevel:"$$$",
+  },
+  {
+    id:6, slug:"essaouira", name:"Essaouira", region:"Marrakech-Safi", tagline:"The Wind City of Africa",
+    description:"Essaouira — Mogador to the Portuguese, the Wind City of Africa — is Morocco's most beloved coastal escape. A fortified Atlantic port city of whitewashed walls, blue shutters and Portuguese ramparts, it has been declared a UNESCO World Heritage Site.\n\nThe Alizée trade wind blows every afternoon from April to October, making Essaouira the kitesurfing and windsurfing capital of Africa. The 10km beach south of the ramparts is one of the finest in Morocco.\n\nThe medina is relaxed, navigable and bohemian — full of art galleries, thuya wood workshops, live music venues and some of Morocco's finest seafood. Jimi Hendrix visited in 1969. Orson Welles filmed Othello on the ramparts in 1952.",
+    image:I.ess1, heroImage:I.ess2,
+    bestTime:"Year-round (avoid July–August for wind)",
+    language:"Darija (Moroccan Arabic), French, Tachelhit Berber",
+    currency:"Moroccan Dirham (MAD)", temperature:"Mild Atlantic — 23°C summer, 14°C winter (never extreme)",
+    facts:["UNESCO World Heritage Site since 2001","Orson Welles filmed Othello on the ramparts in 1952","Jimi Hendrix visited in 1969 — reportedly considered buying a palace here","Home to Morocco's largest argan forest (a UNESCO Biosphere Reserve)","Essaouira is the world capital of thuya wood carving","The Gnaoua World Music Festival (June) draws 500,000 visitors annually","Morocco's finest fishing port — over 300 tonnes of sardines landed daily","The Alizée wind blows at 25–30 knots most summer afternoons","Morocco's Jewish heritage is strong in Essaouira — a significant mellah (Jewish quarter)","The ramparts were built by Portuguese engineer Théodore Cornut in 1769"],
+    gettingThere:"Nearest airport: Marrakech RAK (2.5h by road). Supratours buses from Marrakech (2.5h, 80 MAD). CTM buses from Casablanca (5h) and Agadir (3h). No train. Shared grands taxis from Marrakech (3h, 100 MAD).",
+    tips:["Buy grilled sardines straight from the port fishing boats at 7am — the freshest in Morocco","The rampart walk at sunset: 45 minutes of extraordinary Atlantic views","Gnaoua World Music Festival (June) — book accommodation 6 months ahead","Argan oil cooperative visits are free and fascinating","Kitesurfing lessons: many schools on the beach — 500 MAD for 2 hours","The medina is small and walkable — allow 2 hours","Heure Bleue Palais rooftop cinema: films under the stars every evening","La Fromagerie on Place Moulay Hassan: the best restaurant terrace in town","Essaouira is 10°C cooler than Marrakech in summer — a perfect July escape","Buy thuya wood objects from the craftsmen in the medina, not the tourist stalls"],
+    highlights:["Atlantic ramparts","Gnaoua music","Kitesurfing beach","Thuya wood crafts"],
+    rating:4.8, reviewCount:6890, priceLevel:"$$",
+  },
+  {
+    id:7, slug:"atlas-mountains", name:"Atlas Mountains", region:"Marrakech-Safi / Drâa-Tafilalet", tagline:"Roof of North Africa",
+    description:"The Atlas Mountains — running 2,500km across Morocco, Algeria and Tunisia — are Africa's highest mountain range outside the East African Rift. In Morocco, they divide the Atlantic coast from the Sahara Desert, creating dramatic landscapes of Berber villages, kasbahs, fossil valleys and the dramatic Draa and Dades gorges.\n\nMount Toubkal (4,167m) — just 60km from Marrakech — is the highest peak in North Africa. The two-day ascent from the Berber village of Imlil is one of the great mountain treks of the world, achievable with no technical equipment from October to May.\n\nThe Dades Valley and Todra Gorge are among the most dramatic landscapes in Africa. The kasbahs of Aït Ben Haddou (UNESCO) and Skoura appear like movie sets — because they are: Gladiator, Game of Thrones and Lawrence of Arabia were all filmed here.",
+    image:I.atl1, heroImage:I.atl3,
+    bestTime:"April–June, September–November",
+    language:"Tachelhit Berber (Souss), Darija (Moroccan Arabic), French",
+    currency:"Moroccan Dirham (MAD)", temperature:"Alpine — 25°C summer, -5°C winter peaks (snow Nov–May)",
+    facts:["Mount Toubkal (4,167m) is the highest peak in North Africa","The Atlas range stretches 2,500km across Morocco, Algeria and Tunisia","Aït Ben Haddou is a UNESCO World Heritage ksar — filming location for Gladiator and Game of Thrones","The Todra Gorge has sheer 300m limestone walls — a world-class rock climbing destination","The Draa Valley palm oasis stretches 200km — the longest in Morocco","Berber villages in the Atlas have been inhabited for over 2,000 years","The Tizi n'Tichka pass (2,260m) on the Marrakech–Ouarzazate road is Morocco's most scenic drive","The Valley of Roses produces 4,000 tonnes of roses per year for perfumers","Snow covers Mount Toubkal from November to May","Morocco's fossil riches include the largest Cretaceous shark ever found (near Taouz)"],
+    gettingThere:"Most Atlas destinations are accessed from Marrakech. Imlil (for Toubkal) is 90 minutes by taxi from Marrakech. The Tizi n'Tichka road to Ouarzazate takes 3h. Dades and Todra gorges are day trips from Tinghir or Ouarzazate. No train to the Atlas — car or guided tour recommended.",
+    tips:["Toubkal ascent: two days, base camp at Neltner Refuge (3,207m). No technical experience needed Apr–Oct","Hire a local Berber mountain guide in Imlil — they know every path and rock","Aït Ben Haddou: arrive at sunrise for golden light on the ksar walls","Kasbah Tamadot (Richard Branson's mountain retreat) is 45 min from Marrakech","The Marrakech–Ouarzazate road is the greatest drive in Morocco — allow the full day","Todra Gorge: the walls glow most dramatically 10–11am when sun reaches the canyon floor","Valley of Roses: visit during the May harvest festival","Atlas circuit from Marrakech: Tizi n'Tichka → Ouarzazate → Aït Ben Haddou → Dades → Todra (3 days)","In winter (Dec–Feb), snow chains are required on the Tizi n'Tichka pass","Local Berber hospitality: accept any offer of mint tea in a mountain home"],
+    highlights:["Toubkal summit trek","Aït Ben Haddou ksar","Todra Gorge","Dades Valley kasbahs"],
+    rating:4.9, reviewCount:5620, priceLevel:"$$",
+  },
+  {
+    id:8, slug:"agadir", name:"Agadir", region:"Souss-Massa", tagline:"Morocco's Sun & Beach Capital",
+    description:"Agadir — rebuilt entirely after the devastating 1960 earthquake — is Morocco's premier beach resort and the country's most visited city by international tourists. A 10km arc of golden Atlantic sand framed by a casbah hill, palm-lined promenade and year-round sunshine (300+ days per year) makes it an irresistible destination for beach lovers.\n\nBut Agadir is more than its beach. The Souss-Massa National Park shelters the last wild populations of the critically endangered Northern Bald Ibis. The argan forest of the surrounding region is a UNESCO Biosphere Reserve where women's cooperatives hand-press the world's most valuable culinary oil.\n\nThe Thursday Souk El Had — one of the largest traditional markets in North Africa — is an extraordinary spectacle.",
+    image:I.ess1, heroImage:I.ess2,
+    bestTime:"Year-round (beach destination — 300+ sun days)",
+    language:"Tachelhit Berber (Souss), Darija (Moroccan Arabic), French",
+    currency:"Moroccan Dirham (MAD)", temperature:"Atlantic — 28°C summer, 18°C winter (sunniest city in Morocco)",
+    facts:["Agadir gets over 300 days of sunshine per year — the sunniest city in Morocco","The 1960 earthquake destroyed the old city (15,000 deaths) — the entire city was rebuilt","The 10km Agadir beach is consistently ranked one of the best in Africa","Souk El Had is one of the largest traditional markets in North Africa (6,500 vendors)","The Souss-Massa National Park shelters the world's last wild Northern Bald Ibis","Morocco produces 95% of the world's argan oil — most from the Agadir region","The Agadir marina has 700 berths — one of the largest yacht marinas in West Africa","Agadir is Morocco's main sardine-exporting port","The Val d'Argan winery produces excellent Atlantic-influenced Moroccan wine","Agadir airport handles over 4 million passengers per year"],
+    gettingThere:"Agadir Al Massira Airport (AGA) has flights from London, Paris, Amsterdam, Frankfurt, Brussels and many European cities. Supratours buses from Marrakech (3.5h) and Casablanca (7h). No train to Agadir. Car rental is the best way to explore the surrounding area.",
+    tips:["The beach is 10km long — the southern end near Tikida Beach hotels is the most beautiful","Souk El Had on Thursdays is the most authentic market experience in the region","Book a day trip to Imouzzer Ida Outanane waterfalls (60km north)","Argan oil cooperative visit: Cooperative Ibn Baitar is the most reputable","Surfing: Taghazout (20km north) is Africa's best surf spot — board rental from 100 MAD","The kasbah hill at sunset: the Arabic inscription glows gold in the last light","Cap Rhir to the north: a lighthouse perched on dramatic Atlantic cliffs","Fresh fish at the port market early morning — negotiate with the fishermen","Agadir–Tiznit road (60km south): the most scenic coastal drive in Morocco","Try argan-infused amlou (almond butter) — the best breakfast spread in Morocco"],
+    highlights:["10km golden beach","Souss-Massa National Park","Argan oil cooperatives","Taghazout surfing"],
+    rating:4.6, reviewCount:8940, priceLevel:"$$",
+  },
+  {
+    id:9, slug:"casablanca", name:"Casablanca", region:"Casablanca-Settat", tagline:"Morocco's Modern Heart",
+    description:"Casablanca — Casa to its residents, Dar el-Beida (White House) in Arabic — is Morocco's economic capital and largest city. A dynamic, modern metropolis of 4 million people built on French Art Deco architecture and Moorish grandeur, it is Morocco's pulse of business, culture, fashion and gastronomy.\n\nThe Hassan II Mosque — rising from a promontory directly over the Atlantic Ocean — is the third largest mosque in the world and Morocco's greatest architectural achievement. Its 210-metre minaret is the tallest religious structure on earth.\n\nBeyond the mosque, the city offers Morocco's best restaurants, a vibrant arts scene, a revitalized Art Deco old medina, the Corniche Ain Diab oceanfront, and the kind of sophisticated nightlife found nowhere else in the country.",
+    image:I.cas1, heroImage:I.cas1,
+    bestTime:"April–October",
+    language:"Darija (Moroccan Arabic), French, English (business)",
+    currency:"Moroccan Dirham (MAD)", temperature:"Atlantic — 26°C summer, 14°C winter (mild, never extreme)",
+    facts:["Hassan II Mosque is the 3rd largest mosque in the world (25,000 worshippers inside)","Its 210m minaret is the tallest religious structure on earth — visible 50km out at sea","The mosque is built directly over the Atlantic Ocean — the sea is visible through glass floors","Casablanca generates 50% of Morocco's national industrial production","Mohammed V International Airport (CMN) is the busiest in Morocco (10 million pax/year)","The Rick's Café (inspired by the 1942 film Casablanca) is a genuine fine dining destination","Casablanca was Morocco's first city to have a tramway (2012)","The Casa-Port to Tangier TGV takes just 2h10","Port of Casablanca handles 35 million tonnes of freight per year","The 1930s Art Deco architecture of the Ville Nouvelle is one of the finest collections in the world"],
+    gettingThere:"Mohammed V International Airport (CMN) is Morocco's main hub with direct flights from 100+ destinations globally. Al Boraq high-speed train: Casablanca to Tangier (2h10), to Rabat (1h). ONCF train to Marrakech (3h), Fes (4h30). Tramway connects the city centre.",
+    tips:["Hassan II Mosque: guided tours daily 9am–6pm (non-Muslims welcome) — book at the mosque door","Rick's Café: dinner reservation essential — call ahead on the day","La Sqala: the most beautiful garden restaurant in Casablanca, inside Portuguese ramparts","Corniche Ain Diab: the 5km ocean boulevard is best at sunset","Art Deco walking tour of the Ville Nouvelle: the greatest collection in Africa","The old medina is small and safe — the Sqala (rampart tower) is the highlight","Mohammed V Square at night: the art deco architecture illuminated is extraordinary","Day trip to Azemmour (80km south) — a blue-and-white medina on the Oum er-Rbia river","Casa Voyageurs station: one of the most beautiful in Africa","Morocco's best sushi and Japanese food is in Casablanca — try Bleu Marine at Four Seasons"],
+    highlights:["Hassan II Mosque","Art Deco architecture","Rick's Café","Atlantic Corniche"],
+    rating:4.5, reviewCount:12300, priceLevel:"$$$",
   },
 ];
 
@@ -331,6 +456,148 @@ const gallery = [
   { id:7, url:I.tng5,  caption:"Tangier Bay Beach",                 city:"Tangier",    size:"large" },
   { id:8, url:I.mrk5,  caption:"Marrakech Spice Souk",              city:"Marrakech",  size:"small" },
   { id:9, url:I.ess1,  caption:"Essaouira Atlantic Port",           city:"Essaouira",  size:"small" },
+  { id:10, url:I.mrk1, caption:"Marrakech — Riad Courtyard",        city:"Marrakech",  size:"small" },
+  { id:11, url:I.fes1, caption:"Fes — Royal Palace Gate",           city:"Fes",        size:"large" },
+  { id:12, url:I.tng1, caption:"Tangier — Medina Streets",          city:"Tangier",    size:"small" },
+  { id:13, url:I.sah2, caption:"Sahara — Camel Caravan at Sunset",  city:"Merzouga",   size:"large" },
+  { id:14, url:I.chef1,caption:"Chefchaouen — Blue Stairs",         city:"Chefchaouen",size:"small" },
+  { id:15, url:I.ess2, caption:"Essaouira — Harbour View",          city:"Essaouira",  size:"small" },
+  { id:16, url:I.atl2, caption:"Atlas — Valley Village",            city:"Atlas",      size:"small" },
+  { id:17, url:I.mrk4, caption:"Marrakech — Koutoubia at Dusk",     city:"Marrakech",  size:"large" },
+  { id:18, url:I.fes3, caption:"Fes — Leather Tanneries",           city:"Fes",        size:"small" },
+];
+
+// ═══ Blog Posts ═══
+const blogPosts = [
+  {
+    id:1, featured:true, category:"Travel Tips",
+    title:"10 Things I Wish I Knew Before Visiting Morocco",
+    excerpt:"From navigating the medinas to tipping etiquette — the essential tips that will transform your Moroccan adventure.",
+    image:I.mrk3, readTime:"6 min read", date:"September 2026",
+    author:"Amina El Fassi", authorAvatar:"https://i.pravatar.cc/80?img=47",
+    content:`<p>Morocco is a country that rewards the curious traveller — but a little preparation goes a long way. Here are 10 things I learned after three years of exploring every corner of the kingdom.</p>
+<h2>1. Learn a Few Words of Darija</h2>
+<p>Even a simple "Salam" (hello) or "Shukran" (thank you) in Moroccan Arabic opens doors that stay closed to tourists who don't try. Moroccans are deeply appreciative of any effort to speak their language.</p>
+<h2>2. Bargaining is Expected — and Fun</h2>
+<p>In the souks, the first price is almost never the final price. Start at about 40% of the asking price and work your way up. It's a social ritual, not a confrontation. Smile, drink tea if it's offered, and enjoy the performance.</p>
+<h2>3. Dress Modestly Outside Tourist Areas</h2>
+<p>Morocco is relatively liberal by regional standards, but covering shoulders and knees is respectful in medinas, rural areas, and when visiting mosques. In modern city centres like Casablanca's Maarif or Tangier's city centre, fashion is much more Western.</p>
+<h2>4. The Best Food is in People's Homes</h2>
+<p>Moroccan home cooking is almost always better than restaurant food. If you're invited to eat with a family, accept. You'll experience tagines, couscous, and pastilla that no restaurant can replicate.</p>
+<h2>5. Friday is the Sabbath</h2>
+<p>Many shops and all mosques are busiest on Friday. Couscous Friday is a nationwide tradition — families gather for the weekly couscous meal after Friday prayers. Many restaurants serve only couscous on Fridays.</p>
+<h2>6. Cash is King</h2>
+<p>Outside luxury hotels and major tourist restaurants, Morocco runs on cash. ATMs are plentiful in cities, but carry enough dirhams for rural areas and medina shopping.</p>
+<h2>7. The Train System is Excellent</h2>
+<p>Morocco has Africa's first high-speed train (Al Boraq) connecting Tangier to Casablanca in 2 hours 10 minutes. The regular ONCF network is reliable, comfortable and affordable.</p>
+<h2>8. Mint Tea is a Ritual</h2>
+<p>Tea is never just a drink in Morocco. It's a ceremony of hospitality. Refusing tea can be considered impolite. The sugar is always generous — asking for less is fine, but "no sugar" might earn you a puzzled look.</p>
+<h2>9. Medinas Have Their Own Logic</h2>
+<p>Getting lost in a medina is inevitable — and it's the best way to discover hidden riads, craftsmen and local life. If you're truly stuck, ask a shopkeeper (not a "helpful" stranger) for directions.</p>
+<h2>10. Morocco is Safer Than You Think</h2>
+<p>Morocco has one of the lowest violent crime rates in Africa. Petty theft exists in crowded tourist areas, but violent crime against tourists is extremely rare. Use normal precautions and you'll be fine.</p>`
+  },
+  {
+    id:2, featured:false, category:"City Guides",
+    title:"The Ultimate Tangier City Guide: 3 Days in the Gateway to Africa",
+    excerpt:"Where two continents meet — a local's guide to the most cosmopolitan city in Morocco.",
+    image:I.tng1, readTime:"8 min read", date:"August 2026",
+    author:"Youssef Tazi", authorAvatar:"https://i.pravatar.cc/80?img=52",
+    content:`<p>Tangier sits at the northwestern tip of Africa, 14km from Spain, where the Atlantic meets the Mediterranean. It's Morocco's most layered, most surprising city.</p>
+<h2>Day 1: The Old Medina & Kasbah</h2>
+<p>Start at the Grand Socco (Place du 9 Avril 1947) — the grand square that connects the new and old cities. Walk through Bab Fahs gate into the medina. Follow the narrow streets uphill to the Kasbah, where the Kasbah Museum (former Sultan's palace) houses 3,000 years of Tangier history.</p>
+<p>From the kasbah walls, you can see Spain — the coast of Tarifa is clearly visible on most days. This is the only place on earth where you can stand in Africa and see Europe.</p>
+<h2>Day 2: Cap Spartel & Hercules</h2>
+<p>Take a taxi to Cap Spartel — the dramatic headland where the Atlantic Ocean meets the Mediterranean Sea. The lighthouse marks the exact point. Continue to the Caves of Hercules, ancient sea-carved grottoes where legend says the Greek hero rested.</p>
+<h2>Day 3: Modern Tangier</h2>
+<p>Explore the new city: Boulevard Pasteur, Place de France, and the stunning Tangier City beach stretching 5km along the bay. End with sunset at Café Hafa — the legendary cliff-side café where the Rolling Stones, Paul Bowles, and the Beatles once sat.</p>`
+  },
+  {
+    id:3, featured:false, category:"Food & Drink",
+    title:"A Foodie's Guide to Moroccan Cuisine: Beyond the Tagine",
+    excerpt:"From street-side bissara to royal pastilla — discover the incredible depth of Moroccan cooking.",
+    image:I.food_tagine, readTime:"7 min read", date:"August 2026",
+    author:"Fatima Zahra", authorAvatar:"https://i.pravatar.cc/80?img=29",
+    content:`<p>Moroccan cuisine is one of the world's great culinary traditions — a living blend of Berber, Arab, Andalusian, and French influences refined over centuries.</p>
+<h2>The Tagine: Morocco's Signature Dish</h2>
+<p>Named after the conical clay pot it's cooked in, the tagine is a slow-cooked stew where meat, vegetables, dried fruits and spices meld into something transcendent. The classic combinations: lamb with prunes and almonds, chicken with preserved lemon and olives, and kefta (meatball) with tomato and egg.</p>
+<h2>Couscous Friday</h2>
+<p>Every Friday, families across Morocco gather for the weekly couscous meal. Hand-rolled semolina steamed over a rich broth of seven vegetables and tender meat. It's Morocco's national dish and a sacred family tradition.</p>
+<h2>Pastilla: The Crown Jewel</h2>
+<p>A delicate pie of shredded pigeon (or chicken), eggs, almonds, cinnamon and sugar wrapped in tissue-thin warqa pastry. Sweet and savoury in perfect balance — originally from Fes, now beloved nationwide.</p>
+<h2>Street Food You Must Try</h2>
+<p>Bissara (broad bean soup), msemen (crispy layered flatbread), sfenj (Moroccan doughnuts), and snail soup from the carts of Jemaa el-Fnaa. The best food in Morocco often costs under 10 dirhams.</p>`
+  },
+  {
+    id:4, featured:false, category:"Adventure",
+    title:"Sahara Desert: A Night Under the Stars in Merzouga",
+    excerpt:"Camel trekking, sandboarding, and sleeping under the Milky Way — the ultimate desert experience.",
+    image:I.sah1, readTime:"5 min read", date:"July 2026",
+    author:"Omar Benali", authorAvatar:"https://i.pravatar.cc/80?img=60",
+    content:`<p>The Erg Chebbi dunes of Merzouga rise 150 metres from the flat hamada desert like golden waves frozen in time. Spending a night here is one of the most profound travel experiences in the world.</p>
+<h2>The Journey</h2>
+<p>Most visitors arrive from Marrakech or Fes via a day's drive through the Atlas Mountains, Todra Gorge and the Draa Valley — one of Morocco's most spectacular road trips. At the edge of the dunes, you'll mount a camel for the trek to your desert camp.</p>
+<h2>The Desert at Night</h2>
+<p>With zero light pollution, the Sahara sky is overwhelming. The Milky Way is so bright it casts shadows on the sand. Berber guides play traditional Gnawa drums around the fire, and the silence between songs is unlike any silence you've ever heard.</p>
+<h2>Luxury Desert Camps</h2>
+<p>Gone are the days of basic bivouacs. Today's luxury desert camps feature king-size beds, private bathrooms, heated pools and gourmet dining — all in the middle of the Sahara.</p>`
+  },
+  {
+    id:5, featured:false, category:"Culture",
+    title:"The Art of Moroccan Zellige: 1,000 Years of Mosaic Mastery",
+    excerpt:"How Moroccan artisans create the most intricate tile mosaics on earth — and where to see the best examples.",
+    image:I.fes1, readTime:"5 min read", date:"July 2026",
+    author:"Laila Berrada", authorAvatar:"https://i.pravatar.cc/80?img=44",
+    content:`<p>Zellige (from the Arabic 'al-zulayj', meaning polished stone) is Morocco's most iconic art form — intricate geometric mosaic tilework found in palaces, mosques, riads and fountains across the country.</p>
+<h2>How It's Made</h2>
+<p>Each tiny piece is hand-cut from larger glazed tiles using a traditional hammer called a 'menqash'. The artisan (called a 'maâlem') works entirely by eye, cutting thousands of pieces to create complex geometric patterns without any guide or template. A single square metre of zellige can contain over 1,000 individual pieces.</p>
+<h2>Where to See the Best Examples</h2>
+<p>Fes is the world capital of zellige — the Bou Inania Madrasa, Al-Attarine Madrasa and the Royal Palace gates contain the finest examples. In Marrakech, the Ben Youssef Madrasa and Bahia Palace are stunning. In Casablanca, the Hassan II Mosque features the most ambitious modern zellige project ever undertaken.</p>`
+  },
+  {
+    id:6, featured:false, category:"Travel Tips",
+    title:"Getting Around Morocco: The Complete Transport Guide",
+    excerpt:"Trains, buses, grand taxis, and the Al Boraq high-speed rail — how to navigate the Kingdom like a local.",
+    image:I.cas1, readTime:"6 min read", date:"June 2026",
+    author:"Karim Idrissi", authorAvatar:"https://i.pravatar.cc/80?img=31",
+    content:`<p>Morocco has an excellent transport network that makes independent travel easy and affordable. Here's everything you need to know.</p>
+<h2>Al Boraq High-Speed Train</h2>
+<p>Africa's first high-speed railway connects Tangier to Casablanca in just 2 hours 10 minutes at speeds up to 320km/h. It's modern, comfortable and punctual. Book at oncf.ma.</p>
+<h2>Regular Trains (ONCF)</h2>
+<p>The national railway connects all major cities: Tangier, Rabat, Casablanca, Marrakech, Fes and Meknès. First class is comfortable and very affordable (Casablanca to Marrakech is about 150 MAD first class).</p>
+<h2>Grand Taxis</h2>
+<p>Shared Mercedes taxis that run fixed routes between cities. They leave when full (6 passengers) and are faster than buses. Agree on the price before departure.</p>
+<h2>CTM & Supratours Buses</h2>
+<p>Modern, air-conditioned long-distance buses covering routes the trains don't reach — essential for Chefchaouen, Essaouira, and Sahara destinations.</p>`
+  },
+  {
+    id:7, featured:false, category:"City Guides",
+    title:"Chefchaouen: The Blue City Photography Guide",
+    excerpt:"The most photogenic city in Morocco — when to go, where to shoot, and how to capture the magic.",
+    image:I.chef1, readTime:"4 min read", date:"June 2026",
+    author:"Nadia Chaoui", authorAvatar:"https://i.pravatar.cc/80?img=38",
+    content:`<p>Chefchaouen's medina is painted entirely in shades of blue — cobalt, indigo, turquoise, powder blue and periwinkle. It's the most photographed small town in Africa.</p>
+<h2>Best Time for Photography</h2>
+<p>The golden hour (early morning and late afternoon) is magical — warm light against cool blue walls creates extraordinary contrast. Midday light is harsh but makes the blues vibrant. Overcast days create soft, even tones.</p>
+<h2>Must-Photograph Spots</h2>
+<p>The Spanish Mosque on the hill above town (best sunset viewpoint), Rue El Haouta (the most photographed alley), Place Uta el-Hammam (the main square), and the Ras El Maa waterfall where locals wash wool. The narrow alleys around the kasbah are endlessly photogenic.</p>
+<h2>Tips</h2>
+<p>Always ask permission before photographing people. Many locals are happy to be photographed, but some prefer not to be. A small tip is appreciated if someone poses for you.</p>`
+  },
+  {
+    id:8, featured:false, category:"Adventure",
+    title:"Trekking the Atlas: A Guide to Morocco's Mountain Trails",
+    excerpt:"From day hikes to multi-day treks — exploring the dramatic High Atlas and Rif mountains.",
+    image:I.atl1, readTime:"6 min read", date:"May 2026",
+    author:"Hassan Amazigh", authorAvatar:"https://i.pravatar.cc/80?img=56",
+    content:`<p>The Atlas Mountains stretch 2,500km across Morocco, Tunisia and Algeria. In Morocco, the High Atlas rises to 4,167m at Jebel Toubkal — the highest peak in North Africa.</p>
+<h2>Jebel Toubkal Trek</h2>
+<p>The most popular trek in Morocco: a 2-day ascent from the village of Imlil (1,740m) to the summit at 4,167m. No technical climbing required, but good fitness is essential. The views from the top are extraordinary — on a clear day you can see the Sahara to the south and the Atlantic to the west.</p>
+<h2>Berber Villages of the Ourika Valley</h2>
+<p>An easy day trip from Marrakech — the Ourika Valley follows a rushing river past terraced farms, walnut groves and traditional Berber villages clinging to the mountainsides. The Setti Fatma waterfalls at the end of the valley are spectacular.</p>
+<h2>When to Trek</h2>
+<p>Spring (April–May) and autumn (September–October) offer the best conditions. Summer is too hot at lower altitudes. Winter brings snow above 2,000m — Toubkal summit is snow-covered from November to April.</p>`
+  },
 ];
 
 // ═══ AGADIR Hotels ═══
@@ -351,14 +618,14 @@ const rabatHotels = [
 
 // ═══ Moroccan Food ═══
 const food = [
-  { id:1, name:"Tagine", arabic:"الطاجين", french:"Tajine", category:"Main Course", icon:"🍲", image:I.mrk5, description:"Morocco's most iconic dish — a slow-cooked stew named after the conical clay pot it's cooked in. Meat (lamb, chicken or beef), preserved lemons, olives, vegetables and spices are layered and cooked over charcoal for hours until meltingly tender. Every family has their own recipe, passed down for generations.", where:"Every restaurant, home and souk in Morocco.", price:"60–150 MAD at restaurants", region:"Nationwide", tip:"The best tagines are cooked over charcoal, not gas — look for street stalls with real clay pots and smoke." },
-  { id:2, name:"Couscous", arabic:"الكسكس", french:"Couscous", category:"Main Course", icon:"🫕", image:I.mrk3, description:"The national dish of Morocco, traditionally eaten every Friday by the entire family after midday prayers. Steamed semolina grains served with slow-cooked vegetables, chickpeas, and meat (lamb, chicken or beef) with a rich broth poured over. The technique of steaming couscous seven times by hand is a dying art.", where:"Best on Fridays at traditional Moroccan restaurants or in family homes.", price:"50–120 MAD", region:"Nationwide", tip:"Avoid couscous on weekdays at tourist restaurants — find a local spot on a Friday for the real thing." },
-  { id:3, name:"Pastilla (B'stilla)", arabic:"البسطيلة", french:"Pastilla", category:"Starter / Main", icon:"🥐", image:I.mrk4, description:"One of the world's most extraordinary dishes — paper-thin warka pastry layered with slow-cooked pigeon or chicken, eggs scrambled with saffron and herbs, and a layer of toasted almonds sweetened with cinnamon and sugar. Sweet and savoury simultaneously. Originally from Fes, served at weddings and celebrations.", where:"Fes, Marrakech — at traditional Fassi restaurants.", price:"80–200 MAD", region:"Fes, Marrakech", tip:"Pastilla au poisson (fish pastilla) is Essaouira's coastal variation — equally extraordinary." },
-  { id:4, name:"Harira", arabic:"الحريرة", french:"Harira", category:"Soup", icon:"🍜", image:I.mrk1, description:"Morocco's beloved thick soup of tomatoes, lentils, chickpeas, vermicelli, fresh coriander, parsley and a squeeze of lemon. The traditional meal to break the Ramadan fast each evening at Iftar. Available year-round across Morocco, usually served with chebakia (honey-sesame pastries) and dates.", where:"Everywhere — street stalls, cafés, restaurants. Most authentic at home during Ramadan.", price:"10–25 MAD at street stalls", region:"Nationwide", tip:"At 6pm on the streets of any Moroccan city, you'll find vendors selling Harira by the bowl — this is the real version." },
-  { id:5, name:"Moroccan Mint Tea", arabic:"أتاي", french:"Thé à la menthe", category:"Drink", icon:"🍵", image:I.chef1, description:"The 'Moroccan whisky' — gunpowder green tea steeped with fresh spearmint and sugar, poured from a height to create the signature frothy head. An act of hospitality, of friendship and of daily life. To refuse mint tea in Morocco is to refuse the host. The tea ceremony can last an hour.", where:"Everywhere — offered free in every shop, home and riad in Morocco.", price:"Free (hospitality) or 15–20 MAD at cafés", region:"Nationwide", tip:"The higher the pour, the better the host. Three glasses is traditional — one for life, one for love, one for death." },
-  { id:6, name:"Mechoui", arabic:"المشوي", french:"Méchoui", category:"Main Course", icon:"🐑", image:I.sah2, description:"A whole lamb slow-roasted in an underground clay oven (the mechoui pit) for 4–8 hours until the meat is so tender it falls from the bone at a touch. Rubbed with ras el hanout, cumin and butter. Served at celebrations, moussems and mechoui restaurants across Morocco. An experience unlike any other.", where:"Mechoui squares in Marrakech (Place des Ferblantiers), desert camps, celebrations.", price:"80–150 MAD per portion", region:"Marrakech, Ouarzazate, Sahara", tip:"In Marrakech, the mechoui sellers near the Djemaa el-Fna set up from noon — arrive by 12:30pm before it runs out." },
-  { id:7, name:"Msemen", arabic:"المسمن", french:"Msemen", category:"Breakfast / Street Food", icon:"🫓", image:I.mrk3, description:"Flaky, layered Moroccan flatbread made by folding butter and semolina into dough and pan-frying until golden. Eaten for breakfast with argan oil and honey, or stuffed with kefta (spiced minced meat) as street food. A staple of every Moroccan breakfast table and every street corner.", where:"Bakeries, street stalls, home kitchens — everywhere in Morocco.", price:"3–5 MAD on the street", region:"Nationwide", tip:"For the best msemen in Morocco, follow the smoke to the nearest bakery at 7am when the day's batch is fresh off the pan." },
-  { id:8, name:"Rfissa", arabic:"الرفيسة", french:"Rfissa", category:"Main Course", icon:"🍗", image:I.fes1, description:"A celebratory dish traditionally prepared for new mothers and for Mawlid (the Prophet's birthday) — shredded msemen bread layered under a rich stew of chicken, lentils, fenugreek seeds and ras el hanout spices. One of the most comforting and complex flavour profiles in all of Moroccan cooking.", where:"Traditional homes and speciality Moroccan restaurants in Fes and Marrakech.", price:"80–130 MAD at restaurants", region:"Fes, Marrakech", tip:"Rfissa is almost never made by restaurants — ask your riad host to arrange a home-cooked version. An unforgettable experience." },
+  { id:1, name:"Tagine", arabic:"الطاجين", french:"Tajine", category:"Main Course", icon:"🍲", image:I.food_tagine, description:"Morocco's most iconic dish — a slow-cooked stew named after the conical clay pot it's cooked in. Meat (lamb, chicken or beef), preserved lemons, olives, vegetables and spices are layered and cooked over charcoal for hours until meltingly tender. Every family has their own recipe, passed down for generations.", where:"Every restaurant, home and souk in Morocco.", price:"60–150 MAD at restaurants", region:"Nationwide", tip:"The best tagines are cooked over charcoal, not gas — look for street stalls with real clay pots and smoke." },
+  { id:2, name:"Couscous", arabic:"الكسكس", french:"Couscous", category:"Main Course", icon:"🫕", image:I.food_couscous, description:"The national dish of Morocco, traditionally eaten every Friday by the entire family after midday prayers. Steamed semolina grains served with slow-cooked vegetables, chickpeas, and meat (lamb, chicken or beef) with a rich broth poured over. The technique of steaming couscous seven times by hand is a dying art.", where:"Best on Fridays at traditional Moroccan restaurants or in family homes.", price:"50–120 MAD", region:"Nationwide", tip:"Avoid couscous on weekdays at tourist restaurants — find a local spot on a Friday for the real thing." },
+  { id:3, name:"Pastilla (B'stilla)", arabic:"البسطيلة", french:"Pastilla", category:"Starter / Main", icon:"🥐", image:I.food_pastilla, description:"One of the world's most extraordinary dishes — paper-thin warka pastry layered with slow-cooked pigeon or chicken, eggs scrambled with saffron and herbs, and a layer of toasted almonds sweetened with cinnamon and sugar. Sweet and savoury simultaneously. Originally from Fes, served at weddings and celebrations.", where:"Fes, Marrakech — at traditional Fassi restaurants.", price:"80–200 MAD", region:"Fes, Marrakech", tip:"Pastilla au poisson (fish pastilla) is Essaouira's coastal variation — equally extraordinary." },
+  { id:4, name:"Harira", arabic:"الحريرة", french:"Harira", category:"Soup", icon:"🍜", image:I.food_harira, description:"Morocco's beloved thick soup of tomatoes, lentils, chickpeas, vermicelli, fresh coriander, parsley and a squeeze of lemon. The traditional meal to break the Ramadan fast each evening at Iftar. Available year-round across Morocco, usually served with chebakia (honey-sesame pastries) and dates.", where:"Everywhere — street stalls, cafés, restaurants. Most authentic at home during Ramadan.", price:"10–25 MAD at street stalls", region:"Nationwide", tip:"At 6pm on the streets of any Moroccan city, you'll find vendors selling Harira by the bowl — this is the real version." },
+  { id:5, name:"Moroccan Mint Tea", arabic:"أتاي", french:"Thé à la menthe", category:"Drink", icon:"🍵", image:I.food_tea, description:"The 'Moroccan whisky' — gunpowder green tea steeped with fresh spearmint and sugar, poured from a height to create the signature frothy head. An act of hospitality, of friendship and of daily life. To refuse mint tea in Morocco is to refuse the host. The tea ceremony can last an hour.", where:"Everywhere — offered free in every shop, home and riad in Morocco.", price:"Free (hospitality) or 15–20 MAD at cafés", region:"Nationwide", tip:"The higher the pour, the better the host. Three glasses is traditional — one for life, one for love, one for death." },
+  { id:6, name:"Mechoui", arabic:"المشوي", french:"Méchoui", category:"Main Course", icon:"🐑", image:I.food_mechoui, description:"A whole lamb slow-roasted in an underground clay oven (the mechoui pit) for 4–8 hours until the meat is so tender it falls from the bone at a touch. Rubbed with ras el hanout, cumin and butter. Served at celebrations, moussems and mechoui restaurants across Morocco. An experience unlike any other.", where:"Mechoui squares in Marrakech (Place des Ferblantiers), desert camps, celebrations.", price:"80–150 MAD per portion", region:"Marrakech, Ouarzazate, Sahara", tip:"In Marrakech, the mechoui sellers near the Djemaa el-Fna set up from noon — arrive by 12:30pm before it runs out." },
+  { id:7, name:"Msemen", arabic:"المسمن", french:"Msemen", category:"Breakfast / Street Food", icon:"🫓", image:I.food_msemen, description:"Flaky, layered Moroccan flatbread made by folding butter and semolina into dough and pan-frying until golden. Eaten for breakfast with argan oil and honey, or stuffed with kefta (spiced minced meat) as street food. A staple of every Moroccan breakfast table and every street corner.", where:"Bakeries, street stalls, home kitchens — everywhere in Morocco.", price:"3–5 MAD on the street", region:"Nationwide", tip:"For the best msemen in Morocco, follow the smoke to the nearest bakery at 7am when the day's batch is fresh off the pan." },
+  { id:8, name:"Rfissa", arabic:"الرفيسة", french:"Rfissa", category:"Main Course", icon:"🍗", image:I.food_rfissa, description:"A celebratory dish traditionally prepared for new mothers and for Mawlid (the Prophet's birthday) — shredded msemen bread layered under a rich stew of chicken, lentils, fenugreek seeds and ras el hanout spices. One of the most comforting and complex flavour profiles in all of Moroccan cooking.", where:"Traditional homes and speciality Moroccan restaurants in Fes and Marrakech.", price:"80–130 MAD at restaurants", region:"Fes, Marrakech", tip:"Rfissa is almost never made by restaurants — ask your riad host to arrange a home-cooked version. An unforgettable experience." },
 ];
 
 // ═══ Culture & Festivals ═══
@@ -557,6 +824,10 @@ app.get('/api/cities',       (req,res) => res.json([...new Set(allHotels.map(h=>
 app.get('/api/testimonials', (req,res) => res.json(testimonials));
 app.get('/api/stats',        (req,res) => res.json([{ label:"Happy Travellers", value:24800, suffix:"+" },{ label:"Real Hotels", value:allHotels.length, suffix:"" },{ label:"Cities Covered", value:[...new Set(allHotels.map(h=>h.city))].length, suffix:"" },{ label:"Years Experience", value:12, suffix:"" }]));
 app.get('/api/gallery',      (req,res) => res.json(gallery));
+app.get('/api/blog',         (req,res) => {
+  const { category } = req.query;
+  res.json(category ? blogPosts.filter(p=>p.category===category) : blogPosts);
+});
 app.get('/api/attractions',  (req,res) => {
   const { city } = req.query;
   res.json(city ? attractions.filter(a=>a.city.toLowerCase().includes(city.toLowerCase())) : attractions);
@@ -566,6 +837,10 @@ app.get('/api/destinations/:slug', (req,res) => {
   const d = destinations.find(d=>d.slug===req.params.slug);
   if (!d) return res.status(404).json({ error:'Not found' });
   res.json(d);
+});
+app.get('/api/tours', (req,res) => {
+  const { city } = req.query;
+  res.json(city ? tours.filter(t=>t.city.toLowerCase().includes(city.toLowerCase())) : tours);
 });
 app.get('/api/food',                 (req,res) => res.json(food));
 app.get('/api/culture',              (req,res) => res.json(culture));
@@ -635,4 +910,11 @@ app.get('/api/weather',              (req,res) => {
   res.json(weather);
 });
 app.get('/api/featured-attractions', (req,res) => res.json(featuredAttractions));
-app.listen(5000, () => console.log('✅ Server on http://localhost:5000'));
+
+// Root health check endpoint for cloud hosting
+app.get('/', (req, res) => {
+  res.json({ message: '🇲🇦 Morocco Tourism API is running', status: 'OK' });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

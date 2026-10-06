@@ -6,7 +6,7 @@ export default function Culture() {
   const [tab, setTab] = useState('festivals')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/culture').then(r => setCulture(r.data))
+    axios.get('/api/culture').then(r => setCulture(r.data))
   }, [])
 
   if (!culture) return <div className="loading">Loading...</div>

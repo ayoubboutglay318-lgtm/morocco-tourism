@@ -91,23 +91,23 @@ export default function Home() {
   const heroSearchRef = useRef()
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/hotels')
+    axios.get('/api/hotels')
       .then(r => setHotels(r.data))
       .catch(err => console.error('Failed to load hotels:', err))
 
-    axios.get('http://localhost:5000/api/cities')
+    axios.get('/api/cities')
       .then(r => setCities(r.data))
       .catch(err => console.error('Failed to load cities:', err))
 
-    axios.get('http://localhost:5000/api/testimonials')
+    axios.get('/api/testimonials')
       .then(r => setTestimonials(r.data))
       .catch(err => console.error('Failed to load testimonials:', err))
 
-    axios.get('http://localhost:5000/api/gallery')
+    axios.get('/api/gallery')
       .then(r => setGallery(r.data))
       .catch(err => console.error('Failed to load gallery:', err))
 
-    axios.get('http://localhost:5000/api/stats')
+    axios.get('/api/stats')
       .then(r => setStats(r.data))
       .catch(err => console.error('Failed to load stats:', err))
   }, [])
@@ -420,6 +420,8 @@ export default function Home() {
             {[
               { to:'/food',         icon:'🍲', title:'Moroccan Food',    desc:'Tagine, Couscous, Pastilla & more' },
               { to:'/culture',      icon:'🎉', title:'Culture & Festivals', desc:'Music, crafts, customs & etiquette' },
+              { to:'/gallery',      icon:'📸', title:'Photo Gallery',    desc:'Morocco through the lens' },
+              { to:'/blog',         icon:'📖', title:'Travel Stories',   desc:'Tips, guides & tales from Morocco' },
               { to:'/transport',    icon:'✈️', title:'Transport Guide',  desc:'Airports, trains, buses & ferries' },
               { to:'/weather',      icon:'🌤️', title:'Weather & Climate', desc:'Best time to visit every city' },
               { to:'/map',          icon:'🗺️', title:'Interactive Map',  desc:'Hotels, attractions & airports' },

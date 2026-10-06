@@ -7,7 +7,7 @@ const LANGS = [{ code:'en', label:'EN 🇬🇧' }, { code:'fr', label:'FR 🇫�
 
 export default function Navbar() {
   const { pathname } = useLocation()
-  const { dark, setDark, lang, setLang, currency, setCurrency, t } = useApp()
+  const { dark, setDark, lang, setLang, currency, setCurrency, t, user, favorites } = useApp()
   const [menuOpen, setMenuOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
   const isActive = (path) => pathname === path || (path !== '/' && pathname.startsWith(path))
@@ -27,8 +27,9 @@ export default function Navbar() {
         <li><Link to="/destinations" style={navLinkStyle('/destinations')} onClick={() => setMenuOpen(false)}>{t('destinations')}</Link></li>
         <li><Link to="/hotels" style={navLinkStyle('/hotels')} onClick={() => setMenuOpen(false)}>{t('hotels')}</Link></li>
         <li><Link to="/food" style={navLinkStyle('/food')} onClick={() => setMenuOpen(false)}>{t('food')}</Link></li>
+        <li className="hide-mobile"><Link to="/gallery" style={navLinkStyle('/gallery')} onClick={() => setMenuOpen(false)}>{t('gallery')}</Link></li>
+        <li className="hide-mobile"><Link to="/blog" style={navLinkStyle('/blog')} onClick={() => setMenuOpen(false)}>{t('blog')}</Link></li>
         <li className="hide-mobile"><Link to="/culture" style={navLinkStyle('/culture')} onClick={() => setMenuOpen(false)}>{t('culture')}</Link></li>
-        <li className="hide-mobile"><Link to="/transport" style={navLinkStyle('/transport')} onClick={() => setMenuOpen(false)}>{t('transport')}</Link></li>
         <li className="hide-mobile"><Link to="/weather" style={navLinkStyle('/weather')} onClick={() => setMenuOpen(false)}>{t('weather')}</Link></li>
         <li className="hide-mobile"><Link to="/map" style={navLinkStyle('/map')} onClick={() => setMenuOpen(false)}>{t('map')}</Link></li>
         {/* More dropdown */}
@@ -38,7 +39,7 @@ export default function Navbar() {
           </button>
           {moreOpen && (
             <div style={{ position:'absolute', top:'100%', left:0, background:'#1a0a00', border:'1px solid rgba(201,151,58,0.2)', borderRadius:12, padding:'0.5rem', minWidth:180, zIndex:200, marginTop:8, boxShadow:'0 8px 32px rgba(0,0,0,0.4)' }}>
-              {[['reviews','⭐ Guest Reviews'],['trip-planner',`✨ ${t('tripPlanner')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
+              {[['reviews','⭐ Guest Reviews'],['trip-planner',`✨ ${t('tripPlanner')}`],['transport',`✈️ ${t('transport')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
                 <Link key={path} to={`/${path}`} onClick={() => { setMoreOpen(false); setMenuOpen(false) }} style={{ display:'block', padding:'0.5rem 1rem', color:'rgba(255,255,255,0.75)', textDecoration:'none', fontSize:'0.85rem', borderRadius:8, transition:'background 0.2s' }} onMouseEnter={e=>e.target.style.background='rgba(201,151,58,0.1)'} onMouseLeave={e=>e.target.style.background='transparent'}>{label}</Link>
               ))}
             </div>
@@ -48,6 +49,23 @@ export default function Navbar() {
 
       {/* Right tools */}
       <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', flexShrink:0 }}>
+        {/* Favorites */}
+        <Link to="/favorites" style={{ position:'relative', color:'rgba(255,255,255,0.8)', textDecoration:'none', fontSize:'1.1rem', display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:8, background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', transition:'background 0.2s' }} title="Favorites">
+          ♥
+          {favorites.length > 0 && (
+            <span style={{ position:'absolute', top:-4, right:-4, background:'var(--gold)', color:'#fff', fontSize:'0.6rem', fontWeight:700, width:16, height:16, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{favorites.length}</span>
+          )}
+        </Link>
+
+        {/* User / Auth */}
+        <Link to="/auth" style={{ color:'rgba(255,255,255,0.8)', textDecoration:'none', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:8, background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', transition:'background 0.2s', overflow:'hidden' }} title={user ? user.name : 'Sign In'}>
+          {user ? (
+            <img src={user.avatar} alt={user.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          )}
+        </Link>
+
         {/* Language */}
         <select value={lang} onChange={e => setLang(e.target.value)} style={{ background:'transparent', border:'1px solid rgba(255,255,255,0.2)', borderRadius:8, color:'rgba(255,255,255,0.8)', padding:'0.3rem 0.5rem', fontSize:'0.78rem', cursor:'pointer', outline:'none' }}>
           {LANGS.map(l => <option key={l.code} value={l.code} style={{ background:'#1a0a00' }}>{l.label}</option>)}

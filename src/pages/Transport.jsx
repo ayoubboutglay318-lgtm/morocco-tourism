@@ -9,7 +9,7 @@ export default function Transport() {
   const [tab, setTab] = useState('airports')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/transport').then(r => setData(r.data))
+    axios.get('/api/transport').then(r => setData(r.data))
   }, [])
 
   if (!data) return <div className="loading">Loading...</div>

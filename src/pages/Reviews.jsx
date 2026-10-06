@@ -11,7 +11,7 @@ export default function Reviews() {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('http://localhost:5000/api/testimonials')
+    axios.get('/api/testimonials')
       .then(r => {
         setTestimonials(r.data)
         setError(null)

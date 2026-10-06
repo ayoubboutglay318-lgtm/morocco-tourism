@@ -11,7 +11,7 @@ export default function HotelDetail() {
   const contentRef = useRef()
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/hotels/${id}`)
+    axios.get(`/api/hotels/${id}`)
       .then(r => { setHotel(r.data); setLoading(false) })
       .catch(() => setLoading(false))
   }, [id])

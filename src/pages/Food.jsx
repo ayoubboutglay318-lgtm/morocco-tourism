@@ -14,7 +14,7 @@ export default function Food() {
   const headerRef = useRef()
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/food').then(r => setFood(r.data))
+    axios.get('/api/food').then(r => setFood(r.data))
     gsap.fromTo(headerRef.current, { opacity:0, y:30 }, { opacity:1, y:0, duration:0.8, ease:'power3.out' })
   }, [])
 
