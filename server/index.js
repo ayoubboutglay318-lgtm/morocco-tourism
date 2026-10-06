@@ -911,26 +911,14 @@ app.get('/api/weather',              (req,res) => {
 });
 app.get('/api/featured-attractions', (req,res) => res.json(featuredAttractions));
 
-const path = require('path');
-
-// Serve compiled static frontend from dist
-app.use(express.static(path.join(__dirname, '../dist')));
-
 // API health check endpoint
 app.get('/api', (req, res) => {
   res.json({ message: '🇲🇦 Morocco Tourism API is running', status: 'OK' });
 });
 
-// Catch-all for frontend routes: serve React index.html
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api')) return next();
-  const indexPath = path.join(__dirname, '../dist/index.html');
-  res.sendFile(indexPath, err => {
-    if (err) next();
-  });
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+}
 
 module.exports = app;
