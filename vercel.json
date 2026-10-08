@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "npm install && npm run build && ls -la && ls -la dist",
   "outputDirectory": "dist",
   "rewrites": [
     {
