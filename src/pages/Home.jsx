@@ -51,17 +51,7 @@ function useCountUp(target, duration = 2, start = false) {
 
 function StatItem({ value, suffix, label }) {
   const ref = useRef()
-  const [started, setStarted] = useState(false)
-  const count = useCountUp(value, 2, started)
-
-  useEffect(() => {
-    const trigger = ScrollTrigger.create({
-      trigger: ref.current,
-      start: 'top 85%',
-      onEnter: () => setStarted(true),
-    })
-    return () => trigger.kill()
-  }, [])
+  const count = useCountUp(value, 2, true)
 
   return (
     <div className="stat-item reveal" ref={ref}>
@@ -77,7 +67,12 @@ export default function Home() {
   const [cities, setCities] = useState([])
   const [testimonials, setTestimonials] = useState([])
   const [gallery, setGallery] = useState([])
-  const [stats, setStats] = useState([])
+  const [stats, setStats] = useState([
+    { label: 'Happy Travellers', value: 154000, suffix: '+' },
+    { label: 'Real Hotels', value: 520, suffix: '+' },
+    { label: 'Cities Covered', value: 45, suffix: '' },
+    { label: 'Years Experience', value: 15, suffix: '+' }
+  ])
   const [search, setSearch] = useState('')
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
@@ -107,9 +102,7 @@ export default function Home() {
       .then(r => setGallery(r.data))
       .catch(err => console.error('Failed to load gallery:', err))
 
-    axios.get('/api/stats')
-      .then(r => setStats(r.data))
-      .catch(err => console.error('Failed to load stats:', err))
+
   }, [])
 
   // Hero entrance animation
