@@ -792,6 +792,7 @@ const featuredAttractions = [
 ];
 
 const bookings = [];
+const subscribers = [];
 
 app.get('/api/hotels', (req,res) => {
   const { city, minPrice, maxPrice, stars } = req.query;
@@ -890,6 +891,24 @@ app.post('/api/reviews', (req,res) => {
   const review = { id:userReviews.length+1, hotelId:Number(hotelId), userId:'user', userName, country:country||'Morocco', avatar:`https://i.pravatar.cc/80?img=${Math.floor(Math.random()*70)+1}`, rating:Number(rating), title, text, date:new Date().toISOString().split('T')[0], helpful:0 };
   userReviews.push(review);
   res.status(201).json(review);
+});
+
+// ── Newsletter Lead Generation (Monetization) ──
+app.post('/api/newsletter', (req, res) => {
+  const { email } = req.body;
+  if (!email || !email.includes('@')) {
+    return res.status(400).json({ error: 'Please provide a valid email address.' });
+  }
+  const normalized = email.trim().toLowerCase();
+  const exists = subscribers.find(s => s.email === normalized);
+  if (!exists) {
+    subscribers.push({ id: subscribers.length + 1, email: normalized, subscribedAt: new Date().toISOString() });
+  }
+  res.json({ ok: true, message: 'Subscribed successfully! Welcome to Morocco Travel.' });
+});
+
+app.get('/api/newsletter/subscribers', (req, res) => {
+  res.json({ total: subscribers.length, subscribers });
 });
 
 // ── Analytics ──

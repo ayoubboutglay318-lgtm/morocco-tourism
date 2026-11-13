@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
+import { AdBanner } from '../components/Monetization'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -152,6 +153,38 @@ export default function Blog() {
                 </div>
               </div>
               <div className="bp-modal-content" dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+              
+              {/* Monetization: Tour CTA & Ad in Blog */}
+              <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--cream2)', borderRadius: 16, textAlign: 'center' }}>
+                <h4 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--dark)' }}>
+                  Planning a Trip to Morocco?
+                </h4>
+                <p style={{ color: 'var(--text3)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
+                  Explore top-rated guided tours, desert excursions, and city passes with free cancellation.
+                </p>
+                <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <a
+                    href="https://www.getyourguide.com/s/?q=Morocco&partner_id=YOUR_GYG_ID"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                    style={{ fontSize: '0.85rem' }}
+                  >
+                    Browse Morocco Tours on GetYourGuide →
+                  </a>
+                  <a
+                    href="https://www.booking.com/search.html?ss=Morocco&aid=YOUR_AFFILIATE_ID"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline"
+                    style={{ fontSize: '0.85rem' }}
+                  >
+                    Check Hotel Deals
+                  </a>
+                </div>
+              </div>
+
+              <AdBanner slot="BLOG_ARTICLE_SLOT" />
             </div>
           </div>
         </div>

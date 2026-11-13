@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
+import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Hotels from './pages/Hotels'
@@ -20,6 +21,7 @@ import Gallery from './pages/Gallery'
 import Blog from './pages/Blog'
 import Favorites from './pages/Favorites'
 import Auth from './pages/Auth'
+import NotFound from './pages/NotFound'
 import './App.css'
 
 const WHATSAPP_NUMBER = '212689122018'
@@ -29,6 +31,7 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`
 function App() {
   return (
     <AppProvider>
+      <ScrollToTop />
       <Navbar />
 
       {/* Floating WhatsApp Booking Button */}
@@ -69,6 +72,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AppProvider>
   )

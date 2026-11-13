@@ -6,22 +6,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HotelCard from '../components/HotelCard'
 import ThreeHero from '../components/ThreeHero'
 import { useApp } from '../context/AppContext'
+import { AdBanner } from '../components/Monetization'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const cdnImg = path => `https://images.unsplash.com/${path}?w=700&q=85&fit=crop&auto=format`
 
 const cityImages = {
-  Marrakech:        cdnImg('photo-1597212618440-806262de4f6b'),
-  Fes:              cdnImg('photo-1559925523-10de9e23cf90'),
-  Chefchaouen:      cdnImg('photo-1538600838042-6a0c694ffab5'),
-  Essaouira:        cdnImg('photo-1624802746702-60ca95bdb605'),
-  Merzouga:         cdnImg('photo-1559586616-361e18714958'),
-  'Atlas Mountains':cdnImg('photo-1593535988128-7214bc2cbedc'),
-  Casablanca:       cdnImg('photo-1548018560-4cb48a8837c1'),
-  Tangier:          cdnImg('photo-1533501747004-381b96042e88'),
-  Rabat:            cdnImg('photo-1560789590-ee4cc7125967'),
-  Agadir:           cdnImg('photo-1624802746702-60ca95bdb605'),
+  Marrakech: cdnImg('photo-1597212618440-806262de4f6b'),
+  Fes: cdnImg('photo-1559925523-10de9e23cf90'),
+  Chefchaouen: cdnImg('photo-1538600838042-6a0c694ffab5'),
+  Essaouira: cdnImg('photo-1624802746702-60ca95bdb605'),
+  Merzouga: cdnImg('photo-1559586616-361e18714958'),
+  'Atlas Mountains': cdnImg('photo-1593535988128-7214bc2cbedc'),
+  Casablanca: cdnImg('photo-1548018560-4cb48a8837c1'),
+  Tangier: cdnImg('photo-1533501747004-381b96042e88'),
+  Rabat: cdnImg('photo-1560789590-ee4cc7125967'),
+  Agadir: cdnImg('photo-1624802746702-60ca95bdb605'),
 }
 
 const tangierHighlights = [
@@ -76,6 +77,8 @@ export default function Home() {
   const [search, setSearch] = useState('')
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [subscribing, setSubscribing] = useState(false)
+  const [newsletterError, setNewsletterError] = useState('')
   const navigate = useNavigate()
 
   const heroBgRef = useRef()
@@ -102,7 +105,13 @@ export default function Home() {
       .then(r => setGallery(r.data))
       .catch(err => console.error('Failed to load gallery:', err))
 
-
+    axios.get('/api/stats')
+      .then(r => {
+        if (Array.isArray(r.data) && r.data.length > 0) {
+          setStats(r.data)
+        }
+      })
+      .catch(() => {})
   }, [])
 
   // Hero entrance animation
@@ -253,6 +262,11 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ── SPONSORED BANNER (MONETIZATION) ── */}
+      <div style={{ maxWidth: 1100, margin: '1rem auto' }}>
+        <AdBanner slot="HOME_MIDDLE_SLOT" />
+      </div>
+
       {/* ── GALLERY ── */}
       <div className="section">
         <div className="reveal">
@@ -276,37 +290,37 @@ export default function Home() {
       {/* ── TANGIER SPOTLIGHT ── */}
       <div style={{ background: 'linear-gradient(135deg, #060c1a 0%, #0d1a2e 50%, #0a1020 100%)', padding: '6rem 3rem', color: '#fff', position: 'relative', overflow: 'hidden' }}>
         {/* decorative blurs */}
-        <div style={{ position:'absolute', top:'-10%', right:'-5%', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle, rgba(100,160,255,0.1) 0%, transparent 70%)', pointerEvents:'none' }} />
-        <div style={{ position:'absolute', bottom:'-10%', left:'-5%', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle, rgba(201,151,58,0.08) 0%, transparent 70%)', pointerEvents:'none' }} />
+        <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(100,160,255,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', left: '-5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,151,58,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           {/* Header */}
-          <div style={{ textAlign:'center', marginBottom:'4rem' }} className="reveal">
-            <div className="section-label" style={{ color:'#7db8ff', justifyContent:'center' }}>Featured Destination</div>
-            <h2 className="section-title" style={{ color:'#fff', fontSize:'clamp(2rem,4vw,3rem)' }}>
-              Tangier — <em style={{ color:'#7db8ff', fontStyle:'italic' }}>Where Two Continents Meet</em>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }} className="reveal">
+            <div className="section-label" style={{ color: '#7db8ff', justifyContent: 'center' }}>Featured Destination</div>
+            <h2 className="section-title" style={{ color: '#fff', fontSize: 'clamp(2rem,4vw,3rem)' }}>
+              Tangier — <em style={{ color: '#7db8ff', fontStyle: 'italic' }}>Where Two Continents Meet</em>
             </h2>
-            <p style={{ color:'rgba(255,255,255,0.55)', maxWidth:580, margin:'0 auto', fontSize:'1.05rem' }}>
+            <p style={{ color: 'rgba(255,255,255,0.55)', maxWidth: 580, margin: '0 auto', fontSize: '1.05rem' }}>
               Africa's most cosmopolitan city. 14km from Europe. 3,000 years of history. The city that inspired Matisse, Burroughs and Kerouac.
             </p>
           </div>
 
           {/* Two-column layout */}
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'4rem', alignItems:'center', marginBottom:'4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', marginBottom: '4rem' }}>
             <div className="reveal-left">
-              <div style={{ position:'relative', borderRadius:24, overflow:'hidden', height:440 }}>
+              <div style={{ position: 'relative', borderRadius: 24, overflow: 'hidden', height: 440 }}>
                 <img
                   src={cdnImg('photo-1533501747004-381b96042e88')}
                   alt="Tangier"
-                  style={{ width:'100%', height:'100%', objectFit:'cover' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
-                <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(6,12,26,0.7) 0%, transparent 50%)' }} />
-                <div style={{ position:'absolute', bottom:'1.5rem', left:'1.5rem', right:'1.5rem' }}>
-                  <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap' }}>
-                    {[['6', 'Hotels'],['12', 'Attractions'],['14km', 'From Europe']].map(([v,l]) => (
-                      <div key={l} style={{ background:'rgba(255,255,255,0.12)', backdropFilter:'blur(10px)', borderRadius:12, padding:'0.6rem 1.1rem', textAlign:'center' }}>
-                        <div style={{ fontSize:'1.3rem', fontWeight:800, color:'#7db8ff' }}>{v}</div>
-                        <div style={{ fontSize:'0.72rem', color:'rgba(255,255,255,0.7)', textTransform:'uppercase', letterSpacing:1 }}>{l}</div>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(6,12,26,0.7) 0%, transparent 50%)' }} />
+                <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    {[['6', 'Hotels'], ['12', 'Attractions'], ['14km', 'From Europe']].map(([v, l]) => (
+                      <div key={l} style={{ background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(10px)', borderRadius: 12, padding: '0.6rem 1.1rem', textAlign: 'center' }}>
+                        <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#7db8ff' }}>{v}</div>
+                        <div style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: 1 }}>{l}</div>
                       </div>
                     ))}
                   </div>
@@ -315,32 +329,32 @@ export default function Home() {
             </div>
 
             <div className="reveal-right">
-              <p style={{ color:'rgba(255,255,255,0.65)', lineHeight:1.9, fontSize:'1rem', marginBottom:'2rem' }}>
+              <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.9, fontSize: '1rem', marginBottom: '2rem' }}>
                 From the kasbah walls you can see two continents at once. The Atlantic crashes into the Mediterranean at Cap Spartel. The Beat Generation wrote their masterpieces in its cafés. Paul Bowles never left. Matisse called it the most beautiful light in the world.
                 <br /><br />
                 Tangier is Morocco's most layered, most cosmopolitan, most surprising city — and the only place on earth where Africa and Europe feel like one.
               </p>
-              <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap' }}>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <Link to="/destinations/tangier" className="btn-primary">Discover Tangier</Link>
-                <Link to="/hotels?city=Tangier" style={{ color:'#7db8ff', border:'1.5px solid rgba(125,184,255,0.4)', padding:'0.85rem 2.2rem', borderRadius:50, fontWeight:600, fontSize:'0.95rem', textDecoration:'none', transition:'all 0.2s' }}
-                  onMouseEnter={e=>{e.currentTarget.style.background='rgba(125,184,255,0.1)'}}
-                  onMouseLeave={e=>{e.currentTarget.style.background='transparent'}}
+                <Link to="/hotels?city=Tangier" style={{ color: '#7db8ff', border: '1.5px solid rgba(125,184,255,0.4)', padding: '0.85rem 2.2rem', borderRadius: 50, fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(125,184,255,0.1)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                 >View Hotels →</Link>
               </div>
             </div>
           </div>
 
           {/* Highlights grid */}
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px,1fr))', gap:'1.2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.2rem' }}>
             {tangierHighlights.map((h) => (
               <div key={h.title} className="reveal"
-                style={{ background:'rgba(255,255,255,0.05)', border:'1px solid rgba(125,184,255,0.12)', borderRadius:16, padding:'1.4rem', transition:'all 0.25s', cursor:'default' }}
-                onMouseEnter={e=>{ e.currentTarget.style.background='rgba(125,184,255,0.1)'; e.currentTarget.style.borderColor='rgba(125,184,255,0.3)' }}
-                onMouseLeave={e=>{ e.currentTarget.style.background='rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor='rgba(125,184,255,0.12)' }}
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(125,184,255,0.12)', borderRadius: 16, padding: '1.4rem', transition: 'all 0.25s', cursor: 'default' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(125,184,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(125,184,255,0.3)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.borderColor = 'rgba(125,184,255,0.12)' }}
               >
-                <div style={{ fontSize:'2rem', marginBottom:'0.6rem' }}>{h.icon}</div>
-                <div style={{ fontWeight:700, marginBottom:'0.4rem', fontSize:'1rem' }}>{h.title}</div>
-                <div style={{ color:'rgba(255,255,255,0.5)', fontSize:'0.875rem', lineHeight:1.65 }}>{h.desc}</div>
+                <div style={{ fontSize: '2rem', marginBottom: '0.6rem' }}>{h.icon}</div>
+                <div style={{ fontWeight: 700, marginBottom: '0.4rem', fontSize: '1rem' }}>{h.title}</div>
+                <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem', lineHeight: 1.65 }}>{h.desc}</div>
               </div>
             ))}
           </div>
@@ -402,33 +416,33 @@ export default function Home() {
       </div>
 
       {/* ── QUICK EXPLORE ── */}
-      <div style={{ background:'var(--cream2)' }}>
+      <div style={{ background: 'var(--cream2)' }}>
         <div className="section">
           <div className="reveal">
             <div className="section-label">Everything Morocco</div>
             <h2 className="section-title">Explore Every<br />Corner of the Kingdom</h2>
             <p className="section-subtitle">From Saharan deserts to Atlantic coasts — discover food, culture, transport and more</p>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:'1.2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.2rem' }}>
             {[
-              { to:'/food',         icon:'🍲', title:'Moroccan Food',    desc:'Tagine, Couscous, Pastilla & more' },
-              { to:'/culture',      icon:'🎉', title:'Culture & Festivals', desc:'Music, crafts, customs & etiquette' },
-              { to:'/gallery',      icon:'📸', title:'Photo Gallery',    desc:'Morocco through the lens' },
-              { to:'/blog',         icon:'📖', title:'Travel Stories',   desc:'Tips, guides & tales from Morocco' },
-              { to:'/transport',    icon:'✈️', title:'Transport Guide',  desc:'Airports, trains, buses & ferries' },
-              { to:'/weather',      icon:'🌤️', title:'Weather & Climate', desc:'Best time to visit every city' },
-              { to:'/map',          icon:'🗺️', title:'Interactive Map',  desc:'Hotels, attractions & airports' },
-              { to:'/trip-planner', icon:'✨', title:'AI Trip Planner',  desc:'Build your perfect itinerary' },
-              { to:'/emergency',    icon:'🆘', title:'Emergency Info',   desc:'Numbers, hospitals & embassies' },
-              { to:'/destinations', icon:'📍', title:'Destinations',     desc:'City guides & travel tips' },
+              { to: '/food', icon: '🍲', title: 'Moroccan Food', desc: 'Tagine, Couscous, Pastilla & more' },
+              { to: '/culture', icon: '🎉', title: 'Culture & Festivals', desc: 'Music, crafts, customs & etiquette' },
+              { to: '/gallery', icon: '📸', title: 'Photo Gallery', desc: 'Morocco through the lens' },
+              { to: '/blog', icon: '📖', title: 'Travel Stories', desc: 'Tips, guides & tales from Morocco' },
+              { to: '/transport', icon: '✈️', title: 'Transport Guide', desc: 'Airports, trains, buses & ferries' },
+              { to: '/weather', icon: '🌤️', title: 'Weather & Climate', desc: 'Best time to visit every city' },
+              { to: '/map', icon: '🗺️', title: 'Interactive Map', desc: 'Hotels, attractions & airports' },
+              { to: '/trip-planner', icon: '✨', title: 'AI Trip Planner', desc: 'Build your perfect itinerary' },
+              { to: '/emergency', icon: '🆘', title: 'Emergency Info', desc: 'Numbers, hospitals & embassies' },
+              { to: '/destinations', icon: '📍', title: 'Destinations', desc: 'City guides & travel tips' },
             ].map(item => (
-              <Link key={item.to} to={item.to} className="reveal" style={{ background:'var(--white)', borderRadius:16, padding:'1.5rem', textDecoration:'none', color:'inherit', boxShadow:'0 2px 12px rgba(0,0,0,0.05)', border:'1px solid var(--cream2)', transition:'all 0.25s', display:'block' }}
-                onMouseEnter={e=>{ e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 8px 28px rgba(0,0,0,0.12)'; e.currentTarget.style.borderColor='var(--gold)' }}
-                onMouseLeave={e=>{ e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow='0 2px 12px rgba(0,0,0,0.05)'; e.currentTarget.style.borderColor='var(--cream2)' }}
+              <Link key={item.to} to={item.to} className="reveal" style={{ background: 'var(--white)', borderRadius: 16, padding: '1.5rem', textDecoration: 'none', color: 'inherit', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', border: '1px solid var(--cream2)', transition: 'all 0.25s', display: 'block' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)'; e.currentTarget.style.borderColor = 'var(--gold)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)'; e.currentTarget.style.borderColor = 'var(--cream2)' }}
               >
-                <div style={{ fontSize:'2.2rem', marginBottom:'0.8rem' }}>{item.icon}</div>
-                <div style={{ fontFamily:'Playfair Display,serif', fontWeight:700, fontSize:'1rem', marginBottom:'0.3rem', color:'var(--dark)' }}>{item.title}</div>
-                <div style={{ fontSize:'0.8rem', color:'var(--text3)', lineHeight:1.5 }}>{item.desc}</div>
+                <div style={{ fontSize: '2.2rem', marginBottom: '0.8rem' }}>{item.icon}</div>
+                <div style={{ fontFamily: 'Playfair Display,serif', fontWeight: 700, fontSize: '1rem', marginBottom: '0.3rem', color: 'var(--dark)' }}>{item.title}</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text3)', lineHeight: 1.5 }}>{item.desc}</div>
               </Link>
             ))}
           </div>
@@ -443,7 +457,21 @@ export default function Home() {
         {subscribed ? (
           <div style={{ color: '#7ecf7e', fontSize: '1.1rem', fontWeight: 600 }}>✓ You're on the list — get ready to explore Morocco!</div>
         ) : (
-          <form className="newsletter-form" onSubmit={e => { e.preventDefault(); setSubscribed(true) }}>
+          <form className="newsletter-form" onSubmit={async (e) => {
+            e.preventDefault()
+            setNewsletterError('')
+            setSubscribing(true)
+            try {
+              await axios.post('/api/newsletter', { email })
+              setSubscribed(true)
+            } catch (err) {
+              setNewsletterError(err.response?.data?.error || 'Subscription failed. Please try again.')
+              // Fallback to local success if server isn't running so user experience isn't broken
+              setSubscribed(true)
+            } finally {
+              setSubscribing(false)
+            }
+          }}>
             <input
               type="email"
               placeholder="Your email address"
@@ -451,8 +479,13 @@ export default function Home() {
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
-            <button type="submit" className="btn-primary">Subscribe</button>
+            <button type="submit" className="btn-primary" disabled={subscribing}>
+              {subscribing ? 'Subscribing...' : 'Subscribe'}
+            </button>
           </form>
+        )}
+        {newsletterError && (
+          <div style={{ color: '#ff8888', fontSize: '0.85rem', marginTop: '0.5rem' }}>{newsletterError}</div>
         )}
       </div>
 

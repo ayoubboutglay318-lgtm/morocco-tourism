@@ -33,7 +33,8 @@ export default function Destinations() {
     const matchSearch = d.name.toLowerCase().includes(search.toLowerCase()) ||
       d.tagline.toLowerCase().includes(search.toLowerCase()) ||
       d.region.toLowerCase().includes(search.toLowerCase())
-    const matchFilter = filter === 'All' || d.region.includes(filter)
+    const priceCategory = PRICE_LABELS[d.priceLevel] || d.priceLevel
+    const matchFilter = filter === 'All' || priceCategory === filter || (d.region && d.region.includes(filter))
     return matchSearch && matchFilter
   })
 

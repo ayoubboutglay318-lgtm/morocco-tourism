@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import axios from 'axios'
+import { useApp } from '../context/AppContext'
+import { AffiliateLinks, AdBanner } from '../components/Monetization'
 
 export default function HotelDetail() {
   const { id } = useParams()
+  const { convertPrice } = useApp()
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(true)
   const imgRef = useRef()
@@ -44,7 +47,7 @@ export default function HotelDetail() {
             </div>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div className="hotel-detail-price">${hotel.price} <span>/ night</span></div>
+            <div className="hotel-detail-price">{convertPrice(hotel.price)} <span>/ night</span></div>
             <div style={{ color: 'var(--text3)', fontSize: '0.85rem', marginBottom: '1rem' }}>Taxes & fees included</div>
             <Link to={`/hotels/${hotel.id}/book`} className="btn-primary" style={{ fontSize: '1rem' }}>Book Now →</Link>
           </div>
@@ -57,6 +60,13 @@ export default function HotelDetail() {
           {hotel.amenities.map(a => (
             <span key={a} className="amenity-tag">✓ {a}</span>
           ))}
+        </div>
+
+        {/* Affiliate Booking Options (Monetization) */}
+        <AffiliateLinks hotel={hotel} />
+
+        <div style={{ margin: '1.5rem 0' }}>
+          <AdBanner slot="HOTEL_DETAIL_SLOT" />
         </div>
 
         <div style={{

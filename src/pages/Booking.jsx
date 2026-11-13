@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useApp } from '../context/AppContext'
 
 export default function Booking() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { convertPrice } = useApp()
   const [hotel, setHotel] = useState(null)
   const [form, setForm] = useState({ name: '', email: '', checkIn: '', checkOut: '', guests: 1 })
   const [error, setError] = useState('')
@@ -75,10 +77,10 @@ export default function Booking() {
             <div className="booking-summary">
               <h3>Booking Summary</h3>
               <div className="summary-row"><span>Hotel</span><span>{hotel.name}</span></div>
-              <div className="summary-row"><span>Price per night</span><span>${hotel.price}</span></div>
+              <div className="summary-row"><span>Price per night</span><span>{convertPrice(hotel.price)}</span></div>
               <div className="summary-row"><span>Nights</span><span>{nights}</span></div>
               <div className="summary-row"><span>Guests</span><span>{form.guests}</span></div>
-              <div className="summary-row total"><span>Total</span><span>${total}</span></div>
+              <div className="summary-row total"><span>Total</span><span>{convertPrice(total)}</span></div>
             </div>
           )}
 

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const cityData = {
   Tangier:          { days:2, highlights:['Kasbah & Museum','Cap Spartel','Petit Socco cafés','Tangier Bay beach','Hercules Caves','American Legation Museum'], hotels:['Fairmont Tazi Palace','Saba\'s House Riad','El Minzah Hotel'], food:['Fresh seafood at the port','Harira soup at Grand Socco','Msemen breakfast at medina bakery'] },
@@ -179,7 +180,7 @@ export default function TripPlanner() {
             <p style={{ color:'var(--text2)', marginBottom:'1rem' }}>Ready to book? Browse hotels for your trip:</p>
             <div style={{ display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap' }}>
               {(form.cities.length ? form.cities : ['Marrakech','Fes','Tangier']).slice(0,4).map(c => (
-                <a key={c} href={`/hotels?city=${c}`} className="btn-primary" style={{ fontSize:'0.85rem' }}>Hotels in {c}</a>
+                <Link key={c} to={`/hotels?city=${c}`} className="btn-primary" style={{ fontSize:'0.85rem' }}>Hotels in {c}</Link>
               ))}
             </div>
           </div>

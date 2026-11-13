@@ -2,7 +2,8 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 const AppContext = createContext()
 
-const RATES = { MAD:1, USD:0.099, EUR:0.091, GBP:0.078, CAD:0.135, JPY:14.6 }
+// Rates: how much of each currency equals 1 USD (hotel prices are in USD)
+const RATES = { USD:1, MAD:10.1, EUR:0.92, GBP:0.79, CAD:1.36, JPY:149 }
 
 export function AppProvider({ children }) {
   const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
@@ -34,10 +35,10 @@ export function AppProvider({ children }) {
     localStorage.removeItem('authToken')
   }
 
-  const convertPrice = (mad) => {
+  const convertPrice = (usd) => {
     const rate = RATES[currency] || 1
-    const converted = (mad * rate).toFixed(0)
-    const symbols = { MAD:'MAD', USD:'$', EUR:'€', GBP:'£', CAD:'CA$', JPY:'¥' }
+    const converted = (usd * rate).toFixed(currency === 'JPY' || currency === 'MAD' ? 0 : 2)
+    const symbols = { USD:'$', MAD:'MAD ', EUR:'€', GBP:'£', CAD:'CA$', JPY:'¥' }
     return `${symbols[currency]}${Number(converted).toLocaleString()}`
   }
 

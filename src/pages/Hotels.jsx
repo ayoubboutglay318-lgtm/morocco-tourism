@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
 import HotelCard from '../components/HotelCard'
+import { InFeedAd } from '../components/Monetization'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -104,7 +105,16 @@ export default function Hotels() {
         <div className="loading">No hotels found. Try different filters.</div>
       ) : (
         <div className="hotels-grid">
-          {hotels.map(h => <HotelCard key={h.id} hotel={h} />)}
+          {hotels.map((h, i) => (
+            <div key={h.id} style={{ display: 'contents' }}>
+              <HotelCard hotel={h} />
+              {i === 5 && (
+                <div style={{ gridColumn: '1 / -1', margin: '1rem 0' }}>
+                  <InFeedAd />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       )}
     </div>

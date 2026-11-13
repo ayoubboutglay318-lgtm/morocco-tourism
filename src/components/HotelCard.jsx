@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 
 export default function HotelCard({ hotel }) {
-  const { toggleFavorite, favorites } = useApp()
+  const { toggleFavorite, favorites, convertPrice } = useApp()
   const isFav = favorites.includes(hotel.id)
   const cardRef = useRef()
   const glowRef = useRef()
@@ -83,7 +83,7 @@ export default function HotelCard({ hotel }) {
         {/* Footer */}
         <div className="hotel-card-footer">
           <div>
-            <div className="hotel-card-price">${hotel.price} <span>/ night</span></div>
+            <div className="hotel-card-price">{convertPrice(hotel.price)} <span>/ night</span></div>
             <div style={{ fontSize:'0.72rem', color:'var(--text3)' }}>{hotel.rooms} rooms available</div>
           </div>
           <span className="btn-primary" style={{ padding:'0.5rem 1.2rem', fontSize:'0.85rem' }}>View →</span>

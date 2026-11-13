@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 
@@ -11,6 +11,23 @@ export default function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef(null)
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setMoreOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (moreRef.current && !moreRef.current.contains(e.target)) {
+        setMoreOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const isActive = (path) => pathname === path || (path !== '/' && pathname.startsWith(path))
 
   const navLinkStyle = (path) => ({
@@ -34,7 +51,7 @@ export default function Navbar() {
         <li className="hide-mobile"><Link to="/weather" style={navLinkStyle('/weather')} onClick={() => setMenuOpen(false)}>{t('weather')}</Link></li>
         <li className="hide-mobile"><Link to="/map" style={navLinkStyle('/map')} onClick={() => setMenuOpen(false)}>{t('map')}</Link></li>
         {/* More dropdown */}
-        <li style={{ position:'relative' }}>
+        <li ref={moreRef} style={{ position:'relative' }}>
           <button onClick={() => setMoreOpen(!moreOpen)} style={{ background:'none', border:'none', color:'rgba(255,255,255,0.75)', cursor:'pointer', fontSize:'0.88rem', fontWeight:500, display:'flex', alignItems:'center', gap:4, padding:0 }}>
             More ▾
           </button>

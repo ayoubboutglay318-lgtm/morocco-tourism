@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Reviews() {
@@ -220,7 +221,7 @@ export default function Reviews() {
         <p style={{ color: 'var(--text2)', marginBottom: '1.5rem' }}>
           Browse our highest-rated hotels and book your unforgettable Moroccan adventure
         </p>
-        <a href="/hotels" style={{
+        <Link to="/hotels" style={{
           display: 'inline-block',
           padding: '0.9rem 2rem',
           background: 'var(--gold)',
@@ -234,7 +235,7 @@ export default function Reviews() {
           onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
         >
           Browse Hotels →
-        </a>
+        </Link>
       </div>
     </div>
   )
