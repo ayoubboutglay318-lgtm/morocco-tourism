@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import HotelImage from '../components/HotelImage'
+import Seo from '../components/Seo'
 import { whatsappLink } from '../config'
 
 /* ─── Type badge colours ─── */
@@ -118,6 +119,12 @@ export default function DestinationDetail() {
   /* ── Render ── */
   return (
     <div style={{ background: 'var(--cream)' }}>
+      <Seo
+        title={`${dest.name} Travel Guide: ${dest.tagline}`}
+        description={`${dest.name}, Morocco: best time to visit (${dest.bestTime}), how to get there, things to do, hotels and local tips.`}
+        image={dest.heroImage || dest.image}
+        jsonLd={{ '@context': 'https://schema.org', '@type': 'TouristDestination', name: dest.name, description: dest.description?.split('\n')[0], address: { '@type': 'PostalAddress', addressCountry: 'MA' } }}
+      />
 
       {/* ══ HERO ══ */}
       <div className="dd-hero">

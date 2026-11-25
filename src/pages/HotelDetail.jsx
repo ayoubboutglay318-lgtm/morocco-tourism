@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import axios from 'axios'
 import { AffiliateLinks, AdBanner } from '../components/Monetization'
 import HotelImage from '../components/HotelImage'
+import Seo from '../components/Seo'
 import { whatsappLink, AD_SLOTS } from '../config'
 
 export default function HotelDetail() {
@@ -30,6 +31,11 @@ export default function HotelDetail() {
 
   return (
     <div className="hotel-detail">
+      <Seo
+        title={`${hotel.name}, ${hotel.city}`}
+        description={`${hotel.name} in ${hotel.city}: ${hotel.stars}-star ${hotel.badge ? hotel.badge.toLowerCase() + ' — ' : ''}${hotel.description.slice(0, 120)}…`}
+        image={hotel.image || undefined}
+      />
       <Link to="/hotels" className="back-link">← All Hotels</Link>
 
       <div className="hotel-detail-hero" ref={imgRef} style={{ position: 'relative' }}>

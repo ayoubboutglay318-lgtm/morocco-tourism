@@ -32,3 +32,14 @@ export const AD_SLOTS = {
   blog: import.meta.env.VITE_AD_SLOT_BLOG || '',
   inFeed: import.meta.env.VITE_AD_SLOT_INFEED || '',
 }
+
+// Public address of the site (used for canonical links and social previews).
+// Set VITE_SITE_URL in Vercel when you connect your own domain, e.g. https://www.yourdomain.com
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://morocco-tourism-ir75.vercel.app').replace(/\/$/, '')
+export const SITE_NAME = 'Morocco Travel'
+
+// Visitor's cookie choice for advertising ('accepted' | 'refused' | null)
+export const getCookieConsent = () => {
+  try { return localStorage.getItem('cookieConsent') } catch { return null }
+}
+export const ADS_ALLOWED = () => Boolean(ADSENSE_CLIENT) && getCookieConsent() === 'accepted'

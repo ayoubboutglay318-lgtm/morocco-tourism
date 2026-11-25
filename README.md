@@ -100,7 +100,12 @@ All optional. While a value is empty the feature stays hidden (ads) or links wor
 | `VITE_AGODA_CID` | Agoda partner CID |
 | `VITE_GYG_PARTNER_ID` | GetYourGuide partner ID |
 
+| `VITE_SITE_URL` | Your own domain once connected, e.g. `https://www.yourdomain.com` (used for canonical links) |
+
 Redeploy after changing them. The WhatsApp number is set in `src/config.js`.
+
+When you connect a custom domain, also replace `morocco-tourism-ir75.vercel.app` in `public/sitemap.xml`, `public/robots.txt` and `index.html`.
+When ads are enabled, visitors see a cookie banner and AdSense loads only after they accept.
 
 ## ✅ Content policy
 

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://morocco-tourism.vercel.app/sitemap.xml
+Sitemap: https://morocco-tourism-ir75.vercel.app/sitemap.xml

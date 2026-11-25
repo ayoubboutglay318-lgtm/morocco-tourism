@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
-import { gygSearchUrl, bookingSearchUrl, AD_SLOTS } from '../config'
-import { AdBanner } from '../components/Monetization'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,7 +11,7 @@ const BLOG_CATEGORIES = ['All', 'Travel Tips', 'City Guides', 'Food & Drink', 'C
 export default function Blog() {
   const [posts, setPosts] = useState([])
   const [activeCategory, setActiveCategory] = useState('All')
-  const [selectedPost, setSelectedPost] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('/api/blog')
@@ -35,16 +34,6 @@ export default function Blog() {
     return () => ScrollTrigger.getAll().forEach(t => t.kill())
   }, [posts, activeCategory])
 
-  // Lock body scroll when article is open
-  useEffect(() => {
-    if (selectedPost) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [selectedPost])
-
   const filtered = activeCategory === 'All'
     ? posts
     : posts.filter(p => p.category === activeCategory)
@@ -59,14 +48,14 @@ export default function Blog() {
         <div className="bp-hero-overlay" />
         <div className="bp-hero-content">
           <div className="section-label" style={{ color: 'var(--gold-light)', justifyContent: 'center' }}>Travel Stories</div>
-          <h1>Stories from<br /><em>the Kingdom</em></h1>
-          <p>Tips, guides, and tales from Morocco — written by travellers, for travellers</p>
+          <h1>Morocco<br /><em>Travel Guides</em></h1>
+          <p>Practical itineraries, city guides and tips for travelling in Morocco</p>
         </div>
       </section>
 
       {/* Featured Post */}
       {featured && (
-        <div className="bp-featured" onClick={() => setSelectedPost(featured)}>
+        <div className="bp-featured" onClick={() => navigate(`/blog/${featured.slug}`)} role="link" tabIndex={0} onKeyDown={e => { if (e.key === 'Enter') navigate(`/blog/${featured.slug}`) }}>
           <div className="bp-featured-img">
             <img src={featured.image} alt={featured.title} />
             <div className="bp-featured-badge">Featured Story</div>
@@ -82,7 +71,7 @@ export default function Blog() {
                 <div className="bp-date">{featured.date} · {featured.readTime}</div>
               </div>
             </div>
-            <button className="btn-primary" style={{ marginTop: '1.2rem' }}>Read Story →</button>
+            <Link to={`/blog/${featured.slug}`} className="btn-primary" style={{ marginTop: '1.2rem', display: 'inline-block' }} onClick={e => e.stopPropagation()}>Read Article →</Link>
           </div>
         </div>
       )}
@@ -105,7 +94,7 @@ export default function Blog() {
       {/* Posts Grid */}
       <div className="bp-grid">
         {filtered.map(post => (
-          <article key={post.id} className="bp-card" onClick={() => setSelectedPost(post)}>
+          <Link key={post.id} to={`/blog/${post.slug}`} className="bp-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
             <div className="bp-card-img">
               <img src={post.image} alt={post.title} loading="lazy" />
               <div className="bp-card-tag">{post.category}</div>
@@ -121,7 +110,7 @@ export default function Blog() {
                 </div>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 
@@ -132,64 +121,6 @@ export default function Blog() {
         </div>
       )}
 
-      {/* Article Modal */}
-      {selectedPost && (
-        <div className="bp-modal-overlay" onClick={() => setSelectedPost(null)}>
-          <div className="bp-modal" onClick={e => e.stopPropagation()}>
-            <button className="bp-modal-close" onClick={() => setSelectedPost(null)}>✕</button>
-            <div className="bp-modal-hero">
-              <img src={selectedPost.image.replace('w=900', 'w=1400')} alt={selectedPost.title} />
-              <div className="bp-modal-hero-overlay" />
-              <div className="bp-modal-hero-content">
-                <div className="bp-tag" style={{ background: 'var(--gold)', color: '#fff' }}>{selectedPost.category}</div>
-                <h1>{selectedPost.title}</h1>
-              </div>
-            </div>
-            <div className="bp-modal-body">
-              <div className="bp-modal-meta">
-                <span className="bp-avatar" aria-hidden="true" style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', background:'var(--gold)', color:'#fff', fontWeight:700 }}>MT</span>
-                <div>
-                  <div className="bp-author">{selectedPost.author}</div>
-                  <div className="bp-date">{selectedPost.date} · {selectedPost.readTime}</div>
-                </div>
-              </div>
-              <div className="bp-modal-content" dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
-              
-              {/* Monetization: Tour CTA & Ad in Blog */}
-              <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--cream2)', borderRadius: 16, textAlign: 'center' }}>
-                <h4 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--dark)' }}>
-                  Planning a Trip to Morocco?
-                </h4>
-                <p style={{ color: 'var(--text3)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-                  Compare guided tours and desert excursions, or message us on WhatsApp for help planning.
-                </p>
-                <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  <a
-                    href={gygSearchUrl('Morocco')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                    style={{ fontSize: '0.85rem' }}
-                  >
-                    Browse Morocco Tours on GetYourGuide →
-                  </a>
-                  <a
-                    href={bookingSearchUrl('Morocco')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline"
-                    style={{ fontSize: '0.85rem' }}
-                  >
-                    Check Hotel Deals
-                  </a>
-                </div>
-              </div>
-
-              <AdBanner slot={AD_SLOTS.blog} />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

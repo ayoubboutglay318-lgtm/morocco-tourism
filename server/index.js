@@ -428,7 +428,7 @@ const gallery = [
 const blogPosts = [
   {
     id:1, featured:true, category:"Travel Tips",
-    title:"10 Things I Wish I Knew Before Visiting Morocco",
+    title:"10 Things to Know Before Visiting Morocco",
     excerpt:"From navigating the medinas to tipping etiquette — the essential tips that will transform your Moroccan adventure.",
     image:I.mrk3, readTime:"6 min read", date:"September 2026",
     author:"Morocco Travel Team", authorAvatar:null,
@@ -554,6 +554,61 @@ const blogPosts = [
 <p>An easy day trip from Marrakech — the Ourika Valley follows a rushing river past terraced farms, walnut groves and traditional Berber villages clinging to the mountainsides. The Setti Fatma waterfalls at the end of the valley are spectacular.</p>
 <h2>When to Trek</h2>
 <p>Spring (April–May) and autumn (September–October) offer the best conditions. Summer is too hot at lower altitudes. Winter brings snow above 2,000m — Toubkal summit is snow-covered from November to April.</p>`
+  },
+  {
+    id:9, featured:false, category:"Adventure",
+    title:"Marrakech to Merzouga in 3 Days: A Realistic Sahara Itinerary",
+    excerpt:"The classic road trip from Marrakech over the High Atlas to the Erg Chebbi dunes — day by day, with honest advice on driving times.",
+    image:I.sah1, readTime:"7 min read", date:"November 2026",
+    author:"Morocco Travel Team", authorAvatar:null,
+    content:`<p>The trip from Marrakech to the Erg Chebbi dunes at Merzouga is one of the most popular journeys in Morocco. It is roughly 550km each way on mountain and desert roads, so the most important advice is simple: <strong>do not try to do it in two days.</strong> Three days is the realistic minimum, and four is more comfortable.</p>
+<h2>Day 1: Marrakech → Tizi n'Tichka → Aït Benhaddou → Dades Valley</h2>
+<p>Leave Marrakech early. The road climbs into the High Atlas and crosses the Tizi n'Tichka pass at about 2,260m, with long series of hairpin bends — take motion-sickness tablets if you need them. In the afternoon, stop at <strong>Aït Benhaddou</strong>, the fortified earthen village (ksar) listed by UNESCO and used as a set for many films. Continue past Ouarzazate and spend the night in the <strong>Dades Valley</strong>, known for its red rock formations and kasbahs.</p>
+<h2>Day 2: Todra Gorge → Merzouga, camel ride at sunset</h2>
+<p>In the morning, walk into the <strong>Todra Gorge</strong> near Tinghir, where the canyon walls rise steeply on both sides of a shallow river. Then drive on through the desert towns towards Erfoud and Rissani to reach <strong>Merzouga</strong> in the afternoon. Most visitors leave their luggage at a hotel or camp office, take a camel or 4x4 into the dunes for sunset, and sleep in a desert camp.</p>
+<h2>Day 3: Sunrise on the dunes → back to Marrakech (or on to Fes)</h2>
+<p>Wake up early for sunrise over the dunes. The drive back to Marrakech is long — usually a full day of 9 hours or more with stops. Many travellers prefer to continue north to <strong>Fes</strong> instead, which is a similar distance and avoids driving the same road twice.</p>
+<h2>Practical tips</h2>
+<p><strong>Group tour, private driver or self-drive?</strong> Group tours are the cheapest but stick to a fixed schedule. A private driver lets you stop when you want. Self-driving is possible on good roads, but mountain bends and long distances make it tiring.</p>
+<p><strong>What to bring:</strong> a scarf for sun and sand, sunglasses, a warm layer for the evening (desert nights are cold from November to March), a power bank, and cash for small purchases along the way.</p>
+<p><strong>Weather:</strong> spring (March–May) and autumn (September–November) are the most pleasant. Summer days in Merzouga are extremely hot, and in winter the Tizi n'Tichka pass can be closed by snow for a few hours or days.</p>
+<p>Want help arranging a driver or a desert camp? Send us your dates on WhatsApp.</p>`
+  },
+  {
+    id:10, featured:false, category:"City Guides",
+    title:"Is Chefchaouen Worth Visiting? A Practical Guide to the Blue City",
+    excerpt:"How to get there, how long to stay, the best viewpoints and the waterfalls nearby — everything you need to plan a visit.",
+    image:I.chef1, readTime:"6 min read", date:"November 2026",
+    author:"Morocco Travel Team", authorAvatar:null,
+    content:`<p>Chefchaouen sits in the Rif Mountains of northern Morocco, and its old medina is painted in shades of blue. It is calmer and smaller than Marrakech or Fes, which is exactly why many travellers love it. <strong>Yes, it is worth visiting</strong> — as long as you plan the journey, because it is not on the train network.</p>
+<h2>How to get there</h2>
+<p>There is no train to Chefchaouen. The usual options are a <strong>CTM bus</strong> from Tangier or Fes, a <strong>grand taxi</strong> via Tetouan, or a private driver. From Tangier the trip takes roughly 2.5–3 hours; from Fes, around 4 hours. Book buses a day ahead in busy seasons.</p>
+<h2>How long to stay</h2>
+<p>One full day is enough to see the medina, but <strong>two nights</strong> is better: you get the quiet early mornings in the blue streets before day-trippers arrive, and time for a hike or the waterfalls.</p>
+<h2>What to see</h2>
+<p><strong>The medina:</strong> wander without a plan — the town is small and you cannot get seriously lost. <strong>Place Outa el-Hammam:</strong> the main square, with the kasbah and its garden. <strong>Ras El Maa:</strong> the spring at the edge of town where the river flows out of the mountain. <strong>The Spanish Mosque viewpoint:</strong> a 30-minute walk uphill for the classic sunset view over the town.</p>
+<h2>Day trip: Akchour waterfalls</h2>
+<p>In Talassemtane National Park, about an hour's drive away, trails lead along a river to waterfalls and natural pools, and to the rock arch known as "God's Bridge". Wear proper shoes — the paths are rocky and can be slippery.</p>
+<h2>Good to know</h2>
+<p>Winters in the Rif are cold and wet, so pack warm clothes from November to March. Always ask before photographing people. You may be offered hashish in the streets — it is illegal for recreational use in Morocco, so simply say no and keep walking.</p>`
+  },
+  {
+    id:11, featured:false, category:"Travel Tips",
+    title:"Morocco in Winter: Weather, Where to Go and What to Pack",
+    excerpt:"December to February can be a great time to visit — if you know that sunny days come with cold nights and snow in the mountains.",
+    image:I.atl1, readTime:"6 min read", date:"November 2026",
+    author:"Morocco Travel Team", authorAvatar:null,
+    content:`<p>Many people imagine Morocco as hot all year. In winter (December to February) the days are often sunny and pleasant, but <strong>nights are cold</strong>, the mountains get snow and the north is rainy. With the right expectations it is a quiet, beautiful season with fewer crowds.</p>
+<h2>What the weather is like</h2>
+<p><strong>Marrakech:</strong> daytime highs are typically around 18–20°C with lots of sun, but nights can drop to around 5°C. <strong>Fes and Chefchaouen:</strong> colder and wetter, with chilly evenings. <strong>Agadir and the south coast:</strong> the mildest region, often around 20°C in the day. <strong>The Sahara (Merzouga):</strong> warm days, but nights can fall close to freezing. <strong>The High Atlas:</strong> snow on the peaks and often in the villages around Imlil.</p>
+<p>Check our <a href="/weather">live weather page</a> for the current forecast in each city.</p>
+<h2>Where to go</h2>
+<p><strong>Marrakech and the south coast</strong> are the most comfortable. <strong>The desert</strong> is excellent if you bring warm layers for the camp at night. <strong>The Atlas Mountains</strong> are spectacular under snow, and Oukaïmeden, about an hour and a half from Marrakech, has a small ski area when there is enough snow. Mountain passes such as Tizi n'Tichka can close temporarily after heavy snowfall, so keep some flexibility in your plans.</p>
+<h2>Riads in winter</h2>
+<p>Traditional riads are built around open courtyards and are designed to stay cool, which means they can be cold in winter. Before booking, ask whether the rooms have heating and extra blankets.</p>
+<h2>What to pack</h2>
+<p>Layers: a warm jacket or fleece, a jumper, a scarf and a hat for evenings and the desert; comfortable walking shoes; a light rain jacket for the north; sunglasses and sunscreen for the bright days.</p>
+<p>Winter is also a good time to visit for prices and crowds — except around Christmas and New Year, when Marrakech is very busy and should be booked early.</p>`
   },
 ];
 
@@ -769,9 +824,16 @@ app.get('/api/stats', (req,res) => res.json([
   { label:'Restaurants', value:restaurants.length, suffix:'' },
 ]));
 app.get('/api/gallery', (req,res) => res.json(gallery));
+const slugify = t => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const blogWithSlugs = blogPosts.map(p => ({ ...p, slug: slugify(p.title) }));
 app.get('/api/blog', (req,res) => {
   const { category } = req.query;
-  res.json(category ? blogPosts.filter(p => p.category === category) : blogPosts);
+  res.json(category ? blogWithSlugs.filter(p => p.category === category) : blogWithSlugs);
+});
+app.get('/api/blog/:slug', (req,res) => {
+  const post = blogWithSlugs.find(p => p.slug === req.params.slug);
+  if (!post) return res.status(404).json({ error:'Not found' });
+  res.json(post);
 });
 app.get('/api/attractions', (req,res) => {
   const { city } = req.query;

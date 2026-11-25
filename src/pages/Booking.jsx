@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { whatsappLink, bookingSearchUrl } from '../config'
+import Seo from '../components/Seo'
 
 // Stay request: this site does not take bookings or payments itself.
 // The form builds a WhatsApp message to the Morocco Travel team, and links to live prices on Booking.com.
@@ -42,6 +43,7 @@ export default function Booking() {
 
   return (
     <div className="booking-page">
+      <Seo title={`Ask about ${hotel.name}`} noindex />
       <Link to={`/hotels/${id}`} className="back-link">← Back to Hotel</Link>
       <h1>Ask About Your Stay</h1>
       <p className="booking-hotel-name">{hotel.name} — {hotel.city}</p>

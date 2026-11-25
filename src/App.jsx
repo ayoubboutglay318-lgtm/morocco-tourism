@@ -2,23 +2,34 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
+import { lazy, Suspense } from 'react'
+import { Analytics } from '@vercel/analytics/react'
+import RouteSeo from './components/RouteSeo'
+import CookieBanner from './components/CookieBanner'
+import Footer from './components/Footer'
 import Home from './pages/Home'
-import Hotels from './pages/Hotels'
-import HotelDetail from './pages/HotelDetail'
-import Booking from './pages/Booking'
-import Destinations from './pages/Destinations'
-import DestinationDetail from './pages/DestinationDetail'
-import Food from './pages/Food'
-import Culture from './pages/Culture'
-import Transport from './pages/Transport'
-import Emergency from './pages/Emergency'
-import Weather from './pages/Weather'
-import TripPlanner from './pages/TripPlanner'
-import MapPage from './pages/MapPage'
-import Gallery from './pages/Gallery'
-import Blog from './pages/Blog'
-import Favorites from './pages/Favorites'
-import NotFound from './pages/NotFound'
+
+// Other pages load on demand so the first visit downloads less code (faster on phones)
+const Hotels = lazy(() => import('./pages/Hotels'))
+const HotelDetail = lazy(() => import('./pages/HotelDetail'))
+const Booking = lazy(() => import('./pages/Booking'))
+const Destinations = lazy(() => import('./pages/Destinations'))
+const DestinationDetail = lazy(() => import('./pages/DestinationDetail'))
+const Food = lazy(() => import('./pages/Food'))
+const Culture = lazy(() => import('./pages/Culture'))
+const Transport = lazy(() => import('./pages/Transport'))
+const Emergency = lazy(() => import('./pages/Emergency'))
+const Weather = lazy(() => import('./pages/Weather'))
+const TripPlanner = lazy(() => import('./pages/TripPlanner'))
+const MapPage = lazy(() => import('./pages/MapPage'))
+const Gallery = lazy(() => import('./pages/Gallery'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Favorites = lazy(() => import('./pages/Favorites'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 import { WHATSAPP_URL } from './config'
 import './App.css'
 
@@ -46,6 +57,8 @@ function App() {
         <span className="whatsapp-float__label">Chat on WhatsApp</span>
       </a>
 
+      <RouteSeo />
+      <Suspense fallback={<div className="loading">Loading…</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<Hotels />} />
@@ -64,10 +77,18 @@ function App() {
         <Route path="/reviews" element={<Navigate to="/hotels" replace />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/auth" element={<Navigate to="/favorites" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
+      <Footer />
+      <CookieBanner />
+      <Analytics />
     </AppProvider>
   )
 }

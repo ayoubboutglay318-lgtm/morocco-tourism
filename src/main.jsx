@@ -4,15 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 import './index.css'
 import App from './App.jsx'
-import { ADSENSE_CLIENT } from './config'
+import { ADSENSE_CLIENT, ADS_ALLOWED } from './config'
 
 // Set production API URL if provided in environment variables
 if (import.meta.env.VITE_API_URL) {
   axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 }
 
-// Load Google AdSense only when a publisher ID is configured
-if (ADSENSE_CLIENT) {
+// Load Google AdSense only when a publisher ID is configured AND the visitor accepted cookies
+if (ADS_ALLOWED()) {
   const script = document.createElement('script')
   script.async = true
   script.crossOrigin = 'anonymous'

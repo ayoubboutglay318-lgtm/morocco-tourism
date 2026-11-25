@@ -1,62 +1,362 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://morocco-tourism.vercel.app/</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/destinations</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/hotels</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/map</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/food</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/trip-planner</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/weather</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/transport</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/food</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/emergency</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/culture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/culture</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://morocco-tourism.vercel.app/weather</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://morocco-tourism.vercel.app/blog</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://morocco-tourism.vercel.app/gallery</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/map</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/transport</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/trip-planner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://morocco-tourism.vercel.app/emergency</loc>
+    <loc>https://morocco-tourism-ir75.vercel.app/gallery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/about</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/contact</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/tangier</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/marrakech</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/fes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/chefchaouen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/merzouga</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/essaouira</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/atlas-mountains</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/agadir</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/destinations/casablanca</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/10-things-to-know-before-visiting-morocco</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/the-ultimate-tangier-city-guide-3-days-in-the-gateway-to-africa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/a-foodie-s-guide-to-moroccan-cuisine-beyond-the-tagine</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/sahara-desert-a-night-under-the-stars-in-merzouga</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/the-art-of-moroccan-zellige-1-000-years-of-mosaic-mastery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/getting-around-morocco-the-complete-transport-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/chefchaouen-the-blue-city-photography-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/trekking-the-atlas-a-guide-to-morocco-s-mountain-trails</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/marrakech-to-merzouga-in-3-days-a-realistic-sahara-itinerary</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/is-chefchaouen-worth-visiting-a-practical-guide-to-the-blue-city</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/blog/morocco-in-winter-weather-where-to-go-and-what-to-pack</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/7</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/8</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/9</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/11</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/12</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/13</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/15</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/16</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/17</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/19</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/20</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/21</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/22</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/23</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/24</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/25</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/26</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/27</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/28</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/29</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/30</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/31</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/32</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/33</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/34</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/35</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/36</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://morocco-tourism-ir75.vercel.app/hotels/37</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

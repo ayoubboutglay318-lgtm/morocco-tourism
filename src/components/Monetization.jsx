@@ -3,14 +3,14 @@
 // otherwise nothing is shown — no empty boxes. See src/config.js.
 
 import { useEffect, useRef } from 'react'
-import { ADSENSE_CLIENT, HAS_AFFILIATES, bookingSearchUrl, agodaSearchUrl, gygSearchUrl } from '../config'
+import { ADSENSE_CLIENT, ADS_ALLOWED, HAS_AFFILIATES, bookingSearchUrl, agodaSearchUrl, gygSearchUrl } from '../config'
 
 const isRealSlot = slot => /^\d{6,}$/.test(String(slot))
 
 export function AdBanner({ slot, format = 'auto', style = {} }) {
   const adRef = useRef(null)
   const pushed = useRef(false)
-  const enabled = Boolean(ADSENSE_CLIENT) && isRealSlot(slot)
+  const enabled = ADS_ALLOWED() && isRealSlot(slot)
 
   useEffect(() => {
     if (!enabled || pushed.current) return
@@ -116,7 +116,7 @@ export function AffiliateLinks({ hotel }) {
 
 // In-feed ad between hotel listings — hidden until AdSense is configured
 export function InFeedAd({ slot }) {
-  if (!ADSENSE_CLIENT || !isRealSlot(slot)) return null
+  if (!ADS_ALLOWED() || !isRealSlot(slot)) return null
   return (
     <div style={{ background: 'var(--cream)', borderRadius: 16, padding: '1rem', minHeight: 280 }}>
       <AdBanner slot={slot} format="fluid" />

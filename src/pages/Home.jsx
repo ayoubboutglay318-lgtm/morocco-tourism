@@ -1,15 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HotelCard from '../components/HotelCard'
-import ThreeHero from '../components/ThreeHero'
 import { useApp } from '../context/AppContext'
 import { AdBanner } from '../components/Monetization'
 import { WHATSAPP_URL, AD_SLOTS } from '../config'
 
 gsap.registerPlugin(ScrollTrigger)
+
+// The 3D sky is decorative: load it after the page so text appears first
+const ThreeHero = lazy(() => import('../components/ThreeHero'))
 
 const cdnImg = path => `https://images.unsplash.com/${path}?w=700&q=85&fit=crop&auto=format`
 
@@ -170,7 +172,7 @@ export default function Home() {
     <>
       {/* ── HERO ── */}
       <section className="hero">
-        <ThreeHero />
+        <Suspense fallback={null}><ThreeHero /></Suspense>
         <div className="hero-bg" ref={heroBgRef} style={{ opacity: 0.18 }} />
         <div className="hero-overlay" />
         <div className="hero-content">
@@ -417,44 +419,6 @@ export default function Home() {
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>Chat on WhatsApp</a>
       </div>
 
-      {/* ── FOOTER ── */}
-      <footer>
-        <div className="footer-inner">
-          <div>
-            <div className="footer-brand-name">Morocco<span>Travel</span></div>
-            <p className="footer-desc">An independent travel guide to the Kingdom of Morocco — destinations, hotels, food, culture and practical tips.</p>
-          </div>
-          <div className="footer-col">
-            <h4>Destinations</h4>
-            <ul>
-              {['Marrakech', 'Fes', 'Chefchaouen', 'Essaouira', 'Merzouga', 'Tangier'].map(c => (
-                <li key={c}><Link to={`/hotels?city=${c}`}>{c}</Link></li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h4>Explore</h4>
-            <ul>
-              <li><Link to="/hotels">All Hotels</Link></li>
-              <li><Link to="/destinations">Destinations</Link></li>
-              <li><Link to="/food">Food</Link></li>
-              <li><Link to="/culture">Culture</Link></li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h4>Info</h4>
-            <ul>
-              <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Contact (WhatsApp)</a></li>
-              <li><Link to="/emergency">Emergency Info</Link></li>
-              <li><Link to="/transport">Transport Guide</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} <span>MoroccoTravel</span>. All rights reserved.</span>
-          <span>Made with ♥ for Morocco</span>
-        </div>
-      </footer>
     </>
   )
 }
