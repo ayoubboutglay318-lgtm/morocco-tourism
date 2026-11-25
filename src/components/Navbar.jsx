@@ -2,21 +2,23 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 
-const CURRENCIES = ['USD','EUR','GBP','MAD','CAD','JPY']
 const LANGS = [{ code:'en', label:'EN 🇬🇧' }, { code:'fr', label:'FR 🇫🇷' }, { code:'ar', label:'AR 🇲🇦' }]
 
 export default function Navbar() {
   const { pathname } = useLocation()
-  const { dark, setDark, lang, setLang, currency, setCurrency, t, user, favorites } = useApp()
+  const { dark, setDark, lang, setLang, t, favorites } = useApp()
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
   const moreRef = useRef(null)
 
-  useEffect(() => {
+  // Close menus when the route changes (state adjustment during render, no effect needed)
+  const [prevPath, setPrevPath] = useState(pathname)
+  if (prevPath !== pathname) {
+    setPrevPath(pathname)
     setMenuOpen(false)
     setMoreOpen(false)
-  }, [pathname])
+  }
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -57,7 +59,7 @@ export default function Navbar() {
           </button>
           {moreOpen && (
             <div style={{ position:'absolute', top:'100%', left:0, background:'#1a0a00', border:'1px solid rgba(201,151,58,0.2)', borderRadius:12, padding:'0.5rem', minWidth:180, zIndex:200, marginTop:8, boxShadow:'0 8px 32px rgba(0,0,0,0.4)' }}>
-              {[['reviews','⭐ Guest Reviews'],['trip-planner',`✨ ${t('tripPlanner')}`],['transport',`✈️ ${t('transport')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
+              {[['trip-planner',`✨ ${t('tripPlanner')}`],['transport',`✈️ ${t('transport')}`],['emergency',`🆘 ${t('emergency')}`],['destinations/tangier','✦ Tangier Guide'],['hotels?city=Agadir','🏖️ Agadir'],['hotels?city=Rabat','🏛️ Rabat']].map(([path, label]) => (
                 <Link key={path} to={`/${path}`} onClick={() => { setMoreOpen(false); setMenuOpen(false) }} style={{ display:'block', padding:'0.5rem 1rem', color:'rgba(255,255,255,0.75)', textDecoration:'none', fontSize:'0.85rem', borderRadius:8, transition:'background 0.2s' }} onMouseEnter={e=>e.target.style.background='rgba(201,151,58,0.1)'} onMouseLeave={e=>e.target.style.background='transparent'}>{label}</Link>
               ))}
             </div>
@@ -68,19 +70,10 @@ export default function Navbar() {
       {/* Right tools */}
       <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', flexShrink:0 }}>
         {/* Favorites */}
-        <Link to="/favorites" style={{ position:'relative', color:'rgba(255,255,255,0.8)', textDecoration:'none', fontSize:'1.1rem', display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:8, background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', transition:'background 0.2s' }} title="Favorites">
+        <Link to="/favorites" style={{ position:'relative', color:'rgba(255,255,255,0.8)', textDecoration:'none', fontSize:'1.1rem', display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:8, background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', transition:'background 0.2s' }} title="Favorites" aria-label="Favorites">
           ♥
           {favorites.length > 0 && (
             <span style={{ position:'absolute', top:-4, right:-4, background:'var(--gold)', color:'#fff', fontSize:'0.6rem', fontWeight:700, width:16, height:16, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center' }}>{favorites.length}</span>
-          )}
-        </Link>
-
-        {/* User / Auth */}
-        <Link to="/auth" style={{ color:'rgba(255,255,255,0.8)', textDecoration:'none', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center', width:34, height:34, borderRadius:8, background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', transition:'background 0.2s', overflow:'hidden' }} title={user ? user.name : 'Sign In'}>
-          {user ? (
-            <img src={user.avatar} alt={user.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-          ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           )}
         </Link>
 
@@ -89,18 +82,13 @@ export default function Navbar() {
           {LANGS.map(l => <option key={l.code} value={l.code} style={{ background:'#1a0a00' }}>{l.label}</option>)}
         </select>
 
-        {/* Currency */}
-        <select value={currency} onChange={e => setCurrency(e.target.value)} style={{ background:'transparent', border:'1px solid rgba(255,255,255,0.2)', borderRadius:8, color:'rgba(255,255,255,0.8)', padding:'0.3rem 0.5rem', fontSize:'0.78rem', cursor:'pointer', outline:'none' }}>
-          {CURRENCIES.map(c => <option key={c} value={c} style={{ background:'#1a0a00' }}>{c}</option>)}
-        </select>
-
         {/* Dark mode */}
-        <button onClick={() => setDark(!dark)} style={{ background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:'1rem', transition:'background 0.2s' }} title={dark ? 'Light mode' : 'Dark mode'}>
+        <button onClick={() => setDark(!dark)} style={{ background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:'1rem', transition:'background 0.2s' }} title={dark ? 'Light mode' : 'Dark mode'} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
           {dark ? '☀️' : '🌙'}
         </button>
 
-        {/* Book Now CTA */}
-        <Link to="/hotels" className="nav-cta hide-mobile" style={{ padding:'0.45rem 1.1rem', fontSize:'0.82rem', borderRadius:50, background:'var(--gold)', color:'var(--dark)', fontWeight:700, textDecoration:'none' }}>{t('bookNow')}</Link>
+        {/* Plan trip CTA */}
+        <Link to="/trip-planner" className="nav-cta hide-mobile" style={{ padding:'0.45rem 1.1rem', fontSize:'0.82rem', borderRadius:50, background:'var(--gold)', color:'var(--dark)', fontWeight:700, textDecoration:'none' }}>{t('bookNow')}</Link>
 
         {/* Hamburger */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background:'none', border:'none', color:'var(--white)', fontSize:'1.6rem', cursor:'pointer' }}>

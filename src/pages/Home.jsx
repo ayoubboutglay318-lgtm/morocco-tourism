@@ -7,6 +7,7 @@ import HotelCard from '../components/HotelCard'
 import ThreeHero from '../components/ThreeHero'
 import { useApp } from '../context/AppContext'
 import { AdBanner } from '../components/Monetization'
+import { WHATSAPP_URL, AD_SLOTS } from '../config'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -66,19 +67,9 @@ export default function Home() {
   useApp()
   const [hotels, setHotels] = useState([])
   const [cities, setCities] = useState([])
-  const [testimonials, setTestimonials] = useState([])
   const [gallery, setGallery] = useState([])
-  const [stats, setStats] = useState([
-    { label: 'Happy Travellers', value: 154000, suffix: '+' },
-    { label: 'Real Hotels', value: 520, suffix: '+' },
-    { label: 'Cities Covered', value: 45, suffix: '' },
-    { label: 'Years Experience', value: 15, suffix: '+' }
-  ])
+  const [stats, setStats] = useState([])
   const [search, setSearch] = useState('')
-  const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
-  const [subscribing, setSubscribing] = useState(false)
-  const [newsletterError, setNewsletterError] = useState('')
   const navigate = useNavigate()
 
   const heroBgRef = useRef()
@@ -96,10 +87,6 @@ export default function Home() {
     axios.get('/api/cities')
       .then(r => setCities(r.data))
       .catch(err => console.error('Failed to load cities:', err))
-
-    axios.get('/api/testimonials')
-      .then(r => setTestimonials(r.data))
-      .catch(err => console.error('Failed to load testimonials:', err))
 
     axios.get('/api/gallery')
       .then(r => setGallery(r.data))
@@ -170,7 +157,7 @@ export default function Home() {
     })
 
     return () => ScrollTrigger.getAll().forEach(t => t.kill())
-  }, [hotels, testimonials, gallery])
+  }, [hotels, gallery])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -214,12 +201,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS BAND ── */}
-      <div className="stats-band">
+      {/* ── STATS BAND (real counts from our own guide data) ── */}
+      {stats.length > 0 && <div className="stats-band">
         <div className="stats-inner">
           {stats.map(s => <StatItem key={s.label} value={s.value} suffix={s.suffix} label={s.label} />)}
         </div>
-      </div>
+      </div>}
 
       {/* ── DESTINATIONS ── */}
       <div className="section">
@@ -247,7 +234,7 @@ export default function Home() {
           <div className="reveal">
             <div className="section-label">Featured Stays</div>
             <h2 className="section-title">Handpicked Hotels<br />& Riads</h2>
-            <p className="section-subtitle">Every property verified for authenticity, comfort, and that unmistakable Moroccan magic</p>
+            <p className="section-subtitle">A selection of well-known hotels, riads and desert camps across Morocco — check live prices and availability before you go</p>
           </div>
           <div className="hotels-grid">
             {hotels.slice(0, 6).map((h, i) => (
@@ -264,7 +251,7 @@ export default function Home() {
 
       {/* ── SPONSORED BANNER (MONETIZATION) ── */}
       <div style={{ maxWidth: 1100, margin: '1rem auto' }}>
-        <AdBanner slot="HOME_MIDDLE_SLOT" />
+        <AdBanner slot={AD_SLOTS.home} />
       </div>
 
       {/* ── GALLERY ── */}
@@ -366,49 +353,22 @@ export default function Home() {
         <div className="section">
           <div className="reveal">
             <div className="section-label">Why Morocco Travel</div>
-            <h2 className="section-title">Your Journey,<br />Perfectly Crafted</h2>
-            <p className="section-subtitle">We've been connecting travellers with authentic Moroccan experiences since 2014</p>
+            <h2 className="section-title">Plan Smarter,<br />Travel Deeper</h2>
+            <p className="section-subtitle">A free, independent guide to Morocco — practical information first, no hidden fees</p>
           </div>
           <div className="features-grid">
             {[
-              { icon: '🏰', title: 'Curated Properties', desc: 'Every riad, kasbah and hotel is personally vetted. No algorithm — only places we\'d stay ourselves.' },
-              { icon: '🔐', title: 'Secure Booking', desc: 'Bank-level encryption on every transaction. Your data and payments are always protected.' },
-              { icon: '⭐', title: 'Best Price Guarantee', desc: 'Find the same room cheaper elsewhere? We\'ll match it, no questions asked.' },
-              { icon: '🌍', title: 'Local Expertise', desc: 'Our team of Moroccan travel experts is available 24/7 with insider tips and real advice.' },
-              { icon: '🚀', title: 'Instant Confirmation', desc: 'Book in under 2 minutes. Instant confirmation straight to your inbox every time.' },
-              { icon: '♻️', title: 'Responsible Travel', desc: 'We partner with eco-conscious properties and support local Moroccan communities.' },
+              { icon: '🗺️', title: 'Practical City Guides', desc: 'When to go, how to get there, what to see and what to eat — for 10 destinations across Morocco.' },
+              { icon: '💬', title: 'Ask Us on WhatsApp', desc: 'Send us your dates and plans on WhatsApp and we will help you organise your stay and tours.' },
+              { icon: '🔎', title: 'Compare Before You Book', desc: 'Check live prices and availability on trusted platforms like Booking.com and GetYourGuide.' },
+              { icon: '🌤️', title: 'Live Weather', desc: 'Current conditions and a 7-day forecast for every city, plus monthly climate averages.' },
+              { icon: '🆘', title: 'Safety Information', desc: 'Emergency numbers, hospitals and useful contacts in one place, before you need them.' },
+              { icon: '♻️', title: 'Travel Responsibly', desc: 'Tips on etiquette, bargaining and supporting local cooperatives and family-run riads.' },
             ].map((f, i) => (
               <div key={f.title} className="feature-card reveal" style={{ transitionDelay: `${i * 0.07}s` }}>
                 <span className="feature-icon">{f.icon}</span>
                 <h3>{f.title}</h3>
                 <p>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── TESTIMONIALS ── */}
-      <div style={{ background: 'var(--cream)' }}>
-        <div className="section">
-          <div className="reveal">
-            <div className="section-label">Traveller Stories</div>
-            <h2 className="section-title">What Our Guests<br />Are Saying</h2>
-            <p className="section-subtitle">Real experiences from travellers who fell in love with Morocco</p>
-          </div>
-          <div className="testimonials-grid">
-            {testimonials.map((t, i) => (
-              <div key={t.id} className="testimonial-card reveal" style={{ transitionDelay: `${i * 0.08}s` }}>
-                <div className="testimonial-stars">{'★'.repeat(t.rating)}</div>
-                <p className="testimonial-text">{t.text}</p>
-                <div className="testimonial-author">
-                  <img src={t.avatar} alt={t.name} className="testimonial-avatar" />
-                  <div>
-                    <div className="testimonial-name">{t.name}</div>
-                    <div className="testimonial-country">{t.country}</div>
-                    <div className="testimonial-hotel">{t.hotel}</div>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -432,7 +392,7 @@ export default function Home() {
               { to: '/transport', icon: '✈️', title: 'Transport Guide', desc: 'Airports, trains, buses & ferries' },
               { to: '/weather', icon: '🌤️', title: 'Weather & Climate', desc: 'Best time to visit every city' },
               { to: '/map', icon: '🗺️', title: 'Interactive Map', desc: 'Hotels, attractions & airports' },
-              { to: '/trip-planner', icon: '✨', title: 'AI Trip Planner', desc: 'Build your perfect itinerary' },
+              { to: '/trip-planner', icon: '✨', title: 'Trip Planner', desc: 'Build a day-by-day itinerary' },
               { to: '/emergency', icon: '🆘', title: 'Emergency Info', desc: 'Numbers, hospitals & embassies' },
               { to: '/destinations', icon: '📍', title: 'Destinations', desc: 'City guides & travel tips' },
             ].map(item => (
@@ -449,44 +409,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── NEWSLETTER ── */}
+      {/* ── CONTACT CTA ── */}
       <div className="newsletter-section reveal">
-        <div className="section-label" style={{ color: 'var(--gold-light)', justifyContent: 'center' }}>Stay Inspired</div>
-        <h2>Get Morocco Travel Inspiration<br /><em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>Delivered to You</em></h2>
-        <p>Hidden riads, secret desert camps, local festivals — straight to your inbox. No spam, ever.</p>
-        {subscribed ? (
-          <div style={{ color: '#7ecf7e', fontSize: '1.1rem', fontWeight: 600 }}>✓ You're on the list — get ready to explore Morocco!</div>
-        ) : (
-          <form className="newsletter-form" onSubmit={async (e) => {
-            e.preventDefault()
-            setNewsletterError('')
-            setSubscribing(true)
-            try {
-              await axios.post('/api/newsletter', { email })
-              setSubscribed(true)
-            } catch (err) {
-              setNewsletterError(err.response?.data?.error || 'Subscription failed. Please try again.')
-              // Fallback to local success if server isn't running so user experience isn't broken
-              setSubscribed(true)
-            } finally {
-              setSubscribing(false)
-            }
-          }}>
-            <input
-              type="email"
-              placeholder="Your email address"
-              required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-            <button type="submit" className="btn-primary" disabled={subscribing}>
-              {subscribing ? 'Subscribing...' : 'Subscribe'}
-            </button>
-          </form>
-        )}
-        {newsletterError && (
-          <div style={{ color: '#ff8888', fontSize: '0.85rem', marginTop: '0.5rem' }}>{newsletterError}</div>
-        )}
+        <div className="section-label" style={{ color: 'var(--gold-light)', justifyContent: 'center' }}>Plan With Us</div>
+        <h2>Questions About Your Trip?<br /><em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>Message Us on WhatsApp</em></h2>
+        <p>Tell us your dates, cities and budget — we reply personally.</p>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>Chat on WhatsApp</a>
       </div>
 
       {/* ── FOOTER ── */}
@@ -494,7 +422,7 @@ export default function Home() {
         <div className="footer-inner">
           <div>
             <div className="footer-brand-name">Morocco<span>Travel</span></div>
-            <p className="footer-desc">Your trusted guide to the Kingdom of Morocco. Curated hotels, authentic experiences, and the warmest hospitality on earth.</p>
+            <p className="footer-desc">An independent travel guide to the Kingdom of Morocco — destinations, hotels, food, culture and practical tips.</p>
           </div>
           <div className="footer-col">
             <h4>Destinations</h4>
@@ -509,20 +437,21 @@ export default function Home() {
             <ul>
               <li><Link to="/hotels">All Hotels</Link></li>
               <li><Link to="/destinations">Destinations</Link></li>
+              <li><Link to="/food">Food</Link></li>
+              <li><Link to="/culture">Culture</Link></li>
             </ul>
           </div>
           <div className="footer-col">
             <h4>Info</h4>
             <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">Contact (WhatsApp)</a></li>
+              <li><Link to="/emergency">Emergency Info</Link></li>
+              <li><Link to="/transport">Transport Guide</Link></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 <span>MoroccoTravel</span>. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} <span>MoroccoTravel</span>. All rights reserved.</span>
           <span>Made with ♥ for Morocco</span>
         </div>
       </footer>

@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import HotelImage from './HotelImage'
 
 export default function HotelCard({ hotel }) {
-  const { toggleFavorite, favorites, convertPrice } = useApp()
+  const { toggleFavorite, favorites } = useApp()
   const isFav = favorites.includes(hotel.id)
   const cardRef = useRef()
   const glowRef = useRef()
@@ -30,7 +31,7 @@ export default function HotelCard({ hotel }) {
 
       {/* Image */}
       <div className="hotel-card-img-wrap">
-        <img src={hotel.image} alt={hotel.name} className="hotel-card-img" loading="lazy" />
+        <HotelImage hotel={hotel} className="hotel-card-img" />
 
         {/* Stars overlay */}
         <div style={{ position:'absolute', top:12, left:12, background:'rgba(15,8,0,0.72)', backdropFilter:'blur(8px)', borderRadius:20, padding:'0.28rem 0.75rem', display:'flex', alignItems:'center', gap:3 }}>
@@ -40,7 +41,7 @@ export default function HotelCard({ hotel }) {
         </div>
 
         {/* Favorite button */}
-        <button onClick={e => { e.preventDefault(); toggleFavorite(hotel.id) }} style={{ position:'absolute', top:12, right:12, background:'rgba(15,8,0,0.6)', backdropFilter:'blur(8px)', border:'none', borderRadius:'50%', width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:'1rem', zIndex:6 }}>
+        <button aria-label={isFav ? 'Remove from favorites' : 'Save to favorites'} onClick={e => { e.preventDefault(); toggleFavorite(hotel.id) }} style={{ position:'absolute', top:12, right:12, background:'rgba(15,8,0,0.6)', backdropFilter:'blur(8px)', border:'none', borderRadius:'50%', width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:'1rem', zIndex:6 }}>
           {isFav ? '❤️' : '🤍'}
         </button>
 
@@ -57,19 +58,6 @@ export default function HotelCard({ hotel }) {
         <div className="hotel-card-city">{hotel.city}</div>
         <div className="hotel-card-name">{hotel.name}</div>
 
-        {/* Rating row */}
-        <div style={{ display:'flex', alignItems:'center', gap:'0.6rem', marginBottom:'0.75rem' }}>
-          <div style={{ background:'#1a5c2a', color:'#fff', fontWeight:800, fontSize:'0.8rem', padding:'0.2rem 0.55rem', borderRadius:6 }}>
-            {hotel.rating}
-          </div>
-          <div style={{ display:'flex', gap:2 }}>
-            {[1,2,3,4,5].map(s => (
-              <span key={s} style={{ color: s <= Math.round(hotel.rating) ? '#f4a830' : '#ddd', fontSize:'0.75rem' }}>★</span>
-            ))}
-          </div>
-          <span style={{ color:'var(--text3)', fontSize:'0.78rem' }}>({hotel.reviews?.toLocaleString()} reviews)</span>
-        </div>
-
         {/* Amenities pills */}
         <div className="hotel-card-amenities">
           {hotel.amenities.slice(0, 4).map(a => (
@@ -83,8 +71,8 @@ export default function HotelCard({ hotel }) {
         {/* Footer */}
         <div className="hotel-card-footer">
           <div>
-            <div className="hotel-card-price">{convertPrice(hotel.price)} <span>/ night</span></div>
-            <div style={{ fontSize:'0.72rem', color:'var(--text3)' }}>{hotel.rooms} rooms available</div>
+            <div className="hotel-card-price" title="Approximate price range">{hotel.priceLevel}</div>
+            <div style={{ fontSize:'0.72rem', color:'var(--text3)' }}>{hotel.rooms ? `${hotel.rooms} rooms · ` : ''}check live prices</div>
           </div>
           <span className="btn-primary" style={{ padding:'0.5rem 1.2rem', fontSize:'0.85rem' }}>View →</span>
         </div>

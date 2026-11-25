@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
 import HotelCard from '../components/HotelCard'
 import { InFeedAd } from '../components/Monetization'
+import { AD_SLOTS } from '../config'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,8 +14,7 @@ export default function Hotels() {
   const [loading, setLoading] = useState(true)
   const [searchParams, setSearchParams] = useSearchParams()
   const [city, setCity] = useState(searchParams.get('city') || '')
-  const [minPrice, setMinPrice] = useState('')
-  const [maxPrice, setMaxPrice] = useState('')
+  const [priceLevel, setPriceLevel] = useState('')
   const [sortBy, setSortBy] = useState('default')
   const [stars, setStars] = useState('')
   const headerRef = useRef()
@@ -24,19 +24,19 @@ export default function Hotels() {
     setLoading(true)
     const params = {}
     if (city) params.city = city
-    if (minPrice) params.minPrice = minPrice
-    if (maxPrice) params.maxPrice = maxPrice
+    if (priceLevel) params.priceLevel = priceLevel
     if (stars) params.stars = stars
     axios.get('/api/hotels', { params })
       .then(r => {
         let data = r.data
-        if (sortBy === 'price-asc')  data = [...data].sort((a, b) => a.price - b.price)
-        if (sortBy === 'price-desc') data = [...data].sort((a, b) => b.price - a.price)
-        if (sortBy === 'rating')     data = [...data].sort((a, b) => b.rating - a.rating)
+        if (sortBy === 'price-asc')  data = [...data].sort((a, b) => a.priceLevel.length - b.priceLevel.length)
+        if (sortBy === 'price-desc') data = [...data].sort((a, b) => b.priceLevel.length - a.priceLevel.length)
+        if (sortBy === 'stars')      data = [...data].sort((a, b) => b.stars - a.stars)
         setHotels(data)
         setLoading(false)
       })
-  }, [city, minPrice, maxPrice, sortBy, stars])
+      .catch(() => { setHotels([]); setLoading(false) })
+  }, [city, priceLevel, sortBy, stars])
 
   useEffect(() => {
     gsap.fromTo(headerRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
@@ -58,7 +58,7 @@ export default function Hotels() {
       <div ref={headerRef}>
         <div className="section-label" style={{ marginBottom: '0.5rem' }}>All Properties</div>
         <h1>Hotels & Riads<br /><span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>in Morocco</span></h1>
-        <p className="subtitle">{hotels.length} handpicked stays across the kingdom</p>
+        <p className="subtitle">{hotels.length} well-known stays across the kingdom · price ranges are approximate, check live rates before booking</p>
       </div>
 
       <div className="filters">
@@ -72,12 +72,14 @@ export default function Hotels() {
           />
         </div>
         <div className="filter-group">
-          <label>Min Price ($/night)</label>
-          <input type="number" placeholder="0" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
-        </div>
-        <div className="filter-group">
-          <label>Max Price ($/night)</label>
-          <input type="number" placeholder="1000" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
+          <label>Price Range</label>
+          <select value={priceLevel} onChange={e => setPriceLevel(e.target.value)}>
+            <option value="">Any</option>
+            <option value="$">$ Budget</option>
+            <option value="$$">$$ Mid-range</option>
+            <option value="$$$">$$$ Upscale</option>
+            <option value="$$$$">$$$$ Luxury</option>
+          </select>
         </div>
         <div className="filter-group">
           <label>Stars</label>
@@ -94,7 +96,7 @@ export default function Hotels() {
             <option value="default">Default</option>
             <option value="price-asc">Price: Low → High</option>
             <option value="price-desc">Price: High → Low</option>
-            <option value="rating">Top Rated</option>
+            <option value="stars">Star Category</option>
           </select>
         </div>
       </div>
@@ -108,9 +110,9 @@ export default function Hotels() {
           {hotels.map((h, i) => (
             <div key={h.id} style={{ display: 'contents' }}>
               <HotelCard hotel={h} />
-              {i === 5 && (
+              {i === 5 && AD_SLOTS.inFeed && (
                 <div style={{ gridColumn: '1 / -1', margin: '1rem 0' }}>
-                  <InFeedAd />
+                  <InFeedAd slot={AD_SLOTS.inFeed} />
                 </div>
               )}
             </div>

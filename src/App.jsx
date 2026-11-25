@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import Hotels from './pages/Hotels'
 import HotelDetail from './pages/HotelDetail'
 import Booking from './pages/Booking'
-import BookingSuccess from './pages/BookingSuccess'
 import Destinations from './pages/Destinations'
 import DestinationDetail from './pages/DestinationDetail'
 import Food from './pages/Food'
@@ -16,17 +15,12 @@ import Emergency from './pages/Emergency'
 import Weather from './pages/Weather'
 import TripPlanner from './pages/TripPlanner'
 import MapPage from './pages/MapPage'
-import Reviews from './pages/Reviews'
 import Gallery from './pages/Gallery'
 import Blog from './pages/Blog'
 import Favorites from './pages/Favorites'
-import Auth from './pages/Auth'
 import NotFound from './pages/NotFound'
+import { WHATSAPP_URL } from './config'
 import './App.css'
-
-const WHATSAPP_NUMBER = '212689122018'
-const WHATSAPP_MSG = encodeURIComponent('Hello! I would like to book a trip to Morocco. Could you help me?')
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`
 
 function App() {
   return (
@@ -41,7 +35,7 @@ function App() {
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
-        aria-label="Book via WhatsApp"
+        aria-label="Chat with us on WhatsApp"
       >
         <span className="whatsapp-float__icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
@@ -49,7 +43,7 @@ function App() {
             <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.522 5.847L.057 23.882a.5.5 0 0 0 .606.625l6.218-1.634A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.358-.213-3.712.976.993-3.624-.234-.373A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
           </svg>
         </span>
-        <span className="whatsapp-float__label">Book via WhatsApp</span>
+        <span className="whatsapp-float__label">Chat on WhatsApp</span>
       </a>
 
       <Routes>
@@ -57,7 +51,7 @@ function App() {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/hotels/:id" element={<HotelDetail />} />
         <Route path="/hotels/:id/book" element={<Booking />} />
-        <Route path="/booking-success" element={<BookingSuccess />} />
+        <Route path="/booking-success" element={<Navigate to="/hotels" replace />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
         <Route path="/food" element={<Food />} />
@@ -67,11 +61,11 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/trip-planner" element={<TripPlanner />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/reviews" element={<Navigate to="/hotels" replace />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/auth" element={<Navigate to="/favorites" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppProvider>

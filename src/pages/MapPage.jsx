@@ -63,23 +63,23 @@ const featuredPlaces = [
 ]
 
 const restaurants = [
-  { id:1, name:'Le Saveur du Poisson', city:'Tangier', lat:35.7750, lng:-5.8100, cuisine:'Seafood', rating:4.9, reviews:87 },
-  { id:2, name:'El Morocco Club', city:'Tangier', lat:35.7680, lng:-5.8150, cuisine:'Moroccan', rating:4.6, reviews:124 },
-  { id:4, name:'Dar Yacout', city:'Marrakech', lat:31.6380, lng:-7.9850, cuisine:'Fine Dining', rating:4.8, reviews:342 },
-  { id:5, name:'Nomad', city:'Marrakech', lat:31.6290, lng:-7.9920, cuisine:'Modern', rating:4.7, reviews:298 },
-  { id:6, name:'Al Fassia Aguedal', city:'Marrakech', lat:31.6180, lng:-7.9750, cuisine:'Fassi', rating:4.8, reviews:276 },
-  { id:7, name:'Restaurant Palais de Fes', city:'Fes', lat:34.0750, lng:-5.0050, cuisine:'Moroccan', rating:4.6, reviews:189 },
-  { id:8, name:'Dar Roumana', city:'Fes', lat:34.0680, lng:-5.0120, cuisine:'Fusion', rating:4.7, reviews:156 },
-  { id:10, name:'La Fromagerie', city:'Essaouira', lat:31.5120, lng:-9.7650, cuisine:'French-Moroccan', rating:4.7, reviews:203 },
-  { id:12, name:'Rick\'s Café', city:'Casablanca', lat:33.5650, lng:-7.6100, cuisine:'International', rating:4.5, reviews:287 },
-  { id:13, name:'La Sqala', city:'Casablanca', lat:33.5750, lng:-7.6050, cuisine:'Moroccan', rating:4.8, reviews:312 },
-  { id:15, name:'Restaurant Dinarjat', city:'Rabat', lat:34.0350, lng:-6.8350, cuisine:'Classic Moroccan', rating:4.7, reviews:198 },
+  { id:1, name:'Le Saveur du Poisson', city:'Tangier', lat:35.7750, lng:-5.8100, cuisine:'Seafood' },
+  { id:2, name:'El Morocco Club', city:'Tangier', lat:35.7680, lng:-5.8150, cuisine:'Moroccan' },
+  { id:4, name:'Dar Yacout', city:'Marrakech', lat:31.6380, lng:-7.9850, cuisine:'Fine Dining' },
+  { id:5, name:'Nomad', city:'Marrakech', lat:31.6290, lng:-7.9920, cuisine:'Modern' },
+  { id:6, name:'Al Fassia Aguedal', city:'Marrakech', lat:31.6180, lng:-7.9750, cuisine:'Fassi' },
+  { id:7, name:'Restaurant Palais de Fes', city:'Fes', lat:34.0750, lng:-5.0050, cuisine:'Moroccan' },
+  { id:8, name:'Dar Roumana', city:'Fes', lat:34.0680, lng:-5.0120, cuisine:'Fusion' },
+  { id:10, name:'La Fromagerie', city:'Essaouira', lat:31.5120, lng:-9.7650, cuisine:'French-Moroccan' },
+  { id:12, name:'Rick\'s Café', city:'Casablanca', lat:33.5650, lng:-7.6100, cuisine:'International' },
+  { id:13, name:'La Sqala', city:'Casablanca', lat:33.5750, lng:-7.6050, cuisine:'Moroccan' },
+  { id:15, name:'Restaurant Dinarjat', city:'Rabat', lat:34.0350, lng:-6.8350, cuisine:'Classic Moroccan' },
 ]
 
 export default function MapPage() {
   const [hotels, setHotels] = useState([])
   const [activeFilter, setActiveFilter] = useState('all')
-  const [minRating, setMinRating] = useState(4.0)
+  const [minStars, setMinStars] = useState(3)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -88,7 +88,7 @@ export default function MapPage() {
     setLoading(true)
     axios.get('/api/hotels')
       .then(r => {
-        setHotels(r.data.filter(h => h.rating >= minRating))
+        setHotels(r.data.filter(h => h.stars >= minStars))
         setError(null)
       })
       .catch(err => {
@@ -96,7 +96,7 @@ export default function MapPage() {
         console.error(err)
       })
       .finally(() => setLoading(false))
-  }, [minRating])
+  }, [minStars])
 
   const hotelCoords = {
     Tangier:[35.7870,  -5.8033], Marrakech:[31.6340,-7.9890], Fes:[34.0640,-4.9800],
@@ -104,26 +104,26 @@ export default function MapPage() {
     'Atlas Mountains':[31.0588,-7.9158], Casablanca:[33.5900,-7.6200], Agadir:[30.4250,-9.5950], Rabat:[34.0200,-6.8420]
   }
 
-  const filteredRestaurants = restaurants.filter(r => r.rating >= minRating)
+  const filteredRestaurants = restaurants
 
   return (
     <div style={{ maxWidth:1200, margin:'0 auto', padding:'2.5rem 2rem' }}>
       <div className="section-label">Explore Morocco</div>
       <h1 className="section-title">Interactive Map<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>of Morocco's Best Places</em></h1>
-      <p className="section-subtitle">Hotels, restaurants, attractions, airports and beaches — all with ratings & reviews</p>
+      <p className="section-subtitle">Hotels, restaurants, attractions, airports and beaches. Hotel and restaurant pins show the approximate area, not the exact address.</p>
 
-      {/* Rating Filter */}
+      {/* Hotel category filter */}
       <div style={{ marginBottom:'1.5rem', padding:'1rem', background:'var(--cream)', borderRadius:12, display:'flex', alignItems:'center', gap:'1rem', flexWrap:'wrap' }}>
-        <label style={{ fontWeight:600, fontSize:'0.9rem' }}>Minimum Rating:</label>
+        <label style={{ fontWeight:600, fontSize:'0.9rem' }}>Hotel category:</label>
         <div style={{ display:'flex', gap:'0.5rem' }}>
-          {[3.5, 4.0, 4.5, 4.8].map(rating => (
-            <button key={rating} onClick={() => setMinRating(rating)} style={{
+          {[3, 4, 5].map(rating => (
+            <button key={rating} onClick={() => setMinStars(rating)} style={{
               padding:'0.4rem 0.8rem', borderRadius:8, border:'2px solid', cursor:'pointer', fontSize:'0.85rem', fontWeight:600, transition:'all 0.2s',
-              borderColor: minRating === rating ? 'var(--gold)' : '#ddd',
-              background: minRating === rating ? 'var(--gold)' : 'white',
-              color: minRating === rating ? 'var(--dark)' : 'var(--text2)',
+              borderColor: minStars === rating ? 'var(--gold)' : '#ddd',
+              background: minStars === rating ? 'var(--gold)' : 'white',
+              color: minStars === rating ? 'var(--dark)' : 'var(--text2)',
             }}>
-              {'★'.repeat(Math.floor(rating))} {rating}+
+              {'★'.repeat(rating)}{rating < 5 ? '+' : ''}
             </button>
           ))}
         </div>
@@ -178,33 +178,27 @@ export default function MapPage() {
               {(activeFilter==='all'||activeFilter==='hotels') && hotels.map(h => {
                 const coords = hotelCoords[h.city]
                 if (!coords) return null
-                // eslint-disable-next-line
-                const offset = [coords[0] + (Math.random()-0.5)*0.02, coords[1] + (Math.random()-0.5)*0.02]
+                const offset = [coords[0] + (((h.id * 37) % 21) - 10) * 0.001, coords[1] + (((h.id * 53) % 21) - 10) * 0.001]
                 return (
                   <Marker key={h.id} position={offset} icon={hotelIcon}>
                     <Popup><div style={{ minWidth:200 }}>
                       <strong style={{ fontFamily:'Playfair Display,serif', fontSize:'1rem', display:'block' }}>{h.name}</strong>
                       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0.4rem 0', fontSize:'0.9rem' }}>
-                        <span style={{ color:'#c9973a', fontWeight:700 }}>{'★'.repeat(h.stars)} {h.rating}</span>
-                        <span style={{ color:'#888', fontSize:'0.8rem' }}>{h.reviews} reviews</span>
+                        <span style={{ color:'#c9973a', fontWeight:700 }}>{'★'.repeat(h.stars)}</span>
+                        <span style={{ color:'#888', fontSize:'0.8rem' }}>{h.priceLevel}</span>
                       </div>
                       <div style={{ color:'#888', fontSize:'0.8rem', marginBottom:'0.4rem' }}>{h.city}</div>
-                      <div style={{ fontWeight:700, color:'#c9973a', fontSize:'1rem', marginBottom:'0.5rem' }}>${h.price}<span style={{ fontSize:'0.85rem', color:'#666' }}>/night</span></div>
                       <Link to={`/hotels/${h.id}`} style={{ color:'#c9973a', fontSize:'0.82rem', fontWeight:600, textDecoration:'none' }}>→ View Details</Link>
                     </div></Popup>
                   </Marker>
                 )
               })}
 
-              {/* Restaurants with Ratings */}
+              {/* Restaurants */}
               {(activeFilter==='all'||activeFilter==='restaurants') && filteredRestaurants.map(r => (
                 <Marker key={`restaurant-${r.id}`} position={[r.lat, r.lng]} icon={restaurantIcon}>
                   <Popup><div style={{ minWidth:180 }}>
                     <strong style={{ fontFamily:'Playfair Display,serif', fontSize:'1rem', display:'block' }}>{r.name}</strong>
-                    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0.4rem 0', fontSize:'0.9rem' }}>
-                      <span style={{ color:'#e67e22', fontWeight:700 }}>{'★'.repeat(Math.floor(r.rating))} {r.rating}</span>
-                      <span style={{ color:'#888', fontSize:'0.8rem' }}>{r.reviews} reviews</span>
-                    </div>
                     <div style={{ color:'#888', fontSize:'0.8rem' }}>{r.city} · {r.cuisine}</div>
                   </div></Popup>
                 </Marker>
@@ -255,7 +249,7 @@ export default function MapPage() {
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'1rem' }}>
               <div style={{ padding:'1rem', background:'var(--cream)', borderRadius:12, textAlign:'center' }}>
                 <div style={{ fontSize:'1.8rem', fontWeight:700, color:'#c9973a' }}>{hotels.length}</div>
-                <div style={{ color:'var(--text2)', fontSize:'0.9rem' }}>Quality Hotels (Rating {minRating}+)</div>
+                <div style={{ color:'var(--text2)', fontSize:'0.9rem' }}>Hotels ({minStars}★ and above)</div>
               </div>
               <div style={{ padding:'1rem', background:'var(--cream)', borderRadius:12, textAlign:'center' }}>
                 <div style={{ fontSize:'1.8rem', fontWeight:700, color:'#e67e22' }}>{filteredRestaurants.length}</div>

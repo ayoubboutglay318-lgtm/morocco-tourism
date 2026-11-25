@@ -16,8 +16,8 @@ export default function Emergency() {
       <div style={{ background:'#c0392b', borderRadius:16, padding:'1.2rem 1.8rem', color:'#fff', marginBottom:'2rem', display:'flex', alignItems:'center', gap:'1rem' }}>
         <span style={{ fontSize:'1.8rem' }}>🆘</span>
         <div>
-          <strong>In a life-threatening emergency, call 15 (ambulance/fire) or 19 (police).</strong>
-          <div style={{ fontSize:'0.88rem', opacity:0.85, marginTop:'0.2rem' }}>These numbers work from any phone in Morocco, including foreign SIM cards.</div>
+          <strong>In a life-threatening emergency: from a mobile dial 150 (ambulance/fire) or 190 (police) — or 112.</strong>
+          <div style={{ fontSize:'0.88rem', opacity:0.85, marginTop:'0.2rem' }}>From a landline: 15 (ambulance/fire) or 19 (police). Royal Gendarmerie (rural areas): 177.</div>
         </div>
       </div>
 
@@ -27,6 +27,7 @@ export default function Emergency() {
 
       {/* Emergency Numbers */}
       <h2 style={{ fontFamily:'Playfair Display,serif', fontSize:'1.5rem', fontWeight:700, marginBottom:'1.2rem', marginTop:'2.5rem' }}>📞 Emergency Numbers</h2>
+      <p style={{ fontSize:'0.8rem', color:'var(--text3)', marginTop:'-0.6rem', marginBottom:'1rem' }}>Checked against official government travel advice (November 2026). Numbers can change — confirm with your embassy or hotel.</p>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'1rem', marginBottom:'3rem' }}>
         {data.numbers.map(n => (
           <div key={n.service} style={{ background:'var(--white)', borderRadius:16, padding:'1.3rem', boxShadow:'0 2px 12px rgba(0,0,0,0.07)', border:'1px solid var(--cream2)', display:'flex', gap:'1rem', alignItems:'flex-start' }}>
@@ -45,13 +46,12 @@ export default function Emergency() {
       <h2 style={{ fontFamily:'Playfair Display,serif', fontSize:'1.5rem', fontWeight:700, marginBottom:'1.2rem' }}>🏥 Major Hospitals</h2>
       <div style={{ display:'flex', flexDirection:'column', gap:'0.8rem', marginBottom:'3rem' }}>
         {data.hospitals.map(h => (
-          <div key={h.name} style={{ background:'var(--white)', borderRadius:14, padding:'1.2rem 1.5rem', boxShadow:'0 2px 8px rgba(0,0,0,0.06)', border:'1px solid var(--cream2)', display:'grid', gridTemplateColumns:'1fr auto auto', gap:'1rem', alignItems:'center' }}>
+          <div key={h.name} style={{ background:'var(--white)', borderRadius:14, padding:'1.2rem 1.5rem', boxShadow:'0 2px 8px rgba(0,0,0,0.06)', border:'1px solid var(--cream2)', display:'grid', gridTemplateColumns:'1fr auto', gap:'1rem', alignItems:'center' }}>
             <div>
               <div style={{ fontWeight:700, fontSize:'0.95rem' }}>{h.name}</div>
               <div style={{ fontSize:'0.82rem', color:'var(--text3)' }}>📍 {h.address}</div>
             </div>
             <span style={{ background:'var(--cream2)', color:'var(--text2)', padding:'0.3rem 0.8rem', borderRadius:20, fontSize:'0.75rem', fontWeight:600, whiteSpace:'nowrap' }}>{h.type}</span>
-            <a href={`tel:${h.phone}`} style={{ color:'var(--gold)', fontWeight:700, fontSize:'0.9rem', textDecoration:'none', whiteSpace:'nowrap' }}>{h.phone}</a>
           </div>
         ))}
       </div>
@@ -64,7 +64,8 @@ export default function Emergency() {
             <div style={{ fontWeight:700, fontSize:'1.1rem', marginBottom:'0.5rem' }}>{e.country} Embassy</div>
             <div style={{ fontSize:'0.82rem', color:'var(--text3)', marginBottom:'0.4rem' }}>📍 {e.address}</div>
             <div style={{ display:'flex', flexDirection:'column', gap:'0.3rem' }}>
-              <a href={`tel:${e.phone}`} style={{ fontSize:'0.85rem', color:'var(--gold)', fontWeight:600, textDecoration:'none' }}>📞 {e.phone}</a>
+              <a href={`tel:${e.phone.replace(/\s/g,'')}`} style={{ fontSize:'0.85rem', color:'var(--gold)', fontWeight:600, textDecoration:'none' }}>📞 {e.phone}</a>
+              {e.emergency && e.emergency !== e.phone && <div style={{ fontSize:'0.8rem', color:'var(--text2)' }}>🚨 Emergency: {e.emergency}</div>}
               <a href={`https://${e.website}`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'0.8rem', color:'var(--text3)', textDecoration:'none' }}>🌐 {e.website}</a>
             </div>
           </div>

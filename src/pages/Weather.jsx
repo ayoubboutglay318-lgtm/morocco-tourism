@@ -15,6 +15,61 @@ function TempBar({ high, low }) {
   )
 }
 
+
+// Live conditions from Open-Meteo (free, no API key): https://open-meteo.com
+const CITY_COORDS = {
+  Marrakech: [31.63, -8.0], Tangier: [35.77, -5.8], Fes: [34.03, -5.0], Chefchaouen: [35.17, -5.27],
+  Essaouira: [31.51, -9.77], Merzouga: [31.1, -4.01], Casablanca: [33.57, -7.59], Agadir: [30.42, -9.6], Rabat: [34.02, -6.83],
+}
+const WMO = { 0:'☀️ Clear', 1:'🌤️ Mostly clear', 2:'⛅ Partly cloudy', 3:'☁️ Overcast', 45:'🌫️ Fog', 48:'🌫️ Fog', 51:'🌦️ Light drizzle', 53:'🌦️ Drizzle', 55:'🌦️ Drizzle', 61:'🌧️ Light rain', 63:'🌧️ Rain', 65:'🌧️ Heavy rain', 71:'🌨️ Light snow', 73:'🌨️ Snow', 75:'❄️ Heavy snow', 80:'🌦️ Showers', 81:'🌧️ Showers', 82:'⛈️ Heavy showers', 95:'⛈️ Thunderstorm', 96:'⛈️ Thunderstorm', 99:'⛈️ Thunderstorm' }
+const wmo = c => WMO[c] || '🌡️'
+
+function LiveWeather({ city }) {
+  const [state, setState] = useState({ status: 'loading', data: null })
+  useEffect(() => {
+    const coords = CITY_COORDS[city]
+    if (!coords) return
+    let cancelled = false
+    // eslint-disable-next-line
+    setState({ status: 'loading', data: null })
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords[0]}&longitude=${coords[1]}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Africa%2FCasablanca&forecast_days=7`
+    fetch(url)
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json() })
+      .then(data => { if (!cancelled) setState({ status: 'ok', data }) })
+      .catch(() => { if (!cancelled) setState({ status: 'error', data: null }) })
+    return () => { cancelled = true }
+  }, [city])
+
+  if (!CITY_COORDS[city]) return null
+  if (state.status === 'loading') return <div className="loading" style={{ padding: '1.5rem' }}>Loading live weather for {city}…</div>
+  if (state.status === 'error') return <div style={{ padding: '1rem', background: 'var(--cream)', borderRadius: 12, marginBottom: '2rem', fontSize: '0.9rem' }}>Live weather is unavailable right now — the monthly averages below still apply.</div>
+
+  const { current, daily } = state.data
+  return (
+    <div style={{ background: 'var(--white)', border: '1px solid var(--cream2)', borderRadius: 20, padding: '1.5rem', marginBottom: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
+        <h2 style={{ fontFamily: 'Playfair Display,serif', fontSize: '1.3rem', margin: 0 }}>Live in {city}</h2>
+        <span style={{ fontSize: '0.75rem', color: 'var(--text3)' }}>Updated {current.time.replace('T', ' ')} · data: Open-Meteo</span>
+      </div>
+      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'center', marginBottom: '1.2rem' }}>
+        <div style={{ fontSize: '2.6rem', fontWeight: 900 }}>{Math.round(current.temperature_2m)}°C</div>
+        <div style={{ fontSize: '1rem' }}>{wmo(current.weather_code)}</div>
+        <div style={{ fontSize: '0.85rem', color: 'var(--text2)' }}>Feels like {Math.round(current.apparent_temperature)}° · Humidity {current.relative_humidity_2m}% · Wind {Math.round(current.wind_speed_10m)} km/h</div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))', gap: '0.6rem' }}>
+        {daily.time.map((d, i) => (
+          <div key={d} style={{ background: 'var(--cream)', borderRadius: 12, padding: '0.7rem', textAlign: 'center', fontSize: '0.8rem' }}>
+            <div style={{ fontWeight: 700 }}>{new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' })}</div>
+            <div style={{ fontSize: '1.3rem', margin: '0.2rem 0' }}>{wmo(daily.weather_code[i]).split(' ')[0]}</div>
+            <div><strong>{Math.round(daily.temperature_2m_max[i])}°</strong> / {Math.round(daily.temperature_2m_min[i])}°</div>
+            <div style={{ color: '#3498db' }}>💧 {daily.precipitation_probability_max[i] ?? 0}%</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Weather() {
   const [weatherData, setWeatherData] = useState(null)
   const [selected, setSelected] = useState('Marrakech')
@@ -35,7 +90,7 @@ export default function Weather() {
     <div style={{ maxWidth:1100, margin:'0 auto', padding:'2.5rem 2rem' }}>
       <div className="section-label">Climate Guide</div>
       <h1 className="section-title">Morocco Weather<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>& Best Time to Visit</em></h1>
-      <p className="section-subtitle">Monthly temperature, rainfall and travel advice for every major city in Morocco</p>
+      <p className="section-subtitle">Live conditions, a 7-day forecast and monthly climate averages for major cities in Morocco</p>
 
       {/* City selector */}
       <div style={{ display:'flex', gap:'0.6rem', flexWrap:'wrap', marginBottom:'2.5rem' }}>
@@ -49,10 +104,12 @@ export default function Weather() {
         ))}
       </div>
 
-      {/* Current month highlight */}
+      <LiveWeather city={selected} />
+
+      {/* Current month climate averages */}
       <div style={{ background:'linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%)', borderRadius:20, padding:'2rem', color:'#fff', marginBottom:'2rem', display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap:'1.5rem' }}>
         <div>
-          <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.5)', textTransform:'uppercase', letterSpacing:1, marginBottom:'0.3rem' }}>Right Now in {selected}</div>
+          <div style={{ fontSize:'0.78rem', color:'rgba(255,255,255,0.5)', textTransform:'uppercase', letterSpacing:1, marginBottom:'0.3rem' }}>Average for this month · {selected}</div>
           <div style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:900 }}>{months[getCurrentMonth()]}</div>
           <div style={{ fontSize:'0.85rem', color:'rgba(255,255,255,0.6)', marginTop:'0.3rem' }}>Current month</div>
         </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
+import { gygSearchUrl, bookingSearchUrl, AD_SLOTS } from '../config'
 import { AdBanner } from '../components/Monetization'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -75,7 +76,7 @@ export default function Blog() {
             <h2>{featured.title}</h2>
             <p>{featured.excerpt}</p>
             <div className="bp-meta">
-              <img src={featured.authorAvatar} alt={featured.author} className="bp-avatar" />
+              <span className="bp-avatar" aria-hidden="true" style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', background:'var(--gold)', color:'#fff', fontWeight:700 }}>MT</span>
               <div>
                 <div className="bp-author">{featured.author}</div>
                 <div className="bp-date">{featured.date} · {featured.readTime}</div>
@@ -113,7 +114,7 @@ export default function Blog() {
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
               <div className="bp-card-footer">
-                <img src={post.authorAvatar} alt={post.author} className="bp-avatar-sm" />
+                <span className="bp-avatar-sm" aria-hidden="true" style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', background:'var(--gold)', color:'#fff', fontWeight:700 }}>MT</span>
                 <div>
                   <div className="bp-card-author">{post.author}</div>
                   <div className="bp-card-date">{post.date} · {post.readTime}</div>
@@ -146,7 +147,7 @@ export default function Blog() {
             </div>
             <div className="bp-modal-body">
               <div className="bp-modal-meta">
-                <img src={selectedPost.authorAvatar} alt={selectedPost.author} className="bp-avatar" />
+                <span className="bp-avatar" aria-hidden="true" style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', background:'var(--gold)', color:'#fff', fontWeight:700 }}>MT</span>
                 <div>
                   <div className="bp-author">{selectedPost.author}</div>
                   <div className="bp-date">{selectedPost.date} · {selectedPost.readTime}</div>
@@ -160,11 +161,11 @@ export default function Blog() {
                   Planning a Trip to Morocco?
                 </h4>
                 <p style={{ color: 'var(--text3)', fontSize: '0.9rem', marginBottom: '1.2rem' }}>
-                  Explore top-rated guided tours, desert excursions, and city passes with free cancellation.
+                  Compare guided tours and desert excursions, or message us on WhatsApp for help planning.
                 </p>
                 <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <a
-                    href="https://www.getyourguide.com/s/?q=Morocco&partner_id=YOUR_GYG_ID"
+                    href={gygSearchUrl('Morocco')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
@@ -173,7 +174,7 @@ export default function Blog() {
                     Browse Morocco Tours on GetYourGuide →
                   </a>
                   <a
-                    href="https://www.booking.com/search.html?ss=Morocco&aid=YOUR_AFFILIATE_ID"
+                    href={bookingSearchUrl('Morocco')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-outline"
@@ -184,7 +185,7 @@ export default function Blog() {
                 </div>
               </div>
 
-              <AdBanner slot="BLOG_ARTICLE_SLOT" />
+              <AdBanner slot={AD_SLOTS.blog} />
             </div>
           </div>
         </div>

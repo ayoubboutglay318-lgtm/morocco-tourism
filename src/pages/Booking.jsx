@@ -1,93 +1,94 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
-import { useApp } from '../context/AppContext'
+import { whatsappLink, bookingSearchUrl } from '../config'
 
+// Stay request: this site does not take bookings or payments itself.
+// The form builds a WhatsApp message to the Morocco Travel team, and links to live prices on Booking.com.
 export default function Booking() {
   const { id } = useParams()
-  const navigate = useNavigate()
-  const { convertPrice } = useApp()
   const [hotel, setHotel] = useState(null)
-  const [form, setForm] = useState({ name: '', email: '', checkIn: '', checkOut: '', guests: 1 })
+  const [notFound, setNotFound] = useState(false)
+  const [form, setForm] = useState({ name: '', checkIn: '', checkOut: '', guests: 2, notes: '' })
   const [error, setError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
-    axios.get(`/api/hotels/${id}`).then(r => setHotel(r.data))
+    axios.get(`/api/hotels/${id}`).then(r => setHotel(r.data)).catch(() => setNotFound(true))
   }, [id])
 
+  const today = new Date().toISOString().split('T')[0]
   const nights = form.checkIn && form.checkOut
-    ? Math.max(0, Math.ceil((new Date(form.checkOut) - new Date(form.checkIn)) / 86400000))
+    ? Math.max(0, Math.round((new Date(form.checkOut) - new Date(form.checkIn)) / 86400000))
     : 0
-  const total = hotel ? nights * hotel.price : 0
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     setError('')
     if (nights <= 0) { setError('Check-out must be after check-in.'); return }
-    setSubmitting(true)
-    try {
-      const res = await axios.post('/api/bookings', { hotelId: id, ...form })
-      navigate('/booking-success', { state: { booking: res.data } })
-    } catch (err) {
-      setError(err.response?.data?.error || 'Something went wrong.')
-      setSubmitting(false)
-    }
+    const message = [
+      `Hello! I'd like to ask about a stay at ${hotel.name} (${hotel.city}).`,
+      `Name: ${form.name}`,
+      `Dates: ${form.checkIn} → ${form.checkOut} (${nights} night${nights > 1 ? 's' : ''})`,
+      `Guests: ${form.guests}`,
+      form.notes && `Notes: ${form.notes}`,
+    ].filter(Boolean).join('\n')
+    window.open(whatsappLink(message), '_blank', 'noopener,noreferrer')
   }
 
+  if (notFound) return <div className="loading">Hotel not found. <Link to="/hotels">Browse hotels</Link></div>
   if (!hotel) return <div className="loading">Loading...</div>
 
   return (
     <div className="booking-page">
       <Link to={`/hotels/${id}`} className="back-link">← Back to Hotel</Link>
-      <h1>Book Your Stay</h1>
+      <h1>Ask About Your Stay</h1>
       <p className="booking-hotel-name">{hotel.name} — {hotel.city}</p>
 
       <div className="booking-form">
+        <p style={{ fontSize: '0.9rem', color: 'var(--text3)', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+          Send us your dates on WhatsApp and we will reply personally with availability and options.
+          This is a request, not a booking: nothing is reserved or charged until you confirm with us.
+        </p>
         {error && <div className="error-msg">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Full Name</label>
-            <input name="name" required placeholder="Ahmed El Mansouri" value={form.name} onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input name="email" type="email" required placeholder="you@example.com" value={form.email} onChange={handleChange} />
+            <label htmlFor="bk-name">Your Name</label>
+            <input id="bk-name" name="name" required placeholder="Your full name" value={form.name} onChange={handleChange} />
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label>Check-In</label>
-              <input name="checkIn" type="date" required value={form.checkIn} onChange={handleChange} min={new Date().toISOString().split('T')[0]} />
+              <label htmlFor="bk-in">Check-In</label>
+              <input id="bk-in" name="checkIn" type="date" required value={form.checkIn} onChange={handleChange} min={today} />
             </div>
             <div className="form-group">
-              <label>Check-Out</label>
-              <input name="checkOut" type="date" required value={form.checkOut} onChange={handleChange} min={form.checkIn || new Date().toISOString().split('T')[0]} />
+              <label htmlFor="bk-out">Check-Out</label>
+              <input id="bk-out" name="checkOut" type="date" required value={form.checkOut} onChange={handleChange} min={form.checkIn || today} />
             </div>
           </div>
           <div className="form-group">
-            <label>Guests</label>
-            <select name="guests" value={form.guests} onChange={handleChange}>
-              {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} guest{n > 1 ? 's' : ''}</option>)}
+            <label htmlFor="bk-guests">Guests</label>
+            <select id="bk-guests" name="guests" value={form.guests} onChange={handleChange}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>{n} guest{n > 1 ? 's' : ''}</option>)}
             </select>
           </div>
+          <div className="form-group">
+            <label htmlFor="bk-notes">Anything else? (optional)</label>
+            <textarea id="bk-notes" name="notes" rows={3} placeholder="Airport transfer, desert tour, budget…" value={form.notes} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', borderRadius: 10, border: '1px solid var(--cream2)', font: 'inherit' }} />
+          </div>
 
-          {nights > 0 && (
-            <div className="booking-summary">
-              <h3>Booking Summary</h3>
-              <div className="summary-row"><span>Hotel</span><span>{hotel.name}</span></div>
-              <div className="summary-row"><span>Price per night</span><span>{convertPrice(hotel.price)}</span></div>
-              <div className="summary-row"><span>Nights</span><span>{nights}</span></div>
-              <div className="summary-row"><span>Guests</span><span>{form.guests}</span></div>
-              <div className="summary-row total"><span>Total</span><span>{convertPrice(total)}</span></div>
-            </div>
-          )}
-
-          <button type="submit" className="btn-primary" style={{width:'100%', padding:'0.9rem', fontSize:'1.05rem'}} disabled={submitting}>
-            {submitting ? 'Booking...' : 'Confirm Booking'}
+          <button type="submit" className="btn-primary" style={{ width: '100%', padding: '0.9rem', fontSize: '1.05rem' }}>
+            Send Request on WhatsApp
           </button>
         </form>
+
+        <div style={{ textAlign: 'center', marginTop: '1.2rem', fontSize: '0.88rem', color: 'var(--text3)' }}>
+          Prefer to book yourself?{' '}
+          <a href={bookingSearchUrl(`${hotel.name} ${hotel.city} Morocco`)} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)', fontWeight: 600 }}>
+            Check live prices on Booking.com
+          </a>
+        </div>
       </div>
     </div>
   )

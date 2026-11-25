@@ -1,17 +1,19 @@
-// Ad component for Google AdSense placements
-// Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your real AdSense publisher ID
-// Replace 'XXXXXXXXXX' with your real ad slot IDs
+// Google AdSense placements and affiliate links.
+// Ads render ONLY when VITE_ADSENSE_CLIENT is set (and slot IDs are real numbers);
+// otherwise nothing is shown — no empty boxes. See src/config.js.
 
 import { useEffect, useRef } from 'react'
+import { ADSENSE_CLIENT, HAS_AFFILIATES, bookingSearchUrl, agodaSearchUrl, gygSearchUrl } from '../config'
 
-const AD_CLIENT = 'ca-pub-XXXXXXXXXXXXXXXX' // TODO: Replace with your AdSense publisher ID
+const isRealSlot = slot => /^\d{6,}$/.test(String(slot))
 
-export function AdBanner({ slot = 'XXXXXXXXXX', format = 'auto', style = {} }) {
+export function AdBanner({ slot, format = 'auto', style = {} }) {
   const adRef = useRef(null)
   const pushed = useRef(false)
+  const enabled = Boolean(ADSENSE_CLIENT) && isRealSlot(slot)
 
   useEffect(() => {
-    if (pushed.current) return
+    if (!enabled || pushed.current) return
     try {
       if (window.adsbygoogle && adRef.current) {
         window.adsbygoogle.push({})
@@ -20,7 +22,9 @@ export function AdBanner({ slot = 'XXXXXXXXXX', format = 'auto', style = {} }) {
     } catch {
       // AdSense not loaded yet or ad blocker active
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <div style={{ textAlign: 'center', margin: '2rem 0', minHeight: 90, ...style }}>
@@ -28,7 +32,7 @@ export function AdBanner({ slot = 'XXXXXXXXXX', format = 'auto', style = {} }) {
         className="adsbygoogle"
         ref={adRef}
         style={{ display: 'block' }}
-        data-ad-client={AD_CLIENT}
+        data-ad-client={ADSENSE_CLIENT}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive="true"
@@ -39,9 +43,9 @@ export function AdBanner({ slot = 'XXXXXXXXXX', format = 'auto', style = {} }) {
 
 // Affiliate link component for hotels
 export function AffiliateLinks({ hotel }) {
-  const bookingUrl = `https://www.booking.com/search.html?ss=${encodeURIComponent(hotel.name + ' ' + hotel.city + ' Morocco')}&aid=YOUR_AFFILIATE_ID`
-  const agodaUrl = `https://www.agoda.com/search?q=${encodeURIComponent(hotel.name + ' ' + hotel.city)}&cid=YOUR_AGODA_CID`
-  const gyUrl = `https://www.getyourguide.com/s/?q=${encodeURIComponent(hotel.city + ' Morocco tours')}&partner_id=YOUR_GYG_ID`
+  const bookingUrl = bookingSearchUrl(`${hotel.name} ${hotel.city} Morocco`)
+  const agodaUrl = agodaSearchUrl(`${hotel.name} ${hotel.city}`)
+  const gyUrl = gygSearchUrl(`${hotel.city} Morocco tours`)
 
   return (
     <div style={{
@@ -101,30 +105,21 @@ export function AffiliateLinks({ hotel }) {
           🟠 Tours in {hotel.city}
         </a>
       </div>
-      <div style={{ fontSize: '0.7rem', color: 'var(--text3)', marginTop: '0.8rem', opacity: 0.7 }}>
-        We may earn a small commission — at no extra cost to you
-      </div>
+      {HAS_AFFILIATES && (
+        <div style={{ fontSize: '0.7rem', color: 'var(--text3)', marginTop: '0.8rem', opacity: 0.7 }}>
+          We may earn a small commission — at no extra cost to you
+        </div>
+      )}
     </div>
   )
 }
 
-// In-feed ad placeholder (between hotel listings)
-export function InFeedAd() {
+// In-feed ad between hotel listings — hidden until AdSense is configured
+export function InFeedAd({ slot }) {
+  if (!ADSENSE_CLIENT || !isRealSlot(slot)) return null
   return (
-    <div style={{
-      background: 'var(--cream)',
-      border: '1px dashed var(--cream2)',
-      borderRadius: 16,
-      padding: '2rem',
-      textAlign: 'center',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: 280,
-    }}>
-      <AdBanner slot="IN_FEED_SLOT" format="fluid" />
+    <div style={{ background: 'var(--cream)', borderRadius: 16, padding: '1rem', minHeight: 280 }}>
+      <AdBanner slot={slot} format="fluid" />
     </div>
   )
 }
-

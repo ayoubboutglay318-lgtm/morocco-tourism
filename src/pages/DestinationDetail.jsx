@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
+import HotelImage from '../components/HotelImage'
+import { whatsappLink } from '../config'
 
 /* ─── Type badge colours ─── */
 const TYPE_COLORS = {
@@ -161,8 +163,7 @@ export default function DestinationDetail() {
       <div className="dd-stats-bar">
         <div className="dd-stats-inner">
           {[
-            { icon: '⭐', value: dest.rating, label: 'Rating' },
-            { icon: '🗣️', value: dest.reviewCount?.toLocaleString(), label: 'Reviews' },
+            { icon: '📅', value: dest.bestTime?.split(',')[0], label: 'Best Time' },
             { icon: '🏨', value: hotels.length, label: 'Hotels' },
             { icon: '🏛️', value: attractions.length, label: 'Attractions' },
             { icon: '🎒', value: tours.length, label: 'Tours' },
@@ -268,18 +269,6 @@ export default function DestinationDetail() {
                   ))}
                 </div>
 
-                {/* Rating Card */}
-                <div className="dd-sidebar-card dd-reveal-scale" style={{ transitionDelay: '0.1s' }}>
-                  <h3>Traveller Rating</h3>
-                  <div className="dd-rating-display">
-                    <span className="dd-rating-num">{dest.rating}</span>
-                    <div>
-                      <div className="dd-rating-stars">{'★'.repeat(Math.round(dest.rating))}</div>
-                      <div className="dd-rating-count">{dest.reviewCount?.toLocaleString()} reviews</div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* CTA Card */}
                 <div className="dd-sidebar-card dd-reveal-scale" style={{ transitionDelay: '0.2s' }}>
                   <h3>Plan Your Visit</h3>
@@ -367,7 +356,6 @@ export default function DestinationDetail() {
                 >
                   <div className="dd-tour-img-wrap">
                     <img src={t.image} alt={t.title} loading="lazy" />
-                    <span className="dd-tour-rating-badge">★ {t.rating}</span>
                   </div>
                   <div className="dd-tour-body">
                     <h3 className="dd-tour-title">{t.title}</h3>
@@ -386,16 +374,15 @@ export default function DestinationDetail() {
                     </div>
                     <div className="dd-tour-footer">
                       <div className="dd-tour-price">
-                        {t.price} MAD
-                        <span> / person</span>
+                        <span>Price on request</span>
                       </div>
                       <a
-                        href={`https://wa.me/212689122018?text=${encodeURIComponent(`Hello! I'd like to book the "${t.title}" tour in ${dest.name}. Price: ${t.price} MAD/person.`)}`}
+                        href={whatsappLink(`Hello! I'm interested in the "${t.title}" tour in ${dest.name}. Could you send me the price and available dates?`)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="dd-tour-book-btn"
                       >
-                        💬 Book
+                        💬 Ask
                       </a>
                     </div>
                   </div>
@@ -440,15 +427,14 @@ export default function DestinationDetail() {
                   style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
                 >
                   <div className="hotel-card-img-wrap">
-                    <img src={h.image} alt={h.name} className="hotel-card-img" loading="lazy" />
+                    <HotelImage hotel={h} className="hotel-card-img" />
                     <span className="hotel-card-badge">{h.badge}</span>
                   </div>
                   <div className="hotel-card-body">
                     <div className="hotel-card-city">{h.city}</div>
                     <div className="hotel-card-name">{h.name}</div>
                     <div className="hotel-card-rating">
-                      <span className="stars">{'★'.repeat(Math.round(h.rating))}</span>
-                      <span className="rating-num">{h.rating} · {h.reviews.toLocaleString()} reviews</span>
+                      <span className="stars" title={`${h.stars}-star hotel`}>{'★'.repeat(h.stars)}</span>
                     </div>
                     <div className="hotel-card-amenities">
                       {h.amenities.slice(0, 4).map(a => (
@@ -457,10 +443,10 @@ export default function DestinationDetail() {
                     </div>
                     <div className="hotel-card-footer">
                       <div className="hotel-card-price">
-                        ${h.price}<span> / night</span>
+                        {h.priceLevel}<span> price range</span>
                       </div>
                       <span className="btn-primary" style={{ padding: '0.45rem 1.1rem', fontSize: '0.85rem' }}>
-                        Book
+                        View
                       </span>
                     </div>
                   </div>

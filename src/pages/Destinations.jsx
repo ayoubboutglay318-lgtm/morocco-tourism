@@ -5,16 +5,6 @@ import axios from 'axios'
 const PRICE_LABELS = { '$': 'Budget', '$$': 'Mid-range', '$$$': 'Luxury' }
 const PRICE_COLORS = { '$': '#27ae60', '$$': '#f39c12', '$$$': '#8e44ad' }
 
-function StarRating({ rating }) {
-  const full = Math.floor(rating)
-  const half = rating % 1 >= 0.5
-  return (
-    <span style={{ color: '#f4a830', fontSize: '0.9rem', letterSpacing: 1 }}>
-      {'★'.repeat(full)}{half ? '½' : ''}{'☆'.repeat(5 - full - (half ? 1 : 0))}
-    </span>
-  )
-}
-
 export default function Destinations() {
   const [destinations, setDestinations] = useState([])
   const [search, setSearch] = useState('')
@@ -195,11 +185,9 @@ function DestinationCard({ dest }) {
 
         {/* Card Body */}
         <div style={{ padding: '1.4rem' }}>
-          {/* Rating row */}
+          {/* Best time row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.9rem' }}>
-            <StarRating rating={dest.rating || 4.8} />
-            <span style={{ fontWeight: 700, color: '#333', fontSize: '0.9rem' }}>{dest.rating}</span>
-            <span style={{ color: '#aaa', fontSize: '0.82rem' }}>({(dest.reviewCount || 0).toLocaleString()} reviews)</span>
+            <span style={{ color: '#888', fontSize: '0.82rem' }}>📅 Best time: {dest.bestTime}</span>
           </div>
 
           {/* Description snippet */}

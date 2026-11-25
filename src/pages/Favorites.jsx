@@ -4,11 +4,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import axios from 'axios'
 import { useApp } from '../context/AppContext'
+import HotelImage from '../components/HotelImage'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Favorites() {
-  const { favorites, toggleFavorite, convertPrice } = useApp()
+  const { favorites, toggleFavorite } = useApp()
   const [hotels, setHotels] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -80,9 +81,9 @@ export default function Favorites() {
         </div>
         <div className="fav-stat">
           <span className="fav-stat-number">
-            {favoriteHotels.length > 0 ? convertPrice(Math.min(...favoriteHotels.map(h => h.price))) : '—'}
+            {favoriteHotels.length > 0 ? favoriteHotels.reduce((a, h) => (h.priceLevel.length < a.length ? h.priceLevel : a), '$$$$') : '—'}
           </span>
-          <span className="fav-stat-label">Lowest Price</span>
+          <span className="fav-stat-label">Lowest Price Range</span>
         </div>
       </div>
 
@@ -92,7 +93,7 @@ export default function Favorites() {
           {favoriteHotels.map(hotel => (
             <div key={hotel.id} className="fav-card">
               <div className="fav-card-img">
-                <img src={hotel.image} alt={hotel.name} />
+                <HotelImage hotel={hotel} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <button
                   className="fav-card-remove"
                   onClick={(e) => { e.preventDefault(); toggleFavorite(hotel.id) }}
@@ -111,18 +112,13 @@ export default function Favorites() {
                 <p className="fav-card-desc">{hotel.description.substring(0, 120)}...</p>
                 <div className="fav-card-footer">
                   <div className="fav-card-price">
-                    <span className="fav-price-label">From</span>
-                    <span className="fav-price-value">{convertPrice(hotel.price)}</span>
-                    <span className="fav-price-label">/ night</span>
-                  </div>
-                  <div className="fav-card-rating">
-                    <span className="fav-rating-score">{hotel.rating}</span>
-                    <span className="fav-rating-count">{hotel.reviews} reviews</span>
+                    <span className="fav-price-label">Price range</span>
+                    <span className="fav-price-value">{hotel.priceLevel}</span>
                   </div>
                 </div>
                 <div className="fav-card-actions">
                   <Link to={`/hotels/${hotel.id}`} className="btn-primary" style={{ flex: 1, textAlign: 'center', fontSize: '0.85rem', padding: '0.7rem' }}>View Details</Link>
-                  <Link to={`/hotels/${hotel.id}/book`} className="btn-secondary" style={{ flex: 1, textAlign: 'center', fontSize: '0.85rem', padding: '0.7rem' }}>Book Now</Link>
+                  <Link to={`/hotels/${hotel.id}/book`} className="btn-secondary" style={{ flex: 1, textAlign: 'center', fontSize: '0.85rem', padding: '0.7rem' }}>Ask on WhatsApp</Link>
                 </div>
               </div>
             </div>

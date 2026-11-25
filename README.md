@@ -7,13 +7,13 @@ A full-stack, responsive luxury tourism and travel web application for Morocco. 
 ## 🌟 Key Features
 
 - **🏛️ Destinations & Imperial Cities:** In-depth curated travel guides for Marrakech, Fes, Chefchaouen, Tangier, Casablanca, Rabat, Essaouira, Merzouga, Agadir, and the Atlas Mountains.
-- **🏨 Handpicked Hotels & Riads:** Detailed lodging directory with star ratings, verified amenities, high-resolution photo galleries, price conversions, and direct booking flows.
+- **🏨 Hotels & Riads:** Directory of well-known hotels, riads and desert camps with star category, amenities and an approximate price range ($–$$$$). Stay requests go to WhatsApp; live prices link out to Booking.com.
 - **🗺️ Interactive Travel Map:** Leaflet map with custom category markers for hotels, restaurants, landmarks, beaches, and airports across Morocco.
 - **✨ 3D Hero Experience:** Dynamic interactive Three.js starry celestial dome with smooth GSAP animations and mouse parallax effects.
 - **🍲 Moroccan Culinary Guide:** Authentic dish explorations (Tagines, Couscous, Pastilla, Harira, Mint Tea, Mechoui, Rfissa).
-- **🌤️ Live Weather & Season Guide:** Real-time city weather forecasts and packing recommendations for all seasons.
+- **🌤️ Live Weather & Season Guide:** Live conditions and 7-day forecast from Open-Meteo, plus monthly climate averages.
 - **💬 Direct WhatsApp Booking:** Integrated floating booking concierge button.
-- **🌐 Multi-Currency & Multi-Language:** Built-in switchers for MAD, USD, EUR, GBP, CAD, JPY and English, French, and Arabic.
+- **🌐 Multi-Language Navigation:** English, French and Arabic menu labels.
 
 ---
 
@@ -84,3 +84,26 @@ This platform is configured with 5 direct revenue channels:
 - **Frontend:** React 19, React Router 7, Vite 8, GSAP 3, Three.js, Leaflet / React-Leaflet, Axios
 - **Backend:** Node.js, Express 5, CORS
 - **Styling:** Custom luxury Moroccan palette CSS with light/dark theme support
+
+
+---
+
+## 💰 Monetization settings (Vercel → Project → Settings → Environment Variables)
+
+All optional. While a value is empty the feature stays hidden (ads) or links work without a tracking code (affiliates).
+
+| Variable | What it is |
+|---|---|
+| `VITE_ADSENSE_CLIENT` | AdSense publisher ID, e.g. `ca-pub-1234567890123456` |
+| `VITE_AD_SLOT_HOME`, `VITE_AD_SLOT_HOTEL`, `VITE_AD_SLOT_BLOG`, `VITE_AD_SLOT_INFEED` | AdSense ad-unit slot numbers |
+| `VITE_BOOKING_AID` | Booking.com affiliate ID |
+| `VITE_AGODA_CID` | Agoda partner CID |
+| `VITE_GYG_PARTNER_ID` | GetYourGuide partner ID |
+
+Redeploy after changing them. The WhatsApp number is set in `src/config.js`.
+
+## ✅ Content policy
+
+- No invented reviews, testimonials, ratings, visitor numbers or prices. Hotel photos are destination photos and are labelled as such.
+- Emergency numbers and embassy contacts were checked against official government sources (Nov 2026). Re-check them at least once a year.
+- The site does not take bookings or payments; requests go to WhatsApp.

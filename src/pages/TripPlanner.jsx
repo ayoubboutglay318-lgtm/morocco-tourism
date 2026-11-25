@@ -69,7 +69,7 @@ export default function TripPlanner() {
   return (
     <div style={{ maxWidth:1000, margin:'0 auto', padding:'2.5rem 2rem' }}>
       <div className="section-label">Plan Your Visit</div>
-      <h1 className="section-title">AI Trip Planner<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>for Morocco</em></h1>
+      <h1 className="section-title">Trip Planner<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>for Morocco</em></h1>
       <p className="section-subtitle">Tell us your budget, duration and interests — we'll build your perfect Morocco itinerary</p>
 
       <form onSubmit={handleGenerate} style={{ background:'var(--white)', borderRadius:24, padding:'2.5rem', boxShadow:'0 4px 32px rgba(0,0,0,0.09)', marginBottom:'3rem' }}>

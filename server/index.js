@@ -59,214 +59,185 @@ const I = {
 const hotels = [
   // ═══ TANGIER ═══
   {
-    id:1, name:"Fairmont Tazi Palace Tangier", city:"Tangier", stars:5, price:259, rating:4.7, reviews:399,
-    image:I.cap,
+    id:1, name:"Fairmont Tazi Palace Tangier", city:"Tangier", stars:5, price:259, image:I.cap,
     badge:"Luxury Palace",
-    description:"A restored 1920s royal palace nestled among eucalyptus forests on a hilltop above Tangier with panoramic city and forest views. Fairmont's flagship North Africa property — 133 elegant rooms, 7 restaurants, 2,500m² spa, and a heated outdoor pool. Ranked #3 of 78 hotels in Tangier on TripAdvisor.",
-    amenities:["Pool","Free WiFi","Breakfast","Spa","7 Restaurants","Fitness Center","Kids Club","Gardens","Airport Transfer"], rooms:133
+    description:"A restored 1920s royal palace nestled among eucalyptus forests on a hilltop above Tangier with panoramic city and forest views. A large luxury resort with a spa, several restaurants and an outdoor pool, a short drive from the medina.",
+    amenities:["Pool","Free WiFi","Spa","Restaurants","Fitness Center","Gardens"]
   },
   {
-    id:2, name:"El Minzah Hotel", city:"Tangier", stars:4, price:140, rating:4.5, reviews:1240,
-    image:I.tng7,
+    id:2, name:"El Minzah Hotel", city:"Tangier", stars:4, price:140, image:I.tng7,
     badge:"Historic Icon",
     description:"Tangier's most storied hotel, opened in 1930 by Lord Bute. A masterpiece of Moorish architecture with hand-painted ceilings, a lush courtyard garden and a terrace with direct views of the Strait of Gibraltar and the Spanish coast 14km beyond. Churchill, Matisse, the Rolling Stones and every notable visitor to Tangier stayed here.",
     amenities:["Pool","Free WiFi","Breakfast","Spa","Garden","Strait View","Historic Bar","Hammam"], rooms:140
   },
   {
-    id:3, name:"Grand Hotel Villa de France", city:"Tangier", stars:4, price:120, rating:4.2, reviews:786,
-    image:I.tng8,
+    id:3, name:"Grand Hotel Villa de France", city:"Tangier", stars:4, price:120, image:I.tng8,
     badge:"Matisse Heritage",
     description:"The hotel where Henri Matisse stayed in 1912 and painted some of his greatest Tangier canvases from Room 35 — the same room is preserved as it was. A beautifully restored Belle Époque property near the medina with a piano bar offering live music nightly and panoramic views over the white city and the Strait.",
     amenities:["Free WiFi","Breakfast","Piano Bar","Live Music","Panoramic Views","Historic Rooms"], rooms:48
   },
   {
-    id:4, name:"Hilton Garden Inn Tanger City Center", city:"Tangier", stars:4, price:95, rating:4.4, reviews:2100,
-    image:I.tng5,
-    badge:"Beachfront Modern",
-    description:"Modern 4-star hotel in the heart of Tangier's city centre with direct beach access, spacious contemporary rooms and an excellent breakfast buffet. Walking distance to the Grand Socco, the medina, the beach and Tangier Ville train station for the Al Boraq high-speed train to Casablanca.",
-    amenities:["Free WiFi","Breakfast","Gym","Beach Access","Business Center","Family Rooms"], rooms:166
+    id:4, name:"Hilton Garden Inn Tanger City Center", city:"Tangier", stars:4, price:95, image:I.tng5,
+    badge:"Modern City Hotel",
+    description:"A large modern 4-star hotel next to Tanger Ville train station (Al Boraq high-speed trains to Casablanca), a few minutes' walk from the city beach. Convenient for business and transit; no swimming pool.",
+    amenities:["Free WiFi","Breakfast","Gym","Near Beach","Business Center","Family Rooms"], rooms:320
   },
   {
-    id:5, name:"Saba's House — Riad Dar Saba", city:"Tangier", stars:5, price:80, rating:5.0, reviews:312,
-    image:I.tng6,
-    badge:"#1 Rated Tangier",
-    description:"The highest-rated property in Tangier on TripAdvisor. A beautifully restored boutique riad inside the ancient kasbah, described by guests as 'feeling like a private art gallery'. Spectacular rooftop terrace with panoramic views over the medina rooftops, the port and the Bay of Tangier. Extraordinary breakfasts included.",
-    amenities:["Free WiFi","Breakfast","Rooftop Terrace","Kasbah Views","Art Collection","Personalised Service"], rooms:7
+    id:5, name:"Riad Dar Saba — Saba's House", city:"Tangier", stars:5, price:80, image:I.tng6,
+    badge:"Kasbah Boutique Riad",
+    description:"A small, luxurious boutique riad in the kasbah, a few steps from the Kasbah Museum. Individually designed rooms full of art, a steam room and a rooftop terrace with views over the medina and the port.",
+    amenities:["Free WiFi","Rooftop Terrace","Kasbah Views","Steam Room","Spa Services","Bar"], rooms:6
   },
   {
-    id:6, name:"Palais Zahia", city:"Tangier", stars:4, price:65, rating:4.5, reviews:428,
-    image:I.tng4,
+    id:6, name:"Palais Zahia", city:"Tangier", stars:3, price:65, image:I.tng4,
     badge:"Traditional Riad",
-    description:"A traditional Moroccan riad in the heart of the old Medina with a beautiful rooftop terrace overlooking the maze of white alleyways. Guests are welcomed with mint tea on arrival and served fresh Moroccan breakfasts each morning. An authentic and tranquil base for exploring the medina on foot.",
-    amenities:["Free WiFi","Breakfast","Rooftop","Mint Tea Welcome","Traditional Decor","Central Location"], rooms:12
+    description:"A traditional hotel on the Petit Socco in the heart of the old medina, with a sunny terrace, a small spa and hammam, and Moroccan breakfasts. No alcohol is served. A good base for exploring the medina on foot.",
+    amenities:["Free WiFi","Breakfast","Terrace","Spa & Hammam","Traditional Decor","Central Location"], rooms:18
   },
   // ═══ MARRAKECH ═══
   {
-    id:7, name:"La Mamounia", city:"Marrakech", stars:5, price:480, rating:5.0, reviews:4320,
-    image:I.mrk2,
-    badge:"Most Legendary Hotel in Africa",
-    description:"Built in 1923 as a royal wedding gift and opened as a hotel in 1929, La Mamounia has been the definitive address in Marrakech for a century. Winston Churchill painted here every winter; he called it 'the most lovely spot in the world'. Set within 17 acres of Moorish gardens inside the ancient medina walls, with 3 pools, 9 restaurants, a legendary casino and the finest spa in Morocco.",
-    amenities:["3 Pools","Free WiFi","Breakfast","Spa","Casino","17-Acre Gardens","9 Restaurants","Hammam","Tennis"], rooms:209
+    id:7, name:"La Mamounia", city:"Marrakech", stars:5, price:480, image:I.mrk2,
+    badge:"Historic Palace Hotel",
+    description:"Opened as a hotel in 1923 in gardens that were once an 18th-century royal wedding gift, La Mamounia is Marrakech's most famous address. Winston Churchill was a regular guest. Vast Moorish gardens just inside the medina walls, several restaurants and bars, a large spa and pool.",
+    amenities:["Pool","Free WiFi","Spa","Hammam","Gardens","Restaurants","Bars"]
   },
   {
-    id:8, name:"La Maison Arabe", city:"Marrakech", stars:5, price:250, rating:4.9, reviews:1876,
-    image:I.mrk1,
-    badge:"Relais & Châteaux",
-    description:"Founded in 1946 as Marrakech's first restaurant, La Maison Arabe became Morocco's first boutique hotel and remains one of the finest. Stunning Andalusian architecture, a heated pool, a traditional hammam, two acclaimed restaurants and Marrakech's only residential cooking school where guests learn authentic Moroccan recipes from master chefs.",
+    id:8, name:"La Maison Arabe", city:"Marrakech", stars:5, price:250, image:I.mrk1,
+    badge:"Boutique Hotel & Cooking School",
+    description:"Founded in 1946 as Marrakech's first restaurant, La Maison Arabe became Morocco's first boutique hotel and remains one of the finest. Andalusian-style architecture, a pool, a traditional hammam, restaurants and a well-known cooking school where guests learn Moroccan recipes.",
     amenities:["Pool","Free WiFi","Breakfast","Hammam","Cooking School","2 Restaurants","Spa","Rooftop"], rooms:26
   },
   {
-    id:9, name:"Les Jardins de la Koutoubia", city:"Marrakech", stars:5, price:185, rating:4.5, reviews:2341,
-    image:I.mrk4,
+    id:9, name:"Les Jardins de la Koutoubia", city:"Marrakech", stars:5, price:185, image:I.mrk4,
     badge:"Central Medina",
     description:"Steps from the Koutoubia Mosque — Marrakech's most iconic landmark — this elegant 5-star hotel wraps around two lush courtyards with heated pools and rose gardens. The rooftop Sky Bar offers one of the best views in the city. A rare combination of central location, luxury and calm in the heart of the old medina.",
     amenities:["2 Pools","Free WiFi","Breakfast","Spa","Sky Bar","Gardens","Hammam","Rooftop"], rooms:72
   },
   {
-    id:10, name:"Riad AndallaSpa", city:"Marrakech", stars:5, price:150, rating:5.0, reviews:987,
-    image:I.mrk3,
-    badge:"TripAdvisor #1",
-    description:"The highest-rated hotel in Marrakech on TripAdvisor. An authentically decorated riad just steps from Djemaa el-Fna square with spacious suites, an expert hammam and spa, a mosaic courtyard pool and a rooftop terrace where Moroccan mint tea and pastries await at any hour. Every review mentions the extraordinary personal service.",
+    id:10, name:"Riad AndallaSpa", city:"Marrakech", stars:5, price:150, image:I.mrk3,
+    badge:"Medina Riad & Spa",
+    description:"An authentically decorated riad just steps from Djemaa el-Fna square with spacious suites, an expert hammam and spa, a mosaic courtyard pool and a rooftop terrace where Moroccan mint tea and pastries await at any hour.",
     amenities:["Pool","Free WiFi","Breakfast","Hammam & Spa","Rooftop","Airport Transfer","Personal Service"], rooms:8
   },
   {
-    id:11, name:"Mövenpick Hotel Mansour Eddahbi", city:"Marrakech", stars:5, price:200, rating:4.6, reviews:3102,
-    image:I.mrk5,
+    id:11, name:"Mövenpick Hotel Mansour Eddahbi", city:"Marrakech", stars:5, price:200, image:I.mrk5,
     badge:"5-Star Resort",
-    description:"A luxurious resort set within serene palm-filled grounds near the Palmeraie. Multiple outdoor pools, world-class spa, six dining options from Moroccan to Asian, a kids club, and direct access to one of Marrakech's top golf courses. One of the best family and couples resorts in the city.",
+    description:"A luxurious resort set within serene palm-filled grounds near the Palmeraie. Multiple outdoor pools, world-class spa, six dining options from Moroccan to Asian, a kids club, and direct access to one of Marrakech's top golf courses. A popular choice for families and couples.",
     amenities:["Multiple Pools","Free WiFi","Breakfast","Spa","6 Restaurants","Kids Club","Golf Access","Hammam"], rooms:336
   },
   // ═══ FES ═══
   {
-    id:12, name:"Palais Jamaï", city:"Fes", stars:5, price:280, rating:5.0, reviews:856,
-    image:I.fes1,
-    badge:"19th-Century Palace",
-    description:"Built in 1879 as the private residence of the Grand Vizier Jamai, this is the most significant hotel in Fes and one of the most important reopenings in North Africa in 2026. Alain Ducasse oversees three restaurants and four bars including a sky bar with panoramic views over the 1,200-year-old Fes medina. Perched on the hillside above the old city, it is unforgettable.",
-    amenities:["Pool","Free WiFi","Breakfast","3 Restaurants","Sky Bar","Spa","Gardens","Hammam","Historic Palace"], rooms:118
+    id:12, name:"Palais Jamaï", city:"Fes", stars:5, price:280, image:I.fes1,
+    badge:"Restored Palace (2026)",
+    description:"Built in 1879 for Grand Vizier Si Mohammed ben Arbi el Jamaï, this palace hotel near Bab Guissa closed in 2014 for a long restoration and is reopening in 2026 as part of the Preferred Hotels & Resorts Legend Collection. Gardens and terraces overlook the Fes medina. Check the hotel's official site for the opening date before planning a stay.",
+    amenities:["Pool","Gardens","Spa","Restaurants","Historic Palace","Medina Views"]
   },
   {
-    id:13, name:"Riad Fes — Relais & Châteaux", city:"Fes", stars:5, price:194, rating:4.9, reviews:1423,
-    image:I.fes2,
-    badge:"Michelin Key Award",
-    description:"A jewel of Moroccan heritage — the only Relais & Châteaux property in Fes and winner of the Michelin Key for exceptional character, design and service. Four harmoniously styled Andalusian patios, sculpted plaster arcades, marble fountains and zellige walls. The rooftop bar offers the finest panoramic view over the Fes medina at sunset.",
-    amenities:["Pool","Free WiFi","Breakfast","Spa","Rooftop Bar","Hammam","Fine Dining","Michelin Key"], rooms:22
+    id:13, name:"Riad Fes — Relais & Châteaux", city:"Fes", stars:5, price:194, image:I.fes2,
+    badge:"Relais & Châteaux",
+    description:"A jewel of Moroccan heritage and a Relais & Châteaux member. Four harmoniously styled Andalusian patios, sculpted plaster arcades, marble fountains and zellige walls. The rooftop bar has a wide view over the Fes medina at sunset.",
+    amenities:["Pool","Free WiFi","Breakfast","Spa","Rooftop Bar","Hammam","Fine Dining"], rooms:22
   },
   {
-    id:14, name:"Riad Laaroussa Hotel & Spa", city:"Fes", stars:4, price:130, rating:4.9, reviews:1108,
-    image:I.fes3,
-    badge:"TripAdvisor #1 Fes",
-    description:"A tranquil restored palace in the heart of the Fes medina with a rooftop terrace offering panoramic views, lush gardens, a peaceful courtyard pool and a full spa and hammam. The highest TripAdvisor rating of any hotel in Fes — guests consistently praise the spacious rooms, exceptional Fassi cuisine and deeply personal service.",
+    id:14, name:"Riad Laaroussa Hotel & Spa", city:"Fes", stars:4, price:130, image:I.fes3,
+    badge:"Medina Palace & Spa",
+    description:"A tranquil restored palace in the heart of the Fes medina with a rooftop terrace offering panoramic views, lush gardens, a peaceful courtyard pool and a full spa and hammam. Known for spacious rooms and Fassi home cooking.",
     amenities:["Pool","Free WiFi","Breakfast","Spa","Hammam","Rooftop","Gardens","Fassi Cuisine"], rooms:9
   },
   {
-    id:15, name:"Riad Fes Maya Suite & Spa", city:"Fes", stars:4, price:160, rating:4.9, reviews:892,
-    image:I.fes1,
+    id:15, name:"Riad Fes Maya Suite & Spa", city:"Fes", stars:4, price:160, image:I.fes1,
     badge:"Palace Architecture",
     description:"A historic palace in the ancient medina transformed into a stunning boutique hotel — walls covered in hand-carved plaster, ceilings of hand-painted cedar, and marble fountains in every courtyard. The rooftop pool seems to float above the medina rooftops. A true example of traditional Fassi aristocratic architecture.",
     amenities:["Pool","Free WiFi","Breakfast","Spa","Hammam","Rooftop","Historic Architecture"], rooms:15
   },
   // ═══ CHEFCHAOUEN ═══
   {
-    id:16, name:"Lina Ryad & Spa", city:"Chefchaouen", stars:4, price:110, rating:4.6, reviews:1234,
-    image:I.chef1,
+    id:16, name:"Lina Ryad & Spa", city:"Chefchaouen", stars:4, price:110, image:I.chef1,
     badge:"Medina Riad",
     description:"A luxurious riad in the heart of Chefchaouen's famous blue medina, surrounded by the Rif Mountains. Bright, spacious suites with private terraces overlooking the cobalt and indigo alleys. A large terrace provides a haven of tranquility above the maze of the old city. Traditional hammam, spa treatments and rooftop breakfasts with mountain views.",
     amenities:["Free WiFi","Breakfast","Spa","Hammam","Rooftop","Mountain Views","Central Medina"], rooms:15
   },
   {
-    id:17, name:"Casa Sabila", city:"Chefchaouen", stars:4, price:70, rating:4.8, reviews:876,
-    image:I.chef2,
+    id:17, name:"Casa Sabila", city:"Chefchaouen", stars:4, price:70, image:I.chef2,
     badge:"Blue City Gem",
     description:"A much-loved boutique guesthouse in the old medina with spacious, beautifully air-conditioned rooms decorated in traditional blue and white tile and local craftsmanship. The rooftop terrace breakfast area offers incredible views over the blue rooftops to the Rif Mountains. Praised by guests for exceptional friendliness and value.",
     amenities:["Free WiFi","Breakfast","Rooftop Terrace","Mountain Views","Air Conditioning","Traditional Decor"], rooms:10
   },
   {
-    id:18, name:"La Petite Chefchaouen", city:"Chefchaouen", stars:4, price:55, rating:4.8, reviews:643,
-    image:I.chef1,
+    id:18, name:"La Petite Chefchaouen", city:"Chefchaouen", stars:4, price:55, image:I.chef1,
     badge:"Intimate Boutique",
     description:"A small, intimate boutique hotel with just five rooms within the kasbah walls of Chefchaouen, run by warm and welcoming hosts. A panoramic rooftop terrace, innovative Moroccan-Mediterranean cooking, and the closest possible connection to the extraordinary blue-painted world outside your door.",
     amenities:["Free WiFi","Breakfast","Rooftop","Innovative Cuisine","Intimate (5 Rooms)","Inside Kasbah Walls"], rooms:5
   },
   {
-    id:19, name:"Dar Jasmine", city:"Chefchaouen", stars:4, price:60, rating:4.6, reviews:712,
-    image:I.chef2,
+    id:19, name:"Dar Jasmine", city:"Chefchaouen", stars:4, price:60, image:I.chef2,
     badge:"Hilltop Views",
-    description:"Situated on a hilltop above Chefchaouen with extraordinary views over the entire blue city, the valley and the Rif Mountains. Stylish rooms with local decor, scenic terraces at every level and warm five-star service. Guests describe the view from Dar Jasmine as one of the best in all of Morocco.",
-    amenities:["Free WiFi","Breakfast","Hilltop Terrace","Panoramic Views","Local Decor","Mountain Walks"], rooms:9
+    description:"Situated on a hilltop above Chefchaouen with extraordinary views over the entire blue city, the valley and the Rif Mountains. Stylish rooms with local decor, scenic terraces at every level and warm service, a seasonal outdoor pool and a restaurant. The climb up the steps is rewarded with one of the best views of the blue city.",
+    amenities:["Free WiFi","Breakfast","Outdoor Pool","Hilltop Terrace","Panoramic Views","Restaurant"], rooms:9
   },
   // ═══ MERZOUGA ═══
   {
-    id:20, name:"Desert Luxury Camp Morocco", city:"Merzouga", stars:5, price:275, rating:4.9, reviews:1876,
-    image:I.sah1,
-    badge:"#1 Erg Chebbi — TripAdvisor",
-    description:"The highest-rated camp in Erg Chebbi on TripAdvisor and a consistent favourite of luxury travel writers. A small, owner-operated property tucked against the western flank of the 150m Erg Chebbi dunes. Beautifully designed private tents with en-suite bathrooms, all meals included, camel trekking at sunset and the most spectacular stargazing on earth.",
+    id:20, name:"Desert Luxury Camp Morocco", city:"Merzouga", stars:5, price:275, image:I.sah1,
+    badge:"Secluded Dune Camp",
+    description:"A secluded luxury camp tucked against the western flank of the 150m Erg Chebbi dunes. Beautifully designed private tents with en-suite bathrooms, all meals included, camel trekking at sunset and superb stargazing.",
     amenities:["All Meals Included","Camel Trek","Stargazing","Private Bathroom","Desert Excursions","Traditional Music"], rooms:16
   },
   {
-    id:21, name:"Kam Kam Dunes", city:"Merzouga", stars:5, price:310, rating:5.0, reviews:654,
-    image:I.sah2,
+    id:21, name:"Kam Kam Dunes", city:"Merzouga", stars:5, price:310, image:I.sah2,
     badge:"Contemporary Berber Design",
     description:"Run by a Moroccan-Spanish family with a passion for design, Kam Kam Dunes stands apart from other Sahara camps for its restrained, contemporary Berber aesthetic — neutral tones, thoughtful lighting, excellent linens and inspired cooking. One of the most beautiful camps in the Moroccan Sahara and utterly unlike anything else in the desert.",
     amenities:["All Meals Included","Camel Trek","Stargazing","Designer Tents","Gourmet Cuisine","Photography Tours"], rooms:12
   },
   {
-    id:22, name:"Sahara Stars Camp", city:"Merzouga", stars:4, price:180, rating:4.8, reviews:1102,
-    image:I.sah1,
-    badge:"Luxury Desert Tents",
-    description:"Sixteen luxurious, fully equipped tents on the edge of the Erg Chebbi dunes with private bathrooms, Moroccan rugs and proper beds. A large Berber tent serves as the communal restaurant where evening meals of slow-cooked tagine and fresh bread from a clay oven are served by candlelight under the stars.",
-    amenities:["All Meals Included","Camel Trek","Stargazing","16 Luxury Tents","Berber Tent Restaurant","Sandboarding"], rooms:16
+    id:22, name:"Sahara Stars Camp", city:"Merzouga", stars:3, price:180, image:I.sah1,
+    badge:"Classic Desert Camp",
+    description:"A simple, well-reviewed camp of around a dozen tents right at the edge of the Erg Chebbi dunes, with shared bathrooms, Moroccan rugs and proper beds. A large Berber tent serves as the communal restaurant where evening meals of slow-cooked tagine and fresh bread from a clay oven are served by candlelight under the stars.",
+    amenities:["Breakfast","Camel Trek","Stargazing","Shared Bathrooms","Restaurant","Sandboarding"], rooms:12
   },
   // ═══ ATLAS MOUNTAINS ═══
   {
-    id:23, name:"Kasbah Tamadot", city:"Atlas Mountains", stars:5, price:350, rating:5.0, reviews:2134,
-    image:I.atl1,
+    id:23, name:"Kasbah Tamadot", city:"Atlas Mountains", stars:5, price:350, image:I.atl1,
     badge:"Richard Branson's Retreat",
     description:"Richard Branson's legendary mountain retreat — a converted Berber kasbah at 1,500m in the High Atlas with views across a valley of almond and walnut trees to snow-capped peaks. World-class spa, heated outdoor pool, hiking routes to Mount Toubkal (4,167m — North Africa's highest peak), and one of the finest dining experiences in Morocco.",
     amenities:["Heated Pool","Free WiFi","Breakfast","Spa","Hiking","Yoga","Hammam","Airport Transfer"], rooms:28
   },
   {
-    id:24, name:"Kasbah du Toubkal", city:"Atlas Mountains", stars:4, price:165, rating:4.8, reviews:1456,
-    image:I.atl2,
+    id:24, name:"Kasbah du Toubkal", city:"Atlas Mountains", stars:4, price:165, image:I.atl2,
     badge:"Trekkers' Base Camp",
-    description:"The original mountain kasbah of Imlil village at 1,740m — a community-owned lodge where all profits benefit local Berber villages. Trekkers use it as their base camp for Mount Toubkal (4,167m). Mule treks, Berber guides, the most genuine Moroccan mountain food imaginable, and one of the most authentic experiences available in Morocco.",
+    description:"The original mountain kasbah of Imlil village at 1,740m — an eco-lodge run in partnership with the local Berber community. Trekkers use it as their base camp for Mount Toubkal (4,167m). Mule treks, Berber guides, the most genuine Moroccan mountain food imaginable, and one of the most authentic experiences available in Morocco.",
     amenities:["Free WiFi","Breakfast","Hiking","Mule Trekking","Berber Guides","Hammam","Community-Owned"], rooms:14
   },
   {
-    id:25, name:"Kasbah Bab Ourika", city:"Atlas Mountains", stars:5, price:240, rating:4.9, reviews:934,
-    image:I.atl3,
+    id:25, name:"Kasbah Bab Ourika", city:"Atlas Mountains", stars:5, price:240, image:I.atl3,
     badge:"Infinity Pool + Organic Farm",
-    description:"A boutique kasbah perched above the Ourika Valley at 1,300m with what may be the most spectacular infinity pool in Morocco — seemingly suspended above the valley with Atlas peaks in every direction. Certified organic kitchen garden, yoga deck, guided walks and one of the warmest family welcomes in the mountains.",
+    description:"A boutique kasbah perched above the Ourika Valley at 1,300m with a spectacular infinity pool seemingly suspended above the valley with Atlas peaks in every direction. Certified organic kitchen garden, yoga deck, guided walks and one of the warmest family welcomes in the mountains.",
     amenities:["Infinity Pool","Free WiFi","Breakfast","Organic Garden","Hiking","Yoga","Valley Views"], rooms:10
   },
   // ═══ ESSAOUIRA ═══
   {
-    id:26, name:"La Sultana Essaouira", city:"Essaouira", stars:5, price:150, rating:4.7, reviews:1654,
-    image:I.ess1,
+    id:26, name:"La Sultana Essaouira", city:"Essaouira", stars:5, price:150, image:I.ess1,
     badge:"5 Riads — UNESCO Medina",
-    description:"Five interconnected 18th-century riads inside Essaouira's UNESCO-listed medina, steps from the Atlantic ramparts. A labyrinth of individually decorated suites with arched doorways and hand-painted ceilings. Rooftop terrace with direct ocean views, spa using local argan and rose, and a restaurant recognised as one of the finest in coastal Morocco.",
+    description:"Five interconnected 18th-century riads inside Essaouira's UNESCO-listed medina, steps from the Atlantic ramparts. A labyrinth of individually decorated suites with arched doorways and hand-painted ceilings. Rooftop terrace with direct ocean views, spa using local argan and rose, and a well-regarded restaurant.",
     amenities:["Free WiFi","Breakfast","Spa","Rooftop","Ocean Views","Hammam","Argan Spa Treatments"], rooms:18
   },
   {
-    id:27, name:"Heure Bleue Palais", city:"Essaouira", stars:5, price:190, rating:4.8, reviews:2012,
-    image:I.ess2,
+    id:27, name:"Heure Bleue Palais", city:"Essaouira", stars:5, price:190, image:I.ess2,
     badge:"Rooftop Cinema",
-    description:"A grand 18th-century riad inside the medina with an indoor heated pool, a hammam and spa, and Essaouira's only rooftop cinema — classic films screened under the stars each evening. The name ('blue hour') refers to the extraordinary Atlantic dusk light that bathes the city every evening. A full restaurant in a beautiful vaulted stone cellar.",
+    description:"A grand 18th-century riad inside the medina with an indoor heated pool, a hammam and spa, and a rooftop cinema — classic films screened under the stars each evening. The name ('blue hour') refers to the extraordinary Atlantic dusk light that bathes the city every evening. A full restaurant in a beautiful vaulted stone cellar.",
     amenities:["Heated Pool","Free WiFi","Breakfast","Spa","Hammam","Rooftop Cinema","Restaurant"], rooms:33
   },
   {
-    id:28, name:"Ocean Vagabond", city:"Essaouira", stars:3, price:85, rating:4.5, reviews:1342,
-    image:I.ess1,
+    id:28, name:"Ocean Vagabond", city:"Essaouira", stars:3, price:85, image:I.ess1,
     badge:"Surfer's Paradise",
     description:"The legendary surf lodge of Essaouira, 200m from the beach — a favourite of kitesurfers, windsurfers and Atlantic wave-riders from across the world. Fresh-caught fish grilled daily, daily surf lessons from local pros, surfboard and kite rentals. The Essaouira trade wind (the Alizee) blows almost every afternoon from April to October.",
     amenities:["Free WiFi","Breakfast","Surf Lessons","Kitesurfing","Kite Rental","Beach Access (200m)"], rooms:9
   },
   // ═══ CASABLANCA ═══
   {
-    id:29, name:"Four Seasons Hotel Casablanca", city:"Casablanca", stars:5, price:320, rating:4.9, reviews:2876,
-    image:I.cas1,
+    id:29, name:"Four Seasons Hotel Casablanca", city:"Casablanca", stars:5, price:320, image:I.cas1,
     badge:"Oceanfront 5-Star",
-    description:"Casablanca's finest address — a sleek oceanfront tower on the Anfa corniche with direct Atlantic views from every room. Floor-to-ceiling windows, an infinity pool at the water's edge, the city's best Japanese restaurant, and a rooftop bar where the sunset views over the Atlantic are unmissable. 10 minutes from the Hassan II Mosque.",
-    amenities:["Infinity Pool","Free WiFi","Breakfast","Spa","Gym","Ocean View","Japanese Restaurant","Rooftop Bar"], rooms:186
+    description:"A luxury oceanfront hotel on the Anfa corniche with Atlantic views, an outdoor pool, a spa and several restaurants and bars. About a 10-minute drive from the Hassan II Mosque.",
+    amenities:["Pool","Free WiFi","Spa","Gym","Ocean View","Restaurants","Bar"]
   },
 ];
 
@@ -276,7 +247,7 @@ const attractions = [
   { id:3,  city:"Tangier", name:"Grottes d'Hercule",                  type:"Nature",   duration:"1.5 hrs",  price:"15 MAD",  image:I.herc,  description:"Ancient sea caves 14km west of Tangier carved partly by Neolithic millstone-quarriers and partly by millennia of Atlantic waves. Legend says Hercules rested here. The most famous feature is an ocean-facing opening shaped exactly like the inverted outline of the African continent." },
   { id:4,  city:"Tangier", name:"Grand Socco",                        type:"Culture",  duration:"1–2 hrs",  price:"Free",    image:I.tng1,  description:"Tangier's great central square surrounded by the ornate gateway of Bab Fahs, the Grande Mosquée, and the Mendoubia Gardens with an 800-year-old dragon tree. On Thursday and Sunday mornings, Rif Berber women arrive in traditional striped dresses selling honey, olives and fresh herbs." },
   { id:5,  city:"Tangier", name:"Petit Socco",                        type:"Culture",  duration:"1 hr",     price:"Free",    image:I.tng4,  description:"The legendary café square deep in the medina where Burroughs, Kerouac, Ginsberg, Tennessee Williams and Paul Bowles were regulars. Still retains its timeless bohemian atmosphere. Order mint tea at Café Central and watch the world pass exactly as it has for a century." },
-  { id:6,  city:"Tangier", name:"American Legation Museum",           type:"Heritage", duration:"1.5 hrs",  price:"Free",    image:I.tng3,  description:"The only US National Historic Landmark outside America. Morocco was the first nation to recognise American independence (1786). Houses paintings by Delacroix, historic maps, documents and a comprehensive exhibit on Tangier's literary and artistic legacy. Open Tue–Sat." },
+  { id:6,  city:"Tangier", name:"American Legation Museum",           type:"Heritage", duration:"1.5 hrs",  price:"Free",    image:I.tng3,  description:"The only US National Historic Landmark outside America. Morocco was among the first nations to recognise American independence (1777). Houses paintings by Delacroix, historic maps, documents and a comprehensive exhibit on Tangier's literary and artistic legacy. Open Tue–Sat." },
   { id:7,  city:"Tangier", name:"Tangier Bay & Corniche",             type:"Nature",   duration:"Half day", price:"Free",    image:I.tng5,  description:"A 5km arc of white sand along the Bay of Tangier framed by the Rif Mountains and the Spanish coast across the Strait. The beachfront corniche is lined with fresh fish restaurants serving the morning's catch. Summer buzzes with life; winter is dramatically empty and windswept." },
   { id:8,  city:"Tangier", name:"Tangier Medina & Souk",              type:"Culture",  duration:"2–3 hrs",  price:"Free",    image:I.tng6,  description:"Compact and navigable alone — unlike Marrakech or Fes. Rue es-Siaghines leads through souks selling kaftans, babouches, Rif carpets, argan oil and fresh-ground spices. Don't miss the covered food market on Rue de la Plage or the kasbah wall view over the medina rooftops." },
   { id:9,  city:"Tangier", name:"Strait of Gibraltar Viewpoint",      type:"Nature",   duration:"1 hr",     price:"Free",    image:I.tng7,  description:"From the kasbah walls and the Marshan plateau, you can see Africa and Europe simultaneously — Spain just 14km away. On clear days the white buildings of Tarifa are visible with the naked eye. Over 100,000 ships per year pass through — the world's busiest international waterway." },
@@ -284,28 +255,28 @@ const attractions = [
   { id:11, city:"Tangier", name:"Church of Saint Andrew",             type:"Heritage", duration:"45 min",   price:"Free",    image:I.paul,  description:"Built in 1894 on land gifted by Sultan Hassan I. The Lord's Prayer is inscribed in Arabic calligraphy in the chancel arch — a symbol of Tangier's interfaith history. The churchyard holds the graves of many notable foreign residents. A profound and peaceful place in the medina." },
   { id:12, city:"Tangier", name:"Literary Tangier Walking Tour",      type:"Culture",  duration:"2 hrs",    price:"Free",    image:I.tng2,  description:"A self-guided walk through the sites that shaped Paul Bowles, William Burroughs, Jack Kerouac and Allen Ginsberg. The El Muniria hotel (Room 9 where Naked Lunch was written), Café Hafa on the Marshan cliff, the American Legation and the Petit Socco cafés. Essential for literature lovers." },
   { id:13, city:"Marrakech", name:"Djemaa el-Fna",                   type:"Culture",  duration:"Evening",  price:"Free",    image:I.mrk3,  description:"UNESCO Intangible Cultural Heritage. By night the world's greatest open-air theatre — storytellers, Gnawa musicians, acrobats, snake charmers and the smoke of a hundred grills. By day: orange juice vendors, henna artists and the best people-watching in Africa." },
-  { id:14, city:"Fes", name:"Chouara Tanneries",                     type:"Heritage", duration:"2 hrs",    price:"Free",    image:I.fes2,  description:"The world's oldest working tannery in continuous operation since the 11th century. Viewed from the leather merchant terraces above, the stone honeycomb vats dyed in saffron, poppy, mint and indigo create an image unlike anything else on earth. Visit Tuesday–Sunday morning." },
+  { id:14, city:"Fes", name:"Chouara Tanneries",                     type:"Heritage", duration:"2 hrs",    price:"Free",    image:I.fes2,  description:"One of the oldest tanneries in the world, in use for centuries. Viewed from the leather merchant terraces above, the stone honeycomb vats dyed in saffron, poppy, mint and indigo create an image unlike anything else on earth. Visit Tuesday–Sunday morning." },
 ];
 
 const tours = [
-  { id:1, city:"Tangier", title:"Literary Tangier Walking Tour", duration:"3 hours", groupSize:"Max 8", rating:4.9, price:350, image:I.tng2, description:"Walk in the footsteps of Burroughs, Bowles and Kerouac. Visit Room 9 of the El Muniria, Café Hafa on the Marshan cliff, the American Legation and the Petit Socco.", highlights:["Café Hafa","American Legation Museum","El Muniria Hotel","Petit Socco cafés"] },
-  { id:2, city:"Tangier", title:"Cap Spartel & Hercules Caves", duration:"Half day", groupSize:"Max 12", rating:4.8, price:280, image:I.cap, description:"Where two seas collide. Visit the striped Cap Spartel lighthouse where the Atlantic meets the Mediterranean, then descend into the ancient Hercules Caves carved by Neolithic millstone-cutters.", highlights:["Cap Spartel lighthouse","Two-sea confluence","Hercules Caves","Rmilat forest walk"] },
-  { id:3, city:"Marrakech", title:"Medina Souk Deep Dive", duration:"4 hours", groupSize:"Max 10", rating:5.0, price:420, image:I.mrk3, description:"Navigate the 18 souk quarters with a master guide. Tanneries, dyers, brass-beaters, spice merchants and carpet weavers — the full living medieval marketplace experience.", highlights:["Dyers souk","Spice market","Brass workshops","Carpet souk"] },
-  { id:4, city:"Marrakech", title:"Djemaa el-Fna by Night", duration:"3 hours", groupSize:"Max 15", rating:4.9, price:300, image:I.mrk5, description:"The world's greatest open-air theatre after dark. Storytellers, Gnawa musicians, acrobats, snake charmers and the smoke and noise of a hundred food grills. Includes dinner at a stall.", highlights:["Gnawa musicians","Storytellers","Snake charmers","Local street dinner"] },
-  { id:5, city:"Fes", title:"Full-Day Fes Medina Tour", duration:"8 hours", groupSize:"Max 8", rating:4.9, price:550, image:I.fes1, description:"The most comprehensive Fes medina experience available. Chouara Tannery, Bou Inania Madrasa, Al-Qarawiyyin, the souks, a Fassi lunch and the covered food market. Transformative.", highlights:["Chouara Tannery","Bou Inania Madrasa","Al-Qarawiyyin","Fassi lunch"] },
-  { id:6, city:"Fes", title:"Fassi Cooking Class", duration:"5 hours", groupSize:"Max 8", rating:5.0, price:480, image:I.fes2, description:"Learn Fassi pastilla, couscous and bastilla from a Fassi family in their home. The most refined cuisine in Morocco, taught by the hands that have been making it for generations.", highlights:["Pastilla preparation","Couscous technique","Preserved lemon","Local family home"] },
-  { id:7, city:"Chefchaouen", title:"Blue City Photography Walk", duration:"3 hours", groupSize:"Max 8", rating:4.9, price:250, image:I.chef1, description:"An early-morning guided walk through Chefchaouen's most photogenic blue alleys before tour groups arrive. The best angles, best light and hidden corners known only to locals.", highlights:["Hidden blue alleys","Spanish Mosque view","Morning golden light","Riff Mountains backdrop"] },
-  { id:8, city:"Chefchaouen", title:"Akchour Waterfalls Trek", duration:"Full day", groupSize:"Max 12", rating:4.8, price:400, image:I.chef2, description:"A spectacular full-day hike through the Talassemtane National Park to the Akchour waterfalls — the most beautiful natural site in northern Morocco. Swimming included.", highlights:["Akchour waterfalls","Talassemtane park","Natural swimming pools","Cedar forest"] },
-  { id:9, city:"Merzouga", title:"Sahara Sunset Camel Trek", duration:"2 hours + overnight", groupSize:"Max 16", rating:5.0, price:890, image:I.sah1, description:"The classic Sahara experience — a camel trek at sunset into the heart of Erg Chebbi, an overnight in a luxury Berber tent, and a dawn walk on the silent dunes. Life-changing.", highlights:["Sunset camel trek","Luxury desert camp","Sahara stargazing","Dune sunrise"] },
-  { id:10, city:"Merzouga", title:"4x4 Desert Explorer", duration:"Full day", groupSize:"Max 6", rating:4.8, price:1200, image:I.sah2, description:"A full-day 4WD expedition across the Sahara — fossil sites of Erfoud, the Gnaoua village of Khemliya, nomad families, salt flats and the hidden southern face of Erg Chebbi.", highlights:["Fossil workshops Erfoud","Khemliya Gnaoua village","Nomad family visit","Erg Chebbi south face"] },
-  { id:11, city:"Essaouira", title:"Gnaoua Music & Ramparts", duration:"3 hours", groupSize:"Max 12", rating:4.8, price:320, image:I.ess1, description:"The spirit of Essaouira — the Atlantic ramparts at sunset, a live Gnaoua music session with a master musician, and the story of this UNESCO port city's extraordinary multicultural history.", highlights:["Atlantic ramparts sunset","Live Gnaoua music","Portuguese fortifications","UNESCO heritage story"] },
-  { id:12, city:"Essaouira", title:"Argan Oil Farm & Cooperatives", duration:"Half day", groupSize:"Max 10", rating:4.7, price:380, image:I.ess2, description:"Visit the argan forest UNESCO Biosphere Reserve and a women's argan oil cooperative — see the traditional hand-pressing process and taste the finest culinary argan oil directly from the source.", highlights:["Argan forest UNESCO reserve","Women's cooperative visit","Hand-pressing process","Argan oil tasting"] },
-  { id:13, city:"Atlas Mountains", title:"Mount Toubkal Ascent (2 days)", duration:"2 days", groupSize:"Max 8", rating:5.0, price:1800, image:I.atl1, description:"The greatest mountain trek in North Africa. Two days from the Berber village of Imlil to the summit of Mount Toubkal (4,167m) — highest peak in Africa north of the Sahara. No technical experience needed.", highlights:["Toubkal summit 4167m","Imlil Berber village","Mountain refuge overnight","360° Atlas panorama"] },
-  { id:14, city:"Atlas Mountains", title:"Aït Ben Haddou & Dades Valley", duration:"Full day", groupSize:"Max 12", rating:4.9, price:850, image:I.atl3, description:"The most spectacular road trip in Morocco — the Tizi n'Tichka pass, the UNESCO ksar of Aït Ben Haddou (Gladiator, Game of Thrones), the Dades Valley rose gardens and clay kasbahs.", highlights:["Tizi n'Tichka pass 2260m","Aït Ben Haddou UNESCO","Dades Valley kasbahs","Valley of Roses"] },
-  { id:15, city:"Agadir", title:"Taghazout Surf Experience", duration:"Half day", groupSize:"Max 8", rating:4.8, price:450, image:I.ess1, description:"Africa's best surf spot — professional instruction at Taghazout beach (20km north of Agadir) with certified surf coaches. Suitable for complete beginners to advanced surfers.", highlights:["Taghazout beach","Professional surf coaching","Board and wetsuit included","Atlantic waves"] },
-  { id:16, city:"Agadir", title:"Souss-Massa Birdwatching", duration:"Full day", groupSize:"Max 6", rating:4.7, price:600, image:I.ess2, description:"The critically endangered Northern Bald Ibis — the rarest bird in Africa — nests only in Souss-Massa National Park. A guided ornithology expedition with a park ranger and specialist guide.", highlights:["Northern Bald Ibis","Souss-Massa park","Flamingos and herons","Atlantic estuary ecosystem"] },
-  { id:17, city:"Casablanca", title:"Hassan II Mosque Private Tour", duration:"2 hours", groupSize:"Max 10", rating:5.0, price:380, image:I.cas1, description:"A private guided tour of the world's third largest mosque — the extraordinary architecture, the retractable roof, the glass floor over the Atlantic, and the full story of its construction (17 years, 10,000 craftsmen).", highlights:["Interior guided tour","Glass floor over Atlantic","210m minaret facts","Retractable roof mechanism"] },
-  { id:18, city:"Casablanca", title:"Art Deco Architecture Walk", duration:"3 hours", groupSize:"Max 12", rating:4.6, price:280, image:I.cas1, description:"The finest collection of 1930s Art Deco architecture in Africa — the Ville Nouvelle of Casablanca rivals Miami Beach and Naples in its concentration of extraordinary buildings. A unique architectural safari.", highlights:["Maarif Art Deco quarter","Place Mohammed V","Cinema Rex (1929)","Colonial administration buildings"] },
+  { id:1, city:"Tangier", title:"Literary Tangier Walking Tour", duration:"3 hours", groupSize:"Max 8", image:I.tng2, description:"Walk in the footsteps of Burroughs, Bowles and Kerouac. Visit Room 9 of the El Muniria, Café Hafa on the Marshan cliff, the American Legation and the Petit Socco.", highlights:["Café Hafa","American Legation Museum","El Muniria Hotel","Petit Socco cafés"] },
+  { id:2, city:"Tangier", title:"Cap Spartel & Hercules Caves", duration:"Half day", groupSize:"Max 12", image:I.cap, description:"Where two seas collide. Visit the striped Cap Spartel lighthouse where the Atlantic meets the Mediterranean, then descend into the ancient Hercules Caves carved by Neolithic millstone-cutters.", highlights:["Cap Spartel lighthouse","Two-sea confluence","Hercules Caves","Rmilat forest walk"] },
+  { id:3, city:"Marrakech", title:"Medina Souk Deep Dive", duration:"4 hours", groupSize:"Max 10", image:I.mrk3, description:"Navigate the 18 souk quarters with a master guide. Tanneries, dyers, brass-beaters, spice merchants and carpet weavers — the full living medieval marketplace experience.", highlights:["Dyers souk","Spice market","Brass workshops","Carpet souk"] },
+  { id:4, city:"Marrakech", title:"Djemaa el-Fna by Night", duration:"3 hours", groupSize:"Max 15", image:I.mrk5, description:"The world's greatest open-air theatre after dark. Storytellers, Gnawa musicians, acrobats, snake charmers and the smoke and noise of a hundred food grills. Includes dinner at a stall.", highlights:["Gnawa musicians","Storytellers","Snake charmers","Local street dinner"] },
+  { id:5, city:"Fes", title:"Full-Day Fes Medina Tour", duration:"8 hours", groupSize:"Max 8", image:I.fes1, description:"The most comprehensive Fes medina experience available. Chouara Tannery, Bou Inania Madrasa, Al-Qarawiyyin, the souks, a Fassi lunch and the covered food market. Transformative.", highlights:["Chouara Tannery","Bou Inania Madrasa","Al-Qarawiyyin","Fassi lunch"] },
+  { id:6, city:"Fes", title:"Fassi Cooking Class", duration:"5 hours", groupSize:"Max 8", image:I.fes2, description:"Learn Fassi pastilla, couscous and bastilla from a Fassi family in their home. The most refined cuisine in Morocco, taught by the hands that have been making it for generations.", highlights:["Pastilla preparation","Couscous technique","Preserved lemon","Local family home"] },
+  { id:7, city:"Chefchaouen", title:"Blue City Photography Walk", duration:"3 hours", groupSize:"Max 8", image:I.chef1, description:"An early-morning guided walk through Chefchaouen's most photogenic blue alleys before tour groups arrive. The best angles, best light and hidden corners known only to locals.", highlights:["Hidden blue alleys","Spanish Mosque view","Morning golden light","Riff Mountains backdrop"] },
+  { id:8, city:"Chefchaouen", title:"Akchour Waterfalls Trek", duration:"Full day", groupSize:"Max 12", image:I.chef2, description:"A spectacular full-day hike through the Talassemtane National Park to the Akchour waterfalls — the most beautiful natural site in northern Morocco. Swimming included.", highlights:["Akchour waterfalls","Talassemtane park","Natural swimming pools","Cedar forest"] },
+  { id:9, city:"Merzouga", title:"Sahara Sunset Camel Trek", duration:"2 hours + overnight", groupSize:"Max 16", image:I.sah1, description:"The classic Sahara experience — a camel trek at sunset into the heart of Erg Chebbi, an overnight in a luxury Berber tent, and a dawn walk on the silent dunes. Life-changing.", highlights:["Sunset camel trek","Luxury desert camp","Sahara stargazing","Dune sunrise"] },
+  { id:10, city:"Merzouga", title:"4x4 Desert Explorer", duration:"Full day", groupSize:"Max 6", image:I.sah2, description:"A full-day 4WD expedition across the Sahara — fossil sites of Erfoud, the Gnaoua village of Khemliya, nomad families, salt flats and the hidden southern face of Erg Chebbi.", highlights:["Fossil workshops Erfoud","Khemliya Gnaoua village","Nomad family visit","Erg Chebbi south face"] },
+  { id:11, city:"Essaouira", title:"Gnaoua Music & Ramparts", duration:"3 hours", groupSize:"Max 12", image:I.ess1, description:"The spirit of Essaouira — the Atlantic ramparts at sunset, a live Gnaoua music session with a master musician, and the story of this UNESCO port city's extraordinary multicultural history.", highlights:["Atlantic ramparts sunset","Live Gnaoua music","Portuguese fortifications","UNESCO heritage story"] },
+  { id:12, city:"Essaouira", title:"Argan Oil Farm & Cooperatives", duration:"Half day", groupSize:"Max 10", image:I.ess2, description:"Visit the argan forest UNESCO Biosphere Reserve and a women's argan oil cooperative — see the traditional hand-pressing process and taste the finest culinary argan oil directly from the source.", highlights:["Argan forest UNESCO reserve","Women's cooperative visit","Hand-pressing process","Argan oil tasting"] },
+  { id:13, city:"Atlas Mountains", title:"Mount Toubkal Ascent (2 days)", duration:"2 days", groupSize:"Max 8", image:I.atl1, description:"The greatest mountain trek in North Africa. Two days from the Berber village of Imlil to the summit of Mount Toubkal (4,167m) — highest peak in Africa north of the Sahara. No technical experience needed.", highlights:["Toubkal summit 4167m","Imlil Berber village","Mountain refuge overnight","360° Atlas panorama"] },
+  { id:14, city:"Atlas Mountains", title:"Aït Ben Haddou & Dades Valley", duration:"Full day", groupSize:"Max 12", image:I.atl3, description:"The most spectacular road trip in Morocco — the Tizi n'Tichka pass, the UNESCO ksar of Aït Ben Haddou (Gladiator, Game of Thrones), the Dades Valley rose gardens and clay kasbahs.", highlights:["Tizi n'Tichka pass 2260m","Aït Ben Haddou UNESCO","Dades Valley kasbahs","Valley of Roses"] },
+  { id:15, city:"Agadir", title:"Taghazout Surf Experience", duration:"Half day", groupSize:"Max 8", image:I.ess1, description:"Africa's best surf spot — professional instruction at Taghazout beach (20km north of Agadir) with certified surf coaches. Suitable for complete beginners to advanced surfers.", highlights:["Taghazout beach","Professional surf coaching","Board and wetsuit included","Atlantic waves"] },
+  { id:16, city:"Agadir", title:"Souss-Massa Birdwatching", duration:"Full day", groupSize:"Max 6", image:I.ess2, description:"The critically endangered Northern Bald Ibis — the rarest bird in Africa — nests only in Souss-Massa National Park. A guided ornithology expedition with a park ranger and specialist guide.", highlights:["Northern Bald Ibis","Souss-Massa park","Flamingos and herons","Atlantic estuary ecosystem"] },
+  { id:17, city:"Casablanca", title:"Hassan II Mosque Private Tour", duration:"2 hours", groupSize:"Max 10", image:I.cas1, description:"A private guided tour of one of the largest mosques in the world — the extraordinary architecture, the retractable roof, the prayer hall built partly over the Atlantic, and the story of its construction.", highlights:["Interior guided tour","Prayer hall over the Atlantic","210m minaret","Retractable roof mechanism"] },
+  { id:18, city:"Casablanca", title:"Art Deco Architecture Walk", duration:"3 hours", groupSize:"Max 12", image:I.cas1, description:"The finest collection of 1930s Art Deco architecture in Africa — the Ville Nouvelle of Casablanca rivals Miami Beach and Naples in its concentration of extraordinary buildings. A unique architectural safari.", highlights:["Maarif Art Deco quarter","Place Mohammed V","Cinema Rex (1929)","Colonial administration buildings"] },
 ];
 
 const destinations = [
@@ -316,11 +287,11 @@ const destinations = [
     bestTime:"April–June, September–November",
     language:"Darija (Moroccan Arabic), Spanish, French, Tarifit Berber",
     currency:"Moroccan Dirham (MAD)", temperature:"Mediterranean — 28°C summer, 12°C winter",
-    facts:["14km from Spain — the Spanish coast is visible from the kasbah","One of the oldest continuously inhabited cities in the world (3,000+ years)","The American Legation is the only US National Historic Landmark outside America","Morocco was the first nation to recognise American independence (1777)","William Burroughs wrote Naked Lunch in Room 9 of the El Muniria hotel (1957)","Paul Bowles lived in Tangier from 1947 until his death in 1999","Henri Matisse visited in 1912 and produced 24 masterworks here","Tanger-Med is the largest container port in Africa","Al Boraq high-speed train: Tangier to Casablanca in 2h10","Cap Spartel is where the Atlantic Ocean and Mediterranean Sea collide"],
+    facts:["14km from Spain — the Spanish coast is visible from the kasbah","One of the oldest continuously inhabited cities in the world (3,000+ years)","The American Legation is the only US National Historic Landmark outside America","Morocco was among the first nations to recognise American independence (1777)","William Burroughs wrote Naked Lunch in Room 9 of the El Muniria hotel (1957)","Paul Bowles lived in Tangier from 1947 until his death in 1999","Henri Matisse visited in 1912 and produced 24 masterworks here","Tanger-Med is the largest container port in Africa","Al Boraq high-speed train: Tangier to Casablanca in 2h10","Cap Spartel is where the Atlantic Ocean and Mediterranean Sea collide"],
     gettingThere:"Tangier Ibn Battouta Airport (TNG) has direct flights from Paris, Madrid, Brussels, Amsterdam, London. Tanger-Med ferry port (40km east) connects to Tarifa (35 min), Algeciras (90 min) and Barcelona. Al Boraq high-speed train to Casablanca (2h10) and Rabat (1h30).",
     tips:["Walk up to the kasbah at sunset — the Strait view is unforgettable","Cap Spartel at 8am before tour groups — sea collision most visible in morning light","Mint tea at Café Hafa on the Marshan cliff — where Burroughs and Kerouac sat","The medina is compact — easy to navigate alone unlike Marrakech or Fes","Fresh seafood on Avenue d'Espagne near the port — fish caught that morning","American Legation Museum: Tue–Sat, free entry","Grand Socco Thursday & Sunday markets: arrive by 7am","Petit taxi to Cap Spartel: agree 200–250 MAD return before getting in","Hercules Caves 3km past Cap Spartel — combine both in one half-day","Book Fairmont Tazi Palace or Villa Josephine well in advance"],
     highlights:["Strait of Gibraltar views","Literary history","Cap Spartel","Kasbah Museum"],
-    rating:4.8, reviewCount:3420, priceLevel:"$$",
+    priceLevel:"$$",
   },
   {
     id:2, slug:"marrakech", name:"Marrakech", region:"Marrakech-Safi", tagline:"The Red City",
@@ -333,20 +304,20 @@ const destinations = [
     gettingThere:"Marrakech Menara Airport (RAK) has direct flights from most European cities (London, Paris, Amsterdam, Madrid). Train to Casablanca (3h) and Rabat (4h). CTM buses from Fes, Casablanca and Agadir. Supratours coaches from Agadir and Essaouira.",
     tips:["Visit Djemaa el-Fna between 9pm–11pm for the full experience","Start souk exploration at 9am before tour groups arrive","Book riads at least 3 weeks ahead in spring/autumn","Hire a calèche (horse-drawn carriage) for a sunset ramparts circuit","Majorelle Garden: arrive at 8am opening to avoid crowds","Bargain respectfully in the souks — 40–50% of initial price is fair","Try the mechoui (slow-roasted lamb) at the plaza near Djemaa el-Fna at noon","Hammam Dar el-Bacha offers an authentic local hammam experience for 30 MAD","Book a cooking class — learning tagine at a riad is a highlight of any visit","The Saadian Tombs are free and less crowded than other sites"],
     highlights:["Djemaa el-Fna","Medina souks","Jardin Majorelle","Atlas day trips"],
-    rating:4.9, reviewCount:18740, priceLevel:"$$",
+    priceLevel:"$$",
   },
   {
     id:3, slug:"fes", name:"Fes", region:"Fès-Meknès", tagline:"The Ancient Soul of Morocco",
-    description:"Fes — the oldest of Morocco's Imperial Cities — is the country's spiritual and intellectual heart. Founded in 789 AD, Fes el-Bali (the old city) is the largest living medieval city in the world and a UNESCO World Heritage Site of extraordinary density and beauty.\n\nThe medina's 9,400 alleys make it the largest car-free urban area on earth. Getting lost is not just inevitable — it is the experience. A maze of ancient mosques, Quranic schools, tanneries, craft workshops and fondouks (merchants' inns) where time has barely moved since the 13th century.\n\nThe Chouara Tannery — the world's oldest working tannery (11th century) — is one of the most visually spectacular sights in all of Africa. The Al-Qarawiyyin University, founded in 859 AD, is the oldest continuously operating university on earth.",
+    description:"Fes — the oldest of Morocco's Imperial Cities — is the country's spiritual and intellectual heart. Founded in 789 AD, Fes el-Bali (the old city) is the largest living medieval city in the world and a UNESCO World Heritage Site of extraordinary density and beauty.\n\nThe medina's 9,400 alleys make it the largest car-free urban area on earth. Getting lost is not just inevitable — it is the experience. A maze of ancient mosques, Quranic schools, tanneries, craft workshops and fondouks (merchants' inns) where time has barely moved since the 13th century.\n\nThe Chouara Tannery — one of the oldest tanneries in the world — is one of the most striking sights in Morocco. The Al-Qarawiyyin University, founded in 859 AD, is the oldest continuously operating university on earth.",
     image:I.fes1, heroImage:I.fes2,
     bestTime:"March–May, September–November",
     language:"Darija (Moroccan Arabic), French, Classical Arabic",
     currency:"Moroccan Dirham (MAD)", temperature:"Continental — 35°C summer, 5°C winter",
-    facts:["Founded in 789 AD by Idris I — Morocco's oldest imperial city","Fes el-Bali is the largest living medieval city in the world (UNESCO)","Al-Qarawiyyin University (859 AD) is the world's oldest continuously operating university","The Chouara Tannery has been in operation since the 11th century","The medina has over 9,400 alleys and is entirely car-free","The Bou Inania Madrasa (1350) is the finest example of Marinid architecture in Morocco","Fassi cuisine is considered the most refined in Morocco","The Fes Festival of World Sacred Music draws 600,000 visitors each May–June","Over 100 fondouks (ancient caravanserais) survive in the medina","The city was the world's largest city in the 13th century"],
+    facts:["Founded in 789 AD by Idris I — Morocco's oldest imperial city","Fes el-Bali is the largest living medieval city in the world (UNESCO)","Al-Qarawiyyin University (859 AD) is the world's oldest continuously operating university","The Chouara Tannery has been in use for centuries","The medina has over 9,400 alleys and is entirely car-free","The Bou Inania Madrasa (1350) is the finest example of Marinid architecture in Morocco","Fassi cuisine is considered the most refined in Morocco","The Fes Festival of World Sacred Music draws 600,000 visitors each May–June","Over 100 fondouks (ancient caravanserais) survive in the medina","Fes was one of the largest cities in the world in medieval times"],
     gettingThere:"Fes-Saïss Airport (FEZ) has direct flights from Paris, Brussels, Amsterdam, Madrid. ONCF train from Casablanca (4h30), Tangier (4h) and Rabat (3h). CTM buses from all major cities. Taxi from airport: 100–150 MAD.",
     tips:["Hire a local guide for the medina — the 9,400 alleys are genuinely impossible to navigate alone the first time","Visit Chouara Tannery in the morning for the best colours and light","The Bou Inania Madrasa (1350) is free and the most beautiful building in Fes","Fassi couscous on Friday — find a neighbourhood restaurant that serves the real family version","Buy saffron, ras el hanout and preserved lemons from the spice souk near Bab Rcif","Al-Qarawiyyin Library is not open to visitors — appreciate it from the courtyard","Book dinner at Riad Fes or Dar Roumana for genuine Fassi fine dining","The Blue Gate (Bab Bou Jeloud) at sunset is Fes's most photographed sight","Lunch at a rooftop restaurant above the medina for the full cityscape panorama","Day trip to Meknès (45 min) and Volubilis Roman ruins"],
     highlights:["Chouara Tanneries","Bou Inania Madrasa","Medieval medina","Fassi cuisine"],
-    rating:4.8, reviewCount:9210, priceLevel:"$",
+    priceLevel:"$",
   },
   {
     id:4, slug:"chefchaouen", name:"Chefchaouen", region:"Tanger-Tétouan-Al Hoceïma", tagline:"The Blue Pearl of Morocco",
@@ -359,7 +330,7 @@ const destinations = [
     gettingThere:"No direct flights. CTM and Supratours buses from Tangier (3h), Fes (4h), Casablanca (5h30). Grand taxi from Tetouan (1h30) or Tangier (2h30). The town is walkable — no car needed.",
     tips:["The blue walls glow most beautifully in golden morning light — explore 7–9am before tour groups arrive","Hike to the Spanish Mosque (45 min) — the panoramic view is the iconic shot of Morocco","Swim at Akchour Waterfalls — a magnificent full-day trek (20km return)","The local kefta and goat cheese tagine is among the best in Morocco","Buy hand-woven Riffian rugs — the geometric patterns are unique to this region","The Plaza Uta el-Hammam is the heart of the medina — perfect for watching the world pass","Stay at least 2 nights — the city has a way of extending every stay","The hammam on the main square is open to all and costs 15 MAD","Overnight buses from Fes make an easy connection","Try the local bissara (broad bean soup) for breakfast — 5 MAD a bowl"],
     highlights:["Blue painted medina","Spanish Mosque viewpoint","Akchour Waterfalls","Rif Mountains hiking"],
-    rating:4.9, reviewCount:7830, priceLevel:"$",
+    priceLevel:"$",
   },
   {
     id:5, slug:"merzouga", name:"Merzouga & Sahara", region:"Drâa-Tafilalet", tagline:"Desert of a Thousand Stars",
@@ -372,7 +343,7 @@ const destinations = [
     gettingThere:"No direct flights. Most visitors fly to Marrakech (RAK) and drive 9–10 hours via the Dades Valley and Draa Valley route. CTM buses from Marrakech (10h). Shared grands taxis from Erfoud (45 min). Many visitors do a 3-day circuit from Marrakech through the Atlas and the Sahara.",
     tips:["Book a luxury desert camp in advance — the best fill up 3 months ahead","Sunset camel trek: depart 1 hour before sunset, arrive at camp in darkness","The coldest months (Dec–Jan) have the clearest skies — best stargazing","Ride a camel one-way, quad bike the other — the best of both worlds","Visit Khemliya village for an authentic Gnaoua music evening with local musicians","Buy ammonite fossils directly from the cutters in Erfoud — avoid tourist shops","4WD is not needed for Erg Chebbi — all roads are paved to Merzouga village","Bring layers even in spring — desert nights are cold even in April","Dawn (5:30am) on the dunes is even more beautiful than sunset","The 3-day Marrakech–Atlas–Sahara road trip is the greatest drive in Morocco"],
     highlights:["Erg Chebbi dunes","Camel sunset trek","Luxury desert camp","Sahara stargazing"],
-    rating:4.9, reviewCount:11250, priceLevel:"$$$",
+    priceLevel:"$$$",
   },
   {
     id:6, slug:"essaouira", name:"Essaouira", region:"Marrakech-Safi", tagline:"The Wind City of Africa",
@@ -385,7 +356,7 @@ const destinations = [
     gettingThere:"Nearest airport: Marrakech RAK (2.5h by road). Supratours buses from Marrakech (2.5h, 80 MAD). CTM buses from Casablanca (5h) and Agadir (3h). No train. Shared grands taxis from Marrakech (3h, 100 MAD).",
     tips:["Buy grilled sardines straight from the port fishing boats at 7am — the freshest in Morocco","The rampart walk at sunset: 45 minutes of extraordinary Atlantic views","Gnaoua World Music Festival (June) — book accommodation 6 months ahead","Argan oil cooperative visits are free and fascinating","Kitesurfing lessons: many schools on the beach — 500 MAD for 2 hours","The medina is small and walkable — allow 2 hours","Heure Bleue Palais rooftop cinema: films under the stars every evening","La Fromagerie on Place Moulay Hassan: the best restaurant terrace in town","Essaouira is 10°C cooler than Marrakech in summer — a perfect July escape","Buy thuya wood objects from the craftsmen in the medina, not the tourist stalls"],
     highlights:["Atlantic ramparts","Gnaoua music","Kitesurfing beach","Thuya wood crafts"],
-    rating:4.8, reviewCount:6890, priceLevel:"$$",
+    priceLevel:"$$",
   },
   {
     id:7, slug:"atlas-mountains", name:"Atlas Mountains", region:"Marrakech-Safi / Drâa-Tafilalet", tagline:"Roof of North Africa",
@@ -398,7 +369,7 @@ const destinations = [
     gettingThere:"Most Atlas destinations are accessed from Marrakech. Imlil (for Toubkal) is 90 minutes by taxi from Marrakech. The Tizi n'Tichka road to Ouarzazate takes 3h. Dades and Todra gorges are day trips from Tinghir or Ouarzazate. No train to the Atlas — car or guided tour recommended.",
     tips:["Toubkal ascent: two days, base camp at Neltner Refuge (3,207m). No technical experience needed Apr–Oct","Hire a local Berber mountain guide in Imlil — they know every path and rock","Aït Ben Haddou: arrive at sunrise for golden light on the ksar walls","Kasbah Tamadot (Richard Branson's mountain retreat) is 45 min from Marrakech","The Marrakech–Ouarzazate road is the greatest drive in Morocco — allow the full day","Todra Gorge: the walls glow most dramatically 10–11am when sun reaches the canyon floor","Valley of Roses: visit during the May harvest festival","Atlas circuit from Marrakech: Tizi n'Tichka → Ouarzazate → Aït Ben Haddou → Dades → Todra (3 days)","In winter (Dec–Feb), snow chains are required on the Tizi n'Tichka pass","Local Berber hospitality: accept any offer of mint tea in a mountain home"],
     highlights:["Toubkal summit trek","Aït Ben Haddou ksar","Todra Gorge","Dades Valley kasbahs"],
-    rating:4.9, reviewCount:5620, priceLevel:"$$",
+    priceLevel:"$$",
   },
   {
     id:8, slug:"agadir", name:"Agadir", region:"Souss-Massa", tagline:"Morocco's Sun & Beach Capital",
@@ -411,40 +382,24 @@ const destinations = [
     gettingThere:"Agadir Al Massira Airport (AGA) has flights from London, Paris, Amsterdam, Frankfurt, Brussels and many European cities. Supratours buses from Marrakech (3.5h) and Casablanca (7h). No train to Agadir. Car rental is the best way to explore the surrounding area.",
     tips:["The beach is 10km long — the southern end near Tikida Beach hotels is the most beautiful","Souk El Had on Thursdays is the most authentic market experience in the region","Book a day trip to Imouzzer Ida Outanane waterfalls (60km north)","Argan oil cooperative visit: Cooperative Ibn Baitar is the most reputable","Surfing: Taghazout (20km north) is Africa's best surf spot — board rental from 100 MAD","The kasbah hill at sunset: the Arabic inscription glows gold in the last light","Cap Rhir to the north: a lighthouse perched on dramatic Atlantic cliffs","Fresh fish at the port market early morning — negotiate with the fishermen","Agadir–Tiznit road (60km south): the most scenic coastal drive in Morocco","Try argan-infused amlou (almond butter) — the best breakfast spread in Morocco"],
     highlights:["10km golden beach","Souss-Massa National Park","Argan oil cooperatives","Taghazout surfing"],
-    rating:4.6, reviewCount:8940, priceLevel:"$$",
+    priceLevel:"$$",
   },
   {
     id:9, slug:"casablanca", name:"Casablanca", region:"Casablanca-Settat", tagline:"Morocco's Modern Heart",
-    description:"Casablanca — Casa to its residents, Dar el-Beida (White House) in Arabic — is Morocco's economic capital and largest city. A dynamic, modern metropolis of 4 million people built on French Art Deco architecture and Moorish grandeur, it is Morocco's pulse of business, culture, fashion and gastronomy.\n\nThe Hassan II Mosque — rising from a promontory directly over the Atlantic Ocean — is the third largest mosque in the world and Morocco's greatest architectural achievement. Its 210-metre minaret is the tallest religious structure on earth.\n\nBeyond the mosque, the city offers Morocco's best restaurants, a vibrant arts scene, a revitalized Art Deco old medina, the Corniche Ain Diab oceanfront, and the kind of sophisticated nightlife found nowhere else in the country.",
+    description:"Casablanca — Casa to its residents, Dar el-Beida (White House) in Arabic — is Morocco's economic capital and largest city. A dynamic, modern metropolis of 4 million people built on French Art Deco architecture and Moorish grandeur, it is Morocco's pulse of business, culture, fashion and gastronomy.\n\nThe Hassan II Mosque — rising from a promontory directly over the Atlantic Ocean — is one of the largest mosques in the world and Morocco's greatest architectural achievement. Its 210-metre minaret is the tallest religious structure on earth.\n\nBeyond the mosque, the city offers Morocco's best restaurants, a vibrant arts scene, a revitalized Art Deco old medina, the Corniche Ain Diab oceanfront, and the kind of sophisticated nightlife found nowhere else in the country.",
     image:I.cas1, heroImage:I.cas1,
     bestTime:"April–October",
     language:"Darija (Moroccan Arabic), French, English (business)",
     currency:"Moroccan Dirham (MAD)", temperature:"Atlantic — 26°C summer, 14°C winter (mild, never extreme)",
-    facts:["Hassan II Mosque is the 3rd largest mosque in the world (25,000 worshippers inside)","Its 210m minaret is the tallest religious structure on earth — visible 50km out at sea","The mosque is built directly over the Atlantic Ocean — the sea is visible through glass floors","Casablanca generates 50% of Morocco's national industrial production","Mohammed V International Airport (CMN) is the busiest in Morocco (10 million pax/year)","The Rick's Café (inspired by the 1942 film Casablanca) is a genuine fine dining destination","Casablanca was Morocco's first city to have a tramway (2012)","The Casa-Port to Tangier TGV takes just 2h10","Port of Casablanca handles 35 million tonnes of freight per year","The 1930s Art Deco architecture of the Ville Nouvelle is one of the finest collections in the world"],
+    facts:["Hassan II Mosque is one of the largest mosques in the world (about 25,000 worshippers inside)","Its 210m minaret is one of the tallest in the world","Part of the mosque is built out over the Atlantic Ocean","Casablanca generates 50% of Morocco's national industrial production","Mohammed V International Airport (CMN) is the busiest in Morocco (10 million pax/year)","The Rick's Café (inspired by the 1942 film Casablanca) is a genuine fine dining destination","Casablanca was Morocco's first city to have a tramway (2012)","The Casa-Port to Tangier TGV takes just 2h10","Port of Casablanca handles 35 million tonnes of freight per year","The 1930s Art Deco architecture of the Ville Nouvelle is one of the finest collections in the world"],
     gettingThere:"Mohammed V International Airport (CMN) is Morocco's main hub with direct flights from 100+ destinations globally. Al Boraq high-speed train: Casablanca to Tangier (2h10), to Rabat (1h). ONCF train to Marrakech (3h), Fes (4h30). Tramway connects the city centre.",
     tips:["Hassan II Mosque: guided tours daily 9am–6pm (non-Muslims welcome) — book at the mosque door","Rick's Café: dinner reservation essential — call ahead on the day","La Sqala: the most beautiful garden restaurant in Casablanca, inside Portuguese ramparts","Corniche Ain Diab: the 5km ocean boulevard is best at sunset","Art Deco walking tour of the Ville Nouvelle: the greatest collection in Africa","The old medina is small and safe — the Sqala (rampart tower) is the highlight","Mohammed V Square at night: the art deco architecture illuminated is extraordinary","Day trip to Azemmour (80km south) — a blue-and-white medina on the Oum er-Rbia river","Casa Voyageurs station: one of the most beautiful in Africa","Morocco's best sushi and Japanese food is in Casablanca — try Bleu Marine at Four Seasons"],
     highlights:["Hassan II Mosque","Art Deco architecture","Rick's Café","Atlantic Corniche"],
-    rating:4.5, reviewCount:12300, priceLevel:"$$$",
+    priceLevel:"$$$",
   },
 ];
 
-const testimonials = [
-  { id:1, name:"Sophie Laurent",   country:"France",      avatar:"https://i.pravatar.cc/80?img=5",  rating:5, text:"Absolutely magical. Booking through MoroccoTravel was effortless and the riad in Marrakech exceeded every expectation. The rooftop breakfast with views over the medina was unforgettable.", hotel:"La Maison Arabe, Marrakech" },
-  { id:2, name:"James Whitfield",  country:"UK",          avatar:"https://i.pravatar.cc/80?img=12", rating:5, text:"The Sahara overnight camel trek was the most incredible experience of my life. Waking up to a desert sunrise with not another soul in sight — pure magic. Will be back next year.", hotel:"Desert Luxury Camp Morocco, Merzouga" },
-  { id:3, name:"Amara Diallo",     country:"Senegal",     avatar:"https://i.pravatar.cc/80?img=21", rating:5, text:"Chefchaouen is a dream. Every alley is painted in a different shade of blue. The riad had the most stunning mountain views. I came for 3 days and stayed for 10.", hotel:"Lina Ryad & Spa, Chefchaouen" },
-  { id:4, name:"Carlos Mendes",    country:"Portugal",    avatar:"https://i.pravatar.cc/80?img=33", rating:5, text:"We spent a week in Fes and didn't want to leave. Riad Laaroussa was extraordinary — waking up to the call to prayer echoing over the medina rooftops every single morning.", hotel:"Riad Laaroussa, Fes" },
-  { id:5, name:"Lucas Fernandez",  country:"Spain",       avatar:"https://i.pravatar.cc/80?img=15", rating:5, text:"Standing at Cap Spartel watching the Atlantic crash into the Mediterranean while Spain shimmered 14km away — I had to pinch myself. Tangier is unlike anywhere I've ever been.", hotel:"Fairmont Tazi Palace, Tangier" },
-  { id:6, name:"Isabelle Moreau",  country:"Belgium",     avatar:"https://i.pravatar.cc/80?img=25", rating:5, text:"El Minzah is pure old-world glamour. Sipping cocktails on the terrace with the Strait of Gibraltar at sunset and Spain visible on the horizon — I finally understood why writers never left.", hotel:"El Minzah Hotel, Tangier" },
-  { id:7, name:"Yuki Tanaka",      country:"Japan",       avatar:"https://i.pravatar.cc/80?img=47", rating:5, text:"Kasbah Tamadot in the Atlas Mountains was beyond anything I'd imagined. Hiking at dawn, then returning to a heated pool with mountain views. Richard Branson has impeccable taste.", hotel:"Kasbah Tamadot, Atlas Mountains" },
-  { id:8, name:"Emma van Dijk",    country:"Netherlands", avatar:"https://i.pravatar.cc/80?img=9",  rating:5, text:"Essaouira stole my heart. The wind, the whitewashed ramparts, the Atlantic crashing against the old Portuguese fortifications. La Sultana felt like a private palace.", hotel:"La Sultana, Essaouira" },
-];
 
-const stats = [
-  { label:"Happy Travellers", value:24800, suffix:"+" },
-  { label:"Real Hotels",      value:29,    suffix:""  },
-  { label:"Cities Covered",   value:8,     suffix:""  },
-  { label:"Years Experience", value:12,    suffix:""  },
-];
 
 const gallery = [
   { id:1, url:I.mrk3,  caption:"Marrakech — Medina Street",         city:"Marrakech",  size:"large" },
@@ -474,8 +429,8 @@ const blogPosts = [
     title:"10 Things I Wish I Knew Before Visiting Morocco",
     excerpt:"From navigating the medinas to tipping etiquette — the essential tips that will transform your Moroccan adventure.",
     image:I.mrk3, readTime:"6 min read", date:"September 2026",
-    author:"Amina El Fassi", authorAvatar:"https://i.pravatar.cc/80?img=47",
-    content:`<p>Morocco is a country that rewards the curious traveller — but a little preparation goes a long way. Here are 10 things I learned after three years of exploring every corner of the kingdom.</p>
+    author:"Morocco Travel Team", authorAvatar:null,
+    content:`<p>Morocco is a country that rewards the curious traveller — but a little preparation goes a long way. Here are 10 practical tips for a first trip.</p>
 <h2>1. Learn a Few Words of Darija</h2>
 <p>Even a simple "Salam" (hello) or "Shukran" (thank you) in Moroccan Arabic opens doors that stay closed to tourists who don't try. Moroccans are deeply appreciative of any effort to speak their language.</p>
 <h2>2. Bargaining is Expected — and Fun</h2>
@@ -484,8 +439,8 @@ const blogPosts = [
 <p>Morocco is relatively liberal by regional standards, but covering shoulders and knees is respectful in medinas, rural areas, and when visiting mosques. In modern city centres like Casablanca's Maarif or Tangier's city centre, fashion is much more Western.</p>
 <h2>4. The Best Food is in People's Homes</h2>
 <p>Moroccan home cooking is almost always better than restaurant food. If you're invited to eat with a family, accept. You'll experience tagines, couscous, and pastilla that no restaurant can replicate.</p>
-<h2>5. Friday is the Sabbath</h2>
-<p>Many shops and all mosques are busiest on Friday. Couscous Friday is a nationwide tradition — families gather for the weekly couscous meal after Friday prayers. Many restaurants serve only couscous on Fridays.</p>
+<h2>5. Friday is a Special Day</h2>
+<p>Friday is the main weekly prayer day and mosques are busiest around midday; some shops close for a few hours. Couscous Friday is a nationwide tradition — families gather for the weekly couscous meal after Friday prayers. Many restaurants serve only couscous on Fridays.</p>
 <h2>6. Cash is King</h2>
 <p>Outside luxury hotels and major tourist restaurants, Morocco runs on cash. ATMs are plentiful in cities, but carry enough dirhams for rural areas and medina shopping.</p>
 <h2>7. The Train System is Excellent</h2>
@@ -495,29 +450,29 @@ const blogPosts = [
 <h2>9. Medinas Have Their Own Logic</h2>
 <p>Getting lost in a medina is inevitable — and it's the best way to discover hidden riads, craftsmen and local life. If you're truly stuck, ask a shopkeeper (not a "helpful" stranger) for directions.</p>
 <h2>10. Morocco is Safer Than You Think</h2>
-<p>Morocco has one of the lowest violent crime rates in Africa. Petty theft exists in crowded tourist areas, but violent crime against tourists is extremely rare. Use normal precautions and you'll be fine.</p>`
+<p>Most visits are trouble-free. Petty theft and scams happen in crowded tourist areas, so keep valuables out of sight, use official taxis and check your government's travel advice before you go.</p>`
   },
   {
     id:2, featured:false, category:"City Guides",
     title:"The Ultimate Tangier City Guide: 3 Days in the Gateway to Africa",
     excerpt:"Where two continents meet — a local's guide to the most cosmopolitan city in Morocco.",
     image:I.tng1, readTime:"8 min read", date:"August 2026",
-    author:"Youssef Tazi", authorAvatar:"https://i.pravatar.cc/80?img=52",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>Tangier sits at the northwestern tip of Africa, 14km from Spain, where the Atlantic meets the Mediterranean. It's Morocco's most layered, most surprising city.</p>
 <h2>Day 1: The Old Medina & Kasbah</h2>
 <p>Start at the Grand Socco (Place du 9 Avril 1947) — the grand square that connects the new and old cities. Walk through Bab Fahs gate into the medina. Follow the narrow streets uphill to the Kasbah, where the Kasbah Museum (former Sultan's palace) houses 3,000 years of Tangier history.</p>
-<p>From the kasbah walls, you can see Spain — the coast of Tarifa is clearly visible on most days. This is the only place on earth where you can stand in Africa and see Europe.</p>
+<p>From the kasbah walls, you can see Spain — the coast of Tarifa is clearly visible on most days. It is one of the few places where you can stand in Africa and see Europe.</p>
 <h2>Day 2: Cap Spartel & Hercules</h2>
 <p>Take a taxi to Cap Spartel — the dramatic headland where the Atlantic Ocean meets the Mediterranean Sea. The lighthouse marks the exact point. Continue to the Caves of Hercules, ancient sea-carved grottoes where legend says the Greek hero rested.</p>
 <h2>Day 3: Modern Tangier</h2>
-<p>Explore the new city: Boulevard Pasteur, Place de France, and the stunning Tangier City beach stretching 5km along the bay. End with sunset at Café Hafa — the legendary cliff-side café where the Rolling Stones, Paul Bowles, and the Beatles once sat.</p>`
+<p>Explore the new city: Boulevard Pasteur, Place de France, and the stunning Tangier City beach stretching 5km along the bay. End with sunset at Café Hafa — the legendary cliff-side café where Paul Bowles and the Rolling Stones once sat.</p>`
   },
   {
     id:3, featured:false, category:"Food & Drink",
     title:"A Foodie's Guide to Moroccan Cuisine: Beyond the Tagine",
     excerpt:"From street-side bissara to royal pastilla — discover the incredible depth of Moroccan cooking.",
     image:I.food_tagine, readTime:"7 min read", date:"August 2026",
-    author:"Fatima Zahra", authorAvatar:"https://i.pravatar.cc/80?img=29",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>Moroccan cuisine is one of the world's great culinary traditions — a living blend of Berber, Arab, Andalusian, and French influences refined over centuries.</p>
 <h2>The Tagine: Morocco's Signature Dish</h2>
 <p>Named after the conical clay pot it's cooked in, the tagine is a slow-cooked stew where meat, vegetables, dried fruits and spices meld into something transcendent. The classic combinations: lamb with prunes and almonds, chicken with preserved lemon and olives, and kefta (meatball) with tomato and egg.</p>
@@ -533,7 +488,7 @@ const blogPosts = [
     title:"Sahara Desert: A Night Under the Stars in Merzouga",
     excerpt:"Camel trekking, sandboarding, and sleeping under the Milky Way — the ultimate desert experience.",
     image:I.sah1, readTime:"5 min read", date:"July 2026",
-    author:"Omar Benali", authorAvatar:"https://i.pravatar.cc/80?img=60",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>The Erg Chebbi dunes of Merzouga rise 150 metres from the flat hamada desert like golden waves frozen in time. Spending a night here is one of the most profound travel experiences in the world.</p>
 <h2>The Journey</h2>
 <p>Most visitors arrive from Marrakech or Fes via a day's drive through the Atlas Mountains, Todra Gorge and the Draa Valley — one of Morocco's most spectacular road trips. At the edge of the dunes, you'll mount a camel for the trek to your desert camp.</p>
@@ -547,7 +502,7 @@ const blogPosts = [
     title:"The Art of Moroccan Zellige: 1,000 Years of Mosaic Mastery",
     excerpt:"How Moroccan artisans create the most intricate tile mosaics on earth — and where to see the best examples.",
     image:I.fes1, readTime:"5 min read", date:"July 2026",
-    author:"Laila Berrada", authorAvatar:"https://i.pravatar.cc/80?img=44",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>Zellige (from the Arabic 'al-zulayj', meaning polished stone) is Morocco's most iconic art form — intricate geometric mosaic tilework found in palaces, mosques, riads and fountains across the country.</p>
 <h2>How It's Made</h2>
 <p>Each tiny piece is hand-cut from larger glazed tiles using a traditional hammer called a 'menqash'. The artisan (called a 'maâlem') works entirely by eye, cutting thousands of pieces to create complex geometric patterns without any guide or template. A single square metre of zellige can contain over 1,000 individual pieces.</p>
@@ -559,7 +514,7 @@ const blogPosts = [
     title:"Getting Around Morocco: The Complete Transport Guide",
     excerpt:"Trains, buses, grand taxis, and the Al Boraq high-speed rail — how to navigate the Kingdom like a local.",
     image:I.cas1, readTime:"6 min read", date:"June 2026",
-    author:"Karim Idrissi", authorAvatar:"https://i.pravatar.cc/80?img=31",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>Morocco has an excellent transport network that makes independent travel easy and affordable. Here's everything you need to know.</p>
 <h2>Al Boraq High-Speed Train</h2>
 <p>Africa's first high-speed railway connects Tangier to Casablanca in just 2 hours 10 minutes at speeds up to 320km/h. It's modern, comfortable and punctual. Book at oncf.ma.</p>
@@ -575,7 +530,7 @@ const blogPosts = [
     title:"Chefchaouen: The Blue City Photography Guide",
     excerpt:"The most photogenic city in Morocco — when to go, where to shoot, and how to capture the magic.",
     image:I.chef1, readTime:"4 min read", date:"June 2026",
-    author:"Nadia Chaoui", authorAvatar:"https://i.pravatar.cc/80?img=38",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>Chefchaouen's medina is painted entirely in shades of blue — cobalt, indigo, turquoise, powder blue and periwinkle. It's the most photographed small town in Africa.</p>
 <h2>Best Time for Photography</h2>
 <p>The golden hour (early morning and late afternoon) is magical — warm light against cool blue walls creates extraordinary contrast. Midday light is harsh but makes the blues vibrant. Overcast days create soft, even tones.</p>
@@ -589,7 +544,7 @@ const blogPosts = [
     title:"Trekking the Atlas: A Guide to Morocco's Mountain Trails",
     excerpt:"From day hikes to multi-day treks — exploring the dramatic High Atlas and Rif mountains.",
     image:I.atl1, readTime:"6 min read", date:"May 2026",
-    author:"Hassan Amazigh", authorAvatar:"https://i.pravatar.cc/80?img=56",
+    author:"Morocco Travel Team", authorAvatar:null,
     content:`<p>The Atlas Mountains stretch 2,500km across Morocco, Tunisia and Algeria. In Morocco, the High Atlas rises to 4,167m at Jebel Toubkal — the highest peak in North Africa.</p>
 <h2>Jebel Toubkal Trek</h2>
 <p>The most popular trek in Morocco: a 2-day ascent from the village of Imlil (1,740m) to the summit at 4,167m. No technical climbing required, but good fitness is essential. The views from the top are extraordinary — on a clear day you can see the Sahara to the south and the Atlantic to the west.</p>
@@ -602,18 +557,18 @@ const blogPosts = [
 
 // ═══ AGADIR Hotels ═══
 const agadirHotels = [
-  { id:30, name:"Sofitel Agadir Thalassa Sea & Spa", city:"Agadir", stars:5, price:280, rating:4.8, reviews:2340, image:I.ess1, badge:"Luxury Thalasso Spa", description:"Agadir's finest luxury resort — a spectacular 5-star seafront property with a legendary thalassotherapy spa drawing mineral-rich Atlantic seawater for treatments. 173 rooms with ocean or garden views, 4 restaurants, and direct access to Agadir's famous 10km sandy beach. A true benchmark of Moroccan seaside luxury.", amenities:["Beach Access","Thalasso Spa","4 Pools","Free WiFi","Breakfast","4 Restaurants","Gym","Tennis"], rooms:173 },
-  { id:31, name:"Hyatt Place Agadir", city:"Agadir", stars:4, price:110, rating:4.5, reviews:1876, image:I.ess2, badge:"City Center Modern", description:"A sleek, modern 4-star in the heart of Agadir with a rooftop pool and panoramic Atlantic views. Contemporary Moroccan design, spacious rooms, and excellent value. 5 minutes from the beach and walking distance to the Souk El Had (one of the largest markets in Morocco).", amenities:["Rooftop Pool","Free WiFi","Breakfast","Gym","Bar","Sea Views","Airport Shuttle"], rooms:200 },
-  { id:32, name:"Royal Atlas & Spa", city:"Agadir", stars:5, price:160, rating:4.6, reviews:1543, image:I.sah2, badge:"All-Inclusive Available", description:"A grand 5-star resort with lush tropical gardens stretching to the beach. Four swimming pools, a full-service spa, five restaurants and the best location on Agadir beach. Particularly popular for families with its extensive entertainment program and kids club. Live Moroccan music every evening.", amenities:["4 Pools","Free WiFi","Breakfast","Spa","5 Restaurants","Kids Club","Beach","Live Music"], rooms:320 },
-  { id:33, name:"Riad Villa Blanche", city:"Agadir", stars:4, price:85, rating:4.7, reviews:987, image:I.mrk1, badge:"Boutique Riad", description:"A beautifully designed boutique riad in the Talborjt district — a calm escape from the beach resorts with a focus on authentic Moroccan hospitality. Handcrafted tilework, a courtyard pool and exceptional home-cooked Moroccan breakfasts. Ideally located for the souk, old Kasbah hill and downtown.", amenities:["Pool","Free WiFi","Breakfast","Traditional Decor","Courtyard","Airport Transfer"], rooms:15 },
+  { id:30, name:"Sofitel Agadir Thalassa Sea & Spa", city:"Agadir", stars:5, price:280, image:null, badge:"Thalasso Spa Resort", description:"A 5-star seafront resort on Agadir Bay known for its thalassotherapy spa, which uses Atlantic seawater for its treatments. Gardens, pools and restaurants lead straight down to Agadir's long sandy beach.", amenities:["Beach","Thalasso Spa","Pools","Free WiFi","Restaurants","Gym"] },
+  { id:31, name:"Hyatt Place Taghazout Bay", city:"Agadir", stars:4, price:110, image:null, badge:"Surf & Golf Resort", description:"A modern hotel in the Taghazout Bay resort, about 17km north of Agadir, overlooking the Atlantic and the foothills of the Atlas. Close to the surf spots of Taghazout and a 27-hole golf course, with outdoor pools and a shuttle to the beach and to Agadir.", amenities:["Pools","Free WiFi","Breakfast","Gym","Golf Nearby","Surf Nearby","Beach Shuttle"], rooms:152 },
+  { id:32, name:"Royal Atlas & Spa", city:"Agadir", stars:5, price:160, image:null, badge:"Beachfront Resort", description:"A large beachfront resort on Agadir Bay with gardens, several pools, a spa and a choice of restaurants. Popular with families.", amenities:["Pools","Free WiFi","Spa","Restaurants","Kids Club","Beach"] },
+  { id:33, name:"Riad Villa Blanche", city:"Agadir", stars:4, price:85, image:null, badge:"Boutique Riad", description:"An elegant boutique riad in the Baie des Palmiers area, a few minutes' walk from Agadir beach — often described as the city's first boutique hotel. Riad-style patios, an outdoor pool, a spa with hammam and a French-Moroccan restaurant.", amenities:["Pool","Free WiFi","Spa & Hammam","Rooftop Terrace","Restaurant","Near Beach"], rooms:28 },
 ];
 
 // ═══ RABAT Hotels ═══
 const rabatHotels = [
-  { id:34, name:"Sofitel Rabat Jardin des Roses", city:"Rabat", stars:5, price:240, rating:4.8, reviews:2109, image:I.fes1, badge:"Palace & Gardens", description:"One of Morocco's most elegant hotels — a palatial 5-star property surrounded by rose gardens in the heart of the capital. Close to the Royal Palace, the Hassan Tower and the Kasbah des Oudayas. The hotel's rose-filled gardens, multiple pools and acclaimed French-Moroccan restaurant make it the premier address in Rabat.", amenities:["2 Pools","Rose Gardens","Free WiFi","Breakfast","Spa","2 Restaurants","Hammam","Fitness"], rooms:378 },
-  { id:35, name:"La Tour Hassan Palace", city:"Rabat", stars:5, price:190, rating:4.7, reviews:1654, image:I.fes2, badge:"Historic Icon Since 1914", description:"A legendary palace hotel in continuous operation since 1914, in the shadow of the 12th-century Hassan Tower — Rabat's most iconic monument. Art deco interiors, Moorish arches, antique furnishings and a rooftop pool with views of the tower. Winston Churchill and Charles de Gaulle both stayed here.", amenities:["Pool","Free WiFi","Breakfast","Spa","Fine Dining","Historic Architecture","Hammam"], rooms:140 },
-  { id:36, name:"Riad Dar Soufa", city:"Rabat", stars:4, price:95, rating:4.9, reviews:876, image:I.fes3, badge:"UNESCO Kasbah Location", description:"A beautifully restored riad inside Rabat's UNESCO-listed Kasbah des Oudayas — one of the most stunning historic quarters in North Africa. Whitewashed walls, Andalusian gardens, ocean views from the rooftop and the most peaceful setting imaginable in a capital city. Extraordinary Moroccan breakfasts.", amenities:["Free WiFi","Breakfast","Rooftop","Ocean Views","Kasbah Location","Andalusian Garden"], rooms:8 },
-  { id:37, name:"Hyatt Regency Rabat", city:"Rabat", stars:5, price:175, rating:4.5, reviews:1234, image:I.cas1, badge:"Business & Leisure", description:"Rabat's leading international 5-star hotel in the marina district, with all the amenities expected of a global Hyatt property. Spacious rooms, a full-service spa, multiple dining options, and an outdoor pool. Walking distance to the Oudayas, the National Museum and the Corniche.", amenities:["Pool","Free WiFi","Breakfast","Spa","Gym","2 Restaurants","Business Center","Marina Views"], rooms:255 },
+  { id:34, name:"Sofitel Rabat Jardin des Roses", city:"Rabat", stars:5, price:240, image:null, badge:"Palace & Gardens", description:"A 5-star hotel set in large rose gardens in the Souissi area, near the Royal Palace. Pools, a spa and several restaurants make it a calm base in the capital.", amenities:["Pools","Gardens","Free WiFi","Spa","Restaurants","Hammam","Fitness"] },
+  { id:35, name:"La Tour Hassan Palace", city:"Rabat", stars:5, price:190, image:null, badge:"Historic Hotel", description:"One of Rabat's historic grand hotels, opened in the early 20th century in the city centre. Moorish arches, Andalusian gardens, a pool and a spa, within reach of the Hassan Tower and the medina.", amenities:["Pool","Free WiFi","Spa","Restaurants","Gardens","Hammam"] },
+  { id:36, name:"Riad Dar Soufa", city:"Rabat", stars:4, price:95, image:null, badge:"Medina Riad", description:"A small traditional riad in the Rabat medina, a short walk from the Kasbah des Oudayas, the beach and the tram. A patio with a fountain, a rooftop terrace and breakfast included.", amenities:["Free WiFi","Breakfast","Rooftop Terrace","Patio","Medina Location"] },
+  { id:37, name:"Rabat Marriott Hotel", city:"Rabat", stars:5, price:175, image:null, badge:"Modern City Hotel", description:"A modern hotel in the Agdal business district (Arribat Center) with around 190 rooms and suites in a blend of modern and Moorish design, a spa, a 24-hour gym and several restaurants and lounges.", amenities:["Free WiFi","Spa","Gym","Restaurants","Business Center"], rooms:190 },
 ];
 
 // ═══ Moroccan Food ═══
@@ -631,11 +586,11 @@ const food = [
 // ═══ Culture & Festivals ═══
 const culture = {
   festivals: [
-    { id:1, name:"Gnaoua World Music Festival", city:"Essaouira", month:"June", dates:"June 19–22, 2026", description:"One of Africa's greatest music festivals. Four days of free outdoor concerts on the Essaouira ramparts and main square, featuring the ancient Gnaoua trance music tradition alongside global artists. Over 500,000 attendees from 60 countries. A UNESCO-recognized cultural event.", image:I.ess1, free:true },
-    { id:2, name:"Fes Festival of World Sacred Music", city:"Fes", month:"May–June", dates:"May 31 – June 8, 2026", description:"A profound and beautiful 9-day festival held within the ancient medina of Fes — one of the world's greatest celebrations of spiritual music. Sufi musicians, gospel choirs, Buddhist monks, Jewish cantors and classical artists from 40 countries perform in the courtyards of Fes's most magnificent palaces.", image:I.fes1, free:false },
-    { id:3, name:"Marrakech International Film Festival", city:"Marrakech", month:"November", dates:"November 2026", description:"One of the most glamorous film festivals on the African continent, held annually in Djemaa el-Fna and the Palais des Congrès. International stars, directors and filmmakers converge on Marrakech for 10 days of screenings, tributes and galas. The Etoile d'Or is the top prize.", image:I.mrk2, free:false },
-    { id:4, name:"Rose Festival", city:"Kelaat M'Gouna", month:"May", dates:"May 2026", description:"Every May in the Valley of Roses near Kelaat M'Gouna, the annual harvest of the Damask rose (used in rose water and argan rose oil) is celebrated with parades, traditional music, Berber folk dancing, and the crowning of the Rose Queen. A deeply authentic rural Moroccan celebration.", image:I.atl1, free:true },
-    { id:5, name:"Tan-Tan Moussem", city:"Tan-Tan", month:"October", dates:"October 2026", description:"The largest nomadic tribal festival in North Africa — a gathering of over 30 Saharan and sub-Saharan tribes stretching from the Atlas to the Sahara. Camel races, traditional music, poetry recitals and an extraordinary display of Saharan culture. UNESCO Intangible Cultural Heritage.", image:I.sah1, free:true },
+    { id:1, name:"Gnaoua World Music Festival", city:"Essaouira", month:"June", dates:"Usually late June — check the official site for this year's dates", description:"One of Africa's greatest music festivals. Four days of free outdoor concerts on the Essaouira ramparts and main square, featuring the ancient Gnaoua trance music tradition alongside global artists. Gnawa music is inscribed on UNESCO's Intangible Cultural Heritage list.", image:I.ess1, free:true },
+    { id:2, name:"Fes Festival of World Sacred Music", city:"Fes", month:"May–June", dates:"Usually late May or June — check the official site", description:"A profound and beautiful 9-day festival held within the ancient medina of Fes — one of the world's greatest celebrations of spiritual music. Sufi musicians, gospel choirs, Buddhist monks, Jewish cantors and classical artists from 40 countries perform in the courtyards of Fes's most magnificent palaces.", image:I.fes1, free:false },
+    { id:3, name:"Marrakech International Film Festival", city:"Marrakech", month:"November", dates:"Usually late November / early December", description:"One of the most glamorous film festivals on the African continent, held annually in Djemaa el-Fna and the Palais des Congrès. International stars, directors and filmmakers converge on Marrakech for 10 days of screenings, tributes and galas. The Etoile d'Or is the top prize.", image:I.mrk2, free:false },
+    { id:4, name:"Rose Festival", city:"Kelaat M'Gouna", month:"May", dates:"Usually early May", description:"Every May in the Valley of Roses near Kelaat M'Gouna, the annual harvest of the Damask rose (used in rose water and argan rose oil) is celebrated with parades, traditional music, Berber folk dancing, and the crowning of the Rose Queen. A deeply authentic rural Moroccan celebration.", image:I.atl1, free:true },
+    { id:5, name:"Tan-Tan Moussem", city:"Tan-Tan", month:"October", dates:"Dates vary — check locally", description:"The largest nomadic tribal festival in North Africa — a gathering of over 30 Saharan and sub-Saharan tribes stretching from the Atlas to the Sahara. Camel races, traditional music, poetry recitals and an extraordinary display of Saharan culture. UNESCO Intangible Cultural Heritage.", image:I.sah1, free:true },
     { id:6, name:"Ramadan", city:"All Morocco", month:"Varies", dates:"Varies by year (lunar calendar)", description:"Experiencing Ramadan in Morocco is one of the most profound travel experiences on earth. Cities come alive after Iftar (sunset) with the smell of Harira, the sound of music and the warmth of Moroccan family life. The Tarawih prayers in the Hassan II Mosque are awe-inspiring. Travel during Ramadan for a completely different Morocco.", image:I.mrk4, free:true },
   ],
   customs: [
@@ -648,7 +603,7 @@ const culture = {
   ],
   crafts: [
     { name:"Zellige", description:"Hand-cut geometric mosaic tilework — the art of cutting and assembling tiles into complex mathematical patterns. Originated in Fes in the 10th century.", city:"Fes", icon:"🔷" },
-    { name:"Leather Tanning", description:"Fes has the world's oldest working tanneries. The leather is softened in pigeon dung, then dyed in natural colours — poppy red, saffron yellow, cobalt blue.", city:"Fes", icon:"👜" },
+    { name:"Leather Tanning", description:"Fes is famous for its centuries-old tanneries. The leather is softened in pigeon dung, then dyed in natural colours — poppy red, saffron yellow, cobalt blue.", city:"Fes", icon:"👜" },
     { name:"Argan Oil", description:"Produced only in Morocco's argan forest (a UNESCO Biosphere Reserve), argan oil is hand-extracted by women's cooperatives. Used in cooking and cosmetics.", city:"Essaouira / Agadir region", icon:"🫒" },
     { name:"Berber Carpets", description:"Each Berber tribe has its own carpet pattern language — the geometric symbols encode prayers, fertility and protection. No two carpets are identical.", city:"Atlas Mountains / Marrakech", icon:"🪡" },
     { name:"Thuya Wood", description:"Essaouira is the world capital of thuya woodwork — the burled root of the argan tree is carved into extraordinary objects with its swirling grain.", city:"Essaouira", icon:"🪵" },
@@ -663,11 +618,11 @@ const transport = {
     { code:"RAK", name:"Marrakech Menara Airport", city:"Marrakech", description:"Morocco's busiest tourist airport with over 7 million passengers per year. Direct flights from 50+ European cities. 6km from the medina — taxi 80–100 MAD, 15 minutes.", airlines:["Royal Air Maroc","Ryanair","easyJet","Transavia","Vueling"], phone:"+212 5 24 44 79 10" },
     { code:"TNG", name:"Tangier Ibn Battouta Airport", city:"Tangier", description:"Named after the medieval Tangerine explorer. Direct flights from Paris, Madrid, Brussels, Amsterdam, London and domestic routes. 15km from the city — taxi 80–100 MAD.", airlines:["Royal Air Maroc","Air Arabia Maroc","Ryanair","Transavia"], phone:"+212 5 39 39 37 20" },
     { code:"FEZ", name:"Fes-Saïss Airport", city:"Fes", description:"Direct flights from Paris, Brussels, Amsterdam, Madrid and other European cities. 15km from the medina — taxi 100–150 MAD. CTM bus also available.", airlines:["Royal Air Maroc","Ryanair","easyJet","Transavia"], phone:"+212 5 35 67 47 12" },
-    { code:"AGA", name:"Agadir Al Massira Airport", city:"Agadir", description:"Major holiday airport serving southern Morocco. Charter and low-cost flights from UK, Germany, France and Scandinavia. 25km from Agadir beach — taxi 150–200 MAD.", airlines:["Royal Air Maroc","Ryanair","TUI","Thomas Cook Airlines"], phone:"+212 5 28 83 90 22" },
+    { code:"AGA", name:"Agadir Al Massira Airport", city:"Agadir", description:"Major holiday airport serving southern Morocco. Charter and low-cost flights from UK, Germany, France and Scandinavia. 25km from Agadir beach — taxi 150–200 MAD.", airlines:["Royal Air Maroc","Ryanair","TUI","easyJet"], phone:"+212 5 28 83 90 22" },
   ],
   trains: [
-    { name:"Al Boraq High-Speed Train", type:"TGV", description:"Morocco's TGV-style high-speed rail service — the first in Africa. Connects Tangier to Casablanca in 2h10 (previously 4h45). Operates 6 return trips daily.", routes:["Tangier → Casablanca: 2h10","Tangier → Rabat: 1h30","Tangier → Kenitra: 55 min"], price:"First class: 240 MAD | Second class: 170 MAD", booking:"oncf.ma" },
-    { name:"ONCF National Rail Network", type:"Train", description:"Morocco's national railway connects all major cities except Marrakech to the Sahara. Modern, comfortable, affordable and punctual.", routes:["Casablanca → Marrakech: 3h","Casablanca → Fes: 4h30","Casablanca → Rabat: 1h","Marrakech → Tangier: 4h45"], price:"From 55 MAD second class", booking:"oncf.ma" },
+    { name:"Al Boraq High-Speed Train", type:"TGV", description:"Morocco's TGV-style high-speed rail service — the first in Africa. Connects Tangier to Casablanca in about 2h10 via Kenitra and Rabat, with frequent departures throughout the day.", routes:["Tangier → Casablanca: 2h10","Tangier → Rabat: 1h30","Tangier → Kenitra: 55 min"], price:"Fares vary by date and class — check oncf.ma", booking:"oncf.ma" },
+    { name:"ONCF National Rail Network", type:"Train", description:"Morocco's national railway links Tangier, Rabat, Casablanca, Marrakech, Fes, Meknes and Oujda. There is no train to the Sahara, Essaouira, Agadir or Chefchaouen — use CTM or Supratours buses. Modern, comfortable, affordable and punctual.", routes:["Casablanca → Marrakech: 3h","Casablanca → Fes: 4h30","Casablanca → Rabat: 1h","Marrakech → Tangier: 4h45"], price:"From 55 MAD second class", booking:"oncf.ma" },
   ],
   buses: [
     { name:"CTM (Compagnie de Transport au Maroc)", description:"Morocco's premium long-distance bus company. Comfortable, air-conditioned coaches with reserved seats, toilets and WiFi on many routes. The most reliable option for intercity travel.", routes:"All major cities and tourist destinations", price:"From 70 MAD Casablanca–Marrakech", booking:"ctm.ma | 0800 090 030" },
@@ -685,39 +640,38 @@ const transport = {
 };
 
 // ═══ Emergency Information ═══
+// Numbers checked against official sources (UK FCDO, US State Dept, Canada, embassy sites) — Nov 2026.
 const emergency = {
   numbers: [
-    { service:"Police", number:"19", description:"National Police — for theft, crime, emergencies in cities", icon:"👮", available:"24/7" },
-    { service:"SAMU Ambulance", number:"15", description:"Medical emergencies and ambulance dispatch", icon:"🚑", available:"24/7" },
-    { service:"Fire Department", number:"15", description:"Fire, rescue and civil emergencies", icon:"🚒", available:"24/7" },
-    { service:"Royal Gendarmerie", number:"177", description:"Rural areas, highways, outside city limits", icon:"🪖", available:"24/7" },
-    { service:"Tourist Police", number:"0537 77 09 27", description:"Dedicated tourist assistance and protection — report scams, theft, harassment", icon:"🛡️", available:"24/7" },
-    { service:"SOS Médecins", number:"0537 20 20 20", description:"Private house-call doctor service in major cities (fee applies)", icon:"🏥", available:"24/7" },
+    { service:"Police", number:"19", description:"Police in towns and cities. From a mobile phone dial 190 (or 112).", icon:"👮", available:"24/7" },
+    { service:"Ambulance & Fire (Civil Protection)", number:"15", description:"Fire, rescue and ambulance. From a mobile phone dial 150.", icon:"🚑", available:"24/7" },
+    { service:"SAMU Medical Emergencies", number:"141", description:"Emergency medical service (SAMU) in major cities.", icon:"🏥", available:"24/7" },
+    { service:"Royal Gendarmerie", number:"177", description:"Rural areas, highways and outside city limits.", icon:"🪖", available:"24/7" },
+    { service:"Mobile Emergency", number:"112", description:"Works from any mobile phone and connects you to the emergency services.", icon:"📱", available:"24/7" },
+    { service:"Tourist Police (Marrakech)", number:"0524 38 46 01", description:"Tourist brigade in Marrakech — report scams, theft or harassment. In other cities, call 19 / 190.", icon:"🛡️", available:"24/7" },
   ],
   hospitals: [
-    { name:"CHU Ibn Rochd", city:"Casablanca", address:"1 Rue des Hôpitaux, Casablanca", phone:"+212 5 22 22 47 20", type:"Public University Hospital" },
-    { name:"Hôpital Universitaire Mohammed VI", city:"Marrakech", address:"Quartier Amerchich, Marrakech", phone:"+212 5 24 30 10 20", type:"Public University Hospital" },
-    { name:"CHU Hassan II", city:"Fes", address:"Route de Sidi Harazem, Fes", phone:"+212 5 35 61 23 23", type:"Public University Hospital" },
-    { name:"Clinique Internationale de Tanger", city:"Tangier", address:"Av. Hassan II, Tangier", phone:"+212 5 39 94 00 50", type:"Private Clinic" },
-    { name:"Polyclinique Agadir", city:"Agadir", address:"Avenue des FAR, Agadir", phone:"+212 5 28 84 10 60", type:"Private Clinic" },
+    { name:"CHU Ibn Rochd", city:"Casablanca", address:"1 Rue des Hôpitaux, Casablanca", type:"Public University Hospital" },
+    { name:"CHU Mohammed VI", city:"Marrakech", address:"Quartier Amerchich, Marrakech", type:"Public University Hospital" },
+    { name:"CHU Hassan II", city:"Fes", address:"Route de Sidi Harazem, Fes", type:"Public University Hospital" },
+    { name:"CHU Ibn Sina", city:"Rabat", address:"Rabat", type:"Public University Hospital" },
   ],
   embassies: [
-    { country:"USA", address:"Km 5.7, Avenue Mohammed VI, Souissi, Rabat", phone:"+212 5 37 63 73 00", emergency:"+212 5 37 63 73 00", website:"ma.usembassy.gov" },
-    { country:"UK", address:"28 Avenue S.A.R Sidi Mohammed, Souissi, Rabat", phone:"+212 5 37 63 33 33", emergency:"+212 5 37 63 33 33", website:"gov.uk/world/morocco" },
-    { country:"France", address:"3 Rue Sahnoun, Agdal, Rabat", phone:"+212 5 37 68 97 00", emergency:"+212 5 37 68 97 00", website:"ma.ambafrance.org" },
-    { country:"Spain", address:"Rue Aïn Khalouiya, Km 5.3, Souissi, Rabat", phone:"+212 5 37 63 39 00", emergency:"+212 5 37 63 39 00", website:"exteriores.gob.es" },
-    { country:"Germany", address:"7 Zankat Madnine, Rabat", phone:"+212 5 37 21 40 09", emergency:"+212 5 37 21 40 09", website:"rabat.diplo.de" },
-    { country:"Canada", address:"66 Mehdi Ben Barka Ave, Souissi, Rabat", phone:"+212 5 37 54 49 49", emergency:"+212 5 37 54 49 49", website:"canadainternational.gc.ca/morocco" },
+    { country:"USA", address:"Km 5.7, Avenue Mohammed VI, Souissi, Rabat (consular services for US citizens are at the Consulate General in Casablanca)", phone:"+212 537 63 72 00", emergency:"+212 661 13 19 39", website:"ma.usembassy.gov" },
+    { country:"UK", address:"28 Avenue S.A.R. Sidi Mohammed, Souissi, Rabat", phone:"+212 537 63 33 33", emergency:"+44 20 7008 5000", website:"gov.uk/world/morocco" },
+    { country:"France", address:"1 Rue Ibn Hajar, Agdal, Rabat", phone:"+212 537 68 97 00", emergency:"+212 537 68 97 00", website:"ma.ambafrance.org" },
+    { country:"Spain", address:"Rue Aïn Khalouiya, Av. Mohammed VI Km 5.3, Souissi, Rabat", phone:"+212 537 63 39 00", emergency:"+212 537 63 39 00", website:"exteriores.gob.es/Embajadas/rabat" },
+    { country:"Germany", address:"7 Zankat Madnine, Rabat", phone:"+212 537 21 86 00", emergency:"+212 537 21 86 00", website:"rabat.diplo.de" },
+    { country:"Canada", address:"66 Avenue Mehdi Ben Barka, Souissi, Rabat", phone:"+212 537 54 49 49", emergency:"+1 613 996 8885 (Ottawa, 24/7)", website:"international.gc.ca" },
   ],
   tips: [
-    "Travel insurance is essential — make sure it covers medical evacuation",
-    "Keep a copy of your passport in your hotel safe and email yourself a scan",
-    "The emergency app SAMU112 works across Morocco for medical emergencies",
-    "Tap water is generally safe in cities but bottled water is recommended",
-    "Pharmacies (pharmacie) are common and staff often speak French and some English",
-    "If you lose your passport, contact your embassy immediately — they can issue emergency travel documents",
-    "Tourist police wear a different uniform (blue) and specifically protect visitors",
-    "Morocco has a genuine culture of hospitality — most people will help you willingly if you're in difficulty",
+    "Travel insurance is essential — make sure it covers medical treatment and evacuation",
+    "Keep a copy of your passport in your hotel safe and a scan on your phone",
+    "Emergency treatment is usually not free for visitors — expect to pay upfront and claim from your insurer",
+    "Drink bottled water, especially outside the big cities",
+    "Pharmacies (pharmacie) are common; staff usually speak French and often some English",
+    "If you lose your passport, report it to the police and contact your embassy for an emergency travel document",
+    "Check your own government's travel advice for Morocco before you go",
   ],
 };
 
@@ -737,28 +691,27 @@ const weather = {
 // ═══ Restaurants ═══
 const restaurants = [
   // Tangier
-  { id:1,  city:"Tangier", name:"Le Saveur du Poisson",     cuisine:"Seafood / Moroccan", price:"$$",   rating:4.9, address:"2 Escalier Waller, Medina, Tangier", description:"Tangier's most legendary restaurant — no menu, no choices. The owner selects the catch of the day and serves a multi-course feast of the freshest fish in Morocco. Sought out by food writers, chefs and travellers from around the world. Reservations essential.", mustTry:"Daily catch — whatever the sea offers", openHours:"Lunch only, Tue–Sun", image:I.tng6 },
-  { id:2,  city:"Tangier", name:"El Morocco Club",           cuisine:"Moroccan / International", price:"$$$", rating:4.6, address:"Rue du Prince Moulay Abdallah, Tangier", description:"A grand colonial-era supper club — art deco décor, 1940s ambiance and refined Moroccan cuisine. The kind of restaurant where diplomats, artists and wealthy Tangerines have dined for 80 years. Live piano music, pristine white tablecloths, and the best chicken bastilla in the city.", mustTry:"Chicken Bastilla, Lamb Tagine", openHours:"Daily 12pm–11pm", image:I.tng8 },
-  { id:3,  city:"Tangier", name:"Bab Al Maqdis",             cuisine:"Traditional Moroccan", price:"$$",   rating:4.5, address:"Place du 9 Avril, Grand Socco, Tangier", description:"Set on the Grand Socco with terrace views over the square, this warm and welcoming restaurant serves generous, authentic Moroccan plates at very reasonable prices. The slow-cooked lamb shoulder and fresh-baked msemen are outstanding.", mustTry:"Slow-cooked lamb, Msemen", openHours:"Daily 11am–10pm", image:I.tng4 },
+  { id:1,  city:"Tangier", name:"Le Saveur du Poisson",     cuisine:"Seafood / Moroccan", price:"$$", address:"2 Escalier Waller, Medina, Tangier", description:"Tangier's most legendary restaurant — no menu, no choices. The owner selects the catch of the day and serves a multi-course feast of the freshest fish in Morocco. Sought out by food writers, chefs and travellers from around the world. Reservations essential.", mustTry:"Daily catch — whatever the sea offers", openHours:"Lunch only, Tue–Sun", image:I.tng6 },
+  { id:2,  city:"Tangier", name:"El Morocco Club",           cuisine:"Moroccan / International", price:"$$$", address:"Rue du Prince Moulay Abdallah, Tangier", description:"A grand colonial-era supper club — art deco décor, 1940s ambiance and refined Moroccan cuisine. The kind of restaurant where diplomats, artists and wealthy Tangerines have dined for 80 years. Live piano music, pristine white tablecloths, and the best chicken bastilla in the city.", mustTry:"Chicken Bastilla, Lamb Tagine", openHours:"Daily 12pm–11pm", image:I.tng8 },
   // Marrakech
-  { id:4,  city:"Marrakech", name:"Dar Yacout",              cuisine:"Classic Moroccan Fine Dining", price:"$$$$", rating:4.8, address:"79 Sidi Ahmed Soussi, Marrakech Medina", description:"The most iconic dining experience in Marrakech — a 17th-century palace with courtyards, rose petals, candlelight and a feast of Moroccan dishes served in courses. Rooftop terrace with views over the medina. Appeared in almost every travel guide to Morocco ever written.", mustTry:"5-course traditional Moroccan feast", openHours:"Dinner only, daily from 8pm", image:I.mrk2 },
-  { id:5,  city:"Marrakech", name:"Nomad",                   cuisine:"Modern Moroccan", price:"$$",   rating:4.7, address:"1 Derb Aarjan, Marrakech Medina", description:"A rooftop restaurant that reinvented Moroccan cuisine for the 21st century — clean, contemporary presentations of classic ingredients with spectacular views over the spice souk. The creative kitchen uses local and seasonal produce. Consistently voted one of the best in the medina.", mustTry:"Lamb & prune tagine, crunchy bastilla", openHours:"Daily 12pm–11pm", image:I.mrk3 },
-  { id:6,  city:"Marrakech", name:"Al Fassia Aguedal",       cuisine:"Traditional Fassi", price:"$$$", rating:4.8, address:"55 Boulevard Zerktouni, Guéliz, Marrakech", description:"One of the most respected restaurants in Morocco — entirely staffed and managed by women, serving the finest traditional Fassi (from Fes) cuisine. A rare restaurant where the tagine has been cooked by the same hands for 30 years. No gimmicks, just extraordinary food.", mustTry:"Chicken with preserved lemon & olives, Moroccan desserts", openHours:"Daily 12pm–3pm, 7:30pm–11pm", image:I.mrk1 },
+  { id:4,  city:"Marrakech", name:"Dar Yacout",              cuisine:"Classic Moroccan Fine Dining", price:"$$$$", address:"79 Sidi Ahmed Soussi, Marrakech Medina", description:"The most iconic dining experience in Marrakech — a 17th-century palace with courtyards, rose petals, candlelight and a feast of Moroccan dishes served in courses. Rooftop terrace with views over the medina. Appeared in almost every travel guide to Morocco ever written.", mustTry:"5-course traditional Moroccan feast", openHours:"Dinner only, daily from 8pm", image:I.mrk2 },
+  { id:5,  city:"Marrakech", name:"Nomad",                   cuisine:"Modern Moroccan", price:"$$", address:"1 Derb Aarjan, Marrakech Medina", description:"A rooftop restaurant that reinvented Moroccan cuisine for the 21st century — clean, contemporary presentations of classic ingredients with spectacular views over the spice souk. The creative kitchen uses local and seasonal produce. Consistently voted one of the best in the medina.", mustTry:"Lamb & prune tagine, crunchy bastilla", openHours:"Daily 12pm–11pm", image:I.mrk3 },
+  { id:6,  city:"Marrakech", name:"Al Fassia Aguedal",       cuisine:"Traditional Fassi", price:"$$$", address:"55 Boulevard Zerktouni, Guéliz, Marrakech", description:"One of the most respected restaurants in Morocco — entirely staffed and managed by women, serving the finest traditional Fassi (from Fes) cuisine. A rare restaurant where the tagine has been cooked by the same hands for 30 years. No gimmicks, just extraordinary food.", mustTry:"Chicken with preserved lemon & olives, Moroccan desserts", openHours:"Daily 12pm–3pm, 7:30pm–11pm", image:I.mrk1 },
   // Fes
-  { id:7,  city:"Fes", name:"Restaurant Palais de Fes",      cuisine:"Traditional Moroccan", price:"$$$", rating:4.6, address:"16 Rue Boutouil, Fes el-Bali", description:"A beautifully restored 15th-century palace in the heart of the Fes medina — rooftop terrace, carved stucco arches and belly dancing on Friday evenings. The menu is a comprehensive tour of Fassi cooking. One of the most photographed restaurants in Morocco.", mustTry:"Bastilla au pigeon, Friday Couscous", openHours:"Daily 12pm–10pm", image:I.fes1 },
-  { id:8,  city:"Fes", name:"Dar Roumana Restaurant",        cuisine:"Fusion Moroccan", price:"$$$", rating:4.7, address:"30 Derb el Amer, Zkak Roumane, Fes el-Bali", description:"The restaurant of the celebrated Dar Roumana riad — creative Moroccan-inspired cuisine by a trained international chef using the freshest local ingredients. Rooftop seating with sweeping views over the ancient city. Wine list.", mustTry:"Lamb with rose & preserved lemon, Chocolate pastilla", openHours:"Dinner only, from 7pm", image:I.fes2 },
+  { id:7,  city:"Fes", name:"Restaurant Palais de Fes",      cuisine:"Traditional Moroccan", price:"$$$", address:"16 Rue Boutouil, Fes el-Bali", description:"A beautifully restored 15th-century palace in the heart of the Fes medina — rooftop terrace, carved stucco arches and belly dancing on Friday evenings. The menu is a comprehensive tour of Fassi cooking. One of the most photographed restaurants in Morocco.", mustTry:"Bastilla au pigeon, Friday Couscous", openHours:"Daily 12pm–10pm", image:I.fes1 },
+  { id:8,  city:"Fes", name:"Dar Roumana Restaurant",        cuisine:"Fusion Moroccan", price:"$$$", address:"30 Derb el Amer, Zkak Roumane, Fes el-Bali", description:"The restaurant of the celebrated Dar Roumana riad — creative Moroccan-inspired cuisine by a trained international chef using the freshest local ingredients. Rooftop seating with sweeping views over the ancient city. Wine list.", mustTry:"Lamb with rose & preserved lemon, Chocolate pastilla", openHours:"Dinner only, from 7pm", image:I.fes2 },
   // Chefchaouen
-  { id:9,  city:"Chefchaouen", name:"Aladdin Restaurant",    cuisine:"Moroccan / International", price:"$",    rating:4.4, address:"Rue Targui, Chefchaouen Medina", description:"A beloved budget-friendly restaurant in the blue medina with a large terrace and honest Moroccan cooking. Best known for enormous portions of kefta tagine and freshly made bissara (broad bean soup). A favourite of backpackers and solo travellers for 20 years.", mustTry:"Kefta tagine, Bissara soup", openHours:"Daily 8am–11pm", image:I.chef1 },
+  { id:9,  city:"Chefchaouen", name:"Aladdin Restaurant",    cuisine:"Moroccan / International", price:"$", address:"Rue Targui, Chefchaouen Medina", description:"A beloved budget-friendly restaurant in the blue medina with a large terrace and honest Moroccan cooking. Best known for enormous portions of kefta tagine and freshly made bissara (broad bean soup). A favourite of backpackers and solo travellers for 20 years.", mustTry:"Kefta tagine, Bissara soup", openHours:"Daily 8am–11pm", image:I.chef1 },
   // Essaouira
-  { id:10, city:"Essaouira", name:"La Fromagerie",           cuisine:"Moroccan / French", price:"$$",   rating:4.7, address:"Place Moulay Hassan 1, Essaouira", description:"On the main square with views over the ramparts — creative Moroccan dishes with French influences and an excellent cheese selection (rare in Morocco). The fish tagine with chermoula is the best in Essaouira.", mustTry:"Fish tagine, Argan oil salads, Cheese board", openHours:"Daily 12pm–10pm", image:I.ess1 },
-  { id:11, city:"Essaouira", name:"Fish Grills at the Port", cuisine:"Grilled Seafood", price:"$",    rating:4.9, address:"Port de Pêche, Essaouira", description:"Not a restaurant — a row of grill stalls at the working fishing port where the morning's catch is grilled over charcoal and served on plastic tables. Choose your fish from the display, haggle gently, and eat the freshest seafood of your life with bread and harissa. The real Essaouira experience.", mustTry:"Grilled sardines, Calamari, Sole", openHours:"Daily 9am–6pm", image:I.ess2 },
+  { id:10, city:"Essaouira", name:"La Fromagerie",           cuisine:"Moroccan / French", price:"$$", address:"Place Moulay Hassan 1, Essaouira", description:"On the main square with views over the ramparts — creative Moroccan dishes with French influences and an excellent cheese selection (rare in Morocco). The fish tagine with chermoula is the best in Essaouira.", mustTry:"Fish tagine, Argan oil salads, Cheese board", openHours:"Daily 12pm–10pm", image:I.ess1 },
+  { id:11, city:"Essaouira", name:"Fish Grills at the Port", cuisine:"Grilled Seafood", price:"$", address:"Port de Pêche, Essaouira", description:"Not a restaurant — a row of grill stalls at the working fishing port where the morning's catch is grilled over charcoal and served on plastic tables. Choose your fish from the display, haggle gently, and eat the freshest seafood of your life with bread and harissa. The real Essaouira experience.", mustTry:"Grilled sardines, Calamari, Sole", openHours:"Daily 9am–6pm", image:I.ess2 },
   // Casablanca
-  { id:12, city:"Casablanca", name:"Rick's Café",            cuisine:"Moroccan / International", price:"$$$", rating:4.5, address:"248 Boulevard Sour Jdid, Casablanca", description:"Inspired by the 1942 film — a recreation of the legendary bar from Casablanca. Not a tourist trap: genuine Moroccan and international cuisine, live jazz piano nightly and a beautiful 1940s décor. The tagine is excellent and the cocktails are the best in Casablanca.", mustTry:"Chicken tagine, Piano Bar cocktails", openHours:"Daily from 6pm", image:I.cas1 },
-  { id:13, city:"Casablanca", name:"La Sqala",               cuisine:"Traditional Moroccan", price:"$$",   rating:4.8, address:"Boulevard des Almohades (inside the ramparts), Casablanca", description:"Hidden inside the 18th-century Portuguese ramparts of Casablanca — a garden restaurant of extraordinary beauty. The menu is a masterclass in Moroccan cooking: pastilla, tagines, couscous and fresh bread baked in clay ovens. The garden is magical at night.", mustTry:"Pastilla, Mixed tagine platter, Moroccan salads", openHours:"Daily 12pm–11pm", image:I.mrk4 },
+  { id:12, city:"Casablanca", name:"Rick's Café",            cuisine:"Moroccan / International", price:"$$$", address:"248 Boulevard Sour Jdid, Casablanca", description:"Inspired by the 1942 film — a recreation of the legendary bar from Casablanca. Not a tourist trap: genuine Moroccan and international cuisine, live jazz piano nightly and a beautiful 1940s décor. The tagine is excellent and the cocktails are the best in Casablanca.", mustTry:"Chicken tagine, Piano Bar cocktails", openHours:"Daily from 6pm", image:I.cas1 },
+  { id:13, city:"Casablanca", name:"La Sqala",               cuisine:"Traditional Moroccan", price:"$$", address:"Boulevard des Almohades (inside the ramparts), Casablanca", description:"Hidden inside the 18th-century Portuguese ramparts of Casablanca — a garden restaurant of extraordinary beauty. The menu is a masterclass in Moroccan cooking: pastilla, tagines, couscous and fresh bread baked in clay ovens. The garden is magical at night.", mustTry:"Pastilla, Mixed tagine platter, Moroccan salads", openHours:"Daily 12pm–11pm", image:I.mrk4 },
   // Agadir
-  { id:14, city:"Agadir", name:"Le Jardin d'Eau",            cuisine:"Moroccan / Mediterranean", price:"$$",  rating:4.5, address:"Secteur Touristique, Agadir", description:"A beautiful garden restaurant in Agadir's tourist district — a haven of calm with cascading water features, palm trees and excellent fresh seafood. One of the most relaxing dining spots on Morocco's Atlantic coast.", mustTry:"Atlantic grilled fish, Argan-marinated lamb", openHours:"Daily 12pm–11pm", image:I.ess1 },
+  { id:14, city:"Agadir", name:"Le Jardin d'Eau",            cuisine:"Moroccan / Mediterranean", price:"$$", address:"Secteur Touristique, Agadir", description:"A beautiful garden restaurant in Agadir's tourist district — a haven of calm with cascading water features, palm trees and excellent fresh seafood. One of the most relaxing dining spots on Morocco's Atlantic coast.", mustTry:"Atlantic grilled fish, Argan-marinated lamb", openHours:"Daily 12pm–11pm", image:I.ess1 },
   // Rabat
-  { id:15, city:"Rabat", name:"Restaurant Dinarjat",         cuisine:"Classic Moroccan", price:"$$$",  rating:4.7, address:"6 Rue Belgnaoui, Medina, Rabat", description:"A beautifully restored 17th-century Andalusian-Moorish mansion in the Rabat medina, serving the finest traditional Moroccan cuisine in the capital. Every room has hand-painted ceilings, carved plaster and mosaic floors. The couscous royal is magnificent.", mustTry:"Couscous Royal, Bastilla, Lamb Mechoui", openHours:"Daily 12pm–11pm", image:I.fes3 },
+  { id:15, city:"Rabat", name:"Restaurant Dinarjat",         cuisine:"Classic Moroccan", price:"$$$", address:"6 Rue Belgnaoui, Medina, Rabat", description:"A beautifully restored 17th-century Andalusian-Moorish mansion in the Rabat medina, serving the finest traditional Moroccan cuisine in the capital. Every room has hand-painted ceilings, carved plaster and mosaic floors. The couscous royal is magnificent.", mustTry:"Couscous Royal, Bastilla, Lamb Mechoui", openHours:"Daily 12pm–11pm", image:I.fes3 },
 ];
 
 // ═══ Car Rentals ═══
@@ -770,160 +723,78 @@ const carRentals = [
   { id:5, company:"Sixt Morocco",      logo:"🚕", description:"Premium vehicles including Mercedes and BMW. Perfect for business travellers and those wanting a higher-end driving experience on Morocco's excellent motorways.", locations:["Casablanca CMN","Marrakech RAK","Agadir AGA"], priceFrom:"550 MAD/day", website:"sixt.ma", phone:"+212 5 22 97 46 30" },
 ];
 
-// ═══ User & Review data (in-memory for now) ═══
-const users = [];
-const userReviews = [
-  { id:1, hotelId:15, userId:'guest', userName:"Sophie Laurent", country:"France", avatar:"https://i.pravatar.cc/80?img=5", rating:5, title:"Absolutely breathtaking", text:"The Fairmont Tazi Palace exceeded every single expectation. The views of Tangier from the hilltop are incredible, the spa is world-class, and the staff made us feel like royalty. A once-in-a-lifetime stay.", date:"2026-05-15", helpful:24 },
-  { id:2, hotelId:7, userId:'guest', userName:"James Whitfield", country:"UK", avatar:"https://i.pravatar.cc/80?img=12", rating:5, title:"The most legendary hotel in Africa", text:"La Mamounia is everything they say and more. The gardens at sunset, breakfast by the pool, and the hammam left us completely speechless. Worth every dirham.", date:"2026-04-28", helpful:18 },
-  { id:3, hotelId:13, userId:'guest', userName:"Amara Diallo", country:"Senegal", avatar:"https://i.pravatar.cc/80?img=21", rating:5, title:"Chefchaouen magic", text:"Waking up to the sound of the medina and those blue streets from the rooftop — Casa Sabila is the perfect base for the Blue City. The mountain views are unreal.", date:"2026-05-02", helpful:15 },
-  { id:4, hotelId:12, userId:'guest', userName:"Carlos Mendes", country:"Portugal", avatar:"https://i.pravatar.cc/80?img=33", rating:5, title:"Best food in the city", text:"Riad Fes Relais & Châteaux is in a league of its own. The breakfast on the rooftop terrace with views over the 1,200-year-old medina was the most beautiful morning of my life.", date:"2026-04-10", helpful:31 },
-  { id:5, hotelId:20, userId:'guest', userName:"Lucas Fernandez", country:"Spain", avatar:"https://i.pravatar.cc/80?img=15", rating:5, title:"Sahara changed my life", text:"Desert Luxury Camp Morocco: 3am, walking out of the tent, complete silence, the Milky Way from horizon to horizon, and warm sand between my toes. I will be back every year.", date:"2026-03-18", helpful:42 },
-];
 
 // ═══ Featured Attractions ═══
 const featuredAttractions = [
-  { id:100, name:"Hassan II Mosque", city:"Casablanca", type:"Landmark", UNESCO:false, rating:4.9, image:I.cas1, description:"The third largest mosque in the world and Morocco's greatest architectural achievement. Built on a promontory over the Atlantic Ocean, the 210m minaret is the tallest religious structure on earth. 25,000 worshippers pray inside; 80,000 in the courtyard. The retractable roof opens to the sky. Guided tours for non-Muslims available.", coordinates:[33.6086,-7.6326], visit:"Tours daily 9am–6pm (except prayer times) | 130 MAD" },
-  { id:101, name:"Jemaa el-Fnaa", city:"Marrakech", type:"Cultural Square", UNESCO:true, rating:5.0, image:I.mrk3, description:"UNESCO Intangible Cultural Heritage and the beating heart of Marrakech. By day: orange juice sellers, henna artists, fortune tellers and snake charmers. By night: the world's greatest open-air theatre — storytellers, Gnawa musicians, acrobats, and the smoke and noise of 100 food stalls. Like nowhere else on earth.", coordinates:[31.6258,-7.9892], visit:"Open 24/7 — best after 7pm. Free." },
-  { id:102, name:"Aït Ben Haddou", city:"Ouarzazate", type:"UNESCO Ksar", UNESCO:true, rating:4.8, image:I.atl3, description:"The most spectacular ksar (fortified village) in Morocco — a UNESCO World Heritage Site on the ancient Saharan caravan route. Built from red earthen clay, it has been the backdrop for over 20 Hollywood films including Gladiator, Game of Thrones and Lawrence of Arabia. Inhabited by a few families who maintain the ancient structures.", coordinates:[31.0472,-7.1325], visit:"Open daily | 20 MAD entry" },
-  { id:103, name:"Volubilis", city:"Meknès", type:"Roman Ruins", UNESCO:true, rating:4.7, image:I.fes3, description:"Morocco's most impressive Roman ruins — a UNESCO World Heritage Site near Meknès. The capital of the Roman province of Mauritania Tingitana, Volubilis contains extraordinary floor mosaics, intact triumphal arches, forum, capitol and basilica dating from the 1st–3rd century AD. One of the best-preserved Roman sites in all of Africa.", coordinates:[34.0724,-5.5561], visit:"Open daily 8am–6pm | 70 MAD" },
-  { id:104, name:"Chefchaouen Medina", city:"Chefchaouen", type:"Historic Medina", UNESCO:false, rating:4.9, image:I.chef2, description:"The Blue City — every alley, staircase and wall painted in shades of cobalt, indigo and turquoise. Founded in 1471 as a refuge for Muslims and Jews expelled from Andalusia, the medina is a labyrinth of photogenic streets, craft workshops and shaded squares. The colour comes from a Jewish tradition of painting blue to ward off evil spirits.", coordinates:[35.1714,-5.2685], visit:"Open 24/7. Free to explore." },
-  { id:105, name:"Kasbah des Oudayas", city:"Rabat", type:"Historic Kasbah", UNESCO:true, rating:4.7, image:I.fes2, description:"A UNESCO World Heritage Site at the mouth of the Bou Regreg river — a 12th-century Almohad fortress with brilliant white and blue painted alleys overlooking the Atlantic. The Andalusian garden inside the kasbah is one of the most peaceful places in Morocco. The view from the walls over the ocean at sunset is unforgettable.", coordinates:[34.0331,-6.8408], visit:"Open daily. Free entry." },
-  { id:106, name:"Majorelle Garden", city:"Marrakech", type:"Garden & Museum", UNESCO:false, rating:4.6, image:I.mrk4, description:"Created by French painter Jacques Majorelle in 1924, purchased and restored by Yves Saint Laurent in 1980. A 12-acre botanical garden of rare cacti, bamboo and exotic plants around the iconic cobalt-blue Villa Majorelle, now home to the Berber Museum and Yves Saint Laurent Museum. One of the most visited sites in Morocco.", coordinates:[31.6415,-8.0036], visit:"Daily 8am–6pm | 150 MAD" },
+  { id:100, name:"Hassan II Mosque", city:"Casablanca", type:"Landmark", UNESCO:false, image:I.cas1, description:"One of the largest mosques in the world, built on a promontory over the Atlantic Ocean, with a 210m minaret. 25,000 worshippers pray inside; 80,000 in the courtyard. The retractable roof opens to the sky. Guided tours for non-Muslims available.", coordinates:[33.6086,-7.6326], visit:"Tours daily 9am–6pm (except prayer times) | 130 MAD" },
+  { id:101, name:"Jemaa el-Fnaa", city:"Marrakech", type:"Cultural Square", UNESCO:true, image:I.mrk3, description:"UNESCO Intangible Cultural Heritage and the beating heart of Marrakech. By day: orange juice sellers, henna artists, fortune tellers and snake charmers. By night: the world's greatest open-air theatre — storytellers, Gnawa musicians, acrobats, and the smoke and noise of 100 food stalls. Like nowhere else on earth.", coordinates:[31.6258,-7.9892], visit:"Open 24/7 — best after 7pm. Free." },
+  { id:102, name:"Aït Ben Haddou", city:"Ouarzazate", type:"UNESCO Ksar", UNESCO:true, image:I.atl3, description:"The most spectacular ksar (fortified village) in Morocco — a UNESCO World Heritage Site on the ancient Saharan caravan route. Built from red earthen clay, it has been the backdrop for over 20 Hollywood films including Gladiator, Game of Thrones and Lawrence of Arabia. Inhabited by a few families who maintain the ancient structures.", coordinates:[31.0472,-7.1325], visit:"Open daily | 20 MAD entry" },
+  { id:103, name:"Volubilis", city:"Meknès", type:"Roman Ruins", UNESCO:true, image:I.fes3, description:"Morocco's most impressive Roman ruins — a UNESCO World Heritage Site near Meknès. The capital of the Roman province of Mauritania Tingitana, Volubilis contains extraordinary floor mosaics, intact triumphal arches, forum, capitol and basilica dating from the 1st–3rd century AD. One of the best-preserved Roman sites in all of Africa.", coordinates:[34.0724,-5.5561], visit:"Open daily 8am–6pm | 70 MAD" },
+  { id:104, name:"Chefchaouen Medina", city:"Chefchaouen", type:"Historic Medina", UNESCO:false, image:I.chef2, description:"The Blue City — every alley, staircase and wall painted in shades of cobalt, indigo and turquoise. Founded in 1471 as a refuge for Muslims and Jews expelled from Andalusia, the medina is a labyrinth of photogenic streets, craft workshops and shaded squares. The colour comes from a Jewish tradition of painting blue to ward off evil spirits.", coordinates:[35.1714,-5.2685], visit:"Open 24/7. Free to explore." },
+  { id:105, name:"Kasbah des Oudayas", city:"Rabat", type:"Historic Kasbah", UNESCO:true, image:I.fes2, description:"A UNESCO World Heritage Site at the mouth of the Bou Regreg river — a 12th-century Almohad fortress with brilliant white and blue painted alleys overlooking the Atlantic. The Andalusian garden inside the kasbah is one of the most peaceful places in Morocco. The view from the walls over the ocean at sunset is unforgettable.", coordinates:[34.0331,-6.8408], visit:"Open daily. Free entry." },
+  { id:106, name:"Majorelle Garden", city:"Marrakech", type:"Garden & Museum", UNESCO:false, image:I.mrk4, description:"Created by French painter Jacques Majorelle in 1924, purchased and restored by Yves Saint Laurent in 1980. A 12-acre botanical garden of rare cacti, bamboo and exotic plants around the iconic cobalt-blue Villa Majorelle, now home to the Berber Museum and Yves Saint Laurent Museum. One of the most visited sites in Morocco.", coordinates:[31.6415,-8.0036], visit:"Daily 8am–6pm | 150 MAD" },
 ];
 
-const bookings = [];
-const subscribers = [];
+
+const allHotels = [...hotels, ...agadirHotels, ...rabatHotels];
+
+// Nightly prices change daily, so the API exposes only an approximate price range ($ – $$$$).
+// The rough figure is kept internally just to compute that range.
+const priceLevel = usd => usd < 80 ? '$' : usd < 150 ? '$$' : usd < 260 ? '$$$' : '$$$$';
+const publicHotel = ({ price, ...h }) => ({ ...h, priceLevel: priceLevel(price) });
+const publicHotels = allHotels.map(publicHotel);
 
 app.get('/api/hotels', (req,res) => {
-  const { city, minPrice, maxPrice, stars } = req.query;
-  let r = allHotels;
-  if (city)     r = r.filter(h => h.city.toLowerCase().includes(city.toLowerCase()));
-  if (minPrice) r = r.filter(h => h.price >= Number(minPrice));
-  if (maxPrice) r = r.filter(h => h.price <= Number(maxPrice));
-  if (stars)    r = r.filter(h => h.stars === Number(stars));
+  const { city, stars, priceLevel: level } = req.query;
+  let r = publicHotels;
+  if (city)  r = r.filter(h => h.city.toLowerCase().includes(String(city).toLowerCase()));
+  if (stars) r = r.filter(h => h.stars === Number(stars));
+  if (level) r = r.filter(h => h.priceLevel === level);
   res.json(r);
 });
 app.get('/api/hotels/:id', (req,res) => {
-  const h = allHotels.find(h => h.id === Number(req.params.id));
+  const h = publicHotels.find(h => h.id === Number(req.params.id));
   if (!h) return res.status(404).json({ error:'Not found' });
   res.json(h);
 });
-app.post('/api/bookings', (req,res) => {
-  const { hotelId, name, email, checkIn, checkOut, guests } = req.body;
-  if (!hotelId||!name||!email||!checkIn||!checkOut||!guests)
-    return res.status(400).json({ error:'All fields are required' });
-  const h = allHotels.find(h => h.id === Number(hotelId));
-  if (!h) return res.status(404).json({ error:'Hotel not found' });
-  const nights = Math.ceil((new Date(checkOut)-new Date(checkIn))/86400000);
-  const b = { id:bookings.length+1, hotelId, hotelName:h.name, name, email, checkIn, checkOut, guests, nights, total:nights*h.price, createdAt:new Date() };
-  bookings.push(b);
-  res.status(201).json(b);
-});
-const allHotels = [...hotels, ...agadirHotels, ...rabatHotels];
 
-app.get('/api/cities',       (req,res) => res.json([...new Set(allHotels.map(h=>h.city))]));
-app.get('/api/testimonials', (req,res) => res.json(testimonials));
-app.get('/api/stats',        (req,res) => res.json([{ label:"Happy Travellers", value:24800, suffix:"+" },{ label:"Real Hotels", value:allHotels.length, suffix:"" },{ label:"Cities Covered", value:[...new Set(allHotels.map(h=>h.city))].length, suffix:"" },{ label:"Years Experience", value:12, suffix:"" }]));
-app.get('/api/gallery',      (req,res) => res.json(gallery));
-app.get('/api/blog',         (req,res) => {
+app.get('/api/cities', (req,res) => res.json([...new Set(publicHotels.map(h=>h.city))]));
+// Real counts of what this guide covers — no invented visitor numbers.
+app.get('/api/stats', (req,res) => res.json([
+  { label:'Destinations', value:destinations.length, suffix:'' },
+  { label:'Hotels & Riads', value:publicHotels.length, suffix:'' },
+  { label:'Tour Ideas', value:tours.length, suffix:'' },
+  { label:'Restaurants', value:restaurants.length, suffix:'' },
+]));
+app.get('/api/gallery', (req,res) => res.json(gallery));
+app.get('/api/blog', (req,res) => {
   const { category } = req.query;
-  res.json(category ? blogPosts.filter(p=>p.category===category) : blogPosts);
+  res.json(category ? blogPosts.filter(p => p.category === category) : blogPosts);
 });
-app.get('/api/attractions',  (req,res) => {
+app.get('/api/attractions', (req,res) => {
   const { city } = req.query;
-  res.json(city ? attractions.filter(a=>a.city.toLowerCase().includes(city.toLowerCase())) : attractions);
+  res.json(city ? attractions.filter(a => a.city.toLowerCase().includes(String(city).toLowerCase())) : attractions);
 });
-app.get('/api/destinations',       (req,res) => res.json(destinations));
+app.get('/api/destinations', (req,res) => res.json(destinations));
 app.get('/api/destinations/:slug', (req,res) => {
-  const d = destinations.find(d=>d.slug===req.params.slug);
+  const d = destinations.find(d => d.slug === req.params.slug);
   if (!d) return res.status(404).json({ error:'Not found' });
   res.json(d);
 });
 app.get('/api/tours', (req,res) => {
   const { city } = req.query;
-  res.json(city ? tours.filter(t=>t.city.toLowerCase().includes(city.toLowerCase())) : tours);
+  res.json(city ? tours.filter(t => t.city.toLowerCase().includes(String(city).toLowerCase())) : tours);
 });
-app.get('/api/food',                 (req,res) => res.json(food));
-app.get('/api/culture',              (req,res) => res.json(culture));
-app.get('/api/transport',            (req,res) => res.json({ ...transport, carRentals }));
-app.get('/api/emergency',            (req,res) => res.json(emergency));
-app.get('/api/restaurants',          (req,res) => {
+app.get('/api/food',        (req,res) => res.json(food));
+app.get('/api/culture',     (req,res) => res.json(culture));
+app.get('/api/transport',   (req,res) => res.json({ ...transport, carRentals }));
+app.get('/api/emergency',   (req,res) => res.json(emergency));
+app.get('/api/restaurants', (req,res) => {
   const { city } = req.query;
-  res.json(city ? restaurants.filter(r => r.city.toLowerCase().includes(city.toLowerCase())) : restaurants);
+  res.json(city ? restaurants.filter(r => r.city.toLowerCase().includes(String(city).toLowerCase())) : restaurants);
 });
-app.get('/api/car-rentals',          (req,res) => res.json(carRentals));
-
-// ── Auth routes ──
-app.post('/api/auth/register', (req,res) => {
-  const { name, email, password } = req.body;
-  if (!name||!email||!password) return res.status(400).json({ error:'All fields required' });
-  if (users.find(u=>u.email===email)) return res.status(409).json({ error:'Email already registered' });
-  const user = { id:users.length+1, name, email, password, avatar:`https://i.pravatar.cc/80?img=${users.length+1}`, favorites:[], createdAt:new Date() };
-  users.push(user);
-  const { password:_, ...safe } = user;
-  res.status(201).json({ user:safe, token:`token_${user.id}_${Date.now()}` });
-});
-app.post('/api/auth/login', (req,res) => {
-  const { email, password } = req.body;
-  const user = users.find(u=>u.email===email && u.password===password);
-  if (!user) return res.status(401).json({ error:'Invalid email or password' });
-  const { password:_, ...safe } = user;
-  res.json({ user:safe, token:`token_${user.id}_${Date.now()}` });
-});
-app.get('/api/auth/profile', (req,res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ error:'Not authenticated' });
-  const userId = parseInt(token.split('_')[1]);
-  const user = users.find(u=>u.id===userId);
-  if (!user) return res.status(404).json({ error:'User not found' });
-  const { password:_, ...safe } = user;
-  res.json(safe);
-});
-
-// ── Reviews routes ──
-app.get('/api/reviews', (req,res) => {
-  const { hotelId } = req.query;
-  res.json(hotelId ? userReviews.filter(r=>r.hotelId===Number(hotelId)) : userReviews);
-});
-app.post('/api/reviews', (req,res) => {
-  const { hotelId, userName, country, rating, title, text } = req.body;
-  if (!hotelId||!userName||!rating||!title||!text) return res.status(400).json({ error:'All fields required' });
-  const review = { id:userReviews.length+1, hotelId:Number(hotelId), userId:'user', userName, country:country||'Morocco', avatar:`https://i.pravatar.cc/80?img=${Math.floor(Math.random()*70)+1}`, rating:Number(rating), title, text, date:new Date().toISOString().split('T')[0], helpful:0 };
-  userReviews.push(review);
-  res.status(201).json(review);
-});
-
-// ── Newsletter Lead Generation (Monetization) ──
-app.post('/api/newsletter', (req, res) => {
-  const { email } = req.body;
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ error: 'Please provide a valid email address.' });
-  }
-  const normalized = email.trim().toLowerCase();
-  const exists = subscribers.find(s => s.email === normalized);
-  if (!exists) {
-    subscribers.push({ id: subscribers.length + 1, email: normalized, subscribedAt: new Date().toISOString() });
-  }
-  res.json({ ok: true, message: 'Subscribed successfully! Welcome to Morocco Travel.' });
-});
-
-app.get('/api/newsletter/subscribers', (req, res) => {
-  res.json({ total: subscribers.length, subscribers });
-});
-
-// ── Analytics ──
-const analytics = { totalVisits:0, pageViews:{}, bookingCount:0, popularCities:{} };
-app.post('/api/analytics/track', (req,res) => {
-  const { page, city } = req.body;
-  analytics.totalVisits++;
-  analytics.pageViews[page] = (analytics.pageViews[page]||0)+1;
-  if (city) analytics.popularCities[city] = (analytics.popularCities[city]||0)+1;
-  res.json({ ok:true });
-});
-app.get('/api/analytics', (req,res) => {
-  res.json({ ...analytics, totalHotels:allHotels.length, totalReviews:userReviews.length, totalUsers:users.length, totalBookings:bookings.length });
-});
-app.get('/api/weather',              (req,res) => {
+app.get('/api/car-rentals', (req,res) => res.json(carRentals));
+app.get('/api/weather', (req,res) => {
   const { city } = req.query;
   if (city && weather[city]) return res.json({ city, ...weather[city] });
   res.json(weather);
