@@ -6,7 +6,7 @@ import axios from 'axios'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const categories = ['All','Main Course','Soup','Breakfast / Street Food','Drink']
+const categories = ['All','Main Course','Starter / Main','Soup','Breakfast / Street Food','Drink']
 
 export default function Food() {
   const [food, setFood] = useState([])
@@ -30,7 +30,7 @@ export default function Food() {
       <div ref={headerRef}>
         <div className="section-label">Moroccan Cuisine</div>
         <h1 className="section-title">Food & Flavours<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>of Morocco</em></h1>
-        <p className="section-subtitle">From the clay tagine pots of the Atlas to the spice souks of Marrakech — the most complex and beautiful cuisine in the Arab world</p>
+        <p className="section-subtitle">From the clay tagine pots of the Atlas to the spice souks of Marrakech — Berber, Arab, Andalusian and Jewish traditions on one table</p>
       </div>
 
       {/* Category filter */}
@@ -49,8 +49,15 @@ export default function Food() {
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(340px, 1fr))', gap:'2rem' }}>
         {filtered.map(item => (
           <div key={item.id} className="food-card" style={{ background:'var(--white)', borderRadius:20, overflow:'hidden', boxShadow:'0 2px 20px rgba(0,0,0,0.07)', border:'1px solid var(--cream2)' }}>
-            <div style={{ position:'relative', height:200 }}>
-              <img src={item.image} alt={item.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} loading="lazy" />
+            <div style={{ position:'relative', height:200, background:'linear-gradient(135deg, #3a1f0d 0%, #7a4a1e 55%, #c9973a 100%)' }}>
+              <img src={item.image} alt={item.name} style={{ width:'100%', height:'100%', objectFit:'cover' }} loading="lazy"
+                onError={e => { e.currentTarget.style.display = 'none' }} />
+              {item.imageCredit && (
+                <a href={item.imageCredit.url} target="_blank" rel="noopener noreferrer" title="Photo licence and source"
+                  style={{ position:'absolute', bottom:8, right:10, zIndex:2, fontSize:'0.62rem', color:'rgba(255,255,255,0.85)', background:'rgba(0,0,0,0.45)', padding:'0.1rem 0.45rem', borderRadius:6, textDecoration:'none' }}>
+                  📷 {item.imageCredit.author} / Wikimedia Commons
+                </a>
+              )}
               <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(15,8,0,0.7) 0%, transparent 50%)' }} />
               <div style={{ position:'absolute', bottom:'1rem', left:'1rem' }}>
                 <span style={{ fontSize:'2rem' }}>{item.icon}</span>
@@ -68,7 +75,7 @@ export default function Food() {
               <p style={{ color:'var(--text2)', fontSize:'0.9rem', lineHeight:1.75, marginBottom:'1rem' }}>{item.description}</p>
               <div style={{ display:'flex', flexDirection:'column', gap:'0.5rem', paddingTop:'1rem', borderTop:'1px solid var(--cream2)' }}>
                 {item.where && <div style={{ fontSize:'0.82rem', color:'var(--text3)' }}><strong style={{ color:'var(--gold)' }}>📍 Where to eat:</strong> {item.where}</div>}
-                {item.price && <div style={{ fontSize:'0.82rem', color:'var(--text3)' }}><strong style={{ color:'var(--gold)' }}>💰 Price:</strong> {item.price}</div>}
+                {item.price && <div style={{ fontSize:'0.82rem', color:'var(--text3)' }}><strong style={{ color:'var(--gold)' }}>💰 Typical price:</strong> {item.price}</div>}
                 {item.tip && <div style={{ fontSize:'0.82rem', background:'rgba(201,151,58,0.08)', border:'1px solid rgba(201,151,58,0.2)', borderRadius:10, padding:'0.6rem 0.8rem', color:'var(--text2)' }}>💡 {item.tip}</div>}
               </div>
             </div>
