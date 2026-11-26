@@ -123,3 +123,11 @@
 
 /* #root is a flex column, so a bare .section would shrink to its content: keep it full width */
 #root > .section { width: 100%; box-sizing: border-box; }
+
+/* Photo credit on images */
+.guide-credit {
+  position: absolute; right: 0.6rem; top: 0.6rem; z-index: 2;
+  font-size: 0.62rem; color: rgba(255,255,255,0.85); background: rgba(0,0,0,0.4);
+  padding: 0.12rem 0.45rem; border-radius: 6px; text-decoration: none;
+}
+.guide-about-img { position: relative; }

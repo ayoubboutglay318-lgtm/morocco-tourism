@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import { DESTINATION_PHOTOS } from './destinationPhotos.js';
+import { MORE_DESTINATIONS } from './moreDestinations.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -839,6 +841,13 @@ app.get('/api/attractions', (req,res) => {
   const { city } = req.query;
   res.json(city ? attractions.filter(a => a.city.toLowerCase().includes(String(city).toLowerCase())) : attractions);
 });
+// Add the extra destinations, then give every destination its verified, credited photo
+MORE_DESTINATIONS.forEach((d, i) => destinations.push({ id: 10 + i, ...d }));
+destinations.forEach(d => {
+  const ph = DESTINATION_PHOTOS[d.slug];
+  if (ph) Object.assign(d, ph);
+});
+
 app.get('/api/destinations', (req,res) => res.json(destinations));
 app.get('/api/destinations/:slug', (req,res) => {
   const d = destinations.find(d => d.slug === req.params.slug);

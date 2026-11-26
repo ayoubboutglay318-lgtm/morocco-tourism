@@ -5,6 +5,14 @@ import axios from 'axios'
 const PRICE_LABELS = { '$': 'Budget', '$$': 'Mid-range', '$$$': 'Luxury' }
 const PRICE_COLORS = { '$': '#27ae60', '$$': '#f39c12', '$$$': '#8e44ad' }
 
+// Type of place, used for the filter buttons
+const AREAS = {
+  Cities: ['tangier', 'marrakech', 'fes', 'casablanca', 'rabat', 'meknes', 'tetouan', 'chefchaouen'],
+  'Desert & South': ['merzouga', 'zagora', 'ouarzazate', 'ait-benhaddou', 'dades-gorges', 'todra-gorge', 'dakhla'],
+  'Mountains & Nature': ['atlas-mountains', 'ifrane', 'ouzoud-falls', 'akchour', 'dades-gorges', 'todra-gorge', 'volubilis'],
+  'Coast & Beaches': ['essaouira', 'agadir', 'taghazout', 'asilah', 'al-hoceima', 'el-jadida', 'legzira', 'dakhla'],
+}
+
 export default function Destinations() {
   const [destinations, setDestinations] = useState([])
   const [search, setSearch] = useState('')
@@ -23,8 +31,7 @@ export default function Destinations() {
     const matchSearch = d.name.toLowerCase().includes(search.toLowerCase()) ||
       d.tagline.toLowerCase().includes(search.toLowerCase()) ||
       d.region.toLowerCase().includes(search.toLowerCase())
-    const priceCategory = PRICE_LABELS[d.priceLevel] || d.priceLevel
-    const matchFilter = filter === 'All' || priceCategory === filter || (d.region && d.region.includes(filter))
+    const matchFilter = filter === 'All' || (AREAS[filter] || []).includes(d.slug)
     return matchSearch && matchFilter
   })
 
@@ -47,14 +54,14 @@ export default function Destinations() {
             ✦ DISCOVER MOROCCO ✦
           </div>
           <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', fontFamily: "'Playfair Display', serif", marginBottom: '1rem', lineHeight: 1.1 }}>
-            9 Extraordinary Destinations
+            {destinations.length || 'All'} Destinations Across Morocco
           </h1>
           <p style={{ fontSize: '1.15rem', color: '#c8b89a', maxWidth: 600, margin: '0 auto 2rem', lineHeight: 1.7 }}>
             From the Sahara's golden dunes to Atlantic ramparts, ancient medinas to mountain peaks — every corner of Morocco tells a different story.
           </p>
           {/* Stats row */}
           <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-            {[['9', 'Destinations'], ['18', 'Guided Tours'], ['50+', 'Attractions']].map(([val, label]) => (
+            {[[String(destinations.length || '—'), 'Destinations'], ['4', 'Kinds of landscape'], ['100%', 'Real, credited photos']].map(([val, label]) => (
               <div key={label} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--gold-light)', lineHeight: 1 }}>{val}</div>
                 <div style={{ fontSize: '0.75rem', color: '#8a7060', textTransform: 'uppercase', letterSpacing: 1, marginTop: '0.2rem' }}>{label}</div>
@@ -84,7 +91,7 @@ export default function Destinations() {
             />
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {['All', 'Budget', 'Mid-range', 'Luxury'].map(f => (
+            {['All', ...Object.keys(AREAS)].map(f => (
               <button key={f} onClick={() => setFilter(f)} style={{
                 padding: '0.5rem 1rem', borderRadius: 50, border: '1.5px solid',
                 borderColor: filter === f ? '#c9973a' : '#e8e0d0',
@@ -146,6 +153,8 @@ function DestinationCard({ dest }) {
           <img
             src={dest.image}
             alt={dest.name}
+            loading="lazy"
+            onError={e => { e.currentTarget.style.visibility = 'hidden' }}
             style={{
               width: '100%', height: '100%', objectFit: 'cover',
               transform: hovered ? 'scale(1.06)' : 'scale(1)',
@@ -175,6 +184,12 @@ function DestinationCard({ dest }) {
               {priceLevel} · {PRICE_LABELS[priceLevel]}
             </span>
           </div>
+
+          {dest.imageCredit && (
+            <span style={{ position: 'absolute', right: 10, bottom: 8, zIndex: 2, fontSize: '0.62rem', color: 'rgba(255,255,255,0.75)', background: 'rgba(0,0,0,0.35)', padding: '0.1rem 0.45rem', borderRadius: 6 }}>
+              📷 {dest.imageCredit.author}
+            </span>
+          )}
 
           {/* Bottom overlay: name & tagline */}
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem 1.4rem 1.2rem' }}>

@@ -108,7 +108,7 @@ export default function DestinationDetail() {
   const WA_URL = `https://wa.me/212689122018?text=${encodeURIComponent(`Hello! I'm interested in a tour to ${dest.name}. Can you help me plan my trip?`)}`
 
   /* ── Gallery images (hero + image, max 5 slots remaining) ── */
-  const galleryImgs = [dest.heroImage, dest.image, ...attractions.slice(0, 4).map(a => a.image)].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).slice(0, 5)
+  const galleryImgs = [dest.image, ...attractions.slice(0, 4).map(a => a.image)].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).slice(0, 5)
 
   /* ── Render ── */
   return (
@@ -153,6 +153,13 @@ export default function DestinationDetail() {
           )}
         </div>
 
+        {dest.imageCredit && (
+          <a href={dest.imageCredit.url} target="_blank" rel="noopener noreferrer" title="Photo licence and source"
+             style={{ position: 'absolute', right: 16, bottom: 14, zIndex: 3, fontSize: '0.72rem', color: 'rgba(255,255,255,0.8)', background: 'rgba(0,0,0,0.4)', padding: '0.25rem 0.6rem', borderRadius: 8, textDecoration: 'none' }}>
+            📷 {dest.imageCredit.author} / Wikimedia Commons
+          </a>
+        )}
+
         {/* Scroll cue */}
         <div className="dd-hero-scroll">
           <div className="dd-hero-scroll-line" />
@@ -167,7 +174,7 @@ export default function DestinationDetail() {
             { icon: '📅', value: dest.bestTime?.split(',')[0], label: 'Best Time' },
             { icon: '🏛️', value: attractions.length, label: 'Attractions' },
             { icon: '🎒', value: tours.length, label: 'Tours' },
-          ].map(s => (
+          ].filter(s => s.value !== 0).map(s => (
             <div key={s.label} className="dd-stat">
               <span className="dd-stat-icon">{s.icon}</span>
               <div className="dd-stat-text">
@@ -182,7 +189,7 @@ export default function DestinationDetail() {
       {/* ══ TABS ══ */}
       <div className="dd-tabs-bar">
         <div className="dd-tabs-inner">
-          {TABS.map(t => (
+          {TABS.filter(t => t.count !== 0).map(t => (
             <button
               key={t.id}
               className={`dd-tab${tab === t.id ? ' active' : ''}`}
@@ -273,12 +280,16 @@ export default function DestinationDetail() {
                 <div className="dd-sidebar-card dd-reveal-scale" style={{ transitionDelay: '0.2s' }}>
                   <h3>Plan Your Visit</h3>
                   <div className="dd-cta-btns">
-                    <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('attractions')}>
+                    {attractions.length > 0 && (
+                      <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('attractions')}>
                       🏛️ {attractions.length} Attractions →
                     </button>
-                    <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('tours')}>
+                    )}
+                    {tours.length > 0 && (
+                      <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('tours')}>
                       🎒 {tours.length} Tours →
                     </button>
+                    )}
                     <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
                       🧭 Book Me as Your Guide
                     </a>

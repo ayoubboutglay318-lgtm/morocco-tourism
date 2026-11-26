@@ -1,67 +1,67 @@
 import { useEffect, lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import { whatsappLink, WHATSAPP_URL } from '../config'
+import { DESTINATION_PHOTOS as PH } from '../../server/destinationPhotos.js'
 import './Home.css'
 
 // The 3D sky is decorative: load it after the page so text appears first
 const ThreeHero = lazy(() => import('../components/ThreeHero'))
 
-const img = path => `https://images.unsplash.com/${path}?w=800&q=80&fit=crop&auto=format`
 
 const TOURS = [
   {
     title: 'City Tours',
     length: 'Half day or full day',
-    image: img('photo-1597212618440-806262de4f6b'),
+    photo: PH['marrakech'],
     desc: 'Walk the medinas of Marrakech, Fes, Tangier or Chefchaouen with a local. Hidden alleys, souks, palaces and the best places to eat.',
     includes: ['Walking tour of the old town', 'Main monuments & hidden corners', 'Local food stops'],
   },
   {
     title: 'Sahara Desert Trip',
     length: '2 to 4 days',
-    image: img('photo-1559586616-361e18714958'),
+    photo: PH['merzouga'],
     desc: 'Cross the Atlas Mountains, visit Aït Benhaddou and the Dades Gorges, then ride camels into the dunes of Merzouga and sleep under the stars.',
     includes: ['Atlas Mountains & kasbahs', 'Camel ride at sunset', 'Night in a desert camp'],
   },
   {
     title: 'Atlas Mountains Day Trip',
     length: '1 day',
-    image: img('photo-1593535988128-7214bc2cbedc'),
+    photo: PH['atlas-mountains'],
     desc: 'Escape the city to Berber villages, waterfalls and mountain views — Imlil, the Ourika Valley or a gentle hike in Toubkal National Park.',
     includes: ['Berber village visit', 'Easy hike with views', 'Tea with a local family'],
   },
   {
     title: 'Imperial Cities',
     length: '5 to 7 days',
-    image: img('photo-1559925523-10de9e23cf90'),
+    photo: PH['meknes'],
     desc: "Morocco's four royal capitals — Rabat, Meknes, Fes and Marrakech — with their palaces, mosques, gardens and ancient medinas.",
     includes: ['Rabat, Meknes, Fes, Marrakech', 'Volubilis Roman ruins', 'Guided medina visits'],
   },
   {
     title: 'The North: Tangier & Chefchaouen',
     length: '2 to 4 days',
-    image: img('photo-1538600838042-6a0c694ffab5'),
+    photo: PH['chefchaouen'],
     desc: 'Where Africa meets Europe: the kasbah of Tangier, Cap Spartel, Tetouan and the blue streets of Chefchaouen in the Rif Mountains.',
     includes: ['Tangier kasbah & Cap Spartel', 'The blue city of Chefchaouen', 'Akchour waterfalls (optional)'],
   },
   {
     title: 'Grand Tour of Morocco',
     length: '10 to 14 days',
-    image: img('photo-1624802746702-60ca95bdb605'),
+    photo: PH['ait-benhaddou'],
     desc: 'See the whole country in one journey: the north, the imperial cities, the Sahara, the Atlas and the Atlantic coast at Essaouira.',
     includes: ['North to south in one trip', 'Desert, mountains & coast', 'Planned around your pace'],
   },
 ]
 
 const PLACES = [
-  { name: 'Marrakech', slug: 'marrakech', image: img('photo-1597212618440-806262de4f6b') },
-  { name: 'Fes', slug: 'fes', image: img('photo-1559925523-10de9e23cf90') },
-  { name: 'Chefchaouen', slug: 'chefchaouen', image: img('photo-1538600838042-6a0c694ffab5') },
-  { name: 'Sahara (Merzouga)', slug: 'merzouga', image: img('photo-1559586616-361e18714958') },
-  { name: 'Tangier', slug: 'tangier', image: img('photo-1533501747004-381b96042e88') },
-  { name: 'Atlas Mountains', slug: 'atlas-mountains', image: img('photo-1593535988128-7214bc2cbedc') },
-  { name: 'Essaouira', slug: 'essaouira', image: img('photo-1624802746702-60ca95bdb605') },
-  { name: 'Casablanca', slug: 'casablanca', image: img('photo-1548018560-4cb48a8837c1') },
+  { name: 'Marrakech', slug: 'marrakech' },
+  { name: 'Fes', slug: 'fes' },
+  { name: 'Chefchaouen', slug: 'chefchaouen' },
+  { name: 'Sahara (Merzouga)', slug: 'merzouga' },
+  { name: 'Aït Benhaddou', slug: 'ait-benhaddou' },
+  { name: 'Tangier', slug: 'tangier' },
+  { name: 'Essaouira', slug: 'essaouira' },
+  { name: 'Ouzoud Falls', slug: 'ouzoud-falls' },
 ]
 
 const WHY = [
@@ -138,7 +138,8 @@ export default function Home() {
       {/* ── ABOUT ME ── */}
       <div className="section guide-about">
         <div className="guide-about-img g-reveal">
-          <img src={img('photo-1618423205267-e95744f57edf')} alt="Morocco landscape" loading="lazy" />
+          <img src={PH['dades-gorges'].image} alt="The road through the Dades Gorges, Morocco" loading="lazy" />
+          <a className="guide-credit" href={PH['dades-gorges'].imageCredit.url} target="_blank" rel="noopener noreferrer">📷 {PH['dades-gorges'].imageCredit.author} / Wikimedia Commons</a>
         </div>
         <div className="guide-about-text g-reveal">
           <div className="section-label">About Me</div>
@@ -167,7 +168,8 @@ export default function Home() {
             {TOURS.map(t => (
               <article key={t.title} className="guide-tour-card g-reveal">
                 <div className="guide-tour-img">
-                  <img src={t.image} alt={t.title} loading="lazy" />
+                  <img src={t.photo.image} alt={t.title} loading="lazy" />
+                  <span className="guide-credit">📷 {t.photo.imageCredit.author}</span>
                   <span className="guide-tour-length">⏱ {t.length}</span>
                 </div>
                 <div className="guide-tour-body">
@@ -202,13 +204,17 @@ export default function Home() {
         <div className="guide-places-grid">
           {PLACES.map(p => (
             <Link key={p.slug} to={`/destinations/${p.slug}`} className="city-card g-reveal">
-              <img src={p.image} alt={p.name} loading="lazy" />
+              <img src={PH[p.slug].image} alt={p.name} loading="lazy" />
+              <span className="guide-credit">📷 {PH[p.slug].imageCredit.author}</span>
               <div className="city-card-overlay">
                 <div className="city-card-name">{p.name}</div>
                 <div className="city-card-count">Read the guide →</div>
               </div>
             </Link>
           ))}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <Link to="/destinations" className="btn-outline">See All Destinations in Morocco →</Link>
         </div>
       </div>
 
