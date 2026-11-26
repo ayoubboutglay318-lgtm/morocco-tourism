@@ -13,7 +13,6 @@ import Home from './pages/Home'
 const Destinations = lazy(() => import('./pages/Destinations'))
 const DestinationDetail = lazy(() => import('./pages/DestinationDetail'))
 const Food = lazy(() => import('./pages/Food'))
-const Culture = lazy(() => import('./pages/Culture'))
 const Transport = lazy(() => import('./pages/Transport'))
 const Emergency = lazy(() => import('./pages/Emergency'))
 const Weather = lazy(() => import('./pages/Weather'))
@@ -63,7 +62,7 @@ function App() {
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
         <Route path="/food" element={<Food />} />
-        <Route path="/culture" element={<Culture />} />
+        <Route path="/culture" element={<Navigate to="/" replace />} />
         <Route path="/transport" element={<Transport />} />
         <Route path="/emergency" element={<Emergency />} />
         <Route path="/weather" element={<Weather />} />

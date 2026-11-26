@@ -5,8 +5,7 @@ import Seo from './Seo'
 const PAGES = {
   '/': { title: null, description: 'Your local guide in Morocco: guided tours of Marrakech, Fes, Chefchaouen and Tangier, Sahara desert trips and custom journeys across the country. Book on WhatsApp.' },
   '/destinations': { title: 'Morocco Destinations & City Guides', description: 'Guides to Morocco\'s best destinations: Marrakech, Fes, Chefchaouen, Tangier, Casablanca, Essaouira, Merzouga and the Atlas Mountains — when to go, how to get there and what to see.' },
-  '/food': { title: 'Moroccan Food: 8 Dishes to Try', description: 'Tagine, couscous, pastilla, harira, mint tea, mechoui, msemen and rfissa — what they are, where to eat them and tips for ordering in Morocco.' },
-  '/culture': { title: 'Moroccan Culture, Festivals & Etiquette', description: 'Festivals, customs, crafts and etiquette in Morocco: dress, greetings, Ramadan, bargaining in the souks and visiting mosques.' },
+  '/food': { title: 'Moroccan Food: 16 Dishes to Try', description: 'Tagine, couscous, pastilla, harira, tanjia, zaalouk, bissara, briouats, baghrir, sfenj, chebakia, mint tea and more — what they are, where to eat them and tips for ordering in Morocco.' },
   '/transport': { title: 'Getting Around Morocco: Trains, Buses, Taxis & Ferries', description: 'How to travel around Morocco: Al Boraq high-speed train, ONCF trains, CTM and Supratours buses, petit and grand taxis, airports and ferries to Spain.' },
   '/emergency': { title: 'Morocco Emergency Numbers & Embassies', description: 'Emergency numbers in Morocco (police 19/190, ambulance 15/150, 112 from mobile), major hospitals and embassy contacts in Rabat.' },
   '/weather': { title: 'Morocco Weather Today & Best Time to Visit', description: 'Live weather and 7-day forecast for Marrakech, Fes, Tangier, Chefchaouen, Essaouira, Merzouga, Casablanca, Agadir and Rabat, plus monthly climate averages.' },

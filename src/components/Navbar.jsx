@@ -49,7 +49,6 @@ export default function Navbar() {
         <li><Link to="/food" style={navLinkStyle('/food')} onClick={() => setMenuOpen(false)}>{t('food')}</Link></li>
         <li className="hide-mobile"><Link to="/gallery" style={navLinkStyle('/gallery')} onClick={() => setMenuOpen(false)}>{t('gallery')}</Link></li>
         <li className="hide-mobile"><Link to="/blog" style={navLinkStyle('/blog')} onClick={() => setMenuOpen(false)}>{t('blog')}</Link></li>
-        <li className="hide-mobile"><Link to="/culture" style={navLinkStyle('/culture')} onClick={() => setMenuOpen(false)}>{t('culture')}</Link></li>
         <li className="hide-mobile"><Link to="/weather" style={navLinkStyle('/weather')} onClick={() => setMenuOpen(false)}>{t('weather')}</Link></li>
         <li className="hide-mobile"><Link to="/map" style={navLinkStyle('/map')} onClick={() => setMenuOpen(false)}>{t('map')}</Link></li>
         {/* More dropdown */}

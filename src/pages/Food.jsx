@@ -6,7 +6,7 @@ import axios from 'axios'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const categories = ['All','Main Course','Starter / Main','Soup','Breakfast / Street Food','Drink']
+const categories = ['All','Main Course','Starter','Starter / Main','Soup','Breakfast / Street Food','Sweets','Drink']
 
 export default function Food() {
   const [food, setFood] = useState([])

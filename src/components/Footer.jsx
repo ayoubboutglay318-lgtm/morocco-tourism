@@ -23,7 +23,6 @@ export default function Footer() {
             <ul>
               <li><Link to="/destinations">Destinations</Link></li>
               <li><Link to="/food">Food</Link></li>
-              <li><Link to="/culture">Culture</Link></li>
               <li><Link to="/blog">Travel Guides</Link></li>
             </ul>
           </div>
