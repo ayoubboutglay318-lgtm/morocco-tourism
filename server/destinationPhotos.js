@@ -16,7 +16,7 @@ export const DESTINATION_PHOTOS = {
   // Existing destinations
   tangier: photo('Kasbah, Tánger, Marruecos, 2015-12-11, DD 27.JPG', 'Diego Delso'),
   marrakech: photo('Jamaa El Fna square Morocco 2018 1.jpg', 'Steven Lek'),
-  fes: photo('Chouara Tannery, Fes (8947682350).jpg', 'just_a_cheeseburger'),
+  fes: photo('Fes Bab Bou Jeloud 2011.jpg', 'Bjørn Christian Tørrissen'),
   chefchaouen: photo('Chefchaouen Street B.jpg', 'Mark Fischer'),
   merzouga: photo('Merzouga Dunes 2011.jpg', 'Bjørn Christian Tørrissen'),
   essaouira: photo('Essaouira-port.JPG', 'Rienna'),
