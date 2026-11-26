@@ -12,15 +12,14 @@ export default function About() {
         <p>
           Morocco Travel is an independent travel guide made by <strong>Ayoub</strong>, based in Morocco.
           The goal is simple: give travellers clear, honest and practical information to plan a trip —
-          where to go, how to get around, what to eat, where to stay, and what to do if something goes wrong.
+          where to go, how to get around, what to eat, and what to do if something goes wrong.
         </p>
 
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', margin: '2rem 0 0.6rem', color: 'var(--dark)' }}>How this guide is made</h2>
         <ul style={{ paddingLeft: '1.2rem' }}>
           <li>We do not publish invented reviews, ratings or visitor numbers.</li>
-          <li>Hotels listed are real, well-known properties. Prices change daily, so we show an approximate range and link to live prices.</li>
           <li>Emergency numbers and embassy contacts are checked against official government sources.</li>
-          <li>Photos marked "Photo: city name" show the destination, not the hotel itself. Food photos are credited to their photographers.</li>
+          <li>Photos marked "Photo: city name" show the destination, not a specific building. Food photos are credited to their photographers.</li>
         </ul>
 
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.4rem', margin: '2rem 0 0.6rem', color: 'var(--dark)' }}>How we can help</h2>

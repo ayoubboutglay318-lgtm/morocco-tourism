@@ -1,0 +1,125 @@
+/* ── Guide home page ── */
+
+/* Hero text appears with a CSS animation, so it never depends on JavaScript */
+.guide-hero-content .hero-eyebrow,
+.guide-hero-content h1,
+.guide-hero-content .hero-subtitle,
+.guide-hero-content .hero-actions {
+  animation: guideFadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.guide-hero-content h1 { animation-delay: 0.15s; }
+.guide-hero-content .hero-subtitle { animation-delay: 0.3s; }
+.guide-hero-content .hero-actions { animation-delay: 0.45s; }
+
+@keyframes guideFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Scroll reveal: only hidden once the observer is running */
+.g-reveal-ready .g-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.g-reveal-ready .g-reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-hero-content * { animation: none !important; }
+  .g-reveal-ready .g-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Trust strip */
+.guide-strip { background: var(--dark2); border-top: 1px solid rgba(201,151,58,0.2); }
+.guide-strip-inner {
+  max-width: 1200px; margin: 0 auto; padding: 1.4rem 2rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500;
+}
+.guide-strip-inner div { display: flex; align-items: center; gap: 0.6rem; justify-content: center; text-align: left; }
+.guide-strip-inner span { font-size: 1.3rem; }
+[data-theme="dark"] .guide-strip { background: #1e1000; }
+
+/* About */
+.guide-about { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: center; }
+.guide-about-img { border-radius: var(--radius-lg); overflow: hidden; height: 480px; box-shadow: var(--shadow-lg); }
+.guide-about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.guide-about-text p { color: var(--text2); line-height: 1.85; font-size: 1.02rem; margin-bottom: 1rem; }
+
+/* Tours */
+.guide-tours-bg { background: var(--white); }
+.guide-tours-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+.guide-tour-card {
+  background: var(--cream); border: 1px solid var(--cream2); border-radius: var(--radius-lg);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+}
+.guide-tour-card:hover { box-shadow: var(--shadow); border-color: var(--gold); }
+.guide-tour-img { position: relative; height: 210px; overflow: hidden; background: var(--cream2); }
+.guide-tour-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s; }
+.guide-tour-card:hover .guide-tour-img img { transform: scale(1.06); }
+.guide-tour-length {
+  position: absolute; left: 1rem; bottom: 1rem; background: rgba(15,8,0,0.75); color: #fff;
+  font-size: 0.78rem; font-weight: 600; padding: 0.35rem 0.8rem; border-radius: 50px; backdrop-filter: blur(6px);
+}
+.guide-tour-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.guide-tour-body h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--text); margin-bottom: 0.6rem; }
+.guide-tour-body p { color: var(--text2); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1rem; }
+.guide-tour-body ul { list-style: none; padding: 0; margin: 0 0 1.4rem; }
+.guide-tour-body li { color: var(--text2); font-size: 0.86rem; padding: 0.25rem 0 0.25rem 1.5rem; position: relative; }
+.guide-tour-body li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.guide-tour-footer {
+  margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
+  border-top: 1px solid var(--cream2); padding-top: 1rem; flex-wrap: wrap;
+}
+.guide-tour-price { font-size: 0.85rem; color: var(--text3); font-weight: 600; }
+.guide-tour-btn { padding: 0.55rem 1.2rem !important; font-size: 0.85rem !important; }
+
+.guide-custom {
+  margin-top: 2.5rem; padding: 2rem 2.5rem; border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--dark2), var(--dark3)); color: #fff;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+}
+.guide-custom h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.3rem; color: #fff; }
+.guide-custom p { color: rgba(255,255,255,0.65); }
+[data-theme="dark"] .guide-custom { background: linear-gradient(135deg, #2e1a06, #1e1000); }
+
+/* Places */
+.guide-places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.guide-places-grid .city-card { height: 300px; }
+.guide-places-grid .city-card-count { opacity: 1; transform: none; }
+
+/* Why */
+.guide-why-bg { background: var(--cream2); }
+.guide-why-grid { grid-template-columns: repeat(4, 1fr); }
+
+/* Steps */
+.guide-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+.guide-step { text-align: center; padding: 2rem 1.5rem; }
+.guide-step-num {
+  width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold); color: #0f0800; font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900;
+}
+.guide-step h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--text); margin-bottom: 0.5rem; }
+.guide-step p { color: var(--text2); line-height: 1.7; font-size: 0.95rem; }
+
+@media (max-width: 1000px) {
+  .guide-tours-grid { grid-template-columns: repeat(2, 1fr); }
+  .guide-places-grid { grid-template-columns: repeat(2, 1fr); }
+  .guide-why-grid { grid-template-columns: repeat(2, 1fr); }
+  .guide-strip-inner { grid-template-columns: repeat(2, 1fr); }
+  .guide-strip-inner div { justify-content: flex-start; }
+  .guide-about { grid-template-columns: 1fr; gap: 2.5rem; }
+  .guide-about-img { height: 340px; }
+}
+
+@media (max-width: 640px) {
+  .guide-tours-grid, .guide-why-grid, .guide-steps { grid-template-columns: 1fr; }
+  .guide-places-grid .city-card { height: 220px; }
+  .guide-strip-inner { grid-template-columns: 1fr; }
+  .guide-custom { padding: 1.6rem; }
+}
+
+/* #root is a flex column, so a bare .section would shrink to its content: keep it full width */
+#root > .section { width: 100%; box-sizing: border-box; }

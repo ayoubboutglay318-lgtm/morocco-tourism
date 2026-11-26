@@ -10,9 +10,6 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 
 // Other pages load on demand so the first visit downloads less code (faster on phones)
-const Hotels = lazy(() => import('./pages/Hotels'))
-const HotelDetail = lazy(() => import('./pages/HotelDetail'))
-const Booking = lazy(() => import('./pages/Booking'))
 const Destinations = lazy(() => import('./pages/Destinations'))
 const DestinationDetail = lazy(() => import('./pages/DestinationDetail'))
 const Food = lazy(() => import('./pages/Food'))
@@ -25,7 +22,6 @@ const MapPage = lazy(() => import('./pages/MapPage'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
-const Favorites = lazy(() => import('./pages/Favorites'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Privacy = lazy(() => import('./pages/Privacy'))
@@ -61,10 +57,9 @@ function App() {
       <Suspense fallback={<div className="loading">Loading…</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/hotels/:id" element={<HotelDetail />} />
-        <Route path="/hotels/:id/book" element={<Booking />} />
-        <Route path="/booking-success" element={<Navigate to="/hotels" replace />} />
+        {/* Hotels were removed: old links go to the home page */}
+        <Route path="/hotels/*" element={<Navigate to="/" replace />} />
+        <Route path="/booking-success" element={<Navigate to="/" replace />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
         <Route path="/food" element={<Food />} />
@@ -74,15 +69,15 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/trip-planner" element={<TripPlanner />} />
         <Route path="/map" element={<MapPage />} />
-        <Route path="/reviews" element={<Navigate to="/hotels" replace />} />
+        <Route path="/reviews" element={<Navigate to="/" replace />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/auth" element={<Navigate to="/favorites" replace />} />
+        <Route path="/favorites" element={<Navigate to="/" replace />} />
+        <Route path="/auth" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </Suspense>

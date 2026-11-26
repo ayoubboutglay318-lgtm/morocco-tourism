@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { whatsappLink } from '../config'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -17,7 +16,6 @@ const mkIcon = (emoji, color, size = 36) => L.divIcon({
   iconSize:[size, size], iconAnchor:[size/2, size], popupAnchor:[0, -size], className:''
 })
 
-const hotelIcon = mkIcon('🏨','#c9973a', 40)
 const restaurantIcon = mkIcon('🍽️','#e67e22', 40)
 const attractionIcon = mkIcon('⭐','#e74c3c', 38)
 const cityIcon = mkIcon('📍','#2980b9', 36)
@@ -77,32 +75,7 @@ const restaurants = [
 ]
 
 export default function MapPage() {
-  const [hotels, setHotels] = useState([])
   const [activeFilter, setActiveFilter] = useState('all')
-  const [minStars, setMinStars] = useState(3)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    // eslint-disable-next-line
-    setLoading(true)
-    axios.get('/api/hotels')
-      .then(r => {
-        setHotels(r.data.filter(h => h.stars >= minStars))
-        setError(null)
-      })
-      .catch(err => {
-        setError('Could not load hotel data. Is the server running?')
-        console.error(err)
-      })
-      .finally(() => setLoading(false))
-  }, [minStars])
-
-  const hotelCoords = {
-    Tangier:[35.7870,  -5.8033], Marrakech:[31.6340,-7.9890], Fes:[34.0640,-4.9800],
-    Chefchaouen:[35.1714,-5.2685], Merzouga:[31.0800,-4.0200], Essaouira:[31.5105,-9.7640],
-    'Atlas Mountains':[31.0588,-7.9158], Casablanca:[33.5900,-7.6200], Agadir:[30.4250,-9.5950], Rabat:[34.0200,-6.8420]
-  }
 
   const filteredRestaurants = restaurants
 
@@ -110,28 +83,11 @@ export default function MapPage() {
     <div style={{ maxWidth:1200, margin:'0 auto', padding:'2.5rem 2rem' }}>
       <div className="section-label">Explore Morocco</div>
       <h1 className="section-title">Interactive Map<br /><em style={{ color:'var(--gold)', fontStyle:'italic' }}>of Morocco's Best Places</em></h1>
-      <p className="section-subtitle">Hotels, restaurants, attractions, airports and beaches. Hotel and restaurant pins show the approximate area, not the exact address.</p>
-
-      {/* Hotel category filter */}
-      <div style={{ marginBottom:'1.5rem', padding:'1rem', background:'var(--cream)', borderRadius:12, display:'flex', alignItems:'center', gap:'1rem', flexWrap:'wrap' }}>
-        <label style={{ fontWeight:600, fontSize:'0.9rem' }}>Hotel category:</label>
-        <div style={{ display:'flex', gap:'0.5rem' }}>
-          {[3, 4, 5].map(rating => (
-            <button key={rating} onClick={() => setMinStars(rating)} style={{
-              padding:'0.4rem 0.8rem', borderRadius:8, border:'2px solid', cursor:'pointer', fontSize:'0.85rem', fontWeight:600, transition:'all 0.2s',
-              borderColor: minStars === rating ? 'var(--gold)' : '#ddd',
-              background: minStars === rating ? 'var(--gold)' : 'white',
-              color: minStars === rating ? 'var(--dark)' : 'var(--text2)',
-            }}>
-              {'★'.repeat(rating)}{rating < 5 ? '+' : ''}
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="section-subtitle">Restaurants, attractions, airports and beaches. Restaurant pins show the approximate area, not the exact address.</p>
 
       {/* Filter pills */}
       <div style={{ display:'flex', gap:'0.6rem', flexWrap:'wrap', marginBottom:'1.5rem' }}>
-        {[['all','🗺️ All'],['hotels','🏨 Hotels'],['restaurants','🍽️ Restaurants'],['attractions','⭐ Attractions'],['airports','✈️ Airports'],['beaches','🏖️ Beaches']].map(([k,l]) => (
+        {[['all','🗺️ All'],['restaurants','🍽️ Restaurants'],['attractions','⭐ Attractions'],['airports','✈️ Airports'],['beaches','🏖️ Beaches']].map(([k,l]) => (
           <button key={k} onClick={() => setActiveFilter(k)} style={{
             padding:'0.45rem 1.1rem', borderRadius:50, border:'1.5px solid', cursor:'pointer', fontSize:'0.82rem', fontWeight:600, transition:'all 0.2s',
             borderColor: activeFilter===k ? 'var(--gold)' : 'var(--cream2)',
@@ -141,19 +97,7 @@ export default function MapPage() {
         ))}
       </div>
 
-      {error && (
-        <div style={{ padding:'1rem', background:'#ffe6e6', borderRadius:8, color:'#d32f2f', marginBottom:'1rem', fontSize:'0.9rem' }}>
-          ⚠️ {error}
-        </div>
-      )}
-
-      {loading && (
-        <div style={{ padding:'2rem', textAlign:'center', color:'var(--text2)' }}>
-          Loading map data...
-        </div>
-      )}
-
-      {!loading && (
+      {(
         <>
           {/* Map */}
           <div style={{ borderRadius:20, overflow:'hidden', boxShadow:'0 4px 32px rgba(0,0,0,0.15)', border:'2px solid var(--cream2)', height:600 }}>
@@ -169,30 +113,10 @@ export default function MapPage() {
                   <Popup><div style={{ minWidth:150 }}>
                     <strong style={{ fontFamily:'Playfair Display,serif', fontSize:'1.05rem', display:'block', marginBottom:'0.3rem' }}>{c.name}</strong>
                     <div style={{ color:'#666', fontSize:'0.85rem', marginBottom:'0.5rem' }}>{c.desc}</div>
-                    <Link to={`/hotels?city=${c.name}`} style={{ color:'#c9973a', fontSize:'0.82rem', fontWeight:600, textDecoration:'none' }}>→ View Hotels</Link>
+                    <a href={whatsappLink(`Hello! I would like a guided trip to ${c.name}.`)} target="_blank" rel="noopener noreferrer" style={{ color:'#c9973a', fontSize:'0.82rem', fontWeight:600, textDecoration:'none' }}>→ Book a guide here</a>
                   </div></Popup>
                 </Marker>
               ))}
-
-              {/* Hotels with Ratings */}
-              {(activeFilter==='all'||activeFilter==='hotels') && hotels.map(h => {
-                const coords = hotelCoords[h.city]
-                if (!coords) return null
-                const offset = [coords[0] + (((h.id * 37) % 21) - 10) * 0.001, coords[1] + (((h.id * 53) % 21) - 10) * 0.001]
-                return (
-                  <Marker key={h.id} position={offset} icon={hotelIcon}>
-                    <Popup><div style={{ minWidth:200 }}>
-                      <strong style={{ fontFamily:'Playfair Display,serif', fontSize:'1rem', display:'block' }}>{h.name}</strong>
-                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0.4rem 0', fontSize:'0.9rem' }}>
-                        <span style={{ color:'#c9973a', fontWeight:700 }}>{'★'.repeat(h.stars)}</span>
-                        <span style={{ color:'#888', fontSize:'0.8rem' }}>{h.priceLevel}</span>
-                      </div>
-                      <div style={{ color:'#888', fontSize:'0.8rem', marginBottom:'0.4rem' }}>{h.city}</div>
-                      <Link to={`/hotels/${h.id}`} style={{ color:'#c9973a', fontSize:'0.82rem', fontWeight:600, textDecoration:'none' }}>→ View Details</Link>
-                    </div></Popup>
-                  </Marker>
-                )
-              })}
 
               {/* Restaurants */}
               {(activeFilter==='all'||activeFilter==='restaurants') && filteredRestaurants.map(r => (
@@ -237,7 +161,7 @@ export default function MapPage() {
           {/* Legend & Stats */}
           <div style={{ marginTop:'1.5rem' }}>
             <div style={{ display:'flex', gap:'1.5rem', flexWrap:'wrap', padding:'1rem 1.5rem', background:'var(--white)', borderRadius:14, border:'1px solid var(--cream2)', marginBottom:'1rem' }}>
-              {[['#c9973a','🏨','Hotels'],['#e67e22','🍽️','Restaurants'],['#e74c3c','⭐','Attractions'],['#2980b9','📍','Cities'],['#27ae60','✈️','Airports'],['#f39c12','🏖️','Beaches']].map(([c,i,l]) => (
+              {[['#e67e22','🍽️','Restaurants'],['#e74c3c','⭐','Attractions'],['#2980b9','📍','Cities'],['#27ae60','✈️','Airports'],['#f39c12','🏖️','Beaches']].map(([c,i,l]) => (
                 <div key={l} style={{ display:'flex', alignItems:'center', gap:'0.4rem', fontSize:'0.82rem', color:'var(--text2)' }}>
                   <span style={{ background:c, borderRadius:'50%', width:18, height:18, display:'inline-flex', alignItems:'center', justifyContent:'center', fontSize:'0.7rem' }}>{i}</span>
                   {l}
@@ -247,10 +171,6 @@ export default function MapPage() {
 
             {/* Stats */}
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'1rem' }}>
-              <div style={{ padding:'1rem', background:'var(--cream)', borderRadius:12, textAlign:'center' }}>
-                <div style={{ fontSize:'1.8rem', fontWeight:700, color:'#c9973a' }}>{hotels.length}</div>
-                <div style={{ color:'var(--text2)', fontSize:'0.9rem' }}>Hotels ({minStars}★ and above)</div>
-              </div>
               <div style={{ padding:'1rem', background:'var(--cream)', borderRadius:12, textAlign:'center' }}>
                 <div style={{ fontSize:'1.8rem', fontWeight:700, color:'#e67e22' }}>{filteredRestaurants.length}</div>
                 <div style={{ color:'var(--text2)', fontSize:'0.9rem' }}>Top Restaurants</div>

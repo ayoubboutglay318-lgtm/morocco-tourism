@@ -54,7 +54,7 @@ export default function Destinations() {
           </p>
           {/* Stats row */}
           <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-            {[['9', 'Destinations'], ['18', 'Guided Tours'], ['50+', 'Attractions'], ['29', 'Hotels']].map(([val, label]) => (
+            {[['9', 'Destinations'], ['18', 'Guided Tours'], ['50+', 'Attractions']].map(([val, label]) => (
               <div key={label} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--gold-light)', lineHeight: 1 }}>{val}</div>
                 <div style={{ fontSize: '0.75rem', color: '#8a7060', textTransform: 'uppercase', letterSpacing: 1, marginTop: '0.2rem' }}>{label}</div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { whatsappLink } from '../config'
 
 const cityData = {
   Tangier:          { days:2, highlights:['Kasbah & Museum','Cap Spartel','Petit Socco cafés','Tangier Bay beach','Hercules Caves','American Legation Museum'], hotels:['Fairmont Tazi Palace','Saba\'s House Riad','El Minzah Hotel'], food:['Fresh seafood at the port','Harira soup at Grand Socco','Msemen breakfast at medina bakery'] },
@@ -39,7 +39,7 @@ function generateItinerary(cities, days, budget) {
         city,
         morning: `Explore ${morningAct}`,
         afternoon: `Visit ${aftenoonAct}`,
-        evening: d === 0 && ci === 0 ? `Arrive in ${city}, check into ${hotel}, evening stroll` : `Dinner: ${food}`,
+        evening: d === 0 && ci === 0 ? `Arrive in ${city}, check in, evening stroll` : `Dinner: ${food}`,
         hotel,
         travel: d === 0 && ci > 0 ? `Travel from ${cityList[ci-1]} to ${city}` : null,
       })
@@ -169,20 +169,13 @@ export default function TripPlanner() {
                     ))}
                   </div>
                 </div>
-                <div style={{ padding:'0.7rem 1.5rem', background:'var(--cream)', borderTop:'1px solid var(--cream2)', fontSize:'0.8rem', color:'var(--text3)' }}>
-                  🏨 Suggested: <strong style={{ color:'var(--text2)' }}>{d.hotel}</strong>
-                </div>
               </div>
             ))}
           </div>
 
           <div style={{ marginTop:'2rem', background:'rgba(201,151,58,0.08)', border:'1px solid rgba(201,151,58,0.2)', borderRadius:16, padding:'1.5rem', textAlign:'center' }}>
-            <p style={{ color:'var(--text2)', marginBottom:'1rem' }}>Ready to book? Browse hotels for your trip:</p>
-            <div style={{ display:'flex', gap:'1rem', justifyContent:'center', flexWrap:'wrap' }}>
-              {(form.cities.length ? form.cities : ['Marrakech','Fes','Tangier']).slice(0,4).map(c => (
-                <Link key={c} to={`/hotels?city=${c}`} className="btn-primary" style={{ fontSize:'0.85rem' }}>Hotels in {c}</Link>
-              ))}
-            </div>
+            <p style={{ color:'var(--text2)', marginBottom:'1rem' }}>Want a local guide for this trip? Send me your itinerary and I'll take care of the rest.</p>
+            <a href={whatsappLink(`Hello! I'd like you to guide my trip: ${(form.cities.length ? form.cities : ['Marrakech','Fes','Tangier']).join(', ')}.`)} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize:'0.9rem', display:'inline-block' }}>Book Me as Your Guide on WhatsApp</a>
           </div>
         </div>
       )}

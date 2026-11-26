@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="footer-inner">
           <div>
             <div className="footer-brand-name">Morocco<span>Travel</span></div>
-            <p className="footer-desc">An independent travel guide to the Kingdom of Morocco — destinations, hotels, food, culture and practical tips.</p>
+            <p className="footer-desc">Your local guide in Morocco — guided city tours, desert trips and journeys across the whole country.</p>
           </div>
           <div className="footer-col">
             <h4>Destinations</h4>
@@ -21,7 +21,6 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Explore</h4>
             <ul>
-              <li><Link to="/hotels">All Hotels</Link></li>
               <li><Link to="/destinations">Destinations</Link></li>
               <li><Link to="/food">Food</Link></li>
               <li><Link to="/culture">Culture</Link></li>

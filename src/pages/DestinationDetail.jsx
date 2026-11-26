@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
-import HotelImage from '../components/HotelImage'
 import Seo from '../components/Seo'
 import { whatsappLink } from '../config'
 
@@ -43,11 +42,9 @@ export default function DestinationDetail() {
   const [dest, setDest]             = useState(null)
   const [attractions, setAttractions] = useState([])
   const [tours, setTours]           = useState([])
-  const [hotels, setHotels]         = useState([])
   const [tab, setTab]               = useState('overview')
   const [openFact, setOpenFact]     = useState(null)
   const [notedTips, setNotedTips]   = useState(new Set())
-  const [starFilter, setStarFilter] = useState(0)
   const [lightbox, setLightbox]     = useState(null)
   const heroImgRef = useRef(null)
 
@@ -55,14 +52,13 @@ export default function DestinationDetail() {
   useEffect(() => {
     // eslint-disable-next-line
     setDest(null)
-    setAttractions([]); setTours([]); setHotels([])
-    setTab('overview'); setOpenFact(null); setNotedTips(new Set()); setStarFilter(0)
+    setAttractions([]); setTours([])
+    setTab('overview'); setOpenFact(null); setNotedTips(new Set())
     axios.get(`/api/destinations/${slug}`).then(r => {
       setDest(r.data)
       const city = r.data.name
       axios.get(`/api/attractions?city=${city}`).then(r2 => setAttractions(r2.data))
       axios.get(`/api/tours?city=${city}`).then(r3 => setTours(r3.data))
-      axios.get(`/api/hotels?city=${city}`).then(r4 => setHotels(r4.data))
     }).catch(console.error)
   }, [slug])
 
@@ -106,12 +102,10 @@ export default function DestinationDetail() {
     { id: 'overview',    icon: '🗺️',  label: 'Overview' },
     { id: 'attractions', icon: '🏛️',  label: 'Attractions', count: attractions.length },
     { id: 'tours',       icon: '🎒',  label: 'Tours',       count: tours.length },
-    { id: 'hotels',      icon: '🏨',  label: 'Hotels',      count: hotels.length },
     { id: 'tips',        icon: '💡',  label: 'Tips',        count: dest.tips?.length },
   ]
 
   const WA_URL = `https://wa.me/212689122018?text=${encodeURIComponent(`Hello! I'm interested in a tour to ${dest.name}. Can you help me plan my trip?`)}`
-  const filteredHotels = starFilter === 0 ? hotels : hotels.filter(h => h.stars === starFilter)
 
   /* ── Gallery images (hero + image, max 5 slots remaining) ── */
   const galleryImgs = [dest.heroImage, dest.image, ...attractions.slice(0, 4).map(a => a.image)].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).slice(0, 5)
@@ -121,7 +115,7 @@ export default function DestinationDetail() {
     <div style={{ background: 'var(--cream)' }}>
       <Seo
         title={`${dest.name} Travel Guide: ${dest.tagline}`}
-        description={`${dest.name}, Morocco: best time to visit (${dest.bestTime}), how to get there, things to do, hotels and local tips.`}
+        description={`${dest.name}, Morocco: best time to visit (${dest.bestTime}), how to get there, things to do and local tips.`}
         image={dest.heroImage || dest.image}
         jsonLd={{ '@context': 'https://schema.org', '@type': 'TouristDestination', name: dest.name, description: dest.description?.split('\n')[0], address: { '@type': 'PostalAddress', addressCountry: 'MA' } }}
       />
@@ -171,7 +165,6 @@ export default function DestinationDetail() {
         <div className="dd-stats-inner">
           {[
             { icon: '📅', value: dest.bestTime?.split(',')[0], label: 'Best Time' },
-            { icon: '🏨', value: hotels.length, label: 'Hotels' },
             { icon: '🏛️', value: attractions.length, label: 'Attractions' },
             { icon: '🎒', value: tours.length, label: 'Tours' },
           ].map(s => (
@@ -286,9 +279,9 @@ export default function DestinationDetail() {
                     <button className="btn-secondary" style={{ color: 'var(--dark)', border: '1.5px solid var(--cream2)' }} onClick={() => setTab('tours')}>
                       🎒 {tours.length} Tours →
                     </button>
-                    <Link to={`/hotels?city=${dest.name}`} className="btn-primary">
-                      🏨 Browse Hotels
-                    </Link>
+                    <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                      🧭 Book Me as Your Guide
+                    </a>
                     <a href={WA_URL} target="_blank" rel="noopener noreferrer"
                        style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', background: '#25d366', color: '#fff', padding: '0.7rem 1.5rem', borderRadius: '50px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem', transition: 'background 0.2s' }}
                        onMouseEnter={e => e.currentTarget.style.background = '#1eb957'}
@@ -405,70 +398,6 @@ export default function DestinationDetail() {
           </div>
         )}
 
-        {/* ── HOTELS ── */}
-        {tab === 'hotels' && (
-          <div className="dd-tab-panel">
-            <div className="dd-section-eyebrow">{dest.name}</div>
-            <h2 className="dd-section-title">Where to Stay</h2>
-            <p className="dd-section-sub">{hotels.length} handpicked accommodations</p>
-
-            {/* Star filter */}
-            <div className="dd-star-filters">
-              {[0, 5, 4, 3].map(s => (
-                <button
-                  key={s}
-                  className={`dd-star-btn${starFilter === s ? ' active' : ''}`}
-                  onClick={() => setStarFilter(s)}
-                >
-                  {s === 0 ? 'All' : `${'★'.repeat(s)} ${s}-star`}
-                </button>
-              ))}
-            </div>
-
-            <div className="hotels-grid">
-              {filteredHotels.map((h, i) => (
-                <Link
-                  key={h.id}
-                  to={`/hotels/${h.id}`}
-                  className="hotel-card dd-reveal"
-                  style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
-                >
-                  <div className="hotel-card-img-wrap">
-                    <HotelImage hotel={h} className="hotel-card-img" />
-                    <span className="hotel-card-badge">{h.badge}</span>
-                  </div>
-                  <div className="hotel-card-body">
-                    <div className="hotel-card-city">{h.city}</div>
-                    <div className="hotel-card-name">{h.name}</div>
-                    <div className="hotel-card-rating">
-                      <span className="stars" title={`${h.stars}-star hotel`}>{'★'.repeat(h.stars)}</span>
-                    </div>
-                    <div className="hotel-card-amenities">
-                      {h.amenities.slice(0, 4).map(a => (
-                        <span key={a} className="amenity-pill">{a}</span>
-                      ))}
-                    </div>
-                    <div className="hotel-card-footer">
-                      <div className="hotel-card-price">
-                        {h.priceLevel}<span> price range</span>
-                      </div>
-                      <span className="btn-primary" style={{ padding: '0.45rem 1.1rem', fontSize: '0.85rem' }}>
-                        View
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            {filteredHotels.length === 0 && (
-              <p style={{ color: 'var(--text3)', textAlign: 'center', padding: '3rem' }}>
-                No {starFilter > 0 ? `${starFilter}-star ` : ''}hotels found.
-              </p>
-            )}
-          </div>
-        )}
-
         {/* ── TIPS ── */}
         {tab === 'tips' && (
           <div className="dd-tab-panel">
@@ -499,12 +428,12 @@ export default function DestinationDetail() {
             <div className="dd-tips-cta dd-reveal">
               <div>
                 <h3>Ready to visit {dest.name}?</h3>
-                <p>Let our local experts craft your perfect itinerary</p>
+                <p>I'll guide you and plan every day of your visit</p>
               </div>
               <div className="dd-tips-cta-btns">
-                <Link to={`/hotels?city=${dest.name}`} className="btn-primary">
-                  🏨 Browse Hotels
-                </Link>
+                <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                  🧭 Book a Guided Trip
+                </a>
                 <a href={WA_URL} target="_blank" rel="noopener noreferrer"
                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: '#25d366', color: '#fff', padding: '0.75rem 1.6rem', borderRadius: '50px', fontWeight: 700, textDecoration: 'none', fontSize: '0.9rem' }}
                 >
